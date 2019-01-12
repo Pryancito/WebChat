@@ -456,6 +456,9 @@ function process(rawData) {
 	if (rawsp[1] == 'TOPIC') {
 		onSetTopic( raw );
 	}
+	if (rawsp[1] == '331') { // RCVD: :roubaix.fr.epiknet.org 331 Georges #wircy :No topic is set.
+		document.getElementById('topic').innerHTML = '';
+	}
 	// rcvd :irc.wevox.co 332 WircyUser_455 #websocket :pwet
 	if (rawsp[1] == '332') {
 		onTopicMsg( rawp );
@@ -502,7 +505,9 @@ function process(rawData) {
 	}
 	
 	let msgs = document.getElementById('msgs');
-	msgs.scrollTop = msgs.scrollHeight;
+	if (document.getElementById('gchanlist').className.indexOf('wselected') === -1) {
+		msgs.scrollTop = msgs.scrollHeight;
+	}
 }
 
 function onKick(rawsp) {
@@ -529,7 +534,7 @@ function startList() {
 	
 	document.getElementById('gchanlist').innerHTML = '<table id="gcl_table"><tr><th>Channel</th><th>Users</th><th>Topic</th></tr>';
 	
-	document.getElementById('msgs').innerHTML += '<img id="loader" src="img/loader.gif" alt="loader.gif" />';
+	document.getElementById('loader').style.display = 'block';
 }
 
 function onList( rawsp ) {
@@ -560,7 +565,7 @@ function endList( rawsp ) {
 		let users = document.createTextNode( objectKey.split('#')[0] );
 		let chan = document.createTextNode( '#' + objectKey.split('#')[1] );
 		let topic = document.createElement( 'span' );
-		topic.innerHTML = style(color(list[objectKey][0]));
+		topic.innerHTML = style(urlify(list[objectKey][0]));
 		
 		cell1.appendChild(chan);
 		cell2.appendChild(users);
@@ -715,7 +720,7 @@ function onTopicMsg( rawp ) { // :irc.wevox.co 332 WircyUser_147 #WeVox :Canal I
 	
 	let topicInput = document.getElementById('topic');
 	topicInput.innerHTML = 'Topic on #' + cs + ' : ';
-	topicInput.title = topicRaw;
+	topicInput.title = style(urlify(topicRaw));
 	topicInput.appendChild(topic);
 	topicInput.style.display = 'inline';
 }
@@ -763,7 +768,7 @@ function memsg(mask, target, message) {
 	let prefix;
 	
 	if (target.substr(0, 1) == '#') {
-		target = chan.substring(1);
+		target = target.substring(1);
 		prefix = 'chan_';
 	}
 	else {
@@ -1131,7 +1136,6 @@ function onNick(oldnick, newnick) {
 	}
 	
 	oldnick = document.createTextNode(oldnick);
-	newnick = document.createTextNode(newnick);
 	
 	for (var item in uls) {
 		
@@ -1142,8 +1146,7 @@ function onNick(oldnick, newnick) {
 			let elem = document.createElement('p');
 			elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ';
 			elem.appendChild(oldnick);
-			elem.innerHTML += ' is now ';
-			elem.appendChild(newnick);
+			elem.innerHTML += ' is now ' + newnick;
 			
 			document.getElementById('chan_' + item).appendChild(elem);
 		}
@@ -2174,11 +2177,22 @@ function exec(cmd) {
 		
 		// :WircyUser_616!websocket@Clk-2B9152EF PRIVMSG #websocket :ACTION pwet
 		
+		let prefix, target;
+		
+		if (active.substr(0, 1) == '#') {
+			prefix = 'chan_';
+			target = active.substring(1);
+		}
+		else {
+			prefix = 'query_';
+			target = active;
+		}
+		
 		doSend('privmsg ' + active + ' :ACTION ' + cmd[1] + '');
 		
 		let elem = document.createElement('p');
 		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + me + ' ' + cmd[1];
-		document.getElementById(prefix + active).appendChild(elem);
+		document.getElementById(prefix + target).appendChild(elem);
 	}
 	else if (cmd[0] == 'cycle') {
 		if (typeof cmd[1] === 'undefined') {

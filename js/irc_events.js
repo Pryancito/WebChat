@@ -903,6 +903,8 @@ function addFavInfoEvents() {
 			
 			document.getElementById('editbox').style.display = 'block';
 			
+			document.getElementById('loader').style.display = 'none';
+			
 			let index = Array.from(e.parentNode.children).indexOf(e);
 			
 			let btn_window = document.getElementsByClassName('btn_window');
@@ -932,7 +934,7 @@ function addFavInfoEvents() {
 					
 					document.getElementById('ul_' + ACStriped).className = 'ul';
 					
-					document.getElementById('userlist').style.display = 'block';
+					document.getElementById('userlist').className = '';
 					
 					doSend('topic ' + activeChannel);
 				}
@@ -943,14 +945,14 @@ function addFavInfoEvents() {
 					activeQuery = target[1];
 					
 					document.getElementById('topic').innerHTML = '';
-					document.getElementById('userlist').style.display = 'none';
+					document.getElementById('userlist').className += 'displaynone';
 				}
 				
 				textarea.focus();
 			}
 			else {
 				document.getElementById('topic').innerHTML = '';
-				document.getElementById('userlist').style.display = 'none';
+				document.getElementById('userlist').className += 'displaynone';
 			}
 			
 			// Scroll to the bottom
@@ -1104,7 +1106,7 @@ function addFavInfoEvents() {
 
 function gchanlist_window() {
 	
-	document.getElementById('userlist').style.display = 'none';
+	document.getElementById('userlist').className += 'displaynone';
 	document.getElementById('editbox').style.display = 'none';
 	
 	let window = document.getElementsByClassName('wselected')[0];
