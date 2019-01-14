@@ -1149,20 +1149,20 @@ function onNick(oldnick, newnick) {
 		me = newnick;
 	}
 	
-	oldnick = document.createTextNode(oldnick);
+	let oldnick_html = document.createTextNode(oldnick);
 	
 	for (var item in uls) {
 		
-		if (item.indexOf(oldnick)) {
+		if (uls_no_mode[item].indexOf(oldnick) !== -1) {
 		
-			doSend('names #' + item);
-			
 			let elem = document.createElement('p');
 			elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ';
-			elem.appendChild(oldnick);
+			elem.appendChild(oldnick_html);
 			elem.innerHTML += ' is now ' + newnick;
 			
 			document.getElementById('chan_' + item).appendChild(elem);
+			
+			doSend('names #' + item);
 		}
 	}
 }
@@ -1382,7 +1382,13 @@ function msg(raw) {
 	line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;' + nick + '&gt;</strong> ' + msg;
 	
 	if (w !== null) {
+		
 		w.appendChild(line);
+		
+		if (chan !== ACStriped) {
+			
+			document.getElementById('chan_btn_' + chan).style.color = 'red';
+		}
 	}
 	
 	if (hlCheck) {
@@ -1492,8 +1498,6 @@ function userlist(chan, nicknames) {
 		let isAdmin = uls[ chan ].indexOf('1' + me);
 		let isOp = uls[ chan ].indexOf('2' + me);
 		let isHop = uls[ chan ].indexOf('3' + me);
-		
-		console.log(isOwner, isAdmin, isOp, isHop);
 		
 		if (isOwner !== -1 || isAdmin !== -1 || isOp !== -1 || isHop !== -1) {
 			
@@ -2059,7 +2063,7 @@ function writeToScreen(message) {
 	output.appendChild(pre);
 	// hope this works in all browsers:
 	let msgs = document.getElementById('msgs');
-	msgs.scrollTop = msgs.scrollHeight;
+	//msgs.scrollTop = msgs.scrollHeight;
 }
 
 function send() {
