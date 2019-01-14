@@ -783,7 +783,7 @@ function memsg(mask, target, message) {
 	else {
 		prefix = 'query_';
 	}
-	message = document.createTextNode(urlify( message.split('ACTION ')[1].split('')[0] ));
+	message = urlify(style(message.split('ACTION ')[1].split('')[0] ));
 	
 	let elem = document.createElement('p');
 	
