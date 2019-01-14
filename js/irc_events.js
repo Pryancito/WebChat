@@ -302,6 +302,18 @@ function addFavInfoEvents() {
 	});
 }
 
+function clearSelection() {
+	
+	if (window.getSelection) {
+		
+		window.getSelection().removeAllRanges();
+	}
+	else if (document.selection) {
+		
+		document.selection.empty();
+	}
+}
+
 (function() {
 	
 	ignores_list();
@@ -314,6 +326,20 @@ function addFavInfoEvents() {
 		document.getElementById('chan_params').style.display = 'none';
 	}
 	*/
+	
+	document.getElementById('topic').ondblclick = function() {
+		
+		if (this.className === 'white_space_normal') {
+			
+			this.className = '';
+		}
+		else {
+			
+			this.className = 'white_space_normal';
+		}
+		
+		clearSelection()
+	}
 	
 	let ab_tab = document.getElementsByClassName('ab_tab');
 	
@@ -643,8 +669,6 @@ function addFavInfoEvents() {
 							elem.innerHTML = elem.innerHTML.substring(0, cccursor - htag.length) + chans[ index[1] ] + elem.innerHTML.substring(cccursor + cclen);
 							let pos = cccursor + chans[ index[1] ].length;
 							
-							console.log(pos);
-							
 							setCaretPos(pos);
 							
 							newcursor = getCaretPosition(elem, true)[0];
@@ -937,6 +961,9 @@ function addFavInfoEvents() {
 					document.getElementById('userlist').className = '';
 					
 					doSend('topic ' + activeChannel);
+					
+					let border_right = document.getElementById('border-right');
+					border_right.style.height = userlist.scrollHeight + 'px';
 				}
 				else if (target[0] == 'query') {
 					

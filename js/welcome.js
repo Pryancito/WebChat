@@ -5,17 +5,15 @@
 	let submit = document.getElementById('submit');
 	submit.onclick = function() {
 		let nickname = document.getElementById('wircy_nickname').value;
-		//setCookie('nspasswd', document.getElementById('wircy_nickserv').value, 10000000);
+		setCookie('nspasswd', document.getElementById('wircy_nickserv').value, 10000000);
 		document.location.href = 'irc.html?nickname=' + nickname;
 	}
 	
-	/*
 	let nspasswd = getCookie('nspasswd');
 	
 	if (nspasswd !== '') {
 		document.getElementById('wircy_nickserv').value = nspasswd;
 	}
-	*/
 	
 	/*
 	document.getElementById('avatar_file').onchange = function (e) {

@@ -565,7 +565,7 @@ function endList( rawsp ) {
 		let users = document.createTextNode( objectKey.split('#')[0] );
 		let chan = document.createTextNode( '#' + objectKey.split('#')[1] );
 		let topic = document.createElement( 'span' );
-		topic.innerHTML = style(urlify(list[objectKey][0]));
+		topic.innerHTML = urlify(style(list[objectKey][0]), '', false, false);
 		
 		cell1.appendChild(chan);
 		cell2.appendChild(users);
@@ -580,7 +580,7 @@ function endList( rawsp ) {
 	
 	Array.from(document.getElementsByClassName('lchan')).forEach(function(item, index) {
 		
-		item.onclick = function() {
+		item.ondblclick = function() {
 			
 			doSend('join ' + item.getElementsByTagName('td')[0].innerText);
 		}
@@ -591,6 +591,8 @@ function endList( rawsp ) {
 	list = {};
 	
 	list_html.style.display = 'block';
+	
+	msgs.scrollTop = 0;
 }
 
 function getMode( rawsp ) {
@@ -710,18 +712,17 @@ function onTopicMsg( rawp ) { // :irc.wevox.co 332 WircyUser_147 #WeVox :Canal I
 	let topicRaw = rawp.slice(2).join(':');
 	
 	let elem = document.createElement('p');
-	let topic = document.createTextNode(topicRaw);
+	let topic = urlify(style(topicRaw), '', false, false);
 	let cs = rawp[1].split(' ')[3].substring(1);
 	
 	if (topicByCommand === true) {
-		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * Topic : ' + rawp[2];
+		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * Topic : ' + topic;
 		document.getElementById('chan_' + cs).appendChild(elem);
 	}
 	
 	let topicInput = document.getElementById('topic');
 	topicInput.innerHTML = 'Topic on #' + cs + ' : ';
-	topicInput.title = style(urlify(topicRaw));
-	topicInput.appendChild(topic);
+	topicInput.innerHTML += topic;
 	topicInput.style.display = 'inline';
 }
 
@@ -796,7 +797,7 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		elem.id = 'idmsg_' + idmsg;
 		
-		let message = style( urlify( rawsp.splice(3).join(' ').substring(1), idmsg, true, false ) );
+		let message = urlify(style( rawsp.splice(3).join(' ').substring(1) ), idmsg, true, false );
 		
 		elem.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">&lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + message + '</span>';
 		
@@ -811,10 +812,15 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 }
 
 function style(msg) {
-
-	let newmsg = msg.split('');
+	
+	let p = document.createElement('p');
+	
+	p.innerText = msg;
+	
+	let newmsg = p.innerText.split('');
+	
 	let output = '';
-
+	
 	newmsg.forEach(function(item, index) {
 
 		if (index > 0) {
@@ -1233,7 +1239,7 @@ function query(nick, msg) {
 		query_window.setAttribute('id', 'query_' + nick);
 		document.getElementById('msgs').appendChild(query_window);
 		
-		document.getElementById('userlist').style.display = 'none';
+		document.getElementById('userlist').className = 'displaynone';
 		
 		let query = document.createElement('p');
 		query.innerHTML = nick;
@@ -1267,7 +1273,7 @@ function query(nick, msg) {
 				query_window.setAttribute('id', 'query_' + nick);
 				document.getElementById('msgs').appendChild(query_window);
 				
-				document.getElementById('userlist').style.display = 'none';
+				document.getElementById('userlist').className = 'displaynone';
 				
 				let query = document.createElement('p');
 				query.innerHTML = nick;
@@ -1350,7 +1356,7 @@ function msg(raw) {
 	idmsg++;
 	
 	let nick = getNickname(raw);
-	let msg = style( urlify( getMsg(raw), idmsg, true, false ) );
+	let msg = urlify(style( getMsg(raw) ), idmsg, true, false );
 	let chan = raw.split(' ')[2].substring(1);
 	let hlCheck = false, hlcolor = '';
 	
@@ -1367,7 +1373,9 @@ function msg(raw) {
 	
 	line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;' + nick + '&gt;</strong> ' + msg;
 	
-	w.appendChild(line);
+	if (w !== null) {
+		w.appendChild(line);
+	}
 	
 	if (hlCheck) {
 		hl(nick, msg);
@@ -2014,6 +2022,7 @@ function onJoin(user, chan) {
 	document.getElementById('userlist').style.display = 'block';
 	
 	doSend('names ' + chan);
+	doSend('topic ' + chan);
 }
 
 function onError(evt) {
@@ -2064,7 +2073,7 @@ function send() {
 			
 			if (lines.length === 0) {
 			
-				let message = style( urlify( text, idmsg, true, recipient ) );
+				let message = urlify(style( text ), idmsg, true, recipient );
 				
 				let line = document.createElement('p');
 				
@@ -2083,7 +2092,7 @@ function send() {
 			else {
 				lines.forEach(function(item, index) {
 					
-					let message = style( urlify( item.innerText, idmsg, true, recipient ) );
+					let message = urlify(style( item.innerText ), idmsg, true, recipient );
 					
 					let line = document.createElement('p');
 					
@@ -2105,7 +2114,7 @@ function send() {
 			
 			lines.forEach(function(item, index) {
 				
-				let message = style( urlify( item.innerText, idmsg, true, recipient ) );
+				let message = urlify(style( item.innerText ), idmsg, true, recipient );
 				
 				let line = document.createElement('p');
 				line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
@@ -2318,33 +2327,25 @@ function urlify(text, idm, ajaxRequest, recipient) {
 	
     let urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
     
-    let check = false;
-    
     let i = -1;
     
     words.forEach(function(item, index) {
     
 		words[index] = item.replace(urlRegex, function(url) {
 			
-			check = true;
-			
-			i++;
-			
 			if (ajaxRequest !== false) {
-				console.log(url);
+				
+				i++;
+				
 				ajax('ajax/summary.php?url=' + url, idm, i, recipient, msg);
+				
+				return '<a href="' + url + '" target="_blank">' + url + '</a><i id="idm_' + idm + '_' + i + '" class="fa fa-arrow-circle-down summary_link" aria-hidden="true"></i>';
 			}
 			
-			return '<a href="' + url + '" target="_blank">' + url + '</a><i id="idm_' + idm + '_' + i + '" class="fa fa-arrow-circle-down summary_link" aria-hidden="true"></i>';
 			
+			return '<a href="' + url + '" target="_blank">' + url + '</a>';
 		});
 	});
-	
-	if (check == false) {
-		
-		doSend('privmsg ' + recipient + ' :' + msg);
-		
-	}
 	
 	return words.join(' ');
 	
@@ -2368,19 +2369,32 @@ function ajax(urlRequest, idm, index, recipient, msg) {
 				
 			}
 			
-			doSend('privmsg ' + recipient + ' :' + msg);
+			let idmessage = document.getElementById('idm_' + idm + '_' + index);
 			
-			document.getElementById('idm_' + idm + '_' + index).onclick = function() {
-				
-				Array.from(document.getElementsByClassName('summary')).forEach(function(item) {
+			if (idmessage !== null) {
+			
+				idmessage.onclick = function() {
 					
-					item.style.display = 'none';
-				});
-				
-				document.getElementById('summ_' + idm + '_' + index).style.display = 'block';
-				
+					Array.from(document.getElementsByClassName('summary')).forEach(function(item) {
+						
+						item.style.display = 'none';
+					});
+					
+					let elem = document.getElementById('summ_' + idm + '_' + index);
+					
+					if (elem !== null) {
+					
+						if (elem.className.indexOf('displayblock') === -1) {
+						
+							elem.className += ' displayblock';
+						}
+						else {
+							
+							elem.className = 'summary';
+						}
+					}
+				}
 			}
-			
 		}
 		
 	};
@@ -2401,17 +2415,28 @@ function summary(result, idm, index) {
 	
 	let video = '';
 	
+	elem.innerHTML = '';
 	
 	if (result['youtube_id'] != '0') {
 		video = '<p class="play_in_chat" id="youtube_' + result['youtube_id'] + '">Play in chat</p>';
 	}
 	
 	if (result['type'] === 'image') {
-		elem.innerHTML = '<img src="' + result['image'] + '" alt="Image" style="display:block; margin:0 auto; max-width:70%;" />';
+		elem.innerHTML += '<img src="' + result['image'] + '" alt="Image" style="display:block; margin:0 auto; max-width:70%;" />';
 	}
 	else {
-		elem.innerHTML = ' \
-			<p class="summary_title_w"><img class="summary_favicon" src="' + result['favicon'] + '" alt="favicon" /> <span class="summary_title">'+ result['title'] + '</span></p> \
+		
+		elem.innerHTML += '<p class="summary_title_w">';
+		
+		/*
+		if (result['favicon'] != false) {
+			
+			elem.innerHTML += '<img class="summary_favicon" src="' + result['favicon'] + '" alt="favicon" />';
+		}
+		*/
+		
+		elem.innerHTML += ' \
+			<span class="summary_title">'+ result['title'] + '</span></p> \
 			<p class="summary_img_w"><img class="summary_img" src="'+ result['image'] +'" alt="image" /></p> \
 			<p class="summary_desc">' + result['description'] + '</p> \
 			<p class="summary_site">' + result['site_name'] + '</p> \
@@ -2462,7 +2487,9 @@ function youtube_link(id) {
 
 function insertAfter(newNode, referenceNode) {
 	
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+	if (referenceNode !== null) {
+		referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+	}
 }
 
 window.addEventListener("load", init, false);
