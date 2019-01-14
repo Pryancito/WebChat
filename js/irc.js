@@ -761,11 +761,10 @@ function onSetTopic( raw ) {
 	let topic = urlify(style( raw.split(':').splice(2).join(':') ), '', false, false);
 	
 	let elem = document.createElement('p');
-	elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + nick.textContent + ' sets topic on #' + chan_striped.textContent + ' : ' + topic.textContent;
+	elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + nick.textContent + ' sets topic on #' + chan_striped.textContent + ' : ' + topic;
 	
 	let topicInput = document.getElementById('topic');
-	topicInput.innerHTML = 'Topic on #' + cs + ' : ';
-	topicInput.appendChild(topic);
+	topicInput.innerHTML = 'Topic on #' + cs + ' : ' + topic;
 	topicInput.style.display = 'inline';
 	
 	document.getElementById('chan_' + cs).appendChild(elem);
@@ -783,13 +782,10 @@ function memsg(mask, target, message) {
 	else {
 		prefix = 'query_';
 	}
+	
 	message = urlify(style(message.split('ACTION ')[1].split('')[0] ), '', false, false);
 	
-	let elem = document.createElement('p');
-	
-	elem.innerHTML = '&lt;' + currentTime() + '&gt; * ' + nick.textContent + ' ' + message;
-	
-	document.getElementById(prefix + target).appendChild(elem);
+	document.getElementById(prefix + target).innerHTML = '&lt;' + currentTime() + '&gt; * ' + nick.textContent + ' ' + message;
 }
 
 function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyUser_604 :NickServ allows you to register a nickname and
