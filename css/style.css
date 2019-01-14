@@ -17,6 +17,9 @@ a, a:visited, a:active {
 .displaynone {
 	display:none !important;
 }
+.displayblock {
+	display:block !important;
+}
 #loader {
 	display:none;
 }
@@ -639,8 +642,17 @@ body #text .nocolorcopy {
 	overflow:hidden;
 	position: absolute;
 	margin-left:10px;
-	cursor:help;
+	cursor:pointer;
 }
 #tools, #topic {
 	display:inline-block;
+}
+.white_space_normal {
+	white-space:normal !important;
+	position:absolute;
+	background-color:#F0F0F0;
+	border:1px solid lightgray;
+	border-top:none;
+	z-index:10000;
+	padding:10px;
 }
