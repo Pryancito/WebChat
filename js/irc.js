@@ -28,7 +28,8 @@ let activeChannel,
 	ban = [],
 	idmsg = -1,
 	ignore_cmd = false,
-	ignores = getCookie('ignores');
+	ignores = getCookie('ignores'),
+	aj = false;
 
 function init() {
 	output = document.getElementById('status');
@@ -137,6 +138,8 @@ function autojoins() {
 		
 		doSend('join ' + default_chan);
 	}
+
+	aj = list.length;
 	
 	list.forEach(function(item) {
 		
@@ -1490,6 +1493,8 @@ function userlist(chan, nicknames) {
 		let isOp = uls[ chan ].indexOf('2' + me);
 		let isHop = uls[ chan ].indexOf('3' + me);
 		
+		console.log(isOwner, isAdmin, isOp, isHop);
+		
 		if (isOwner !== -1 || isAdmin !== -1 || isOp !== -1 || isHop !== -1) {
 			
 			var options = ' \
@@ -2001,9 +2006,13 @@ function getMask(raw) {
 	return mask[1];
 }
 
-function onJoin(user, chan) {
+function onJoin(user, chan, aj) {
 	
 	let chansp = chan.substring(1);
+	
+	if (aj !== false && aj > 0) {
+		aj--;
+	}
 	
 	ACStriped = chansp;
 	activeChannel = chan;
@@ -2027,7 +2036,12 @@ function onJoin(user, chan) {
 	document.getElementById('userlist').style.display = 'block';
 	
 	doSend('names ' + chan);
-	doSend('topic ' + chan);
+	
+	if (aj !== false && aj === 0) {
+	
+		doSend('topic ' + chan);
+		aj = false;
+	}
 }
 
 function onError(evt) {
