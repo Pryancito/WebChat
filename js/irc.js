@@ -274,8 +274,6 @@ function process(rawData) {
 		//doSend("join " + activeChannel); // join a room upon connection.
 		//doSend("mode " + activeChannel);
 		
-		autojoins();
-		
 		if (nspasswd !== '') { // Perform for nickserv pass
 			doSend('ns identify ' + nspasswd);
 		}
@@ -470,7 +468,14 @@ function process(rawData) {
 	// :Kitu!websocket@F59D8D69.81546244.7925F8A.IP MODE #websocket +s
 	// :Kitu MODE Kitu :-i
 	if (rawsp[1] == 'MODE') {
+		
 		setMode( rawsp );
+		
+		//RCVD: :Themis MODE Kitu :+r
+		
+		if (rawp[2] == '+r' && rawsp[2] == me) {
+			autojoins();
+		}
 	}
 	// :irc.wevox.co 324 WircyUser_965 #websocket +s
 	if (rawsp[1] == '324') {
@@ -1480,10 +1485,10 @@ function userlist(chan, nicknames) {
 		
 		let nick = n.className.split(' ')[0].split('_')[1];
 		
-		let isOwner = uls[ ACStriped ].indexOf('0' + me);
-		let isAdmin = uls[ ACStriped ].indexOf('1' + me);
-		let isOp = uls[ ACStriped ].indexOf('2' + me);
-		let isHop = uls[ ACStriped ].indexOf('3' + me);
+		let isOwner = uls[ chan ].indexOf('0' + me);
+		let isAdmin = uls[ chan ].indexOf('1' + me);
+		let isOp = uls[ chan ].indexOf('2' + me);
+		let isHop = uls[ chan ].indexOf('3' + me);
 		
 		if (isOwner !== -1 || isAdmin !== -1 || isOp !== -1 || isHop !== -1) {
 			
