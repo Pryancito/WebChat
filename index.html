@@ -22,6 +22,9 @@
 			<form id="user" method="POST" action="" enctype="multipart/form-data">
 				<script> document.write('<input type="text" id="wircy_nickname" name="wircy_nickname" placeholder="' + lang_nick + '" />'); </script>
 				<script> document.write('<input type="button" id="submit" value="' + lang_submit + '" />'); </script>
+				<p>
+					<script> document.write('<input id="wircy_nickserv" name="wircy_nickserv" type="password" placeholder="' + lang_nspasswd + '" />'); </script>
+				</p>
 				<!--
 				<select id="lang">
 					<script> document.write('<option>'+ lang_lang +'</option>'); </script>
@@ -29,7 +32,6 @@
 					<option>Français</option>
 				</select>
 				<div id="options">
-					<script> document.write('<input id="wircy_nickserv" name="wircy_nickserv" type="password" placeholder="' + lang_nspasswd + '" />'); </script>
 					<p id="nsauth">
 						<script> document.write('<input id="wircy_nickserv_auth" name="wircy_nickserv_auth" type="text" placeholder="' + lang_nsemail + '" />'); </script>
 					</p>
