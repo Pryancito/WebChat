@@ -167,7 +167,7 @@
 				}
 			}
 			
-			$favicon = getFavicon($doc);
+			//$favicon = getFavicon($doc);
 			
 			if (!isset($title)) {
 				$title = '';
@@ -208,18 +208,35 @@
 		}
 		if (!empty($favicon)) {
 			$href = $favicon->getAttribute('href');
-			if (substr($href, 0, 2) != '//' && substr($href, 0, 7) != 'http://' && substr($href, 0, 8) != 'https://') {
+			if (substr($href, 0, 2) != '//' && substr($href, 0, 7) != 'http://' || substr($href, 0, 8) != 'https://') {
 				$favicon = pathtourl($_REQUEST['url'], $href);
 			}
 			else {
 				$favicon = $href;
 			}
 		}
-		if ($favicon) {
+		if (urlExists($favicon)) {
+			
+			if ($favicon === false) {
+				return 'false';
+			}
+			
 			return $favicon;
 		}
 		
-		return false;
+		return 'false';
+	}
+	
+	function urlExists($url) {
+		
+		$file_headers = @get_headers($url);
+		
+		if (strstr($file_headers[0], '404') === false) {
+			
+		   return false;
+		}
+	 
+		return true;
 	}
 	
 	function outerHTML($e) {
