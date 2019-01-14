@@ -1,5 +1,5 @@
 const lang_connect_button = "Connect !";
-const lang_add_chan = "Create channel";
+const lang_add_chan = "Create or join channel";
 const lang_favorites_chans = "Manage favorites channels";
 const lang_address_book = "Manage address book";
 const lang_summary_off = "Don't display web summary";
