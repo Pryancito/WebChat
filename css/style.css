@@ -633,6 +633,7 @@ body #text .nocolorcopy {
 	color:white !important;
 	font-size:25px !important;
 	cursor:pointer !important;
+	z-index:9999;
 }
 .yt_ontop_wrapper .yt_close:hover {
 	color:red !important;
