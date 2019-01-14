@@ -758,7 +758,7 @@ function onSetTopic( raw ) {
 	let nick = document.createTextNode(raw.split(':')[1].split('!')[0]);
 	let cs = raw.split(' ')[2].substring(1);
 	let chan_striped = document.createTextNode(cs);
-	let topic = document.createTextNode(urlify( raw.split(':').splice(2).join(':') ));
+	let topic = urlify(style( raw.split(':').splice(2).join(':') ), '', false, false);
 	
 	let elem = document.createElement('p');
 	elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + nick.textContent + ' sets topic on #' + chan_striped.textContent + ' : ' + topic.textContent;
@@ -783,7 +783,7 @@ function memsg(mask, target, message) {
 	else {
 		prefix = 'query_';
 	}
-	message = urlify(style(message.split('ACTION ')[1].split('')[0] ));
+	message = urlify(style(message.split('ACTION ')[1].split('')[0] ), '', false, false);
 	
 	let elem = document.createElement('p');
 	
