@@ -143,6 +143,8 @@ function autojoins() {
 
 	aj = list.length;
 	
+	list.sort();
+	
 	list.forEach(function(item) {
 		
 		doSend('join ' + item);
@@ -1385,7 +1387,11 @@ function msg(raw) {
 		
 		if (chan !== ACStriped) {
 			
-			document.getElementById('chan_btn_' + chan).style.color = 'red';
+			let elem = document.getElementById('chan_btn_' + chan);
+			
+			if (elem.className.indexOf('red') === -1) {
+				elem.className += ' red';
+			}
 		}
 	}
 	
@@ -2040,7 +2046,7 @@ function onJoin(user, chan, aj) {
 	doSend('names ' + chan);
 	
 	if (aj !== false && aj === 0) {
-	
+		
 		doSend('topic ' + chan);
 		aj = false;
 	}
@@ -2336,7 +2342,7 @@ function notifyMe(msg) {
 }
 
 function playSound() {
-	var audio = new Audio('/HL/691.ogg');
+	var audio = new Audio('HL/691.ogg');
 	audio.play();
 }
 

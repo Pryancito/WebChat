@@ -934,7 +934,17 @@ function clearSelection() {
 			let index = Array.from(e.parentNode.children).indexOf(e);
 			
 			let btn_window = document.getElementsByClassName('btn_window');
-			Array.from( btn_window ).forEach( function(item) { item.className = 'btn_window'; } );
+			Array.from( btn_window ).forEach(function(item) {
+				
+				if (item.className.indexOf('red') !== -1) {
+					
+					item.className = 'btn_window red';
+				}
+				else {
+					
+					item.className = 'btn_window';
+				}
+			});
 			e.className += ' btn_selected';
 			
 			let windows = document.getElementsByClassName('window');
@@ -953,6 +963,10 @@ function clearSelection() {
 					active = activeChannel;
 					activeType = 'channel';
 					
+					doSend('names ' + activeChannel);
+					
+					doSend('topic ' + activeChannel);
+					
 					Array.from(document.getElementsByClassName('ul')).forEach(function(item) {
 						
 						item.className += ' ul_hidden';
@@ -962,7 +976,7 @@ function clearSelection() {
 					
 					document.getElementById('userlist').className = '';
 					
-					doSend('topic ' + activeChannel);
+					document.getElementById('chan_btn_' + ACStriped).className = 'btn_window btn_selected';
 					
 					let border_right = document.getElementById('border-right');
 					border_right.style.height = userlist.scrollHeight + 'px';
