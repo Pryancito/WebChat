@@ -270,13 +270,18 @@ function ignore_add_from_umenu(rawp) {
 
 function process(rawData) {
 	
-	if (rawData.indexOf("PING") == 0) {
+	let raw = escapeHtml(rawData);
+	
+	let rawp = raw.split(':');
+	let rawsp = raw.split(' ');
+	
+	if (rawsp[0] === 'PING') {
 		
 		let pongResponse = rawData.replace("PING","PONG");
 		//writeToScreen('<span style="color: brown;">SENDING: ' + escapeHtml(pongResponse)+'<\/span>');
 		websocket.send(pongResponse);
 	}
-	else if (rawData.indexOf("001") > -1) {
+	else if (rawsp[1] === '001') {
 		
 		//doSend("join " + activeChannel); // join a room upon connection.
 		//doSend("mode " + activeChannel);
@@ -287,19 +292,14 @@ function process(rawData) {
 		
 		Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
 		
-		let status = document.createElement('p');
-		status.setAttribute('class', 'btn_window');
-		status.setAttribute('id', 'btn_status');
+		let s = document.createElement('p');
+		s.setAttribute('class', 'btn_window');
+		s.setAttribute('id', 'btn_status');
 		let chanlist = document.getElementById('chanlist');
 		
-		status.innerHTML = lang_status;
-		chanlist.appendChild(status);
+		s.innerHTML = lang_status;
+		chanlist.appendChild(s);
 	}
-	
-	let raw = escapeHtml(rawData);
-	
-	let rawp = raw.split(':');
-	let rawsp = raw.split(' ');
 	
 	if (rawsp[0] != 'PING') { // RAWDATA FOR DEBUG
 		writeToScreen('<span style="color: blue;" class="nocolorcopy">RCVD: ' + rawData + '</span>');
