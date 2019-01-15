@@ -6,6 +6,8 @@ Webchat IRC with serverside websocket support.
 - PHP server.
 - MySQL server.
 
+# Install
+
 ## Edit start of js/irc.js to give IRC server address as following :
 
 ```
@@ -14,7 +16,6 @@ Webchat IRC with serverside websocket support.
 let irc_server_address = 'wss://<address IP or Hostname>:<port>/';
 ```
 
-# Install
 ## Upload files on a web server.
 For ajax features create ajax/config.php file with this content :
 
