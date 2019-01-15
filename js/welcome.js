@@ -2,6 +2,8 @@
 
 (function() {
 	
+	document.documentElement.setAttribute('lang', lang);
+	
 	let submit = document.getElementById('submit');
 	submit.onclick = function() {
 		let nickname = document.getElementById('wircy_nickname').value;
@@ -20,6 +22,18 @@
 	
 	if (nspasswd !== '') {
 		document.getElementById('wircy_nickserv').value = nspasswd;
+	}
+	
+	document.getElementById('lang').onchange = function() {
+		
+		if (this.value === 'English') {
+			setCookie('lang', 'en', 10000000);
+		}
+		if (this.value === 'Français') {
+			setCookie('lang', 'fr', 10000000);
+		}
+		
+		window.location.href = './';
 	}
 	
 	/*

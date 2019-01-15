@@ -318,6 +318,8 @@ function clearSelection() {
 	
 	ignores_list();
 	
+	document.documentElement.setAttribute('lang', lang);
+	
 	/*
 	let close_chan_params = document.getElementById('cross_chan_params');
 	

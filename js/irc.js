@@ -1,5 +1,7 @@
 "use strict";
 
+let irc_server_address = 'wss://roubaix.fr.epiknet.org:6680/';
+
 let nickname = getParameterByName('nickname');
 let nspasswd = getCookie('nspasswd');
 
@@ -91,7 +93,7 @@ function unescapeHtml(escapedStr) {
 }
 
 function connectWebSocket() {
-	websocket = new WebSocket('wss://roubaix.fr.epiknet.org:6680/');
+	websocket = new WebSocket(irc_server_address);
 	websocket.onopen = function(evt) { onOpen(evt) };
 	websocket.onclose = function(evt) { onClose(evt) };
 	websocket.onmessage = function(evt) { onMessage(evt) };
