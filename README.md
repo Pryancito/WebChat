@@ -11,6 +11,7 @@ Webchat IRC with serverside websocket support.
 For ajax features create ajax/config.php file with this content :
 
 ```
+<?php
 $dbname = "..."; // Name of database.
 $dbhost = "..."; // Host of database.
 $dbuser = "..."; // User of database.
