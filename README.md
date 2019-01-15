@@ -16,7 +16,9 @@ Webchat IRC with serverside websocket support.
 let irc_server_address = 'wss://<address IP or Hostname>:<port>/';
 ```
 
-## For ajax features create *ajax/config.php* file with this content :
+## For ajax features edit *ajax/config.php* :
+
+Create MySQL database on localhost or elsewhere, the MySQL table is created automaticly.
 
 ```
 <?php
