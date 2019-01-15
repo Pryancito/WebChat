@@ -965,7 +965,20 @@ function clearSelection() {
 					
 					doSend('names ' + activeChannel);
 					
-					doSend('topic ' + activeChannel);
+					let chan_topic = document.getElementById('chan_topic_' + ACStriped);
+					
+					if (chan_topic === null) {
+						doSend('topic ' + activeChannel);
+					}
+					else {
+						let cts = document.getElementsByClassName('ct_selected');
+						
+						if (cts.length !== 0) {
+							cts[0].className = 'chan_topic';
+						}
+						
+						chan_topic.className = 'chan_topic ct_selected';
+					}
 					
 					Array.from(document.getElementsByClassName('ul')).forEach(function(item) {
 						

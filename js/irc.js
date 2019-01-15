@@ -733,8 +733,19 @@ function onTopicMsg( rawp ) { // :irc.wevox.co 332 WircyUser_147 #WeVox :Canal I
 	}
 	
 	let topicInput = document.getElementById('topic');
-	topicInput.innerHTML = 'Topic on #' + cs + ' : ';
-	topicInput.innerHTML += topic;
+	
+	let cts = document.getElementsByClassName('ct_selected');
+	
+	if (cts.length !== 0) {
+		cts[0].className = 'chan_topic';
+	}
+	
+	let chan_topic = document.createElement('p');
+	chan_topic.className = 'chan_topic ct_selected';
+	chan_topic.id = 'chan_topic_' + cs;
+	chan_topic.innerHTML = topic;
+	
+	topicInput.appendChild(chan_topic);
 	topicInput.style.display = 'inline';
 }
 
@@ -768,7 +779,19 @@ function onSetTopic( raw ) {
 	elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + nick.textContent + ' sets topic on #' + chan_striped.textContent + ' : ' + topic;
 	
 	let topicInput = document.getElementById('topic');
-	topicInput.innerHTML = 'Topic on #' + cs + ' : ' + topic;
+	
+	let cts = document.getElementsByClassName('ct_selected');
+	
+	if (cts.length !== 0) {
+		cts[0].className = 'chan_topic';
+	}
+	
+	let chan_topic = document.createElement('p');
+	chan_topic.className = 'chan_topic ct_selected';
+	chan_topic.id = 'chan_topic_' + cs;
+	chan_topic.innerHTML = topic;
+	
+	topicInput.appendChild(chan_topic);
 	topicInput.style.display = 'inline';
 	
 	document.getElementById('chan_' + cs).appendChild(elem);
