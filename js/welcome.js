@@ -5,8 +5,15 @@
 	let submit = document.getElementById('submit');
 	submit.onclick = function() {
 		let nickname = document.getElementById('wircy_nickname').value;
+		setCookie('nick_connect', document.getElementById('wircy_nickname').value, 10000000);
 		setCookie('nspasswd', document.getElementById('wircy_nickserv').value, 10000000);
 		document.location.href = 'irc.html?nickname=' + nickname;
+	}
+	
+	let nick_connect = getCookie('nick_connect');
+	
+	if (nick_connect !== '') {
+		document.getElementById('wircy_nickname').value = nick_connect;
 	}
 	
 	let nspasswd = getCookie('nspasswd');
