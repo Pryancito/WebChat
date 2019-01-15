@@ -550,6 +550,12 @@ body #text .nocolorcopy {
 #reason, #kick {
 	margin-top:20px;
 }
+.chan_topic {
+	display:none;
+}
+.ct_selected {
+	display:inline !important;
+}
 .summary {
 	display:none;
 	position:relative;
