@@ -16,8 +16,7 @@ Webchat IRC with serverside websocket support.
 let irc_server_address = 'wss://<address IP or Hostname>:<port>/';
 ```
 
-## Upload files on a web server.
-For ajax features create *ajax/config.php* file with this content :
+## For ajax features create *ajax/config.php* file with this content :
 
 ```
 <?php
@@ -28,6 +27,7 @@ $dbpasswd = "..."; // Password of database.
 $dbprefix = "..."; // Prefix of MySQL tables name.
 ```
 
+## Upload files on a web server.
 It works !
 
 # Languages
