@@ -33,3 +33,6 @@ It works !
 # Languages
 - English
 - French
+
+# To test the client
+https://www.epiknet.org/wircy/
