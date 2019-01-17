@@ -435,6 +435,19 @@ function clearSelection() {
 		textarea.focus();
 	}
 	
+	msgs.onscroll = function() {
+		
+		console.log(msgs.scrollHeight, msgs.offsetHeight, msgs.scrollTop);
+		
+		if (msgs.scrollHeight !== msgs.offsetHeight + msgs.scrollTop) {
+			
+			document.getElementById('border-right').style.backgroundColor = 'red';
+		}
+		else {
+			document.getElementById('border-right').style.backgroundColor = 'gainsboro';
+		}
+	}
+	
 	let gchanlist_evt = document.getElementById('btn_chanlist');
 	
 	gchanlist_evt.onclick = function() {

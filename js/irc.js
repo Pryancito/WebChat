@@ -2,6 +2,8 @@
 
 let irc_server_address = 'wss://roubaix.fr.epiknet.org:6680/';
 
+let urlify_check = true;
+
 let nickname = getParameterByName('nickname');
 let nspasswd = getCookie('nspasswd');
 
@@ -518,7 +520,11 @@ function process(rawData) {
 	
 	let msgs = document.getElementById('msgs');
 	if (document.getElementById('gchanlist').className.indexOf('wselected') === -1) {
-		msgs.scrollTop = msgs.scrollHeight;
+		
+		if (msgs.scrollHeight === msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
+			
+			msgs.scrollTop = msgs.scrollHeight;
+		}
 	}
 }
 
@@ -1412,13 +1418,14 @@ function msg(raw) {
 			
 			let elem = document.getElementById('chan_btn_' + chan);
 			
-			if (elem.className.indexOf('red') === -1) {
+			if (elem.className.indexOf('red') === -1 && elem.className.indexOf('btn_selected') === -1) {
 				elem.className += ' red';
 			}
 		}
 	}
 	
 	if (hlCheck) {
+		
 		hl(nick, msg);
 	}
 }
@@ -2134,8 +2141,13 @@ function send() {
 				line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 				line.innerHTML += message;
 				w.appendChild(line);
+				
 				let msgs = document.getElementById('msgs');
-				msgs.scrollTop = msgs.scrollHeight;
+				
+				if (msgs.scrollHeight === msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
+					
+					msgs.scrollTop = msgs.scrollHeight;
+				}
 				
 				//doSend('privmsg ' + recipient + ' :' + text);
 			}
@@ -2153,8 +2165,13 @@ function send() {
 					line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 					line.innerHTML += message;
 					w.appendChild(line);
+					
 					let msgs = document.getElementById('msgs');
-					msgs.scrollTop = msgs.scrollHeight;
+					
+					if (msgs.scrollHeight === msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
+						
+						msgs.scrollTop = msgs.scrollHeight;
+					}
 					
 					//doSend('privmsg ' + recipient + ' :' + item.innerText);
 				});
@@ -2175,8 +2192,13 @@ function send() {
 				line.className = 'line';
 				
 				w.appendChild(line);
+				
 				let msgs = document.getElementById('msgs');
-				msgs.scrollTop = msgs.scrollHeight;
+				
+				if (msgs.scrollHeight === msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
+					
+					msgs.scrollTop = msgs.scrollHeight;
+				}
 				
 				//doSend('privmsg ' + recipient + ' :' + item.innerText);
 			});
@@ -2383,7 +2405,7 @@ function urlify(text, idm, ajaxRequest, recipient) {
     
 		words[index] = item.replace(urlRegex, function(url) {
 			
-			if (ajaxRequest !== false) {
+			if (ajaxRequest !== false && urlify_check === true) {
 				
 				i++;
 				
