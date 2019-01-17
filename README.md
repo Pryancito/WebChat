@@ -8,15 +8,17 @@ Webchat IRC with serverside websocket support.
 
 # Install
 
-## Edit start of *js/irc.js* to give IRC server address as following :
+## Edit start of *js/irc.js* to give IRC server address and define URL summaries engine as following :
 
 ```
 "use strict";
 
-let irc_server_address = 'wss://<address IP or Hostname>:<port>/';
+let irc_server_address = 'wss://<IP address or hostname:<port>/';
+
+let urlify_check = true; // Or false to disable.
 ```
 
-## For ajax features edit *ajax/config.php* :
+## For URL summaries (if urlify_check == true) edit *ajax/config.php* :
 
 Create MySQL database on localhost or elsewhere, the MySQL table is created automaticly.
 
