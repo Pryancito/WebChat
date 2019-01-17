@@ -437,8 +437,6 @@ function clearSelection() {
 	
 	msgs.onscroll = function() {
 		
-		console.log(msgs.scrollHeight, msgs.offsetHeight, msgs.scrollTop);
-		
 		if (msgs.scrollHeight !== msgs.offsetHeight + msgs.scrollTop) {
 			
 			document.getElementById('border-right').style.backgroundColor = 'red';
