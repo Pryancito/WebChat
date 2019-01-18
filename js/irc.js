@@ -7,6 +7,8 @@ let urlify_check = true;
 let nickname = getParameterByName('nickname');
 let nspasswd = getCookie('nspasswd');
 
+let chans_from_url = getParameterByName('channels');
+
 let nicks_join = new Object();
 
 let topicByCommand = false;
@@ -134,23 +136,36 @@ function handleBinaryInput(event) {
 
 function autojoins() {
 	
-	let list = getCookie('favlist');
+	if (chans_from_url == '') {
 	
-	list = list.split(',');
-	
-	if (list.length == 1 && list[0] == '') {
+		let list = getCookie('favlist');
 		
-		doSend('join ' + default_chan);
-	}
+		list = list.split(',');
+		
+		if (list.length == 1 && list[0] == '') {
+			
+			doSend('join ' + default_chan);
+		}
 
-	aj = list.length;
-	
-	list.sort();
-	
-	list.forEach(function(item) {
+		aj = list.length;
 		
-		doSend('join ' + item);
-	});
+		list.sort();
+		
+		list.forEach(function(item) {
+			
+			doSend('join ' + item);
+		});
+	}
+	else {
+		
+		chans_from_url = chans_from_url.split(',');
+		
+		chans_from_url.sort();
+		
+		chans_from_url.forEach(function(item) {
+			doSend('join ' + item);
+		});
+	}
 }
 
 function ignores_list() {
