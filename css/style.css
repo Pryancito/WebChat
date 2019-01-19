@@ -396,9 +396,6 @@ body #text .nocolorcopy {
 #gcl_table th {
 	padding:5px;
 }
-.lchan:nth-child(even) {
-	background-color:white;
-}
 .lchan:hover {
 	background-color:lightgray;
 }
@@ -623,6 +620,7 @@ body #text .nocolorcopy {
 	top:0;
 	left:0;
 	z-index:100;
+	margin:0px -15px;
 }
 .play_in_chat {
 	color:blue;
