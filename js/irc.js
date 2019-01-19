@@ -598,7 +598,7 @@ function endList( rawsp ) {
 		let users = document.createTextNode( objectKey.split('#')[0] );
 		let chan = document.createTextNode( '#' + objectKey.split('#')[1] );
 		let topic = document.createElement( 'span' );
-		topic.innerHTML = urlify(style(list[objectKey][0]), '', false, false);
+		topic.innerHTML = urlify(style(list[objectKey][0].normalize('NFD')), '', false, false);
 		
 		cell1.appendChild(chan);
 		cell2.appendChild(users);
