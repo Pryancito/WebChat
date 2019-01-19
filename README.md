@@ -18,7 +18,7 @@ let irc_server_address = 'wss://<IP address or hostname:<port>/';
 let urlify_check = true; // Or false to disable.
 ```
 
-## For URL summaries (if urlify_check == true) edit *ajax/config.php* :
+## For URL summaries (if urlify_check === true) edit *ajax/config.php* :
 
 Create MySQL database on localhost or elsewhere, the MySQL table is created automaticly.
 
