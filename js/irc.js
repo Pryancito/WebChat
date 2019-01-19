@@ -963,16 +963,11 @@ function style(msg) {
 					var highlight = parseInt(colorcode[1], 10);
 					
 					var len = parseInt(colorcode[0], 10).toString().length + parseInt(colorcode[1], 10).toString().length + 1;
-					
-					console.log(parseInt(colorcode[0], 10).toString().length, parseInt(colorcode[1], 10).toString().length)
-					
 				}
 				else {
 					var text = parseInt(colorcode[0].substr(0, 2), 10);
 					var len = text.toString().length;
 				}
-				
-				console.log(item, len)
 				
 				output5 += '<span style="color:'+color(text)+'; background-color:'+color(highlight)+';">' + item.substring(len);
 			}
@@ -2093,7 +2088,7 @@ function onJoin(user, chan, aj) {
 	elem.innerHTML = '<strong class="noboldcopy">&lt;'+ currentTime() +'&gt; &lt;' + nickelem.textContent + '&gt; (' + mask.textContent + ') has joined ' + chanelem.textContent + '</strong>';
 	
 	document.getElementById('chan_' + chansp).appendChild(elem);
-	document.getElementById('userlist').style.display = 'block';
+	document.getElementById('userlist').className = '';
 	
 	doSend('names ' + chan);
 	
