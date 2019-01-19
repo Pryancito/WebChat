@@ -946,32 +946,26 @@ function style(msg) {
 	let output5 = '';
 
 	newmsg5.forEach(function(item, index) {
-
+		
 		if (index > 0) {
-			if (index % 2 == 0) {
-				output5 += '</span>' + item;
+			
+			let colorcode = item.substr(0, 5);
+
+			colorcode = colorcode.split(',');
+
+			if (typeof colorcode[1] !== 'undefined') {
+				
+				var text = parseInt(colorcode[0], 10);
+				var highlight = parseInt(colorcode[1], 10);
+				
+				var len = parseInt(colorcode[0], 10).toString().length + parseInt(colorcode[1], 10).toString().length + 1;
 			}
 			else {
-
-				let colorcode = item.substr(0, 5);
-
-				colorcode = colorcode.split(',');
-
-				if (typeof colorcode[1] !== 'undefined') {
-					var text = parseInt(colorcode[0], 10);
-					var highlight = parseInt(colorcode[1], 10);
-					var len = colorcode[0].length + colorcode[1].length + 1;
-				}
-				else {
-					var text = parseInt(colorcode[0].substr(0, 2), 10);
-					var len = text.toString().length;
-				}
-				
-				output5 += '<span style="color:'+color(text)+'; background-color:'+color(highlight)+';">' + item.substring(len);
+				var text = parseInt(colorcode[0].substr(0, 2), 10);
+				var len = text.toString().length;
 			}
-		}
-		else {
-			output5 += item;
+			
+			output5 += '<span style="color:'+color(text)+'; background-color:'+color(highlight)+';">' + item.substring(len);
 		}
 	});
 	
@@ -2086,7 +2080,7 @@ function onJoin(user, chan, aj) {
 	elem.innerHTML = '<strong class="noboldcopy">&lt;'+ currentTime() +'&gt; &lt;' + nickelem.textContent + '&gt; (' + mask.textContent + ') has joined ' + chanelem.textContent + '</strong>';
 	
 	document.getElementById('chan_' + chansp).appendChild(elem);
-	document.getElementById('userlist').style.display = 'block';
+	document.getElementById('userlist').className = '';
 	
 	doSend('names ' + chan);
 	
