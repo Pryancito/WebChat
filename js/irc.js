@@ -136,7 +136,7 @@ function handleBinaryInput(event) {
 
 function autojoins() {
 	
-	if (chans_from_url == '') {
+	if (chans_from_url == null) {
 	
 		let list = getCookie('favlist');
 		
@@ -156,7 +156,7 @@ function autojoins() {
 			doSend('join ' + item);
 		});
 	}
-	else {
+	else if (chans_from_url !== null) {
 		
 		chans_from_url = chans_from_url.split(',');
 		
@@ -958,14 +958,21 @@ function style(msg) {
 				colorcode = colorcode.split(',');
 
 				if (typeof colorcode[1] !== 'undefined') {
+					
 					var text = parseInt(colorcode[0], 10);
 					var highlight = parseInt(colorcode[1], 10);
-					var len = colorcode[0].length + colorcode[1].length + 1;
+					
+					var len = parseInt(colorcode[0], 10).toString().length + parseInt(colorcode[1], 10).toString().length + 1;
+					
+					console.log(parseInt(colorcode[0], 10).toString().length, parseInt(colorcode[1], 10).toString().length)
+					
 				}
 				else {
 					var text = parseInt(colorcode[0].substr(0, 2), 10);
 					var len = text.toString().length;
 				}
+				
+				console.log(item, len)
 				
 				output5 += '<span style="color:'+color(text)+'; background-color:'+color(highlight)+';">' + item.substring(len);
 			}
@@ -2406,11 +2413,31 @@ function playSound() {
 	audio.play();
 }
 
+function html_decode(text) {
+	
+    var map = {
+        '&amp;': '&',
+        '&#038;': "&",
+        '&lt;': '<',
+        '&gt;': '>',
+        '&quot;': '"',
+        '&#039;': "'",
+        '&#8217;': "’",
+        '&#8216;': "‘",
+        '&#8211;': "–",
+        '&#8212;': "—",
+        '&#8230;': "…",
+        '&#8221;': '”'
+    };
+    
+    return text.replace(/\&[\w\d\#]{2,5}\;/g, function(m) { return map[m]; });
+}
+
 function urlify(text, idm, ajaxRequest, recipient) {
 	
-	let msg = text;
+	let msg = html_decode(text);
 	
-	let words = text.split('&nbsp;');
+	let words = msg.split('&nbsp;');
 	
     let urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
     
@@ -2505,7 +2532,7 @@ function summary(result, idm, index) {
 	elem.innerHTML = '';
 	
 	if (result['youtube_id'] != '0') {
-		video = '<p class="play_in_chat" id="youtube_' + result['youtube_id'] + '">Play in chat</p>';
+		video = '<p class="play_in_chat youtube_' + result['youtube_id'] + '">Play in chat</p>';
 	}
 	
 	if (result['type'] === 'image') {
@@ -2534,9 +2561,12 @@ function summary(result, idm, index) {
 	insertAfter(elem, msg);
 	
 	if (typeof result['youtube_id'] !== 'undefined' && result['youtube_id'] != '0') {
-		document.getElementById('youtube_' + result['youtube_id']).onclick = function() {
-			youtube_link(result['youtube_id']);
-		}
+		Array.from(document.getElementsByClassName('youtube_' + result['youtube_id'])).forEach(function(item) {
+			
+			item.onclick = function() {
+				youtube_link(result['youtube_id']);
+			}
+		});
 	}
 }
 
@@ -2566,9 +2596,15 @@ function youtube_link(id) {
 		
 		document.getElementById('yt_' + id).remove();
 		
-		document.getElementById('youtube_' + id).onclick = function() {
-			youtube_link(id);
-		}
+		Array.from(document.getElementsByClassName('play_in_chat')).forEach(function(item) {
+			
+			let id = item.className.split('youtube_')[1];
+			
+			item.onclick = function() {
+				
+				youtube_link(id);
+			}
+		});
 	}
 }
 
