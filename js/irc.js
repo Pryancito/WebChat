@@ -811,7 +811,11 @@ function onSetTopic( raw ) {
 		cts[0].className = 'chan_topic';
 	}
 	
-	document.getElementById('chan_topic_' + cs).remove();
+	let ct = document.getElementById('chan_topic_' + cs);
+	
+	if (ct !== null) {
+		ct.remove();
+	}
 	
 	let chan_topic = document.createElement('p');
 	chan_topic.className = 'chan_topic ct_selected';
@@ -2073,16 +2077,17 @@ function onJoin(user, chan, aj) {
 		aj--;
 	}
 	
-	ACStriped = chansp;
-	activeChannel = chan;
-	active = chan;
-	activeType = 'channel';
-	
 	let nick = getNickname(user);
 	let nickelem = document.createTextNode(nick);
 	let mask = document.createTextNode(getMask(user));
 	
 	if (nick == me) {
+		
+		ACStriped = chansp;
+		activeChannel = chan;
+		active = chan;
+		activeType = 'channel';
+		
 		join(chan);
 	}
 	
