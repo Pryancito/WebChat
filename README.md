@@ -13,7 +13,7 @@ Webchat IRC with serverside websocket HTML5 support.
 ```
 "use strict";
 
-let irc_server_address = 'wss://<IP address or hostname:<port>/';
+let irc_server_address = 'wss://<IP address or hostname>:<port>/';
 
 let urlify_check = true; // Or false to disable.
 ```
