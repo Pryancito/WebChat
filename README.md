@@ -1,5 +1,5 @@
 # Wircy
-Webchat IRC with serverside websocket HTML5 support.
+Webchat IRC with server-side websocket HTML5 support.
 
 # Requierments
 - Web server.
