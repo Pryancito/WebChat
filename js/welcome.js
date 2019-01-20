@@ -9,7 +9,15 @@
 		let nickname = document.getElementById('wircy_nickname').value;
 		setCookie('nick_connect', document.getElementById('wircy_nickname').value, 10000000);
 		setCookie('nspasswd', document.getElementById('wircy_nickserv').value, 10000000);
-		document.location.href = 'irc.html?nickname=' + nickname + '&channels=' + encodeURIComponent(getParameterByName('channels'));
+		
+		let channels = getParameterByName('channels');
+		
+		if (channels !== null) {
+			document.location.href = 'irc.html?nickname=' + nickname + '&channels=' + channels;
+		}
+		else {
+			document.location.href = 'irc.html?nickname=' + nickname;
+		}
 	}
 	
 	let nick_connect = getCookie('nick_connect');
@@ -179,5 +187,5 @@ function getParameterByName(name, url) {
         results = regex.exec(url);
     if (!results) return null;
     if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+    return results[2].replace(/\+/g, " ");
 }

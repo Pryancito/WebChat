@@ -2175,7 +2175,7 @@ function send() {
 					msgs.scrollTop = msgs.scrollHeight;
 				}
 				
-				//doSend('privmsg ' + recipient + ' :' + text);
+				doSend('privmsg ' + recipient + ' :' + text);
 			}
 			else {
 				lines.forEach(function(item, index) {
@@ -2199,7 +2199,7 @@ function send() {
 						msgs.scrollTop = msgs.scrollHeight;
 					}
 					
-					//doSend('privmsg ' + recipient + ' :' + item.innerText);
+					doSend('privmsg ' + recipient + ' :' + item.innerText);
 				});
 			}
 		}
@@ -2226,7 +2226,7 @@ function send() {
 					msgs.scrollTop = msgs.scrollHeight;
 				}
 				
-				//doSend('privmsg ' + recipient + ' :' + item.innerText);
+				doSend('privmsg ' + recipient + ' :' + item.innerText);
 			});
 		}
 		document.getElementById('text').style.height = '23px';
