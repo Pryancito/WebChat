@@ -45,7 +45,7 @@ if (lang == '' || lang === 'en') {
 
 else if (lang === 'fr') {
 	var lang_connect_button = "Se connecter !";
-	var lang_add_chan = "Créer un canal";
+	var lang_add_chan = "Créer ou rejoindre un canal";
 	var lang_favorites_chans = "Gérer les canaux favoris";
 	var lang_address_book = "Gérer les adresses";
 	var lang_summary_off = "Ne pas afficher les résumés web";
