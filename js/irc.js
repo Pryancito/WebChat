@@ -843,7 +843,7 @@ function memsg(mask, target, message) {
 	
 	message = urlify(style(message.split('ACTION ')[1].split('')[0] ), '', false, false);
 	
-	document.getElementById(prefix + target).innerHTML = '&lt;' + currentTime() + '&gt; * ' + nick.textContent + ' ' + message;
+	document.getElementById(prefix + target).innerHTML += '&lt;' + currentTime() + '&gt; * ' + nick.textContent + ' ' + message;
 }
 
 function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyUser_604 :NickServ allows you to register a nickname and
