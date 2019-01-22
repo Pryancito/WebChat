@@ -843,7 +843,19 @@ function memsg(mask, target, message) {
 	
 	message = urlify(style(message.split('ACTION ')[1].split('')[0] ), '', false, false);
 	
-	document.getElementById(prefix + target).innerHTML += '&lt;' + currentTime() + '&gt; * ' + nick.textContent + ' ' + message;
+	let hlCheck = false, hlcolor = '';
+	
+	if (message.split(' ').indexOf(me) !== -1) { // HL
+		hlCheck = true;
+		hlcolor = 'hlcolor';
+	}
+	
+	if (hlCheck) {
+		
+		hl(nick.textContent, message);
+	}
+	
+	document.getElementById(prefix + target).innerHTML += '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; * ' + nick.textContent + '</strong> ' + message;
 }
 
 function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyUser_604 :NickServ allows you to register a nickname and
