@@ -540,7 +540,7 @@ function process(rawData) {
 	let msgs = document.getElementById('msgs');
 	if (document.getElementById('gchanlist').className.indexOf('wselected') === -1) {
 		
-		if (msgs.scrollHeight === msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
+		if (msgs.scrollHeight >= msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
 			
 			msgs.scrollTop = msgs.scrollHeight;
 		}
@@ -2170,7 +2170,7 @@ function send() {
 				
 				let msgs = document.getElementById('msgs');
 				
-				if (msgs.scrollHeight === msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
+				if (msgs.scrollHeight >= msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
 					
 					msgs.scrollTop = msgs.scrollHeight;
 				}
@@ -2221,7 +2221,7 @@ function send() {
 				
 				let msgs = document.getElementById('msgs');
 				
-				if (msgs.scrollHeight === msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
+				if (msgs.scrollHeight >= msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
 					
 					msgs.scrollTop = msgs.scrollHeight;
 				}

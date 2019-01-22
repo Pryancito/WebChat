@@ -30,6 +30,9 @@ function expandTextarea(obj) {
 	obj.style.height = '23px';
 	let linesHeight = obj.scrollHeight - 10;
 	numLines = linesHeight / 23;
+	
+	let msgs = document.getElementById('msgs');
+	
 	if (numLines <= 6) {
 		obj.style.height = linesHeight + 'px';
 		obj.style.overflowY = 'hidden';
@@ -38,6 +41,8 @@ function expandTextarea(obj) {
 		obj.style.height = 6 * 23 + 'px';
 		obj.style.overflowY = 'auto';
 	}
+	
+	msgs.scrollTop = msgs.scrollHeight;
 }
 
 function getCaretPosition(editableDiv, tab) {
@@ -1012,14 +1017,14 @@ function clearSelection() {
 					activeQuery = target[1];
 					
 					document.getElementById('topic').innerHTML = '';
-					document.getElementById('userlist').className += 'displaynone';
+					document.getElementById('userlist').className = 'displaynone';
 				}
 				
 				textarea.focus();
 			}
 			else {
 				document.getElementById('topic').innerHTML = '';
-				document.getElementById('userlist').className += 'displaynone';
+				document.getElementById('userlist').className = 'displaynone';
 			}
 			
 			// Scroll to the bottom
