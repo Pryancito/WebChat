@@ -3,8 +3,8 @@ Webchat IRC with server-side websocket HTML5 support.
 
 # Requierments
 - Web server.
-- PHP server. (Optional, for urlify)
-- MySQL server. (Optional, for urlify)
+- PHP server. (Optional, for URL summaries)
+- MySQL server. (Optional, for URL summaries)
 
 # Install
 
