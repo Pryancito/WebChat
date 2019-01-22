@@ -537,12 +537,13 @@ function process(rawData) {
 		onKick(rawsp);
 	}
 	
-	let msgs = document.getElementById('msgs');
-	if (document.getElementById('gchanlist').className.indexOf('wselected') === -1) {
-		
-		if (msgs.scrollHeight >= msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
+	let activeWindow = document.getElementsByClassName('wselected')[0];
+	
+	if (typeof activeWindow !== 'undefined') {
+	
+		if (document.getElementById('border-right').style.backgroundColor !== 'red') {
 			
-			msgs.scrollTop = msgs.scrollHeight;
+			activeWindow.scrollTop = activeWindow.scrollHeight;
 		}
 	}
 }
@@ -1301,6 +1302,22 @@ function join(chan) {
 	document.getElementById('text').focus();
 	
 	addFavInfoEvents();
+	
+	let activeWindow = document.getElementsByClassName('wselected')[0];
+	
+	if (typeof activeWindow !== 'undefined') {
+	
+		activeWindow.onscroll = function() {
+			
+			if (this.scrollHeight !== this.offsetHeight + this.scrollTop) {
+				
+				document.getElementById('border-right').style.backgroundColor = 'red';
+			}
+			else {
+				document.getElementById('border-right').style.backgroundColor = 'gainsboro';
+			}
+		}
+	}
 }
 
 function query(nick, msg) {
@@ -1322,15 +1339,6 @@ function query(nick, msg) {
 		query.setAttribute('class', 'btn_window btn_selected');
 		query.setAttribute('id', 'query_btn_' + nick);
 		chanlist.appendChild(query);
-		
-		document.getElementById('cn_' + nick).onclick = function() {
-			
-			document.getElementById('query_' + nick).remove();
-			document.getElementById('query_btn_' + nick).remove();
-			
-			document.getElementById('status').className += ' wselected';
-			document.getElementById('btn_status').className += ' btn_selected';
-		}
 		
 		document.getElementById('text').focus();
 	}
@@ -1379,6 +1387,15 @@ function query(nick, msg) {
 				hl(nick, msg);
 			}
 		}
+	}
+	
+	document.getElementById('cn_' + nick).onclick = function() {
+		
+		document.getElementById('query_' + nick).remove();
+		document.getElementById('query_btn_' + nick).remove();
+		
+		document.getElementById('status').className += ' wselected';
+		document.getElementById('btn_status').className += ' btn_selected';
 	}
 	
 	document.getElementById('topic').innerHTML = '';
@@ -2180,11 +2197,11 @@ function send() {
 				line.innerHTML += message;
 				w.appendChild(line);
 				
-				let msgs = document.getElementById('msgs');
+				let activeWindow = document.getElementsByClassName('wselected')[0];
 				
-				if (msgs.scrollHeight >= msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
+				if (document.getElementById('border-right').style.backgroundColor !== 'red') {
 					
-					msgs.scrollTop = msgs.scrollHeight;
+					activeWindow.scrollTop = activeWindow.scrollHeight;
 				}
 				
 				doSend('privmsg ' + recipient + ' :' + text);
@@ -2204,11 +2221,11 @@ function send() {
 					line.innerHTML += message;
 					w.appendChild(line);
 					
-					let msgs = document.getElementById('msgs');
+					let activeWindow = document.getElementsByClassName('wselected')[0];
 					
-					if (msgs.scrollHeight === msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
+					if (document.getElementById('border-right').style.backgroundColor !== 'red') {
 						
-						msgs.scrollTop = msgs.scrollHeight;
+						activeWindow.scrollTop = activeWindow.scrollHeight;
 					}
 					
 					doSend('privmsg ' + recipient + ' :' + item.innerText);
@@ -2231,11 +2248,11 @@ function send() {
 				
 				w.appendChild(line);
 				
-				let msgs = document.getElementById('msgs');
+				let activeWindow = document.getElementsByClassName('wselected')[0];
 				
-				if (msgs.scrollHeight >= msgs.offsetHeight + msgs.scrollTop + 23 || msgs.scrollHeight - msgs.offsetHeight - msgs.scrollTop < 23) {
+				if (document.getElementById('border-right').style.backgroundColor !== 'red') {
 					
-					msgs.scrollTop = msgs.scrollHeight;
+					activeWindow.scrollTop = activeWindow.scrollHeight;
 				}
 				
 				doSend('privmsg ' + recipient + ' :' + item.innerText);
