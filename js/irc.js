@@ -1334,7 +1334,7 @@ function query(nick, msg) {
 		
 		let query = document.createElement('p');
 		query.innerHTML = nick;
-		query.innerHTML += '<span class="chanlist_opt"><i id="cn_' + nick + '" class="fa fa-times close" aria-hidden="true"></i><i class="fa fa-caret-down nopt" aria-hidden="true"></i></span>';
+		query.innerHTML += '<span class="chanlist_opt"><i id="cn_' + nick + '" class="fa fa-times close" aria-hidden="true"></i></span>';
 		Array.from(document.getElementsByClassName('btn_selected')).forEach(function(item) { item.className = 'btn_window' });
 		query.setAttribute('class', 'btn_window btn_selected');
 		query.setAttribute('id', 'query_btn_' + nick);

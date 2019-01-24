@@ -20,10 +20,18 @@
 		}
 	}
 	
-	let nick_connect = getCookie('nick_connect');
+	let nick_url = getParameterByName('nick');
 	
-	if (nick_connect !== '') {
-		document.getElementById('wircy_nickname').value = nick_connect;
+	if (nick_url !== null) {
+		document.getElementById('wircy_nickname').value = nick_url;
+	}
+	else {
+		
+		let nick_connect = getCookie('nick_connect');
+		
+		if (nick_connect !== '') {
+			document.getElementById('wircy_nickname').value = nick_connect;
+		}
 	}
 	
 	let nspasswd = getCookie('nspasswd');
