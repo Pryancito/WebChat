@@ -289,9 +289,89 @@ function ignore_add_from_umenu(rawp) {
 	ignores = getCookie('ignores');
 }
 
+var is_utf8 = function(bytes)
+{
+    var i = 0;
+    while(i < bytes.length)
+    {
+        if(     (// ASCII
+                    bytes[i] <= 0x7F
+                )
+          ) {
+              i += 1;
+              continue;
+          }
+
+        if(     (// non-overlong 2-byte
+                    (0xC2 <= bytes[i] && bytes[i] <= 0xDF) &&
+                    (0x80 <= bytes[i+1] && bytes[i+1] <= 0xBF)
+                )
+          ) {
+              i += 2;
+              continue;
+          }
+
+        if(     (// excluding overlongs
+                    bytes[i] == 0xE0 &&
+                    (0xA0 <= bytes[i + 1] && bytes[i + 1] <= 0xBF) &&
+                    (0x80 <= bytes[i + 2] && bytes[i + 2] <= 0xBF)
+                ) ||
+                (// straight 3-byte
+                 ((0xE1 <= bytes[i] && bytes[i] <= 0xEC) ||
+                  bytes[i] == 0xEE ||
+                  bytes[i] == 0xEF) &&
+                 (0x80 <= bytes[i + 1] && bytes[i+1] <= 0xBF) &&
+                 (0x80 <= bytes[i+2] && bytes[i+2] <= 0xBF)
+                ) ||
+                (// excluding surrogates
+                 bytes[i] == 0xED &&
+                 (0x80 <= bytes[i+1] && bytes[i+1] <= 0x9F) &&
+                 (0x80 <= bytes[i+2] && bytes[i+2] <= 0xBF)
+                )
+          ) {
+              i += 3;
+              continue;
+          }
+
+        if(     (// planes 1-3
+                    bytes[i] == 0xF0 &&
+                    (0x90 <= bytes[i + 1] && bytes[i + 1] <= 0xBF) &&
+                    (0x80 <= bytes[i + 2] && bytes[i + 2] <= 0xBF) &&
+                    (0x80 <= bytes[i + 3] && bytes[i + 3] <= 0xBF)
+                ) ||
+                (// planes 4-15
+                 (0xF1 <= bytes[i] && bytes[i] <= 0xF3) &&
+                 (0x80 <= bytes[i + 1] && bytes[i + 1] <= 0xBF) &&
+                 (0x80 <= bytes[i + 2] && bytes[i + 2] <= 0xBF) &&
+                 (0x80 <= bytes[i + 3] && bytes[i + 3] <= 0xBF)
+                ) ||
+                (// plane 16
+                 bytes[i] == 0xF4 &&
+                 (0x80 <= bytes[i + 1] && bytes[i + 1] <= 0x8F) &&
+                 (0x80 <= bytes[i + 2] && bytes[i + 2] <= 0xBF) &&
+                 (0x80 <= bytes[i + 3] && bytes[i + 3] <= 0xBF)
+                )
+          ) {
+              i += 4;
+              continue;
+          }
+
+        return false;
+    }
+
+    return true;
+}
+
 function process(rawData) {
 	
-	let raw = (new TextDecoder()).decode(rawData);
+	let raw;
+	
+	if (is_utf8(new Uint8Array(rawData)) === false) {
+		raw = (new TextDecoder('iso-8859-15')).decode(rawData);
+	}
+	else {
+		raw = (new TextDecoder()).decode(rawData);
+	}
 	
 	let rawp = raw.split(':');
 	let rawsp = raw.split(' ');
@@ -541,7 +621,7 @@ function process(rawData) {
 	
 	if (typeof activeWindow !== 'undefined') {
 	
-		if (document.getElementById('border-right').style.backgroundColor !== 'red') {
+		if (document.getElementById('border-right').style.backgroundColor !== 'red' && activeWindow.id !== 'gchanlist') {
 			
 			activeWindow.scrollTop = activeWindow.scrollHeight;
 		}
@@ -630,7 +710,9 @@ function endList( rawsp ) {
 	
 	list_html.style.display = 'block';
 	
-	msgs.scrollTop = 0;
+	let window = document.getElementById('gchanlist');
+	
+	window.scrollTop = 0;
 }
 
 function getMode( rawsp ) {
@@ -1594,8 +1676,6 @@ function userlist(chan, nicknames) {
 				<hr />  \
 				<li class="nlnick_pm">Private Messages</li> \
 				<li class="nlnick_whois">Whois</li> \
-				<li class="nlnick_ignore">Ignore</li> \
-				<li class="nlnick_friend">Friend</li> \
 				<hr /> \
 				<li class="nlnick_op">Op</li> \
 				<li class="nlnick_unop">UnOp</li> \
@@ -1618,8 +1698,6 @@ function userlist(chan, nicknames) {
 				<hr />  \
 				<li class="nlnick_pm">Private Messages</li> \
 				<li class="nlnick_whois">Whois</li> \
-				<li class="nlnick_ignore">Ignore</li> \
-				<li class="nlnick_friend">Friend</li> \
 			';
 		}
 		
@@ -1643,13 +1721,14 @@ function userlist(chan, nicknames) {
 				nickoptions.innerHTML = options;
 				document.getElementById('chat').appendChild(nickoptions);
 				
-				
+				/*
 				document.getElementsByClassName('nlnick_ignore')[0].onclick = function() {
 					
 					ignore_cmd = true;
 					
 					doSend('userhost ' + nick);
 				}
+				*/
 				
 				document.getElementsByClassName('nlnick_pm')[0].onclick = function() {
 					
