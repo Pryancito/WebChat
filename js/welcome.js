@@ -7,8 +7,8 @@
 	let submit = document.getElementById('submit');
 	submit.onclick = function() {
 		let nickname = document.getElementById('wircy_nickname').value;
-		setCookie('nick_connect', document.getElementById('wircy_nickname').value, 10000000);
-		setCookie('nspasswd', document.getElementById('wircy_nickserv').value, 10000000);
+		setCookie('nick_connect', nickname, 10000000);
+		setCookie('nspasswd', JSON.stringify([ nickname, document.getElementById('wircy_nickserv').value ]), 10000000);
 		
 		let channels = getParameterByName('channels');
 		
