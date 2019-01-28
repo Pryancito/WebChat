@@ -936,7 +936,7 @@ function memsg(mask, target, message) {
 		prefix = 'query_';
 	}
 	
-	message = urlify(style(message.split('ACTION ')[1].split('')[0] ), '', false, false);
+	message = urlify(style( escapeHtml( message.split('ACTION ')[1].split('')[0] ) ), '', false, false);
 	
 	let hlCheck = false, hlcolor = '';
 	
@@ -966,7 +966,7 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		elem.id = 'idmsg_' + idmsg;
 		
-		let message = urlify(style( rawsp.splice(3).join(' ').substring(1) ), idmsg, true, false );
+		let message = urlify(style( escapeHtml( rawsp.splice(3).join(' ').substring(1) ) ), idmsg, true, false );
 		
 		elem.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">&lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + message + '</span>';
 		
@@ -2304,7 +2304,7 @@ function send() {
 					activeWindow.scrollTop = activeWindow.scrollHeight;
 				}
 				
-				doSend('privmsg ' + recipient + ' :' + text);
+				doSend('privmsg ' + recipient + ' :' + input.innerText);
 			}
 			else {
 				lines.forEach(function(item, index) {
@@ -2328,7 +2328,7 @@ function send() {
 						activeWindow.scrollTop = activeWindow.scrollHeight;
 					}
 					
-					doSend('privmsg ' + recipient + ' :' + item.innerText);
+					doSend('privmsg ' + recipient + ' :' + input.innerText);
 				});
 			}
 		}
@@ -2355,7 +2355,7 @@ function send() {
 					activeWindow.scrollTop = activeWindow.scrollHeight;
 				}
 				
-				doSend('privmsg ' + recipient + ' :' + item.innerText);
+				doSend('privmsg ' + recipient + ' :' + input.innerText);
 			});
 		}
 		document.getElementById('text').style.height = '23px';
@@ -2568,7 +2568,7 @@ function html_decode(text) {
 
 function urlify(text, idm, ajaxRequest, recipient) {
 	
-	let msg = html_decode(text);
+	let msg = text;
 	
 	let words = msg.split('&nbsp;');
 	
