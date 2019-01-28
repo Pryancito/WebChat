@@ -32,7 +32,7 @@
 				<!--<script> document.write('<i id="btn_visio" class="fa fa-eye" aria-hidden="true" title="' + lang_visio_button_dwait + '"></i>'); </script>-->
 			</div>
 			<!--<script> document.write('<div id="topic"><span>' + lang_topic + ' : </span></div>'); </script>-->
-			<div id="topic"></div>
+			<script> document.write('<div id="topic" title="' + lang_expand_topic + '"></div>'); </script>
 		</div>
 		<div id="bubble">
 			<div id="connect" class="options">
@@ -130,8 +130,12 @@
 	</header>
 	
 	<div id="content">
-		<div id="chanlist">
+		<div id="cqlist">
+			
 			<div id="border-left" draggable="true"></div>
+			
+			<div id="chanlist"></div>
+			<div id="querylist"></div>
 		</div>
 		<div id="userlist">
 			<div id="border-right" draggable="true"></div>
