@@ -5,13 +5,16 @@ let irc_server_address = 'wss://roubaix.fr.epiknet.org:6680/';
 let urlify_check = true;
 
 let nickname = getParameterByName('nickname');
-let nspasswd = getCookie('nspasswd');
+
+let nspasswd = JSON.parse(getCookie('nspasswd'));
 
 let chans_from_url = getParameterByName('channels');
 
 let nicks_join = new Object();
 
 let topicByCommand = false;
+
+let autojoins_check = false;
 
 
 if (typeof nickname == null) {
@@ -140,35 +143,41 @@ function handleBinaryInput(event) {
 
 function autojoins() {
 	
-	if (chans_from_url == null) {
+	if (autojoins_check === false) {
+		
+		autojoins_check = true;
 	
-		let list = getCookie('favlist');
+		if (chans_from_url == null) {
 		
-		list = list.split(',');
-		
-		if (list.length == 1 && list[0] == '') {
+			let list = getCookie('favlist');
 			
-			doSend('join ' + default_chan);
-		}
+			list = list.split(',');
+			
+			if (list.length == 1 && list[0] == '') {
+				
+				doSend('join ' + default_chan);
+			}
 
-		aj = list.length;
-		
-		list.sort();
-		
-		list.forEach(function(item) {
+			aj = list.length;
 			
-			doSend('join ' + item);
-		});
-	}
-	else if (chans_from_url !== null) {
-		
-		chans_from_url = chans_from_url.split(',');
-		
-		chans_from_url.sort();
-		
-		chans_from_url.forEach(function(item) {
-			doSend('join ' + item);
-		});
+			list.sort();
+			
+			list.forEach(function(item) {
+				
+				doSend('join ' + item);
+			});
+		}
+		else if (chans_from_url !== null) {
+			
+			chans_from_url = chans_from_url.split(',');
+			
+			chans_from_url.sort();
+			
+			chans_from_url.forEach(function(item) {
+				
+				doSend('join ' + item);
+			});
+		}
 	}
 }
 
@@ -387,8 +396,8 @@ function process(rawData) {
 		//doSend("join " + activeChannel); // join a room upon connection.
 		//doSend("mode " + activeChannel);
 		
-		if (nspasswd !== '') { // Perform for nickserv pass
-			doSend('ns identify ' + nspasswd);
+		if (nspasswd[0] === nickname && nspasswd[1] !== '') { // Perform for nickserv pass
+			doSend('ns identify ' + nspasswd[1]);
 		}
 		else {
 			autojoins();
@@ -405,6 +414,7 @@ function process(rawData) {
 	}
 	
 	if (rawsp[0] !== 'PING') { // RAWDATA FOR DEBUG
+		
 		writeToScreen('<span class="nocolorcopy">' + urlify(style( raw.split(':').splice(2).join(':') ), '', false, false) + '</span>');
 	}
 	
