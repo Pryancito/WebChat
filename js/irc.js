@@ -534,7 +534,7 @@ function process(rawData) {
 		if (rawsp[3] == ':ACTION' && rawp[2].substr(-1) == '') {
 			if ( ignores_check( rawsp[0].substring(1), ['a','p','c']) ) {
 				
-				memsg(rawsp[0], rawsp[2], rawp[2]);
+				memsg(rawsp[0].substring(1), rawsp[2], rawp.splice(2).join(':'));
 			}
 		}
 		else if (rawsp[2] == me) {
