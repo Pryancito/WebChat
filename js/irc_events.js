@@ -936,9 +936,10 @@ function clearSelection() {
 			
 			document.getElementById('loader').style.display = 'none';
 			
-			let index = Array.from(e.parentNode.children).indexOf(e);
-			
 			let btn_window = document.getElementsByClassName('btn_window');
+			
+			let index = Array.from(btn_window).indexOf(e);
+			
 			Array.from( btn_window ).forEach(function(item) {
 				
 				if (item.className.indexOf('red') !== -1) {
@@ -953,13 +954,14 @@ function clearSelection() {
 			e.className += ' btn_selected';
 			
 			let windows = document.getElementsByClassName('window');
+			
 			Array.from( windows ).forEach( closeAllWindows );
 			
-			windows.item(index).className += ' wselected';
+			windows.item(index + 1).className += ' wselected';
 			
-			if (windows.item(index).id !== 'status') {
+			if (windows.item(index + 1).id !== 'status') {
 				
-				let target = windows.item(index).id.split('_');
+				let target = windows.item(index + 1).id.split('_');
 				
 				if (target[0] == 'chan') {
 					
@@ -1012,6 +1014,7 @@ function clearSelection() {
 				textarea.focus();
 			}
 			else {
+				
 				document.getElementById('topic').innerHTML = '';
 				document.getElementById('userlist').className = 'displaynone';
 			}
@@ -1167,7 +1170,7 @@ function clearSelection() {
 
 function gchanlist_window() {
 	
-	document.getElementById('userlist').className += 'displaynone';
+	document.getElementById('userlist').className = 'displaynone';
 	document.getElementById('editbox').style.display = 'none';
 	
 	let window = document.getElementsByClassName('wselected')[0];

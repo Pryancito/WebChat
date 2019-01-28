@@ -41,6 +41,7 @@ if (lang == '' || lang === 'en') {
 	var lang_nsemail = "Enter a valid email address to register";
 	var default_chan = "#EpiKnet";
 	var lang_topic = 'Topic';
+	var lang_expand_topic = 'Double clic to expand';
 }
 
 else if (lang === 'fr') {
@@ -82,6 +83,7 @@ else if (lang === 'fr') {
 	var lang_nsemail = "Entrez une adresse email valide pour vous enregistrer";
 	var default_chan = "#EpiKnet";
 	var lang_topic = 'Sujet';
+	var lang_expand_topic = 'Double-clic pour voir le sujet';
 }
 
 function getCookie(cname) {
