@@ -879,11 +879,13 @@ function clearSelection() {
 	let border_left = document.getElementById('border-left');
 	let chanlist = document.getElementById('chanlist');
 	
+	let cqlist = document.getElementById('cqlist');
+	
 	border_left.ondrag = function(e) {
-		chanlist.style.width = e.pageX + 'px';
+		cqlist.style.width = e.pageX + 'px';
 	}
 	border_left.ondragend = function(e) {
-		chanlist.style.width = e.pageX + 'px';
+		cqlist.style.width = e.pageX + 'px';
 	}
 	
 	let border_right = document.getElementById('border-right');

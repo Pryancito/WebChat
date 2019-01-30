@@ -413,7 +413,7 @@ function process(rawData) {
 		insertAfter(s, document.getElementById('border-left'));
 	}
 	
-	if (rawsp[0] !== 'PING') { // RAWDATA FOR DEBUG
+	if (rawsp[0] !== 'PING' && rawsp[1] !== 'PRIVMSG') { // RAWDATA FOR DEBUG
 		
 		writeToScreen('<span class="nocolorcopy">' + urlify(style( raw.split(':').splice(2).join(':') ), '', false, false) + '</span>');
 	}
@@ -1564,13 +1564,21 @@ function msg(raw) {
 	if (w !== null) {
 		
 		w.appendChild(line);
-		
-		if (chan !== ACStriped) {
 			
-			let elem = document.getElementById('chan_btn_' + chan);
+		let elem = document.getElementById('chan_btn_' + chan);
+		
+		if (hlCheck === false) {
 			
 			if (elem.className.indexOf('red') === -1 && elem.className.indexOf('btn_selected') === -1) {
+				
 				elem.className += ' red';
+			}
+		}
+		else {
+			
+			if (elem.className.indexOf('green') === -1 && elem.className.indexOf('btn_selected') === -1) {
+				
+				elem.className += ' green';
 			}
 		}
 	}
