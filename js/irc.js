@@ -112,7 +112,6 @@ function connectWebSocket() {
 
 function onOpen(evt) {
 	
-	writeToScreen('CONNECTED');
 	doSend('user websocket * * :WebSocket User');
 	doSend('nick ' + nickname);
 }
@@ -413,22 +412,17 @@ function process(rawData) {
 		insertAfter(s, document.getElementById('border-left'));
 	}
 	
-	if (rawsp[0] !== 'PING' && rawsp[1] !== 'PRIVMSG') { // RAWDATA FOR DEBUG
-		
-		writeToScreen('<span class="nocolorcopy">' + urlify(style( raw.split(':').splice(2).join(':') ), '', false, false) + '</span>');
-	}
-	
 	//-> hitchcock.freenode.net USERHOST xcombelle
 	//<- :hitchcock.freenode.net 302 Kitu :xcombelle=+~xcombelle@eglide.org
 	
 	//add ignore :
-	if (rawsp[1] == '302' && ignore_cmd === true) {
+	else if (rawsp[1] == '302' && ignore_cmd === true) {
 		
 		ignore_add_from_umenu(rawp);
 		
 	}
 	
-	if (rawsp[1] == '352') {
+	else if (rawsp[1] == '352') {
 			
 		if (ban !== []) {
 			
@@ -507,7 +501,7 @@ function process(rawData) {
 			ban = [];
 		}
 	}
-	if (rawsp[1] == '353') { // /names #salon
+	else if (rawsp[1] == '353') { // /names #salon
 		
 		if (typeof nicks_join[ rawsp[4] ] === 'undefined') {
 			nicks_join[ rawsp[4] ] = '';
@@ -515,20 +509,20 @@ function process(rawData) {
 		
 		nicks_join[ rawsp[4] ] += rawp[2];
 	}
-	if (rawsp[1] == '366') {
+	else if (rawsp[1] == '366') {
 		
 		userlist(rawsp[3], nicks_join[ rawsp[3] ]);
 		
 		nicks_join[ rawsp[3] ] = '';
 	}
-	if (rawsp[1] == '396') { // mynick and myhost
+	else if (rawsp[1] == '396') { // mynick and myhost
 		me = rawsp[2];
 		myhost = rawsp[3];
 	}
-	if (rawsp[1] == 'JOIN') { // on join
+	else if (rawsp[1] == 'JOIN') { // on join
 		onJoin( rawsp[0], rawp[2] );
 	}
-	if (rawsp[1] == 'PRIVMSG') {
+	else if (rawsp[1] == 'PRIVMSG') {
 		
 		// :WircyUser_616!websocket@Clk-2B9152EF PRIVMSG #websocket :ACTION pwet
 		if (rawsp[3] == ':ACTION' && rawp[2].substr(-1) == '') {
@@ -550,44 +544,44 @@ function process(rawData) {
 			}
 		}
 	}
-	if (rawsp[1] == 'QUIT') {
+	else if (rawsp[1] == 'QUIT') {
 		onQuit( getNickname(raw), rawp[3] );
 	}
-	if (rawsp[1] == 'PART') {
+	else if (rawsp[1] == 'PART') {
 		onPart(rawp[1], rawsp[2]);
 	}
-	if (rawsp[1] == 'NICK') {
+	else if (rawsp[1] == 'NICK') {
 		onNick( getNickname(raw), rawp[2] );
 	}
 	//<- :Kitu!~mg@971300C1.EFA6EE0.D7878BA0.IP NOTICE Kitu :pwet
-	if (rawsp[1] == 'NOTICE') {
+	else if (rawsp[1] == 'NOTICE') {
 		
 		if ( ignores_check( rawsp[0].substring(1), ['a','n']) ) {
 			
 			onNotice( rawsp );
 		}
 	}
-	if (rawsp[1] == '311' || rawsp[1] == '379' || rawsp[1] == '319' || rawsp[1] == '312' || rawsp[1] == '317' || rawsp[1] == '318') {
+	else if (rawsp[1] == '311' || rawsp[1] == '379' || rawsp[1] == '319' || rawsp[1] == '312' || rawsp[1] == '317' || rawsp[1] == '318') {
 		onWhois( rawsp[1], rawsp.splice(3).join(' ') );
 	}
 	// rcvd :WircyUser_455!websocket@F59D8D69.81546244.7925F8A.IP TOPIC #websocket :pwet
-	if (rawsp[1] == 'TOPIC') {
+	else if (rawsp[1] == 'TOPIC') {
 		onSetTopic( raw );
 	}
-	if (rawsp[1] == '331') { // RCVD: :roubaix.fr.epiknet.org 331 Georges #wircy :No topic is set.
+	else if (rawsp[1] == '331') { // RCVD: :roubaix.fr.epiknet.org 331 Georges #wircy :No topic is set.
 		document.getElementById('topic').innerHTML = '';
 	}
 	// rcvd :irc.wevox.co 332 WircyUser_455 #websocket :pwet
-	if (rawsp[1] == '332') {
+	else if (rawsp[1] == '332') {
 		onTopicMsg( rawp );
 	}
 	// rcvd :irc.wevox.co 333 WircyUser_455 #websocket WircyUser_455 1515419933
-	if (rawsp[1] == '333') {
+	else if (rawsp[1] == '333') {
 		onTopicMetas( rawsp );
 	}
 	// :Kitu!websocket@F59D8D69.81546244.7925F8A.IP MODE #websocket +s
 	// :Kitu MODE Kitu :-i
-	if (rawsp[1] == 'MODE') {
+	else if (rawsp[1] == 'MODE') {
 		
 		setMode( rawsp );
 		
@@ -598,42 +592,47 @@ function process(rawData) {
 		}
 	}
 	// :irc.wevox.co 324 WircyUser_965 #websocket +s
-	if (rawsp[1] == '324') {
+	else if (rawsp[1] == '324') {
 		getMode( rawsp );
 	}
 	// :irc.wevox.co 329 WircyUser_965 #websocket 1515628736
-	if (rawsp[1] == '329') {
+	else if (rawsp[1] == '329') {
 		getMode( rawsp );
 	}
 	// :irc.wevox.co 221 Kitu +iwx
-	if (rawsp[1] == '221') {
+	else if (rawsp[1] == '221') {
 		getMode( rawsp );
 	}
-	if (rawsp[1] == '321') {
+	else if (rawsp[1] == '321') {
 		startList();
 	}
 	// :irc.wevox.co 322 WircyUser_450 #pwet 1 : pwet
-	if (rawsp[1] == '322') {
+	else if (rawsp[1] == '322') {
 		onList( rawsp );
 	}
-	if (rawsp[1] == '323') {
+	else if (rawsp[1] == '323') {
 		endList( rawsp );
 	}
-	if (rawsp[1] == '482') { // not channel operator
+	else if (rawsp[1] == '482') { // not channel operator
 		
 		let elem = document.createElement('p');
 		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + rawp[2];
 		document.getElementById('chan_' + rawsp[3].substring(1)).appendChild(elem);
 	}
-	if (rawsp[1] == 'KICK') {
+	else if (rawsp[1] == 'KICK') {
 		onKick(rawsp);
+	}
+	
+	else { // RAWDATA FOR DEBUG
+		
+		writeToScreen('<span class="nocolorcopy">' + urlify(style( raw.split(':').splice(2).join(':') ), '', false, false) + '</span>');
 	}
 	
 	let activeWindow = document.getElementsByClassName('wselected')[0];
 	
 	if (typeof activeWindow !== 'undefined') {
 	
-		if (document.getElementById('border-right').style.backgroundColor !== 'red' && activeWindow.id !== 'gchanlist') {
+		if (document.getElementById('border-right').style.backgroundColor !== 'red' && activeWindow.id !== 'gchanlist' && activeWindow.id !== 'status') {
 			
 			activeWindow.scrollTop = activeWindow.scrollHeight;
 		}
