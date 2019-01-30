@@ -337,7 +337,19 @@ body .chan .fa {
 	cursor:default;
 }
 .hlcolor {
-	color:red;
+	color:LimeGreen;
+}
+.green {
+	color:LimeGreen;
+}
+#btn_favorites_chans {
+	color:#ff9800 !important;
+}
+#btn_add_chan {
+	color:red !important;
+}
+#btn_chanlist {
+	color:royalblue !important;
 }
 #gcl_table {
 	width:100%;
@@ -375,10 +387,10 @@ body .chan .fa {
 }
 .favinfo {
 	float:right;
-	color:grey !important;
+	color:#ff9800 !important;
 }
 .favchecked {
-	color:grey !important;
+	color:#ff9800 !important;
 }
 .favjoin {
 	float:right;
