@@ -34,10 +34,10 @@
 		}
 	}
 	
-	let nspasswd = getCookie('nspasswd');
+	let nspasswd = JSON.parse(getCookie('nspasswd'));
 	
 	if (nspasswd !== '') {
-		document.getElementById('wircy_nickserv').value = nspasswd;
+		document.getElementById('wircy_nickserv').value = nspasswd[1];
 	}
 	
 	document.getElementById('lang').onchange = function() {
