@@ -85,6 +85,11 @@
 				
 				$favicon = getFavicon($doc);
 				
+				if ($metas['og:site_name'] == null) {
+					
+					$metas['og:site_name'] = str_ireplace('www.', '', parse_url($_GET['url'], PHP_URL_HOST));
+				}
+				
 				$json = json_encode(array('type' => 'summary', 'site_name' => $metas['og:site_name'], 'title' => $metas['og:title'], 'description' => $metas['og:description'], 'favicon' => $favicon, 'image' => $metas['og:image'], 'youtube_id' => $youtube_id));
 				
 				cache_mysql($_GET['url'], $json);
