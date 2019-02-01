@@ -2179,10 +2179,7 @@ function userlist(chan, nicknames) {
 	
 					
 	let border_right = document.getElementById('border-right');
-	border_right.style.height = document.getElementById('userlist').scrollHeight + 'px';
-	
-	let border_left = document.getElementById('border-left');
-	border_left.style.height = document.getElementById('chanlist').scrollHeight + 'px';
+	border_right.style.height = document.getElementById('ul_' + chan).scrollHeight + 'px';
 }
 
 function getNickname(raw) {
@@ -2223,6 +2220,9 @@ function onJoin(user, chan, aj) {
 		activeType = 'channel';
 		
 		join(chan);
+		
+		let border_left = document.getElementById('border-left');
+		border_left.style.height = document.getElementById('cqlist').scrollHeight + 'px';
 	}
 	
 	let chanelem = document.createTextNode(chan);
