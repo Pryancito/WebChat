@@ -1512,6 +1512,10 @@ function ctcp(msg) {
 
 function onQuit(nick, quitmsg) {
 	
+	if (typeof quitmsg === 'undefined') {
+		quitmsg = '';
+	}
+	
 	let nickHTML = document.createTextNode(nick);
 	quitmsg = document.createTextNode(quitmsg);
 	
