@@ -2179,7 +2179,7 @@ function userlist(chan, nicknames) {
 	
 					
 	let border_right = document.getElementById('border-right');
-	border_right.style.height = userlist.scrollHeight + 'px';
+	border_right.style.height = document.getElementById('userlist').scrollHeight + 'px';
 	
 	let border_left = document.getElementById('border-left');
 	border_left.style.height = document.getElementById('chanlist').scrollHeight + 'px';
