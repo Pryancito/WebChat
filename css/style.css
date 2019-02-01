@@ -585,7 +585,7 @@ body #text .nocolorcopy {
 	display:none;
 	position:relative;
 	background-color:#eaeaea;
-	padding:5px;
+	padding:15px;
 	font-family:Segoe UI !important;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
@@ -623,7 +623,6 @@ body #text .nocolorcopy {
 }
 .summary_title {
 	vertical-align:middle;
-	margin-left:10px;
 	font-weight:bold;
 	font-size:15px;
 }
