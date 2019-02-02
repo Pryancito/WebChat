@@ -42,6 +42,7 @@ if (lang == '' || lang === 'en') {
 	var default_chan = "#EpiKnet";
 	var lang_topic = 'Topic';
 	var lang_expand_topic = 'Double clic to expand';
+	var lang_leave_warning = 'Do you really want to leave this page?';
 }
 
 else if (lang === 'fr') {
@@ -84,6 +85,7 @@ else if (lang === 'fr') {
 	var default_chan = "#EpiKnet";
 	var lang_topic = 'Sujet';
 	var lang_expand_topic = 'Double-clic pour voir le sujet';
+	var lang_leave_warning = 'Êtes-vous sûr de vouloir quitter cette page ?';
 }
 
 function getCookie(cname) {

@@ -999,6 +999,9 @@ function clearSelection() {
 					document.getElementById('userlist').className = '';
 					
 					document.getElementById('chan_btn_' + ACStriped).className = 'btn_window btn_selected';
+					
+					let border_right = document.getElementById('border-right');
+					border_right.style.height = userlist.scrollHeight + 'px';
 				}
 				else if (target[0] == 'query') {
 					
@@ -1158,7 +1161,10 @@ function clearSelection() {
 	}
 	
 	window.onbeforeunload = function () {
-		doSend('QUIT :Quit :)');
+		
+		return lang_leave_warning;
+		
+		//doSend('QUIT :Quit :)');
 	}
 	
 	init();
