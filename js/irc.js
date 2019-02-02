@@ -1529,7 +1529,7 @@ function onQuit(nick, quitmsg) {
 			let line = document.createElement('p');
 			line.innerHTML = '&lt;'+ currentTime() +'&gt; * ';
 			line.appendChild(nickHTML);
-			line.innerHTML += ' has quited (';
+			line.innerHTML += ' left server (';
 			line.appendChild(quitmsg);
 			line.innerHTML += ')';
 			
@@ -2649,6 +2649,16 @@ function ajax(urlRequest, idm, index, recipient, msg) {
 						else {
 							
 							elem.className = 'summary';
+						}
+					}
+					
+					let activeWindow = document.getElementsByClassName('wselected')[0];
+					
+					if (typeof activeWindow !== 'undefined') {
+					
+						if (document.getElementById('border-right').style.backgroundColor !== 'red' && activeWindow.id !== 'gchanlist' && activeWindow.id !== 'status') {
+							
+							activeWindow.scrollTop = activeWindow.scrollHeight;
 						}
 					}
 				}
