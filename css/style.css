@@ -38,7 +38,11 @@ a, a:visited, a:active {
 	height:35px;
 	line-height:35px;
 	border-bottom:4px solid gainsboro;
-	padding:0 10px 0 25px;
+	padding:0 10px 0 5px;
+}
+.hashtag {
+	 cursor:pointer;
+	 color:gray;
 }
 #content {
 	position:absolute;
