@@ -80,6 +80,27 @@ function escapeHtml(str) {
     return div.innerHTML;
 }
 
+function ht(msg) {
+	
+	msg = msg.split(' ');
+	
+	let chanht = [];
+	
+	msg.forEach(function(word, index) {
+		
+		if (word[0] === '#') {
+			
+			let chansp = word.substring(1);
+			
+			chanht.push( 'ht_' + chansp );
+			
+			msg[index] = '<span id="ht_' + chansp + '" class="hashtag">' + word + '</span>'
+		}
+	});
+	
+	return [ chanht, msg.join(' ') ];
+}
+
 function getParameterByName(name, url) {
 	
     if (!url) url = window.location.href;
@@ -965,7 +986,9 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		elem.id = 'idmsg_' + idmsg;
 		
-		let message = urlify(style( escapeHtml( rawsp.splice(3).join(' ').substring(1) ) ), idmsg, true, false );
+		let mht = ht( rawsp.splice(3).join(' ').substring(1) );
+		
+		let message = urlify(style( mht[1] ), idmsg, true, false );
 		
 		elem.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">&lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + message + '</span>';
 		
@@ -976,6 +999,14 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		else {
 			document.getElementById('status').appendChild(elem);
 		}
+		
+		mht[0].forEach(function(item) {
+			
+			document.getElementById(item).ondblclick = function() {
+				
+				doSend( 'join #' + this.id.split('_')[1] );
+			}
+		});
 	}
 }
 
@@ -1513,7 +1544,7 @@ function ctcp(msg) {
 function onQuit(nick, quitmsg) {
 	
 	if (typeof quitmsg === 'undefined') {
-		quitmsg = '';
+		quitmsg = 'Quit';
 	}
 	
 	let nickHTML = document.createTextNode(nick);
@@ -1546,8 +1577,10 @@ function msg(raw) {
 	
 	idmsg++;
 	
+	let mht = ht( getMsg(raw) );
+	
 	let nick = getNickname(raw);
-	let msg = urlify(style( getMsg(raw) ), idmsg, true, false );
+	let msg = urlify(style( mht[1] ), idmsg, true, false );
 	let chan = raw.split(' ')[2].substring(1);
 	let hlCheck = false, hlcolor = '';
 	
@@ -1567,7 +1600,15 @@ function msg(raw) {
 	if (w !== null) {
 		
 		w.appendChild(line);
+		
+		mht[0].forEach(function(item) {
 			
+			document.getElementById(item).ondblclick = function() {
+				
+				doSend( 'join #' + this.id.split('_')[1] );
+			}
+		});
+		
 		let elem = document.getElementById('chan_btn_' + chan);
 		
 		if (hlCheck === false) {
