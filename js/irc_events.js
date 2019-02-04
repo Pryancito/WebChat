@@ -595,7 +595,10 @@ function clearSelection() {
 			e.preventDefault();
 			
 			if (elem.innerHTML && rememberLines.length < 31) {
+				
 				rememberLines.unshift( elem.innerHTML );
+				
+				console.log(rememberLines);
 			}
 			
 			send();
@@ -838,11 +841,11 @@ function clearSelection() {
 					
 					irl--;
 					elem.innerHTML = rememberLines[ irl ];
-					setTimeout(function(){ setEndOfContenteditable( elem ); }, 0);
+					//setTimeout(function(){ setEndOfContenteditable( elem ); }, 0);
 				}
 				else {
 					
-					irl = rememberLines.length - 1;
+					irl = -1;
 					elem.innerHTML = '';
 				}
 			}
@@ -861,7 +864,7 @@ function clearSelection() {
 			if (typeof rememberLines[ irl ] !== 'undefined') {
 				
 				elem.innerHTML = rememberLines[ irl ];
-				setTimeout(function(){ setEndOfContenteditable( elem ); }, 0);
+				//setTimeout(function(){ setEndOfContenteditable( elem ); }, 0);
 			}
 			
 			expandTextarea(textarea);
@@ -1060,7 +1063,7 @@ function clearSelection() {
 		
 		e.stopPropagation();
 		
-		bubble.style.marginLeft = 24 * 2 + 3 + 'px';
+		bubble.style.marginLeft = 24 * 2 - 17 + 'px';
 		bubble.style.display = 'inline-block';
 		Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
 		document.getElementById('addchan').style.setProperty('display', 'block');
@@ -1074,7 +1077,7 @@ function clearSelection() {
 		
 		e.stopPropagation();
 		
-		bubble.style.marginLeft = 24 * 3 + 18 + 'px';
+		bubble.style.marginLeft = 24 * 3 - 2 + 'px';
 		bubble.style.display = 'inline-block';
 		Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
 		document.getElementById('favchans').style.setProperty('display', 'block');
