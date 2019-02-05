@@ -1634,6 +1634,10 @@ function getMsg(raw) {
 	return raw.split(':').splice(2).join(':');
 }
 
+function ci(a, b) {
+	return a.toLowerCase().localeCompare(b.toLowerCase());
+}
+
 function userlist(chan, nicknames) {
 	
 	nicknames = nicknames.trim().split(' ');
@@ -1660,7 +1664,7 @@ function userlist(chan, nicknames) {
 		}
 	});
 		
-	nicksSorted.sort();
+	nicksSorted.sort(ci);
 	
 	chan = chan.substring(1);
 	
