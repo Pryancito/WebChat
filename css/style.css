@@ -129,6 +129,8 @@ a, a:visited, a:active {
 	flex-direction: column;
 	
 	background-color:#f0f0f0;
+	
+	overflow-y:auto;
 }
 #msgs .window {
 	position:relative;
@@ -303,6 +305,7 @@ input[type=button] {
 }
 .window {
 	display:none;
+	height:100%;
 }
 .ul_hidden {
 	display:none;
