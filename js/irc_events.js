@@ -597,8 +597,6 @@ function clearSelection() {
 			if (elem.innerHTML && rememberLines.length < 31) {
 				
 				rememberLines.unshift( elem.innerHTML );
-				
-				console.log(rememberLines);
 			}
 			
 			send();
@@ -970,6 +968,14 @@ function clearSelection() {
 				
 				if (target[0] == 'chan') {
 					
+					if (windows.item(index + 1).scrollHeight !== windows.item(index + 1).offsetHeight + windows.item(index + 1).scrollTop) {
+						
+						document.getElementById('border-right').style.backgroundColor = 'red';
+					}
+					else {
+						document.getElementById('border-right').style.backgroundColor = 'gainsboro';
+					}
+					
 					activeChannel = '#' + target[1];
 					ACStriped = target[1];
 					active = activeChannel;
@@ -1005,6 +1011,7 @@ function clearSelection() {
 					
 					let border_right = document.getElementById('border-right');
 					border_right.style.height = userlist.scrollHeight + 'px';
+					
 				}
 				else if (target[0] == 'query') {
 					

@@ -1448,7 +1448,7 @@ function query(nick, msg) {
 	
 	let querylist = document.getElementById('querylist');
 	
-	if (document.getElementById('query_' + nick) === null && msg === false) {
+	if (document.getElementById('query_' + nick) === null) {
 		
 		let query_window = document.createElement('div');
 		Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
@@ -1468,7 +1468,7 @@ function query(nick, msg) {
 		
 		document.getElementById('text').focus();
 	}
-	else if (msg !== false) {
+	if (msg !== false) {
 		
 		if (msg[0] === '') {
 			ctcp(msg);
@@ -1493,7 +1493,6 @@ function query(nick, msg) {
 			}
 			
 			let hlCheck = false, hlcolor = '';
-			let nickHTML = document.createTextNode(nick);
 			
 			if (msg.split(' ').indexOf(me) !== -1) { // HL
 				hlCheck = true;
@@ -1503,10 +1502,7 @@ function query(nick, msg) {
 			let w = document.getElementById('query_' + nick);
 			let line = document.createElement('p');
 			
-			line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;';
-			line.appendChild(nickHTML);
-			line.innerHTML += '&gt;</strong> ';
-			line.innerHTML += msg;
+			line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;' + nick + '&gt;</strong> ' + msg;
 			
 			w.appendChild(line);
 			
@@ -1543,7 +1539,7 @@ function ctcp(msg) {
 
 function onQuit(nick, quitmsg) {
 	
-	if (typeof quitmsg === 'undefined') {
+	if (typeof quitmsg === 'undefined' || quitmsg == '') {
 		quitmsg = 'Quit';
 	}
 	
@@ -1584,7 +1580,7 @@ function msg(raw) {
 	let chan = raw.split(' ')[2].substring(1);
 	let hlCheck = false, hlcolor = '';
 	
-	if (msg.split(' ').indexOf(me) !== -1) { // HL
+	if (msg.toLowerCase().split(' ').indexOf(me.toLowerCase()) !== -1) { // HL
 		hlCheck = true;
 		hlcolor = 'hlcolor';
 	}
@@ -2264,6 +2260,8 @@ function onJoin(user, chan, aj) {
 		
 		let border_left = document.getElementById('border-left');
 		border_left.style.height = document.getElementById('cqlist').scrollHeight + 'px';
+		
+		doSend('topic ' + chan);
 	}
 	
 	let chanelem = document.createTextNode(chan);
