@@ -1188,7 +1188,7 @@ function onPart(mask, chan) {
 	
 	let elem = document.createElement('p');
 	
-	elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ';
+	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">&lt;'+ currentTime() +'&gt; * ';
 	elem.appendChild(nickelem);
 	elem.innerHTML += ' has left ';
 	elem.appendChild(chanelem);
@@ -1591,7 +1591,7 @@ function msg(raw) {
 	line.id = 'idmsg_' + idmsg;
 	line.className = 'line';
 	
-	line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;' + nick + '&gt;</strong> ' + msg;
+	line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg;
 	
 	if (w !== null) {
 		
@@ -1660,7 +1660,7 @@ function userlist(chan, nicknames) {
 			nicksSorted[index] = 4 + item.substring(1);
 		}
 		else {
-			nicksSorted[index] = item;
+			nicksSorted[index] = 5 + item;
 		}
 	});
 		
@@ -1690,13 +1690,13 @@ function userlist(chan, nicknames) {
 			uls_no_mode[ chan ].push( item.substring(1) );
 		}
 		else {
-			user.className = 'nick_' + item + ' nlnick';
+			user.className = 'nick_' + item.substring(1) + ' nlnick';
 			
-			if (item === me) {
+			if (item.substring(1)=== me) {
 				user.className += ' me';
 			}
 			
-			uls_no_mode[ chan ].push( item );
+			uls_no_mode[ chan ].push( item.substring(1) );
 		}
 		
 		uls[ chan ].push( item );
@@ -1717,7 +1717,7 @@ function userlist(chan, nicknames) {
 			item = '<i class="fa fa-circle voice" aria-hidden="true"></i> <span>' + item.substring(1) + '</span>';
 		}
 		else {
-			item = '<i class="fa fa-circle user" aria-hidden="true"></i> <span>'+ item +'</span>';
+			item = '<i class="fa fa-circle user" aria-hidden="true"></i> <span>'+ item.substring(1) +'</span>';
 		}
 		
 		user.innerHTML = item;
@@ -2271,7 +2271,7 @@ function onJoin(user, chan, aj) {
 	let chanelem = document.createTextNode(chan);
 	
 	let elem = document.createElement('p');
-	elem.innerHTML = '<strong class="noboldcopy">&lt;'+ currentTime() +'&gt; &lt;' + nickelem.textContent + '&gt; (' + mask.textContent + ') has joined ' + chanelem.textContent + '</strong>';
+	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">&lt;'+ currentTime() +'&gt; &lt;<span style="color:blue;">' + nickelem.textContent + '</span>&gt; (' + mask.textContent + ') has joined ' + chanelem.textContent + '</strong>';
 	
 	document.getElementById('chan_' + chansp).appendChild(elem);
 	
