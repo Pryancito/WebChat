@@ -156,6 +156,7 @@ function onMessage(evt) {
 }
 
 function handleBinaryInput(event) {
+	
 	let fileReader = event.target;
 	let raw = fileReader.result;
 	process(raw);
@@ -175,16 +176,16 @@ function autojoins() {
 			
 			if (list.length == 1 && list[0] == '') {
 				
-				doSend('join ' + default_chan);
+				setTimeout(function(){ doSend('join ' + default_chan); }, 400);
 			}
 
 			aj = list.length;
 			
 			list.sort();
 			
-			list.forEach(function(item) {
+			list.forEach(function(item, index) {
 				
-				doSend('join ' + item);
+				setTimeout( doSend.bind(null, 'join ' + item), index * 400 );
 			});
 		}
 		else if (chans_from_url !== null) {
@@ -193,9 +194,9 @@ function autojoins() {
 			
 			chans_from_url.sort();
 			
-			chans_from_url.forEach(function(item) {
+			chans_from_url.forEach(function(item, index) {
 				
-				doSend('join ' + item);
+				setTimeout( doSend.bind(null, 'join ' + item), index * 400 );
 			});
 		}
 	}
@@ -945,7 +946,7 @@ function onSetTopic( raw ) {
 
 function memsg(mask, target, message) {
 	
-	let nick = document.createTextNode(mask.split('!')[0].substring(1));
+	let nick = document.createTextNode(mask.split('!')[0]);
 	let prefix;
 	
 	if (target.substr(0, 1) == '#') {
@@ -956,7 +957,7 @@ function memsg(mask, target, message) {
 		prefix = 'query_';
 	}
 	
-	message = urlify(style( escapeHtml( message.split('ACTION ')[1].split('')[0] ) ), '', false, false);
+	message = urlify(style( message.split('ACTION ')[1].split('')[0] ), '', false, false);
 	
 	let hlCheck = false, hlcolor = '';
 	
@@ -1188,7 +1189,7 @@ function onPart(mask, chan) {
 	
 	let elem = document.createElement('p');
 	
-	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">&lt;'+ currentTime() +'&gt; * ';
+	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">['+ currentTime() +'] * ';
 	elem.appendChild(nickelem);
 	elem.innerHTML += ' has left ';
 	elem.appendChild(chanelem);
@@ -1557,7 +1558,7 @@ function onQuit(nick, quitmsg) {
 			
 			let w = document.getElementById('chan_' + chan);
 			let line = document.createElement('p');
-			line.innerHTML = '&lt;'+ currentTime() +'&gt; * ';
+			line.innerHTML = '['+ currentTime() +'] * ';
 			line.appendChild(nickHTML);
 			line.innerHTML += ' left server (';
 			line.appendChild(quitmsg);
@@ -2274,7 +2275,7 @@ function onJoin(user, chan, aj) {
 	let chanelem = document.createTextNode(chan);
 	
 	let elem = document.createElement('p');
-	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">&lt;'+ currentTime() +'&gt; &lt;<span style="color:blue;">' + nickelem.textContent + '</span>&gt; (' + mask.textContent + ') has joined ' + chanelem.textContent + '</strong>';
+	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">['+ currentTime() +'] [<span style="color:blue;">' + nickelem.textContent + '</span>] (' + mask.textContent + ') has joined ' + chanelem.textContent + '</strong>';
 	
 	document.getElementById('chan_' + chansp).appendChild(elem);
 	
