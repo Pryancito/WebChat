@@ -971,9 +971,11 @@ function clearSelection() {
 					if (windows.item(index + 1).scrollHeight !== windows.item(index + 1).offsetHeight + windows.item(index + 1).scrollTop) {
 						
 						document.getElementById('border-right').style.backgroundColor = 'red';
+						document.getElementById('border-left').style.backgroundColor = 'red';
 					}
 					else {
 						document.getElementById('border-right').style.backgroundColor = 'gainsboro';
+						document.getElementById('border-left').style.backgroundColor = 'gainsboro';
 					}
 					
 					activeChannel = '#' + target[1];

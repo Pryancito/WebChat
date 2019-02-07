@@ -176,7 +176,7 @@ function autojoins() {
 			
 			if (list.length == 1 && list[0] == '') {
 				
-				setTimeout(function(){ doSend('join ' + default_chan); }, 400);
+				setTimeout(function(){ doSend('join ' + default_chan); }, 100);
 			}
 
 			aj = list.length;
@@ -185,7 +185,7 @@ function autojoins() {
 			
 			list.forEach(function(item, index) {
 				
-				setTimeout( doSend.bind(null, 'join ' + item), index * 400 );
+				setTimeout( doSend.bind(null, 'join ' + item), index * 100 );
 			});
 		}
 		else if (chans_from_url !== null) {
@@ -196,7 +196,7 @@ function autojoins() {
 			
 			chans_from_url.forEach(function(item, index) {
 				
-				setTimeout( doSend.bind(null, 'join ' + item), index * 400 );
+				setTimeout( doSend.bind(null, 'join ' + item), index * 100 );
 			});
 		}
 	}
@@ -238,6 +238,8 @@ function ignores_list() {
 }
 
 function ignores_check(mask, type) {
+	
+	return true; // A changer
 	
 	if (mask.indexOf('!') !== -1 && mask.indexOf('@') !== -1) {
 	
@@ -649,21 +651,12 @@ function process(rawData) {
 		
 		writeToScreen('<span class="nocolorcopy">' + urlify(style( raw.split(':').splice(2).join(':') ), '', false, false) + '</span>');
 	}
-	
-	let activeWindow = document.getElementsByClassName('wselected')[0];
-	
-	if (typeof activeWindow !== 'undefined') {
-	
-		if (document.getElementById('border-right').style.backgroundColor !== 'red' && activeWindow.id !== 'gchanlist' && activeWindow.id !== 'status') {
-			
-			activeWindow.scrollTop = activeWindow.scrollHeight;
-		}
-	}
 }
 
 function onKick(rawsp) {
 	
 	if (rawsp[3] == me) {
+		
 		let chanstriped = rawsp[2].substring(1);
 		document.getElementById('chan_btn_' + chanstriped).remove();
 		document.getElementById('chan_' + chanstriped).remove();
@@ -673,9 +666,15 @@ function onKick(rawsp) {
 		document.getElementById('btn_status').className += ' btn_selected';
 	}
 	else {
+		
 		let elem = document.createElement('p');
 		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + rawsp[3] + ' has been kicked on ' + rawsp[2] + ' (' + rawsp[4].substring(1) + ')';
-		document.getElementById('chan_' + rawsp[2].substring(1)).appendChild(elem);
+		
+		let w = document.getElementById('chan_' + rawsp[2].substring(1));
+		
+		w.appendChild(elem);
+		
+		scrollBottom(w);
 		
 		doSend('names ' + rawsp[2]);
 	}
@@ -846,6 +845,8 @@ function setMode(rawsp) {
 		}
 		
 		doSend('names ' + chan_or_nick);
+		
+		scrollBottom(w);
 	}
 	else {
 		
@@ -971,7 +972,14 @@ function memsg(mask, target, message) {
 		hl(nick.textContent, message);
 	}
 	
-	document.getElementById(prefix + target).innerHTML += '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; * ' + nick.textContent + '</strong> ' + message;
+	let w = document.getElementById(prefix + target);
+	
+	if (w !== null) {
+	
+		w.innerHTML += '<p><strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; * <span style="color:blue;">' + nick.textContent + '</span></strong> ' + message + '</p>';
+	}
+	
+	scrollBottom(w);
 }
 
 function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyUser_604 :NickServ allows you to register a nickname and
@@ -1008,6 +1016,8 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 				doSend( 'join #' + this.id.split('_')[1] );
 			}
 		});
+		
+		scrollBottom(w);
 	}
 }
 
@@ -1194,7 +1204,11 @@ function onPart(mask, chan) {
 	elem.innerHTML += ' has left ';
 	elem.appendChild(chanelem);
 	
-	document.getElementById('chan_' + chan.substring(1)).appendChild(elem);
+	let w = document.getElementById('chan_' + chan.substring(1));
+	
+	w.appendChild(elem);
+	
+	scrollBottom(w);
 	
 	if (nick == me) {
 		let chanstriped = chan.substring(1);
@@ -1241,7 +1255,12 @@ function onWhois(numraw, line) {
 	line = line[0] + line.splice(1).join(':');
 	
 	elem.innerHTML = '&lt;'+ currentTime() +'&gt; ' + line;
-	document.getElementsByClassName('wselected')[0].appendChild(elem);
+	
+	let w = document.getElementsByClassName('wselected')[0];
+	
+	w.appendChild(elem);
+	
+	scrollBottom(w);
 }
 
 function parseIdle(seconds) {
@@ -1565,6 +1584,8 @@ function onQuit(nick, quitmsg) {
 			line.innerHTML += ')';
 			
 			w.appendChild(line);
+			
+			scrollBottom(w);
 		}
 	}
 }
@@ -1625,11 +1646,32 @@ function msg(raw) {
 				elem.className += ' green';
 			}
 		}
+		
+		console.log(w)
+		
+		scrollBottom(w);
 	}
 	
 	if (hlCheck) {
 		
 		hl(nick, msg);
+	}
+}
+
+function scrollBottom(w) {
+	
+	if (w !== null && typeof w !== 'undefined') {
+		
+		console.log(msgs.scrollTop, msgs.scrollHeight, w.scrollTop, w.scrollHeight);
+		
+		if (w.className.indexOf('wselected') === -1) {
+			
+			w.scrollTop = w.scrollHeight;
+		}
+		else if (document.getElementById('border-right').style.backgroundColor !== 'red') {
+			
+			w.scrollTop = w.scrollHeight;
+		}
 	}
 }
 
@@ -2277,7 +2319,9 @@ function onJoin(user, chan, aj) {
 	let elem = document.createElement('p');
 	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">['+ currentTime() +'] [<span style="color:blue;">' + nickelem.textContent + '</span>] (' + mask.textContent + ') has joined ' + chanelem.textContent + '</strong>';
 	
-	document.getElementById('chan_' + chansp).appendChild(elem);
+	let w = document.getElementById('chan_' + chansp);
+	
+	w.appendChild(elem);
 	
 	let activeWindow = document.getElementsByClassName('wselected')[0];
 	
@@ -2293,6 +2337,8 @@ function onJoin(user, chan, aj) {
 		doSend('topic ' + chan);
 		aj = false;
 	}
+	
+	scrollBottom(w);
 }
 
 function onError(evt) {
