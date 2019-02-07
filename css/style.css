@@ -129,13 +129,13 @@ a, a:visited, a:active {
 	flex-direction: column;
 	
 	background-color:#f0f0f0;
-	
-	overflow-y:auto;
 }
 #msgs .window {
 	position:relative;
 	padding:0 15px;
-	overflow-y:auto;
+	overflow-y:scroll;
+	visibility:hidden;
+	height:100%;
 }
 #msgs .window p {
 	word-wrap:break-word;
@@ -301,11 +301,11 @@ input[type=button] {
 	color:#FFAA7F;
 }
 .wselected {
-	display:block !important;
-}
-.window {
-	display:none;
-	height:100%;
+	visibility:visible !important;
+	position:absolute !important;
+	top:0;
+	bottom:77px;
+	width:calc(100% - 30px);
 }
 .ul_hidden {
 	display:none;
@@ -417,7 +417,7 @@ body #text .nocolorcopy {
 	color:initial !important;
 }
 #btn_status, #chanlist, #querylist {
-	margin-right:4px;
+	margin-right:4px !important;
 } 
 .lchan {
 	cursor:pointer;
