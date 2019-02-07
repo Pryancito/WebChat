@@ -416,6 +416,9 @@ body #text .noboldcopy {
 body #text .nocolorcopy {
 	color:initial !important;
 }
+#btn_status, #chanlist, #querylist {
+	margin-right:4px;
+} 
 .lchan {
 	cursor:pointer;
 }
