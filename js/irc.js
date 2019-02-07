@@ -1436,9 +1436,12 @@ function join(chan) {
 			if (this.scrollHeight !== this.offsetHeight + this.scrollTop) {
 				
 				document.getElementById('border-right').style.backgroundColor = 'red';
+				document.getElementById('border-left').style.backgroundColor = 'red';
 			}
 			else {
+				
 				document.getElementById('border-right').style.backgroundColor = 'gainsboro';
+				document.getElementById('border-left').style.backgroundColor = 'gainsboro';
 			}
 		}
 	}
