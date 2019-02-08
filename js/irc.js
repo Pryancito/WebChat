@@ -995,9 +995,9 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		elem.id = 'idmsg_' + idmsg;
 		
-		let mht = ht( rawsp.splice(3).join(' ').substring(1) );
+		let mht = ht( escapeHtml( rawsp.splice(3).join(' ').substring(1) ) );
 		
-		let message = urlify(style( escapeHtml( mht[1] ) ), idmsg, true, false );
+		let message = urlify(style( mht[1] ), idmsg, true, false );
 		
 		elem.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">&lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + message + '</span>';
 		
