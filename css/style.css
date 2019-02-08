@@ -303,8 +303,8 @@ input[type=button] {
 	visibility:visible !important;
 	position:absolute !important;
 	top:0;
-	bottom:77px;
 	width:calc(100% - 30px);
+	height:calc(100% - 77px);
 }
 .ul_hidden {
 	display:none;
