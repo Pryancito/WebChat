@@ -31,8 +31,6 @@ function expandTextarea(obj) {
 	let linesHeight = obj.scrollHeight - 10;
 	numLines = linesHeight / 23;
 	
-	let msgs = document.getElementById('msgs');
-	
 	if (numLines <= 6) {
 		obj.style.height = linesHeight + 'px';
 		obj.style.overflowY = 'hidden';
@@ -323,6 +321,8 @@ function clearSelection() {
 	
 	ignores_list();
 	
+	let msgs = document.getElementById('msgs');
+	
 	document.documentElement.setAttribute('lang', lang);
 	
 	/*
@@ -430,8 +430,6 @@ function clearSelection() {
 			fc.className = 'fa fa-star favinfo favchecked';
 		}
 	}
-	
-	let msgs = document.getElementById('msgs');
 	
 	msgs.onclick = function() {
 		
@@ -1034,7 +1032,6 @@ function clearSelection() {
 			}
 			
 			// Scroll to the bottom
-			let msgs = document.getElementById('msgs');
 			msgs.scrollTop = msgs.scrollHeight;
 		}
 		

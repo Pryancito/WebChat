@@ -2353,7 +2353,6 @@ function writeToScreen(message) {
 	pre.innerHTML = message;
 	output.appendChild(pre);
 	// hope this works in all browsers:
-	let msgs = document.getElementById('msgs');
 	//msgs.scrollTop = msgs.scrollHeight;
 }
 
