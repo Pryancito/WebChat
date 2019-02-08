@@ -1647,8 +1647,6 @@ function msg(raw) {
 			}
 		}
 		
-		console.log(w)
-		
 		scrollBottom(w);
 	}
 	
