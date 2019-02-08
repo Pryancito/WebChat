@@ -80,6 +80,27 @@ function escapeHtml(str) {
     return div.innerHTML;
 }
 
+function ht(msg) {
+	
+	msg = msg.split(' ');
+	
+	let chanht = [];
+	
+	msg.forEach(function(word, index) {
+		
+		if (word[0] === '#') {
+			
+			let chansp = word.substring(1);
+			
+			chanht.push( 'ht_' + chansp );
+			
+			msg[index] = '<span id="ht_' + chansp + '" class="hashtag">' + word + '</span>'
+		}
+	});
+	
+	return [ chanht, msg.join(' ') ];
+}
+
 function getParameterByName(name, url) {
 	
     if (!url) url = window.location.href;
@@ -135,6 +156,7 @@ function onMessage(evt) {
 }
 
 function handleBinaryInput(event) {
+	
 	let fileReader = event.target;
 	let raw = fileReader.result;
 	process(raw);
@@ -154,16 +176,16 @@ function autojoins() {
 			
 			if (list.length == 1 && list[0] == '') {
 				
-				doSend('join ' + default_chan);
+				setTimeout(function(){ doSend('join ' + default_chan); }, 100);
 			}
 
 			aj = list.length;
 			
 			list.sort();
 			
-			list.forEach(function(item) {
+			list.forEach(function(item, index) {
 				
-				doSend('join ' + item);
+				setTimeout( doSend.bind(null, 'join ' + item), index * 100 );
 			});
 		}
 		else if (chans_from_url !== null) {
@@ -172,9 +194,9 @@ function autojoins() {
 			
 			chans_from_url.sort();
 			
-			chans_from_url.forEach(function(item) {
+			chans_from_url.forEach(function(item, index) {
 				
-				doSend('join ' + item);
+				setTimeout( doSend.bind(null, 'join ' + item), index * 100 );
 			});
 		}
 	}
@@ -216,6 +238,8 @@ function ignores_list() {
 }
 
 function ignores_check(mask, type) {
+	
+	return true; // A changer
 	
 	if (mask.indexOf('!') !== -1 && mask.indexOf('@') !== -1) {
 	
@@ -627,21 +651,12 @@ function process(rawData) {
 		
 		writeToScreen('<span class="nocolorcopy">' + urlify(style( raw.split(':').splice(2).join(':') ), '', false, false) + '</span>');
 	}
-	
-	let activeWindow = document.getElementsByClassName('wselected')[0];
-	
-	if (typeof activeWindow !== 'undefined') {
-	
-		if (document.getElementById('border-right').style.backgroundColor !== 'red' && activeWindow.id !== 'gchanlist' && activeWindow.id !== 'status') {
-			
-			activeWindow.scrollTop = activeWindow.scrollHeight;
-		}
-	}
 }
 
 function onKick(rawsp) {
 	
 	if (rawsp[3] == me) {
+		
 		let chanstriped = rawsp[2].substring(1);
 		document.getElementById('chan_btn_' + chanstriped).remove();
 		document.getElementById('chan_' + chanstriped).remove();
@@ -651,9 +666,15 @@ function onKick(rawsp) {
 		document.getElementById('btn_status').className += ' btn_selected';
 	}
 	else {
+		
 		let elem = document.createElement('p');
 		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + rawsp[3] + ' has been kicked on ' + rawsp[2] + ' (' + rawsp[4].substring(1) + ')';
-		document.getElementById('chan_' + rawsp[2].substring(1)).appendChild(elem);
+		
+		let w = document.getElementById('chan_' + rawsp[2].substring(1));
+		
+		w.appendChild(elem);
+		
+		scrollBottom(w);
 		
 		doSend('names ' + rawsp[2]);
 	}
@@ -824,6 +845,8 @@ function setMode(rawsp) {
 		}
 		
 		doSend('names ' + chan_or_nick);
+		
+		scrollBottom(w);
 	}
 	else {
 		
@@ -924,7 +947,7 @@ function onSetTopic( raw ) {
 
 function memsg(mask, target, message) {
 	
-	let nick = document.createTextNode(mask.split('!')[0].substring(1));
+	let nick = document.createTextNode(mask.split('!')[0]);
 	let prefix;
 	
 	if (target.substr(0, 1) == '#') {
@@ -949,7 +972,14 @@ function memsg(mask, target, message) {
 		hl(nick.textContent, message);
 	}
 	
-	document.getElementById(prefix + target).innerHTML += '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; * ' + nick.textContent + '</strong> ' + message;
+	let w = document.getElementById(prefix + target);
+	
+	if (w !== null) {
+	
+		w.innerHTML += '<p><strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; * <span style="color:blue;">' + nick.textContent + '</span></strong> ' + message + '</p>';
+	}
+	
+	scrollBottom(w);
 }
 
 function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyUser_604 :NickServ allows you to register a nickname and
@@ -965,7 +995,9 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		elem.id = 'idmsg_' + idmsg;
 		
-		let message = urlify(style( escapeHtml( rawsp.splice(3).join(' ').substring(1) ) ), idmsg, true, false );
+		let mht = ht( escapeHtml( rawsp.splice(3).join(' ').substring(1) ) );
+		
+		let message = urlify(style( mht[1] ), idmsg, true, false );
 		
 		elem.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">&lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + message + '</span>';
 		
@@ -976,6 +1008,16 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		else {
 			document.getElementById('status').appendChild(elem);
 		}
+		
+		mht[0].forEach(function(item) {
+			
+			document.getElementById(item).ondblclick = function() {
+				
+				doSend( 'join #' + this.id.split('_')[1] );
+			}
+		});
+		
+		scrollBottom(w);
 	}
 }
 
@@ -1157,12 +1199,16 @@ function onPart(mask, chan) {
 	
 	let elem = document.createElement('p');
 	
-	elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ';
+	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">['+ currentTime() +'] * ';
 	elem.appendChild(nickelem);
 	elem.innerHTML += ' has left ';
 	elem.appendChild(chanelem);
 	
-	document.getElementById('chan_' + chan.substring(1)).appendChild(elem);
+	let w = document.getElementById('chan_' + chan.substring(1));
+	
+	w.appendChild(elem);
+	
+	scrollBottom(w);
 	
 	if (nick == me) {
 		let chanstriped = chan.substring(1);
@@ -1209,7 +1255,12 @@ function onWhois(numraw, line) {
 	line = line[0] + line.splice(1).join(':');
 	
 	elem.innerHTML = '&lt;'+ currentTime() +'&gt; ' + line;
-	document.getElementsByClassName('wselected')[0].appendChild(elem);
+	
+	let w = document.getElementsByClassName('wselected')[0];
+	
+	w.appendChild(elem);
+	
+	scrollBottom(w);
 }
 
 function parseIdle(seconds) {
@@ -1405,9 +1456,12 @@ function join(chan) {
 			if (this.scrollHeight !== this.offsetHeight + this.scrollTop) {
 				
 				document.getElementById('border-right').style.backgroundColor = 'red';
+				document.getElementById('border-left').style.backgroundColor = 'red';
 			}
 			else {
+				
 				document.getElementById('border-right').style.backgroundColor = 'gainsboro';
+				document.getElementById('border-left').style.backgroundColor = 'gainsboro';
 			}
 		}
 	}
@@ -1417,7 +1471,7 @@ function query(nick, msg) {
 	
 	let querylist = document.getElementById('querylist');
 	
-	if (document.getElementById('query_' + nick) === null && msg === false) {
+	if (document.getElementById('query_' + nick) === null) {
 		
 		let query_window = document.createElement('div');
 		Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
@@ -1437,7 +1491,7 @@ function query(nick, msg) {
 		
 		document.getElementById('text').focus();
 	}
-	else if (msg !== false) {
+	if (msg !== false) {
 		
 		if (msg[0] === '') {
 			ctcp(msg);
@@ -1462,7 +1516,6 @@ function query(nick, msg) {
 			}
 			
 			let hlCheck = false, hlcolor = '';
-			let nickHTML = document.createTextNode(nick);
 			
 			if (msg.split(' ').indexOf(me) !== -1) { // HL
 				hlCheck = true;
@@ -1472,10 +1525,9 @@ function query(nick, msg) {
 			let w = document.getElementById('query_' + nick);
 			let line = document.createElement('p');
 			
-			line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;';
-			line.appendChild(nickHTML);
-			line.innerHTML += '&gt;</strong> ';
-			line.innerHTML += msg;
+			msg = urlify( style( escapeHtml( msg ) ) );
+			
+			line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;' + nick + '&gt;</strong> ' + msg;
 			
 			w.appendChild(line);
 			
@@ -1512,8 +1564,8 @@ function ctcp(msg) {
 
 function onQuit(nick, quitmsg) {
 	
-	if (typeof quitmsg === 'undefined') {
-		quitmsg = '';
+	if (typeof quitmsg === 'undefined' || quitmsg == '') {
+		quitmsg = 'Quit';
 	}
 	
 	let nickHTML = document.createTextNode(nick);
@@ -1521,19 +1573,21 @@ function onQuit(nick, quitmsg) {
 	
 	Array.from(document.getElementsByClassName('nick_' + nick)).forEach( delNickname );
 	
-	for (var chan in uls) {
+	for (var chan in uls_no_mode) {
 		
-		if (uls[chan].indexOf(nick) !== -1) {
+		if (uls_no_mode[chan].indexOf(nick) !== -1) {
 			
 			let w = document.getElementById('chan_' + chan);
 			let line = document.createElement('p');
-			line.innerHTML = '&lt;'+ currentTime() +'&gt; * ';
+			line.innerHTML = '['+ currentTime() +'] * ';
 			line.appendChild(nickHTML);
-			line.innerHTML += ' has quited (';
+			line.innerHTML += ' left server (';
 			line.appendChild(quitmsg);
 			line.innerHTML += ')';
 			
 			w.appendChild(line);
+			
+			scrollBottom(w);
 		}
 	}
 }
@@ -1546,12 +1600,14 @@ function msg(raw) {
 	
 	idmsg++;
 	
+	let mht = ht( escapeHtml( getMsg(raw) ) );
+	
 	let nick = getNickname(raw);
-	let msg = urlify(style( getMsg(raw) ), idmsg, true, false );
+	let msg = urlify(style( mht[1] ), idmsg, true, false );
 	let chan = raw.split(' ')[2].substring(1);
 	let hlCheck = false, hlcolor = '';
 	
-	if (msg.split(' ').indexOf(me) !== -1) { // HL
+	if (msg.toLowerCase().split(' ').indexOf(me.toLowerCase()) !== -1) { // HL
 		hlCheck = true;
 		hlcolor = 'hlcolor';
 	}
@@ -1562,12 +1618,20 @@ function msg(raw) {
 	line.id = 'idmsg_' + idmsg;
 	line.className = 'line';
 	
-	line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;' + nick + '&gt;</strong> ' + msg;
+	line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg;
 	
 	if (w !== null) {
 		
 		w.appendChild(line);
+		
+		mht[0].forEach(function(item) {
 			
+			document.getElementById(item).ondblclick = function() {
+				
+				doSend( 'join #' + this.id.split('_')[1] );
+			}
+		});
+		
 		let elem = document.getElementById('chan_btn_' + chan);
 		
 		if (hlCheck === false) {
@@ -1584,6 +1648,8 @@ function msg(raw) {
 				elem.className += ' green';
 			}
 		}
+		
+		scrollBottom(w);
 	}
 	
 	if (hlCheck) {
@@ -1592,9 +1658,28 @@ function msg(raw) {
 	}
 }
 
+function scrollBottom(w) {
+	
+	if (w !== null && typeof w !== 'undefined') {
+		
+		if (w.className.indexOf('wselected') === -1) {
+			
+			w.scrollTop = w.scrollHeight;
+		}
+		else if (document.getElementById('border-right').style.backgroundColor !== 'red') {
+			
+			w.scrollTop = w.scrollHeight;
+		}
+	}
+}
+
 function getMsg(raw) {
 	
 	return raw.split(':').splice(2).join(':');
+}
+
+function ci(a, b) {
+	return a.toLowerCase().localeCompare(b.toLowerCase());
 }
 
 function userlist(chan, nicknames) {
@@ -1619,11 +1704,11 @@ function userlist(chan, nicknames) {
 			nicksSorted[index] = 4 + item.substring(1);
 		}
 		else {
-			nicksSorted[index] = item;
+			nicksSorted[index] = 5 + item;
 		}
 	});
 		
-	nicksSorted.sort();
+	nicksSorted.sort(ci);
 	
 	chan = chan.substring(1);
 	
@@ -1649,13 +1734,13 @@ function userlist(chan, nicknames) {
 			uls_no_mode[ chan ].push( item.substring(1) );
 		}
 		else {
-			user.className = 'nick_' + item + ' nlnick';
+			user.className = 'nick_' + item.substring(1) + ' nlnick';
 			
-			if (item === me) {
+			if (item.substring(1)=== me) {
 				user.className += ' me';
 			}
 			
-			uls_no_mode[ chan ].push( item );
+			uls_no_mode[ chan ].push( item.substring(1) );
 		}
 		
 		uls[ chan ].push( item );
@@ -1676,7 +1761,7 @@ function userlist(chan, nicknames) {
 			item = '<i class="fa fa-circle voice" aria-hidden="true"></i> <span>' + item.substring(1) + '</span>';
 		}
 		else {
-			item = '<i class="fa fa-circle user" aria-hidden="true"></i> <span>'+ item +'</span>';
+			item = '<i class="fa fa-circle user" aria-hidden="true"></i> <span>'+ item.substring(1) +'</span>';
 		}
 		
 		user.innerHTML = item;
@@ -2223,14 +2308,18 @@ function onJoin(user, chan, aj) {
 		
 		let border_left = document.getElementById('border-left');
 		border_left.style.height = document.getElementById('cqlist').scrollHeight + 'px';
+		
+		doSend('topic ' + chan);
 	}
 	
 	let chanelem = document.createTextNode(chan);
 	
 	let elem = document.createElement('p');
-	elem.innerHTML = '<strong class="noboldcopy">&lt;'+ currentTime() +'&gt; &lt;' + nickelem.textContent + '&gt; (' + mask.textContent + ') has joined ' + chanelem.textContent + '</strong>';
+	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">['+ currentTime() +'] [<span style="color:blue;">' + nickelem.textContent + '</span>] (' + mask.textContent + ') has joined ' + chanelem.textContent + '</strong>';
 	
-	document.getElementById('chan_' + chansp).appendChild(elem);
+	let w = document.getElementById('chan_' + chansp);
+	
+	w.appendChild(elem);
 	
 	let activeWindow = document.getElementsByClassName('wselected')[0];
 	
@@ -2246,6 +2335,8 @@ function onJoin(user, chan, aj) {
 		doSend('topic ' + chan);
 		aj = false;
 	}
+	
+	scrollBottom(w);
 }
 
 function onError(evt) {
@@ -2262,7 +2353,6 @@ function writeToScreen(message) {
 	pre.innerHTML = message;
 	output.appendChild(pre);
 	// hope this works in all browsers:
-	let msgs = document.getElementById('msgs');
 	//msgs.scrollTop = msgs.scrollHeight;
 }
 
