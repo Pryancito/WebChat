@@ -1571,9 +1571,9 @@ function onQuit(nick, quitmsg) {
 	
 	Array.from(document.getElementsByClassName('nick_' + nick)).forEach( delNickname );
 	
-	for (var chan in uls) {
+	for (var chan in uls_no_mode) {
 		
-		if (uls[chan].indexOf(nick) !== -1) {
+		if (uls_no_mode[chan].indexOf(nick) !== -1) {
 			
 			let w = document.getElementById('chan_' + chan);
 			let line = document.createElement('p');
