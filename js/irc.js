@@ -958,7 +958,7 @@ function memsg(mask, target, message) {
 		prefix = 'query_';
 	}
 	
-	message = urlify(style( message.split('ACTION ')[1].split('')[0] ), '', false, false);
+	message = urlify(style( escapeHtml( message.split('ACTION ')[1].split('')[0] ) ), '', false, false);
 	
 	let hlCheck = false, hlcolor = '';
 	
@@ -997,7 +997,7 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		let mht = ht( rawsp.splice(3).join(' ').substring(1) );
 		
-		let message = urlify(style( mht[1] ), idmsg, true, false );
+		let message = urlify(style( escapeHtml( mht[1] ) ), idmsg, true, false );
 		
 		elem.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">&lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + message + '</span>';
 		
@@ -1525,6 +1525,8 @@ function query(nick, msg) {
 			let w = document.getElementById('query_' + nick);
 			let line = document.createElement('p');
 			
+			msg = urlify( style( escapeHtml( msg ) ) );
+			
 			line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;' + nick + '&gt;</strong> ' + msg;
 			
 			w.appendChild(line);
@@ -1601,7 +1603,7 @@ function msg(raw) {
 	let mht = ht( getMsg(raw) );
 	
 	let nick = getNickname(raw);
-	let msg = urlify(style( mht[1] ), idmsg, true, false );
+	let msg = urlify(style( escapeHtml( mht[1] ) ), idmsg, true, false );
 	let chan = raw.split(' ')[2].substring(1);
 	let hlCheck = false, hlcolor = '';
 	
