@@ -1662,8 +1662,6 @@ function scrollBottom(w) {
 	
 	if (w !== null && typeof w !== 'undefined') {
 		
-		console.log(msgs.scrollTop, msgs.scrollHeight, w.scrollTop, w.scrollHeight);
-		
 		if (w.className.indexOf('wselected') === -1) {
 			
 			w.scrollTop = w.scrollHeight;
