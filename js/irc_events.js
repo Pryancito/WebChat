@@ -31,16 +31,28 @@ function expandTextarea(obj) {
 	let linesHeight = obj.scrollHeight - 10;
 	numLines = linesHeight / 23;
 	
+	let w = document.getElementsByClassName('wselected')[0];
+	
+	let weight;
+	
 	if (numLines <= 6) {
+		
 		obj.style.height = linesHeight + 'px';
 		obj.style.overflowY = 'hidden';
+		
+		weight = 55 + linesHeight;
 	}
 	else {
+		
 		obj.style.height = 6 * 23 + 'px';
 		obj.style.overflowY = 'auto';
+		
+		weight = 55 + 6 * 23;
 	}
 	
-	msgs.scrollTop = msgs.scrollHeight;
+	w.style.height = 'calc(100% - ' + weight + 'px)';
+	
+	w.scrollTop = w.scrollHeight;
 }
 
 function getCaretPosition(editableDiv, tab) {
