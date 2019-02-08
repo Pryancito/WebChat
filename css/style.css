@@ -135,7 +135,6 @@ a, a:visited, a:active {
 	padding:0 15px;
 	overflow-y:scroll;
 	visibility:hidden;
-	height:100%;
 }
 #msgs .window p {
 	word-wrap:break-word;
