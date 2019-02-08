@@ -1600,10 +1600,10 @@ function msg(raw) {
 	
 	idmsg++;
 	
-	let mht = ht( getMsg(raw) );
+	let mht = ht( escapeHtml( getMsg(raw) ) );
 	
 	let nick = getNickname(raw);
-	let msg = urlify(style( escapeHtml( mht[1] ) ), idmsg, true, false );
+	let msg = urlify(style( mht[1] ), idmsg, true, false );
 	let chan = raw.split(' ')[2].substring(1);
 	let hlCheck = false, hlcolor = '';
 	
