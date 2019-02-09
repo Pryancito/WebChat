@@ -569,7 +569,8 @@ function process(rawData) {
 		}
 	}
 	else if (rawsp[1] == 'QUIT') {
-		onQuit( getNickname(raw), rawp[3] );
+		
+		onQuit( getNickname(raw), getMask(raw), rawp[3] );
 	}
 	else if (rawsp[1] == 'PART') {
 		onPart(rawp[1], rawsp[2]);
@@ -1193,14 +1194,15 @@ function color(n) {
 
 function onPart(mask, chan) {
 	
-	let nick = mask.split('!')[0];
-	let nickelem = document.createTextNode(nick);
+	let nick_host = mask.split('!');
+	
+	let nick = nick_host[0];
+	let host = nick_host[1].split(' ')[0];
 	let chanelem = document.createTextNode(chan);
 	
 	let elem = document.createElement('p');
 	
-	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">['+ currentTime() +'] * ';
-	elem.appendChild(nickelem);
+	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">['+ currentTime() +'] * <span style="color:blue; font-weight:bold;">' + nick + '</span> (' + host + ')';
 	elem.innerHTML += ' has left ';
 	elem.appendChild(chanelem);
 	
@@ -1450,7 +1452,7 @@ function join(chan) {
 	let activeWindow = document.getElementsByClassName('wselected')[0];
 	
 	if (typeof activeWindow !== 'undefined') {
-	
+		
 		activeWindow.onscroll = function() {
 			
 			if (this.scrollHeight !== this.offsetHeight + this.scrollTop) {
@@ -1562,13 +1564,12 @@ function ctcp(msg) {
 	}
 }
 
-function onQuit(nick, quitmsg) {
+function onQuit(nick, mask, quitmsg) {
 	
 	if (typeof quitmsg === 'undefined' || quitmsg == '') {
 		quitmsg = 'Quit';
 	}
 	
-	let nickHTML = document.createTextNode(nick);
 	quitmsg = document.createTextNode(quitmsg);
 	
 	Array.from(document.getElementsByClassName('nick_' + nick)).forEach( delNickname );
@@ -1579,8 +1580,7 @@ function onQuit(nick, quitmsg) {
 			
 			let w = document.getElementById('chan_' + chan);
 			let line = document.createElement('p');
-			line.innerHTML = '['+ currentTime() +'] * ';
-			line.appendChild(nickHTML);
+			line.innerHTML = '['+ currentTime() +'] * <span style="color:blue; font-weight:bold;">' + nick + '</span> (' + mask + ')';
 			line.innerHTML += ' left server (';
 			line.appendChild(quitmsg);
 			line.innerHTML += ')';
@@ -2276,13 +2276,15 @@ function getNickname(raw) {
 	return mask[0];
 }
 
-function getMask(raw) {
+function getMask(raw) { // :KituPlus!~MM@EpiK-262605EF.w86-241.abo.wanadoo.fr QUIT :Read error
 	
 	raw = raw.split(':')[1];
 	
 	let mask = raw.split('!');
 	
-	return mask[1];
+	mask = mask[1].split(' ')[0];
+	
+	return mask;
 }
 
 function onJoin(user, chan, aj) {
