@@ -1455,15 +1455,18 @@ function join(chan) {
 		
 		activeWindow.onscroll = function() {
 			
-			if (this.scrollHeight !== this.offsetHeight + this.scrollTop) {
-				
-				document.getElementById('border-right').style.backgroundColor = 'red';
-				document.getElementById('border-left').style.backgroundColor = 'red';
-			}
-			else {
-				
-				document.getElementById('border-right').style.backgroundColor = 'gainsboro';
-				document.getElementById('border-left').style.backgroundColor = 'gainsboro';
+			if (activeWindow === document.getElementsByClassName('wselected')[0]) {
+			
+				if (this.scrollHeight !== this.offsetHeight + this.scrollTop) {
+					
+					document.getElementById('border-right').style.backgroundColor = 'red';
+					document.getElementById('border-left').style.backgroundColor = 'red';
+				}
+				else {
+					
+					document.getElementById('border-right').style.backgroundColor = 'gainsboro';
+					document.getElementById('border-left').style.backgroundColor = 'gainsboro';
+				}
 			}
 		}
 	}
