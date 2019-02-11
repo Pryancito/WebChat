@@ -828,7 +828,10 @@ function clearSelection() {
 					setCaretPos(pos);
 				}
 			}
+			
 			expandTextarea(textarea);
+			
+			setTimeout(function(){ setEndOfContenteditable( elem ); }, 0);
 		}
 		
 		// To remind text entered :

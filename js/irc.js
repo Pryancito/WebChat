@@ -1610,7 +1610,7 @@ function msg(raw) {
 	let chan = raw.split(' ')[2].substring(1);
 	let hlCheck = false, hlcolor = '';
 	
-	if (msg.toLowerCase().split(' ').indexOf(me.toLowerCase()) !== -1) { // HL
+	if (msg.toLowerCase().indexOf(me.toLowerCase()) !== -1) { // HL
 		hlCheck = true;
 		hlcolor = 'hlcolor';
 	}
