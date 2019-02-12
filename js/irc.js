@@ -10,6 +10,8 @@ let nspasswd = JSON.parse(getCookie('nspasswd'));
 
 let chans_from_url = getParameterByName('channels');
 
+console.log(chans_from_url);
+
 let nicks_join = new Object();
 
 let topicByCommand = false;
@@ -168,7 +170,7 @@ function autojoins() {
 		
 		autojoins_check = true;
 	
-		if (chans_from_url == null) {
+		if (!chans_from_url) {
 		
 			let list = getCookie('favlist');
 			
@@ -188,7 +190,7 @@ function autojoins() {
 				setTimeout( doSend.bind(null, 'join ' + item), index * 100 );
 			});
 		}
-		else if (chans_from_url !== null) {
+		else {
 			
 			chans_from_url = chans_from_url.split(',');
 			
