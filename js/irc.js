@@ -10,8 +10,6 @@ let nspasswd = JSON.parse(getCookie('nspasswd'));
 
 let chans_from_url = getParameterByName('channels');
 
-console.log(chans_from_url);
-
 let nicks_join = new Object();
 
 let topicByCommand = false;
@@ -187,7 +185,7 @@ function autojoins() {
 			
 			list.forEach(function(item, index) {
 				
-				setTimeout( doSend.bind(null, 'join ' + item), index * 100 );
+				setTimeout( doSend.bind(null, 'join ' + item), 100 );
 			});
 		}
 		else {
@@ -198,7 +196,7 @@ function autojoins() {
 			
 			chans_from_url.forEach(function(item, index) {
 				
-				setTimeout( doSend.bind(null, 'join ' + item), index * 100 );
+				setTimeout( doSend.bind(null, 'join ' + item), 100 );
 			});
 		}
 	}
@@ -243,6 +241,7 @@ function ignores_check(mask, type) {
 	
 	return true; // A changer
 	
+	/*
 	if (mask.indexOf('!') !== -1 && mask.indexOf('@') !== -1) {
 	
 		let nick_un = mask.split('!');
@@ -281,6 +280,7 @@ function ignores_check(mask, type) {
 		
 		return true;
 	}
+	*/
 }
 
 function ignore_add_from_umenu(rawp) {
@@ -1375,7 +1375,11 @@ function onNick(oldnick, newnick) {
 			elem.appendChild(oldnick_html);
 			elem.innerHTML += ' is now ' + newnick;
 			
-			document.getElementById('chan_' + item).appendChild(elem);
+			let w = document.getElementById('chan_' + item);
+			
+			w.appendChild(elem);
+			
+			scrollBottom(w);
 			
 			doSend('names #' + item);
 		}

@@ -445,7 +445,7 @@ function clearSelection() {
 	
 	msgs.onclick = function() {
 		
-		document.execCommand('Copy');
+		document.execCommand('copy');
 		
 		textarea.focus();
 	}
@@ -1047,7 +1047,7 @@ function clearSelection() {
 			}
 			
 			// Scroll to the bottom
-			msgs.scrollTop = msgs.scrollHeight;
+			scrollBottom(windows.item(index + 1));
 		}
 		
 		if (e.className.indexOf('nlnick') === -1 && document.getElementsByClassName('nick_options').length !== 0) {
