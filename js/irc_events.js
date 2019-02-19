@@ -1027,6 +1027,8 @@ function clearSelection() {
 					let border_right = document.getElementById('border-right');
 					border_right.style.height = userlist.scrollHeight + 'px';
 					
+					//scrollBottom(windows.item(index + 1));
+					
 				}
 				else if (target[0] == 'query') {
 					
@@ -1046,8 +1048,7 @@ function clearSelection() {
 				document.getElementById('userlist').className = 'displaynone';
 			}
 			
-			// Scroll to the bottom
-			scrollBottom(windows.item(index + 1));
+			windows.item(index + 1).scrollTop = windows.item(index + 1).scrollHeight;
 		}
 		
 		if (e.className.indexOf('nlnick') === -1 && document.getElementsByClassName('nick_options').length !== 0) {
