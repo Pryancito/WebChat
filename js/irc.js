@@ -2536,11 +2536,16 @@ function exec(cmd) {
 			target = active;
 		}
 		
-		doSend('privmsg ' + active + ' :ACTION ' + cmd[1] + '');
+		let realmemsg = cmd.splice(1).join(' ');
+		doSend('privmsg ' + active + ' :ACTION ' + realmemsg + '');
 		
 		let elem = document.createElement('p');
-		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + me + ' ' + cmd[1];
+		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + me + ' ' + realmemsg;
 		document.getElementById(prefix + target).appendChild(elem);
+		let activeWindow = document.getElementsByClassName('wselected')[0];
+		if (document.getElementById('border-right').style.backgroundColor !== 'red') {		
+			activeWindow.scrollTop = activeWindow.scrollHeight;
+		}
 	}
 	else if (cmd[0] == 'cycle') {
 		if (typeof cmd[1] === 'undefined') {
