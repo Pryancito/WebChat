@@ -1782,7 +1782,7 @@ function userlist(chan, nicknames) {
 	
 	Array.from(nl).forEach(function(n) {
 		
-		let nick = n.className.split(' ')[0].split('_')[1];
+		let nick = n.className.split(' ')[0].split('_').splice(1).join('_');
 		
 		let isOwner = uls[ chan ].indexOf('0' + me);
 		let isAdmin = uls[ chan ].indexOf('1' + me);
