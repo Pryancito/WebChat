@@ -165,8 +165,6 @@ function handleBinaryInput(event) {
 function autojoins() {
 	
 	if (autojoins_check === false) {
-		
-		autojoins_check = true;
 	
 		if (!chans_from_url) {
 		
@@ -176,16 +174,18 @@ function autojoins() {
 			
 			if (list.length == 1 && list[0] == '') {
 				
-				setTimeout(function(){ doSend('join ' + default_chan); }, 100);
+				doSend('join ' + default_chan);
 			}
 
 			aj = list.length;
+			
+			console.log(aj);
 			
 			list.sort();
 			
 			list.forEach(function(item, index) {
 				
-				setTimeout( doSend.bind(null, 'join ' + item), 100 );
+				doSend('topic ' + item);
 			});
 		}
 		else {
@@ -196,7 +196,7 @@ function autojoins() {
 			
 			chans_from_url.forEach(function(item, index) {
 				
-				setTimeout( doSend.bind(null, 'join ' + item), 100 );
+				doSend('topic ' + item);
 			});
 		}
 	}
@@ -602,6 +602,13 @@ function process(rawData) {
 	else if (rawsp[1] == '332') {
 		onTopicMsg( rawp );
 	}
+	else if (rawsp[1] == '442') { // :roubaix.fr.epiknet.org 442 Kitu #styx :You're not on that channel
+		
+		if (autojoins_check === false) {
+			
+			doSend('join ' + rawsp[3]);
+		}
+	}
 	// rcvd :irc.wevox.co 333 WircyUser_455 #websocket WircyUser_455 1515419933
 	else if (rawsp[1] == '333') {
 		onTopicMetas( rawsp );
@@ -651,7 +658,7 @@ function process(rawData) {
 	}
 	
 	else { // RAWDATA FOR DEBUG
-		
+		console.log(raw);
 		writeToScreen('<span class="nocolorcopy">' + urlify(style( raw.split(':').splice(2).join(':') ), '', false, false) + '</span>');
 	}
 }
@@ -892,6 +899,11 @@ function onTopicMsg( rawp ) { // :irc.wevox.co 332 WircyUser_147 #WeVox :Canal I
 	
 	topicInput.appendChild(chan_topic);
 	topicInput.style.display = 'inline';
+	
+	if (autojoins_check === false) {
+		
+		doSend('join ' + rawp[1].split(' ')[3]);
+	}
 }
 
 function onTopicMetas( rawsp ) {
@@ -2300,15 +2312,11 @@ function onJoin(user, chan, aj) {
 	
 	let chansp = chan.substring(1);
 	
-	if (aj !== false && aj > 0) {
-		aj--;
-	}
-	
 	let nick = getNickname(user);
 	let nickelem = document.createTextNode(nick);
 	let mask = document.createTextNode(getMask(user));
 	
-	if (nick == me) {
+	if (nick === me) {
 		
 		ACStriped = chansp;
 		activeChannel = chan;
@@ -2320,7 +2328,15 @@ function onJoin(user, chan, aj) {
 		let border_left = document.getElementById('border-left');
 		border_left.style.height = document.getElementById('cqlist').scrollHeight + 'px';
 		
-		doSend('topic ' + chan);
+		if (aj !== false && aj > 0) {
+			aj--;
+		}
+		
+		if (aj !== false && aj === 0) {
+			
+			autojoins_check = true;
+			aj = false;
+		}
 	}
 	
 	let chanelem = document.createTextNode(chan);
@@ -2340,12 +2356,6 @@ function onJoin(user, chan, aj) {
 	}
 	
 	doSend('names ' + chan);
-	
-	if (aj !== false && aj === 0) {
-		
-		doSend('topic ' + chan);
-		aj = false;
-	}
 	
 	scrollBottom(w);
 }
@@ -2485,7 +2495,7 @@ function exec(cmd) {
 	cmd = cmd.split(' ');
 	cmd[0] = cmd[0].toLowerCase();
 	
-	if (cmd[0] == 'join' || cmd[0] == 'j') {
+	if ((cmd[0] == 'join' || cmd[0] == 'j') && autojoins_check === true) {
 		
 		if (cmd[1][0] != '#') {
 			cmd[1] = '#' + cmd[1];
