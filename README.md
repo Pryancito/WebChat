@@ -54,6 +54,7 @@ Make sure your browser is up to date.
 ## Some lights bugs to resolve
 - Chanlist and userlist resize don't work on Firefox.
 - Instability of copy to clipboard on text selection.
+- URL summaries to perfect.
 
 # To test the client
 https://www.epiknet.org/wircy/
