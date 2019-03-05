@@ -948,6 +948,11 @@ function clearSelection() {
 
 		if (e.className && e.className.indexOf('btn_window') !== -1) {
 			
+			Array.from(document.getElementsByClassName('summary')).forEach(function(item) {
+				
+				item.className = 'summary';
+			});
+			
 			document.getElementById('editbox').style.display = 'block';
 			
 			document.getElementById('loader').style.display = 'none';
