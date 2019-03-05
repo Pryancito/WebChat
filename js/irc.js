@@ -847,7 +847,7 @@ function setMode(rawsp) {
 		elem.innerHTML += ' on #';
 		elem.appendChild(chan);
 		
-		let w = document.getElementById('chan_' + chan);
+		let w = document.getElementById('chan_' + chan_or_nick.substring(1));
 		if (w != null) {
 			w.appendChild(elem);
 		}
