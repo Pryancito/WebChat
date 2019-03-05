@@ -179,8 +179,6 @@ function autojoins() {
 
 			aj = list.length;
 			
-			console.log(aj);
-			
 			list.sort();
 			
 			list.forEach(function(item, index) {
@@ -819,6 +817,7 @@ function setMode(rawsp) {
 	// :ChanServ!services@services.wevox.co MODE #WeVox +ntrao-o ChanServ ChanServ WircyUser_976
 	
 	let chan_or_nick = rawsp[2];
+	
 	let modes = rawsp[3];
 	
 	modes = document.createTextNode(modes);
@@ -830,6 +829,8 @@ function setMode(rawsp) {
 	
 	let elem = document.createElement('p');
 	if (chan_or_nick[0] === '#') {
+		
+		doSend('names ' + chan_or_nick);
 		
 		let nick = rawsp[0].split(':')[1].split('!')[0];
 		let chan = chan_or_nick.substring(1);
@@ -846,15 +847,13 @@ function setMode(rawsp) {
 		elem.innerHTML += ' on #';
 		elem.appendChild(chan);
 		
-		let w = document.getElementById('chan_' + chan_or_nick.substring(1));
+		let w = document.getElementById('chan_' + chan);
 		if (w != null) {
 			w.appendChild(elem);
 		}
 		else {
 			document.getElementById('status').appendChild(elem);
 		}
-		
-		doSend('names ' + chan_or_nick);
 		
 		scrollBottom(w);
 	}
