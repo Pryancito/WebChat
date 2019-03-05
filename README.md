@@ -51,10 +51,12 @@ Works with UnrealIRCd : https://www.unrealircd.org/docs/WebSocket_support
 
 Make sure your browser is up to date.
 
-## Some lights bugs to resolve
+## Some lights bugs/imperfections to resolve
 - Chanlist and userlist resize don't work on Firefox.
 - Instability of copy to clipboard on text selection.
 - URL summaries to perfect.
+- To do responsive design.
+- Manage all IRC protocol. /raw sends a raw request to IRC server, raws callbacks is in javascript console of your browser.
 
 # To test the client
 https://www.epiknet.org/wircy/
