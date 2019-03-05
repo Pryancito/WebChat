@@ -1,14 +1,25 @@
+
+@import url('https://fonts.googleapis.com/css?family=Oxygen+Mono');
+
 html, body {
 	margin:0;
 	padding:0;
 	height:100%;
 	overflow:hidden;
 	background-color:#f0f0f0;
-	font:16px "Courier New", Courier, monospace;
+	font:15px 'Oxygen Mono', monospace;
 	font-weight:400;
+	
+	text-rendering: auto;
+	text-rendering: optimizeSpeed;
+	text-rendering: optimizeLegibility;
+	text-rendering: geometricPrecision;
 }
 a, a:visited, a:active {
 	color:blue !important;
+}
+.fa-circle.user {
+	color:white;
 }
 .linei {
 	font-size:14px;
@@ -27,7 +38,11 @@ a, a:visited, a:active {
 	height:35px;
 	line-height:35px;
 	border-bottom:4px solid gainsboro;
-	padding:0 10px 0 25px;
+	padding:0 10px 0 5px;
+}
+.hashtag {
+	 cursor:pointer;
+	 color:gray;
 }
 #content {
 	position:absolute;
@@ -47,16 +62,16 @@ a, a:visited, a:active {
 #border-right {
 	float:left;
 }
-#chanlist, #userlist {
+#cqlist, #userlist {
 	height:100%;
 	width:17%;
 }
-#chanlist {
+#cqlist {
 	float:left;
 	min-width:175px;
 	overflow:hidden;
 }
-#chanlist p {
+#cqlist p {
 	cursor:pointer;
 	font-weight:bold;
 	margin:0;
@@ -64,11 +79,11 @@ a, a:visited, a:active {
 	line-height:18px;
 	position:relative;
 }
-#chanlist p .fa {
+#cqlist p .fa {
 	margin-right:5px;
 	width:initial !important;
 }
-#chanlist p:not(.btn_selected):hover {
+#cqlist p:not(.btn_selected):hover {
 	background-color:#e6e6e6;
 }
 #chat {
@@ -113,12 +128,13 @@ a, a:visited, a:active {
 	-ms-flex-direction: column;
 	flex-direction: column;
 	
-	padding:0 15px;
-	overflow-y:auto;
 	background-color:#f0f0f0;
 }
 #msgs .window {
-	position:relative;
+	position:absolute;
+	padding:0 15px;
+	overflow-y:scroll;
+	visibility:hidden;
 }
 #msgs .window p {
 	word-wrap:break-word;
@@ -230,7 +246,7 @@ input[type=button] {
 	vertical-align:middle;
 }
 #favchans div#favlist {
-	width:350px;
+	width:100%;
 	min-height:30px;
 	border:1px solid darkgray;
 }
@@ -264,7 +280,6 @@ input[type=button] {
 	position:absolute;
 }
 #status {
-	font-family:"Courier New", Courier, monospace;
 	white-space:pre-wrap;
 }
 #status p {
@@ -285,10 +300,11 @@ input[type=button] {
 	color:#FFAA7F;
 }
 .wselected {
-	display:block !important;
-}
-.window {
-	display:none;
+	visibility:visible !important;
+	position:absolute !important;
+	top:0;
+	width:calc(100% - 30px);
+	height:calc(100% - 77px);
 }
 .ul_hidden {
 	display:none;
@@ -327,7 +343,19 @@ body .chan .fa {
 	cursor:default;
 }
 .hlcolor {
-	color:red;
+	color:LimeGreen;
+}
+.green {
+	color:LimeGreen;
+}
+#btn_favorites_chans {
+	color:#ff9800 !important;
+}
+#btn_add_chan {
+	color:red !important;
+}
+#btn_chanlist {
+	color:royalblue !important;
 }
 #gcl_table {
 	width:100%;
@@ -365,10 +393,10 @@ body .chan .fa {
 }
 .favinfo {
 	float:right;
-	color:grey !important;
+	color:#ff9800 !important;
 }
 .favchecked {
-	color:grey !important;
+	color:#ff9800 !important;
 }
 .favjoin {
 	float:right;
@@ -387,6 +415,9 @@ body #text .noboldcopy {
 body #text .nocolorcopy {
 	color:initial !important;
 }
+#btn_status, #chanlist, #querylist {
+	margin-right:4px !important;
+} 
 .lchan {
 	cursor:pointer;
 }
@@ -462,7 +493,7 @@ body #text .nocolorcopy {
 	background-color:#f0f0f063;
 }
 .me {
-	color:green;
+	color:blue;
 }
 .close {
 	float:right;
@@ -489,6 +520,12 @@ body #text .nocolorcopy {
 }
 .chan_params {
 	color:gray !important;
+}
+#btn_status {
+	margin-top:15px !important;
+}
+#chanlist {
+	margin:10px 0;
 }
 #chan_params {
 	position:absolute;
@@ -557,7 +594,7 @@ body #text .nocolorcopy {
 	display:none;
 	position:relative;
 	background-color:#eaeaea;
-	padding:5px;
+	padding:15px;
 	font-family:Segoe UI !important;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
@@ -595,7 +632,6 @@ body #text .nocolorcopy {
 }
 .summary_title {
 	vertical-align:middle;
-	margin-left:10px;
 	font-weight:bold;
 	font-size:15px;
 }
