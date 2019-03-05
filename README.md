@@ -38,5 +38,22 @@ It works !
 - English
 - French
 
+# Compatibilty
+
+Works with UnrealIRCd : https://www.unrealircd.org/docs/WebSocket_support
+
+## Browser compatibility
+- Google chrome
+- Firefox
+- Opera
+- Edge
+- Safari (Maybe)
+
+Make sure your browser is up to date.
+
+## Some lights bugs to resolve
+- Chanlist and userlist resize don't work on firefox.
+- Instability of copy to clipboard on text selection.
+
 # To test the client
 https://www.epiknet.org/wircy/
