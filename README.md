@@ -52,7 +52,7 @@ Works with UnrealIRCd : https://www.unrealircd.org/docs/WebSocket_support
 Make sure your browser is up to date.
 
 ## Some lights bugs to resolve
-- Chanlist and userlist resize don't work on firefox.
+- Chanlist and userlist resize don't work on Firefox.
 - Instability of copy to clipboard on text selection.
 
 # To test the client
