@@ -600,7 +600,7 @@ function process(rawData) {
 	else if (rawsp[1] == '332') {
 		onTopicMsg( rawp );
 	}
-	else if (rawsp[1] == '442') { // :roubaix.fr.epiknet.org 442 Kitu #styx :You're not on that channel
+	else if (rawsp[1] == '442' || rawsp[1] == '403') { // :roubaix.fr.epiknet.org 442 Kitu #styx :You're not on that channel
 		
 		if (autojoins_check === false) {
 			
@@ -2307,7 +2307,7 @@ function getMask(raw) { // :KituPlus!~MM@EpiK-262605EF.w86-241.abo.wanadoo.fr QU
 	return mask;
 }
 
-function onJoin(user, chan, aj) {
+function onJoin(user, chan) {
 	
 	let chansp = chan.substring(1);
 	
@@ -2494,7 +2494,7 @@ function exec(cmd) {
 	cmd = cmd.split(' ');
 	cmd[0] = cmd[0].toLowerCase();
 	
-	if ((cmd[0] == 'join' || cmd[0] == 'j') && autojoins_check === true) {
+	if (cmd[0] == 'join' || cmd[0] == 'j') {
 		
 		if (cmd[1][0] != '#') {
 			cmd[1] = '#' + cmd[1];
