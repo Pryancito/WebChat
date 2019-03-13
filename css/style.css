@@ -687,6 +687,7 @@ body #text .nocolorcopy {
 	position: absolute;
 	margin-left:10px;
 	cursor:pointer;
+	width:100%;
 }
 #tools, #topic {
 	display:inline-block;
@@ -699,4 +700,5 @@ body #text .nocolorcopy {
 	border-top:none;
 	z-index:10000;
 	padding:10px;
+	line-height:20px;
 }
