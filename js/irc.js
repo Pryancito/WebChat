@@ -656,9 +656,10 @@ function process(rawData) {
 	}
 	
 	else { // RAWDATA FOR DEBUG
-		console.log(raw);
 		writeToScreen('<span class="nocolorcopy">' + urlify(style( raw.split(':').splice(2).join(':') ), '', false, false) + '</span>');
 	}
+	
+	console.log(raw);
 }
 
 function onKick(rawsp) {
@@ -1211,15 +1212,17 @@ function onPart(mask, chan) {
 	
 	let nick = nick_host[0];
 	let host = nick_host[1].split(' ')[0];
-	let chanelem = document.createTextNode(chan);
+	
+	let chanspNoHTML = chan.substring(1).replace(/\</g, '').toLowerCase();
+	
+	chanspNoHTML = chanspNoHTML.replace(/\>/g, '').toLowerCase();
 	
 	let elem = document.createElement('p');
 	
 	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">['+ currentTime() +'] * <span style="color:blue; font-weight:bold;">' + nick + '</span> (' + host + ')';
-	elem.innerHTML += ' has left ';
-	elem.appendChild(chanelem);
+	elem.innerHTML += ' has left ' + escapeHtml(chan);
 	
-	let w = document.getElementById('chan_' + chan.substring(1));
+	let w = document.getElementById('chan_' + chanspNoHTML);
 	
 	w.appendChild(elem);
 	
@@ -1227,10 +1230,10 @@ function onPart(mask, chan) {
 	
 	if (nick == me) {
 		let chanstriped = chan.substring(1);
-		document.getElementById('chan_btn_' + chanstriped).remove();
-		document.getElementById('chan_' + chanstriped).remove();
+		document.getElementById('chan_btn_' + chanspNoHTML).remove();
+		document.getElementById('chan_' + chanspNoHTML).remove();
 		document.getElementById('status').className += ' wselected';
-		document.getElementById('ul_' + chan.substring(1)).remove();
+		document.getElementById('ul_' + chanspNoHTML).remove();
 		document.getElementById('userlist').className = 'displaynone';
 		document.getElementById('btn_status').className += ' btn_selected';
 	}
@@ -1401,48 +1404,54 @@ function join(chan) {
 	
 	let chansp = chan.substring(1);
 	
+	let chanspNoHTML = chansp.replace(/\</g, '').toLowerCase();
+	
+	chanspNoHTML = chanspNoHTML.replace(/\>/g, '').toLowerCase();
+	
 	let channel_window = document.createElement('div');
 	Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
 	channel_window.className = 'window chan wselected';
-	channel_window.setAttribute('id', 'chan_' + chansp.toLowerCase());
+	channel_window.setAttribute('id', 'chan_' + chanspNoHTML);
 	document.getElementById('msgs').appendChild(channel_window);
 	
 	Array.from(document.getElementsByClassName('ul')).forEach(function(item) { item.className = 'ul ul_hidden' });
 	
 	let userlist_chan = document.createElement('div');
-	userlist_chan.setAttribute('id', 'ul_' + chansp);
+	userlist_chan.setAttribute('id', 'ul_' + chanspNoHTML);
 	userlist_chan.setAttribute('class', 'ul');
 	document.getElementById('userlist').appendChild(userlist_chan);
 	
 	let favinfo;
 	
 	if (favlist.indexOf(chan) === -1) {
+		
 		favinfo = ' \
 			<span class="chanlist_opt"> \
-				<i id="cc_' + chansp + '" class="fa fa-times close" aria-hidden="true"></i> \
-				<i id="fc_' + chansp + '" class="fa fa-star-o favinfo" aria-hidden="true"></i> \
-				<!--<i id="cp_' + chansp + '" class="fa fa-cog chan_params" aria-hidden="true"></i>--> \
+				<i id="cc_' + chanspNoHTML + '" class="fa fa-times close" aria-hidden="true"></i> \
+				<i id="fc_' + chanspNoHTML + '" class="fa fa-star-o favinfo" aria-hidden="true"></i> \
+				<!--<i id="cp_' + chanspNoHTML + '" class="fa fa-cog chan_params" aria-hidden="true"></i>--> \
 			</span> \
 		';
 	}
 	else {
+		
 		favinfo = ' \
 			<span class="chanlist_opt"> \
-				<i id="cc_' + chansp + '" class="fa fa-times close" aria-hidden="true"></i> \
-				<i id="fc_' + chansp + '" class="fa fa-star favinfo favchecked"></i> \
-				<!--<i id="cp_' + chansp + '" class="fa fa-cog chan_params" aria-hidden="true"></i>--> \
+				<i id="cc_' + chanspNoHTML + '" class="fa fa-times close" aria-hidden="true"></i> \
+				<i id="fc_' + chanspNoHTML + '" class="fa fa-star favinfo favchecked"></i> \
+				<!--<i id="cp_' + chanspNoHTML + '" class="fa fa-cog chan_params" aria-hidden="true"></i>--> \
 			</span> \
 		';
 	}
 	
 	let channel = document.createElement('p');
-	channel.innerHTML = '<i class="fa fa-hashtag" aria-hidden="true"></i>' + chansp + favinfo;
+	channel.innerHTML = '<i class="fa fa-hashtag" aria-hidden="true"></i>' + escapeHtml(chansp) + favinfo;
 	Array.from(document.getElementsByClassName('btn_selected')).forEach(function(item) { item.className = 'btn_window' });
 	channel.setAttribute('class', 'btn_window btn_selected');
-	channel.setAttribute('id', 'chan_btn_' + chansp.toLowerCase());
+	channel.setAttribute('id', 'chan_btn_' + chanspNoHTML);
 	chanlist.appendChild(channel);
 		
-	document.getElementById('cc_' + chansp).onclick = function() {
+	document.getElementById('cc_' + chanspNoHTML).onclick = function() {
 			
 		doSend('part ' + chan);
 	
@@ -1734,7 +1743,11 @@ function userlist(chan, nicknames) {
 	
 	chan = chan.substring(1);
 	
-	let user, userlist = document.getElementById('ul_' + chan);
+	let chanspNoHTML = chan.replace(/\</g, '').toLowerCase();
+	
+	chanspNoHTML = chanspNoHTML.replace(/\>/g, '').toLowerCase();
+	
+	let user, userlist = document.getElementById('ul_' + chanspNoHTML);
 	
 	userlist.innerHTML = '';
 	
@@ -2286,7 +2299,7 @@ function userlist(chan, nicknames) {
 	
 					
 	let border_right = document.getElementById('border-right');
-	border_right.style.height = document.getElementById('ul_' + chan).scrollHeight + 'px';
+	border_right.style.height = document.getElementById('ul_' + chanspNoHTML).scrollHeight + 'px';
 }
 
 function getNickname(raw) {
@@ -2312,6 +2325,10 @@ function getMask(raw) { // :KituPlus!~MM@EpiK-262605EF.w86-241.abo.wanadoo.fr QU
 function onJoin(user, chan) {
 	
 	let chansp = chan.substring(1);
+	
+	let chanspNoHTML = chansp.replace(/\</g, '').toLowerCase();
+	
+	chanspNoHTML = chanspNoHTML.replace(/\>/g, '').toLowerCase();
 	
 	let nick = getNickname(user);
 	let nickelem = document.createTextNode(nick);
@@ -2340,12 +2357,10 @@ function onJoin(user, chan) {
 		}
 	}
 	
-	let chanelem = document.createTextNode(chan);
-	
 	let elem = document.createElement('p');
-	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">['+ currentTime() +'] [<span style="color:blue;">' + nickelem.textContent + '</span>] (' + mask.textContent + ') has joined ' + chanelem.textContent + '</strong>';
+	elem.innerHTML = '<strong class="noboldcopy" style="color:green;">['+ currentTime() +'] [<span style="color:blue;">' + nickelem.textContent + '</span>] (' + mask.textContent + ') has joined ' + escapeHtml(chan) + '</strong>';
 	
-	let w = document.getElementById('chan_' + chansp);
+	let w = document.getElementById('chan_' + chanspNoHTML);
 	
 	w.appendChild(elem);
 	
@@ -2356,7 +2371,7 @@ function onJoin(user, chan) {
 		document.getElementById('userlist').className = '';
 	}
 	
-	doSend('names ' + chan);
+	doSend('names ' + html_decode(chan));
 	
 	scrollBottom(w);
 }
@@ -2502,7 +2517,7 @@ function exec(cmd) {
 			cmd[1] = '#' + cmd[1];
 		}
 		
-		doSend('join ' + cmd[1]);
+		doSend('join ' + html_decode(cmd[1]));
 	}
 	else if (cmd[0] == 'nick') {
 		doSend('nick ' + cmd[1]);

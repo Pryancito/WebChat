@@ -1007,12 +1007,16 @@ function clearSelection() {
 					active = activeChannel;
 					activeType = 'channel';
 					
-					doSend('names ' + activeChannel);
+					let chanspHTML = activeChannel.replace(/\/g, '<').toLowerCase();
+					
+					chanspHTML = chanspHTML.replace(/\/g, '>').toLowerCase();
+					
+					doSend('names ' + chanspHTML);
 					
 					let chan_topic = document.getElementById('chan_topic_' + ACStriped);
 					
 					if (chan_topic === null) {
-						doSend('topic ' + activeChannel);
+						doSend('topic ' + chanspHTML);
 					}
 					else {
 						let cts = document.getElementsByClassName('ct_selected');
