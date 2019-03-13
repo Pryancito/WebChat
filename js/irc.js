@@ -965,7 +965,7 @@ function memsg(mask, target, message) {
 	let prefix;
 	
 	if (target.substr(0, 1) == '#') {
-		target = target.substring(1);
+		target = target.substring(1).toLowerCase();
 		prefix = 'chan_';
 	}
 	else {
