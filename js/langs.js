@@ -41,7 +41,8 @@ if (lang == '' || lang === 'en') {
 	var lang_nsemail = "Enter a valid email address to register";
 	var default_chan = "#EpiKnet";
 	var lang_topic = 'Topic';
-	var lang_expand_topic = 'Double clic to expand';
+	var lang_topic_view = 'Double-clic to see topic';
+	var lang_topic_view2 = 'Double-clic to reduct topic';
 	var lang_leave_warning = 'Do you really want to leave this page?';
 }
 
@@ -84,7 +85,8 @@ else if (lang === 'fr') {
 	var lang_nsemail = "Entrez une adresse email valide pour vous enregistrer";
 	var default_chan = "#EpiKnet";
 	var lang_topic = 'Sujet';
-	var lang_expand_topic = 'Double-clic pour voir le sujet';
+	var lang_topic_view = 'Double-clic pour voir le sujet';
+	var lang_topic_view2 = 'Double-clic pour réduire le sujet';
 	var lang_leave_warning = 'Êtes-vous sûr de vouloir quitter cette page ?';
 }
 

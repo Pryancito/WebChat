@@ -351,10 +351,12 @@ function clearSelection() {
 		if (this.className === 'white_space_normal') {
 			
 			this.className = '';
+			this.title = lang_topic_view;
 		}
 		else {
 			
 			this.className = 'white_space_normal';
+			this.title = lang_topic_view2;
 		}
 		
 		clearSelection()
@@ -607,6 +609,8 @@ function clearSelection() {
 			if (elem.innerHTML && rememberLines.length < 31) {
 				
 				rememberLines.unshift( elem.innerHTML );
+				
+				irl = -1;
 			}
 			
 			send();
