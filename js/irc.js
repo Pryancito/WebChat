@@ -1632,7 +1632,7 @@ function msg(raw) {
 		hlcolor = 'hlcolor';
 	}
 	
-	let w = document.getElementById('chan_' + chan);
+	let w = document.getElementById('chan_' + chan.toLowerCase());
 	let line = document.createElement('p');
 	
 	line.id = 'idmsg_' + idmsg;
