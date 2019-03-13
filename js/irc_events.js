@@ -610,6 +610,8 @@ function clearSelection() {
 			}
 			
 			send();
+			
+			expandTextarea(this);
 		}
 		
 		// nick and chan completion :
