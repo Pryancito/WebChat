@@ -1009,7 +1009,7 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		elem.id = 'idmsg_' + idmsg;
 		
-		let mht = ht( escapeHtml( rawsp.splice(3).join(' ').substring(1) ) );
+		let mht = ht( rawsp.splice(3).join(' ').substring(1) );
 		
 		let message = urlify(style( mht[1] ), idmsg, true, false );
 		
@@ -1632,7 +1632,7 @@ function msg(raw) {
 		hlcolor = 'hlcolor';
 	}
 	
-	let w = document.getElementById('chan_' + chan);
+	let w = document.getElementById('chan_' + chan.toLowerCase());
 	let line = document.createElement('p');
 	
 	line.id = 'idmsg_' + idmsg;
