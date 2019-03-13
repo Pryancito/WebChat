@@ -1404,7 +1404,7 @@ function join(chan) {
 	let channel_window = document.createElement('div');
 	Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
 	channel_window.className = 'window chan wselected';
-	channel_window.setAttribute('id', 'chan_' + chansp);
+	channel_window.setAttribute('id', 'chan_' + chansp.toLowerCase());
 	document.getElementById('msgs').appendChild(channel_window);
 	
 	Array.from(document.getElementsByClassName('ul')).forEach(function(item) { item.className = 'ul ul_hidden' });
@@ -1439,7 +1439,7 @@ function join(chan) {
 	channel.innerHTML = '<i class="fa fa-hashtag" aria-hidden="true"></i>' + chansp + favinfo;
 	Array.from(document.getElementsByClassName('btn_selected')).forEach(function(item) { item.className = 'btn_window' });
 	channel.setAttribute('class', 'btn_window btn_selected');
-	channel.setAttribute('id', 'chan_btn_' + chansp);
+	channel.setAttribute('id', 'chan_btn_' + chansp.toLowerCase());
 	chanlist.appendChild(channel);
 		
 	document.getElementById('cc_' + chansp).onclick = function() {
@@ -1627,12 +1627,14 @@ function msg(raw) {
 	let chan = raw.split(' ')[2].substring(1);
 	let hlCheck = false, hlcolor = '';
 	
+	let chanlc = chan.toLowerCase();
+	
 	if (msg.toLowerCase().indexOf(me.toLowerCase()) !== -1) { // HL
 		hlCheck = true;
 		hlcolor = 'hlcolor';
 	}
 	
-	let w = document.getElementById('chan_' + chan.toLowerCase());
+	let w = document.getElementById('chan_' + chanlc);
 	let line = document.createElement('p');
 	
 	line.id = 'idmsg_' + idmsg;
@@ -1652,7 +1654,7 @@ function msg(raw) {
 			}
 		});
 		
-		let elem = document.getElementById('chan_btn_' + chan);
+		let elem = document.getElementById('chan_btn_' + chanlc);
 		
 		if (hlCheck === false) {
 			
