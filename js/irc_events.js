@@ -903,22 +903,45 @@ function clearSelection() {
 	
 	let cqlist = document.getElementById('cqlist');
 	
+	/*
 	border_left.ondrag = function(e) {
 		cqlist.style.width = e.pageX + 'px';
 	}
 	border_left.ondragend = function(e) {
 		cqlist.style.width = e.pageX + 'px';
 	}
+	*/
 	
 	let border_right = document.getElementById('border-right');
 	let userlist = document.getElementById('userlist');
 	
+	/*
 	border_right.ondrag = function(e) {
 		userlist.style.width = document.body.offsetWidth - e.pageX + 'px';
 	}
 	border_right.ondragend = function(e) {
 		userlist.style.width = document.body.offsetWidth - e.pageX + 'px';
 	}
+	*/
+
+	let elemDragged;
+
+	border_left.onmousedown = function() {
+		elemDragged = this.id;
+	}
+	border_right.onmousedown = function() {
+		elemDragged = this.id;
+	}
+
+	document.addEventListener("dragover", function( e ) {
+		
+		if (elemDragged === 'border-right') {
+			userlist.style.width = document.body.offsetWidth - e.clientX + 'px';
+		}
+		else if (elemDragged === 'border-left') {
+			cqlist.style.width = e.clientX + 'px';
+		}
+	});
 	
 	/* (A GARDER) Event for video conference 
 	let visio = document.getElementById('btn_visio');
