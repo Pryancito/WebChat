@@ -527,6 +527,8 @@ function process(rawData) {
 	}
 	else if (rawsp[1] == '353') { // /names #salon
 		
+		rawsp[4] = rawsp[4].toLowerCase();
+		
 		if (typeof nicks_join[ rawsp[4] ] === 'undefined') {
 			nicks_join[ rawsp[4] ] = '';
 		}
@@ -534,6 +536,8 @@ function process(rawData) {
 		nicks_join[ rawsp[4] ] += rawp[2];
 	}
 	else if (rawsp[1] == '366') {
+		
+		rawsp[3] = rawsp[3].toLowerCase();
 		
 		userlist(rawsp[3], nicks_join[ rawsp[3] ]);
 		

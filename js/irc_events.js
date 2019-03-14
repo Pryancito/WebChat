@@ -405,27 +405,29 @@ function clearSelection() {
 	let addFavChan = document.getElementById('addFavChan');
 	
 	addFavChan.onclick = function() {
-				
+		
+		let activeChannel_lc = activeChannel.toLowerCase();
+		
 		if (favlist === '') {
 			
-			setCookie('favlist', activeChannel, 10000000);
+			setCookie('favlist', activeChannel_lc, 10000000);
 			
 			let p = document.createElement('p');
-			p.innerHTML = activeChannel + '<i class="fa fa-times favdel" id="fav_' + activeChannel.substring(1) + '"></i><i class="fa fa-sign-in favjoin" id="fav_' + activeChannel.substring(1) + '" aria-hidden="true"></i>';
+			p.innerHTML = activeChannel + '<i class="fa fa-times favdel" id="fav_' + activeChannel_lc.substring(1) + '"></i><i class="fa fa-sign-in favjoin" id="fav_' + activeChannel_lc.substring(1) + '" aria-hidden="true"></i>';
 			document.getElementById('favlist_content').appendChild(p);
 			
 			addFavEvents();
 		}
 		else {
 			
-			if (favlist.indexOf(activeChannel) === -1) {
+			if (favlist.indexOf(activeChannel_lc) === -1) {
 				
-				favlist += ',' + activeChannel;
+				favlist += ',' + activeChannel_lc;
 				
 				setCookie('favlist', favlist, 10000000);
 				
 				let p = document.createElement('p');
-				p.innerHTML = activeChannel + '<i class="fa fa-times favdel" id="fav_' + activeChannel.substring(1) + '"></i><i class="fa fa-sign-in favjoin" id="fav_' + activeChannel.substring(1) + '" aria-hidden="true"></i>';
+				p.innerHTML = activeChannel + '<i class="fa fa-times favdel" id="fav_' + activeChannel_lc.substring(1) + '"></i><i class="fa fa-sign-in favjoin" id="fav_' + activeChannel_lc.substring(1) + '" aria-hidden="true"></i>';
 				document.getElementById('favlist_content').appendChild(p);
 				
 				addFavEvents();
@@ -438,7 +440,7 @@ function clearSelection() {
 			fav_default.style.display = 'none';
 		}
 		
-		let fc = document.getElementById('fc_' + activeChannel.substring(1));
+		let fc = document.getElementById('fc_' + activeChannel_lc.substring(1));
 		
 		if (typeof fc !== 'undefined') {
 			fc.className = 'fa fa-star favinfo favchecked';
@@ -1028,8 +1030,8 @@ function clearSelection() {
 					}
 					
 					activeChannel = '#' + target[1];
-					ACStriped = target[1];
-					active = activeChannel;
+					ACStriped = target[1].toLowerCase();
+					active = activeChannel.toLowerCase();
 					activeType = 'channel';
 					
 					let chanspHTML = activeChannel.replace(/\/g, '<').toLowerCase();
