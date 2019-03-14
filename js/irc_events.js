@@ -480,28 +480,30 @@ function clearSelection() {
 		var text = e.clipboardData.getData("text/plain");
 
 		// insert text manually
+		
 		document.execCommand("insertText", false, text);
 	}
 	
 	nltosp.onclick = function() {
 		
-		let lines = Array.from(textarea.getElementsByTagName('div')), result = '';
+		let lines = Array.from(textarea.getElementsByTagName('div'))
+		let result = '';
 		
 		if (lines.length === 0) {
+			
 			lines = Array.from(textarea.getElementsByTagName('p'));
-		}
-		
-		if (lines.length === 0) {
 			textarea.innerHTML = textarea.innerHTML.replace(/<br\s*[\/]?>/gi, ' ');
 			expandTextarea(textarea);
 			textarea.focus();
 		}
 		else {
+			
 			lines.forEach(function(item, index) {
+				
 				result += item.innerText + ' ';
 			});
 			
-			textarea.innerHTML = result;
+			textarea.innerHTML = textarea.childNodes[0].nodeValue + ' ' + result;
 			
 			expandTextarea(textarea);
 			textarea.focus();
