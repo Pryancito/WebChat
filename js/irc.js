@@ -1427,7 +1427,7 @@ function join(chan) {
 	
 	let favinfo;
 	
-	if (favlist.indexOf(chan) === -1) {
+	if (favlist.indexOf(chan.toLowerCase()) === -1) {
 		
 		favinfo = ' \
 			<span class="chanlist_opt"> \

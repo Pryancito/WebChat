@@ -263,8 +263,8 @@ function addFavInfoEvents() {
 			
 			e.stopPropagation();
 			
-			let chansp = item.id.substring(3);
-			let chan = '#' + chansp;
+			let chansp = item.id.substring(3).toLowerCase();
+			let chan = '#' + chansp.toLowerCase();
 			
 			let elem = document.getElementById(item.id);
 			
