@@ -7,7 +7,7 @@ html, body {
 	height:100%;
 	overflow:hidden;
 	background-color:#f0f0f0;
-	font:1em 'Oxygen Mono', monospace;
+	font:0.9rem 'Oxygen Mono', monospace;
 	font-weight:400;
 	
 	text-rendering: auto;
@@ -15,11 +15,17 @@ html, body {
 	text-rendering: optimizeLegibility;
 	text-rendering: geometricPrecision;
 }
+body p {
+	font-size:14px !important;
+}
 a, a:visited, a:active {
 	color:blue !important;
 }
 .fa-circle.user {
 	color:white;
+}
+#gchanlist {
+	height:100% !important;
 }
 .linei {
 	font-size:14px;
@@ -64,7 +70,7 @@ a, a:visited, a:active {
 }
 #cqlist, #userlist {
 	height:100%;
-	width:17%;
+	width:15%;
 }
 #cqlist {
 	float:left;
@@ -701,4 +707,6 @@ body #text .nocolorcopy {
 	z-index:10000;
 	padding:10px;
 	line-height:20px;
+	width:auto !important;
+	margin-right:15%;
 }
