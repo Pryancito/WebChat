@@ -1127,7 +1127,7 @@ function clearSelection() {
 		
 		e.stopPropagation();
 		
-		bubble.style.marginLeft = 24 * 2 - 17 + 'px';
+		bubble.style.marginLeft = 24 * 2 - 18 + 'px';
 		bubble.style.display = 'inline-block';
 		Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
 		document.getElementById('addchan').style.setProperty('display', 'block');
@@ -1141,7 +1141,7 @@ function clearSelection() {
 		
 		e.stopPropagation();
 		
-		bubble.style.marginLeft = 24 * 3 - 2 + 'px';
+		bubble.style.marginLeft = 24 * 3 + 'px';
 		bubble.style.display = 'inline-block';
 		Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
 		document.getElementById('favchans').style.setProperty('display', 'block');
