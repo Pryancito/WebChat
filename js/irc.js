@@ -2719,7 +2719,7 @@ function urlify(text, idm, ajaxRequest, recipient) {
 	
 	let words = msg.split('&nbsp;');
 	
-    let urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
+    let urlRegex = /((ftp|http|https):\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
     
     let i = -1;
     
@@ -2727,17 +2727,26 @@ function urlify(text, idm, ajaxRequest, recipient) {
     
 		words[index] = item.replace(urlRegex, function(url) {
 			
+			let href = url.match(/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi)[0];
+			
+			let mailto = '';
+			
+			if (url.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi) !== null) {
+				
+				mailto = 'mailto:';
+			}
+			
 			if (ajaxRequest !== false && urlify_check === true) {
 				
 				i++;
 				
 				ajax('ajax/summary.php?url=' + url, idm, i, recipient, msg);
 				
-				return '<a href="' + url + '" target="_blank">' + url + '</a><i id="idm_' + idm + '_' + i + '" class="fa fa-arrow-circle-down summary_link" aria-hidden="true"></i>';
+				return '<a href="' + mailto + '//' + href + '" target="_blank">' + url + '</a><i id="idm_' + idm + '_' + i + '" class="fa fa-arrow-circle-down summary_link" aria-hidden="true"></i>';
 			}
 			
 			
-			return '<a href="' + url + '" target="_blank">' + url + '</a>';
+			return '<a href="' + mailto + '//' + href + '" target="_blank">' + url + '</a>';
 		});
 	});
 	
