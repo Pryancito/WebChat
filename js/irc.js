@@ -2414,7 +2414,7 @@ function send() {
 		
 		let query = document.getElementsByClassName('wselected')[0];
 		
-		let w = document.getElementById('chan_' + ACStriped);
+		let w = document.getElementById('chan_' + ACStriped.toLowerCase());
 		
 		if (query.className.indexOf('query') !== -1) {
 			
