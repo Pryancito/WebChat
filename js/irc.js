@@ -1050,11 +1050,11 @@ function style(msg) {
 	
 	let output = '';
 	
-	newmsg.forEach(function(item, index) {
+	newmsg.forEach(function(item, index) { // 4,4|||0+4|||
 
 		if (index > 0) {
 			if (index % 2 == 0) {
-				output += '</strong>' + item;
+				output += item;
 			}
 			else {
 				output += '<strong>' + item;
