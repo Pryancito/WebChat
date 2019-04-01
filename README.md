@@ -52,7 +52,6 @@ Works with UnrealIRCd 4.x server : https://www.unrealircd.org/docs/WebSocket_sup
 Make sure your browser is up to date.
 
 ## Some lights bugs/imperfections to resolve
-- Chanlist and userlist resize don't work on Firefox.
 - Instability of copy to clipboard on text selection.
 - URL summaries to perfect.
 - To do responsive design.
