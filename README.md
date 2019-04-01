@@ -53,7 +53,7 @@ Make sure your browser is up to date.
 
 ## Some lights bugs/imperfections to resolve
 - Instability of copy to clipboard on text selection.
-- URL summaries to perfect.
+- URL summaries to improve.
 - To do responsive design.
 - Manage all IRC protocol. /raw sends a raw request to IRC server, raws callbacks is in javascript console of your browser.
 
