@@ -66,7 +66,7 @@ else if (lang === 'fr') {
 	var lang_addfav_current_chan = "Ajouter le canal courant aux favoris";
 	var lang_nofav = "Pas de canal favoris pour le moment";
 	var lang_list = "Afficher la liste des canaux";
-	var lang_status = "Statut";
+	var lang_status = "Status";
 	var lang_nick = "Pseudonyme";
 	var lang_submit = "Chat !";
 	var lang_lang = "Choisir la langue";
