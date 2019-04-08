@@ -710,3 +710,29 @@ body #text .nocolorcopy {
 	width:auto !important;
 	margin-right:15%;
 }
+@media screen and (max-width: 1024px) {
+	
+
+	header {
+		position:relative;
+		width:100%;
+	}
+	#cqlist, #userlist {
+		display:none;
+	}
+	#icons {
+		height:70px;
+	}
+	#content {
+		top:73px;
+	}
+	#topic {
+		font-size:27px;
+	}
+	body p {
+		font-size:inherit !important;
+	}
+	#icons {
+		line-height:70px !important;
+	}
+}
