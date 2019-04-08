@@ -663,7 +663,7 @@ function process(rawData) {
 		writeToScreen('<span class="nocolorcopy">' + urlify(style( raw.split(':').splice(2).join(':') ), '', false, false) + '</span>');
 	}
 	
-	console.log(raw);
+	//console.log(raw);
 }
 
 function onKick(rawsp) {
