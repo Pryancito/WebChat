@@ -2719,7 +2719,7 @@ function urlify(text, idm, ajaxRequest, recipient) {
 	
 	let words = msg.split('&nbsp;');
 	
-    let urlRegex = /((ftp|http|https):\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=,]*)/gi;
+    let urlRegex = /((ftp|http|https):\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=,;]*)/gi;
     
     let i = -1;
     
@@ -2727,7 +2727,7 @@ function urlify(text, idm, ajaxRequest, recipient) {
     
 		words[index] = item.replace(urlRegex, function(url) {
 			
-			let href = url.match(/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=,]*)/gi)[0];
+			let href = url.match(/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=,;]*)/gi)[0];
 			
 			let mailto = '';
 			
