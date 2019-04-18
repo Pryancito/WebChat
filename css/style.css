@@ -24,6 +24,14 @@ a, a:visited, a:active {
 .fa-circle.user {
 	color:white;
 }
+#emoji {
+	font-size:17px;
+	color:gray;
+	float:right;
+	cursor:pointer;
+	margin-right:5px;
+	opacity:0.5;
+}
 #gchanlist {
 	height:100% !important;
 }
@@ -213,6 +221,30 @@ body #send_options .fa {
 	top:-15px;
 	left:9px;
 }
+
+#bubble2 {
+	display:none;
+	z-index:10000;
+	position:sticky;
+	float:right;
+	padding:0px;
+	background:#FFFFFF;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+	margin:-312px 0;
+	max-height:250px;
+	overflow-y:auto;
+	padding:10px;
+	line-height:25px;
+	font-size:20px;
+}
+#bubble2 span {
+	display:inline-block;
+	width:25px;
+	cursor:pointer;
+}
+
 .options {
 	display:none;
 	padding:1em;
