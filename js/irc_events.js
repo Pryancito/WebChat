@@ -6,6 +6,43 @@ let numLines = 0, editbox = '';
 
 let favlist = getCookie('favlist');
 
+function emoji() {
+	
+	let elem = document.getElementById('bubble2');
+	
+    let rawFile = new XMLHttpRequest();
+    rawFile.open("GET", './emoji-v12.txt', false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                let text = rawFile.responseText;
+                
+                let lines = text.match(/((.*);(.*)#(...)(.*))/gim);
+                
+                //console.log(lines)
+                
+                for (let i = 0; i < 180; i++) {
+					
+					let code = lines[i].split(';')[0].trim().replace(' ', '-');
+					
+					let char = lines[i].split('#')[1].split(' ')[1];
+					
+					if (i % 10 === 0 && i !== 0) {
+						
+						elem.innerHTML += '<br />';
+					}
+					
+					elem.innerHTML += '<span id="' + code + '" class="emoji">' + char + '</span>';
+				}
+            }
+        }
+    }
+    rawFile.send(null);
+}
+
 function hashtag(text, cursor) {
 	
 	let c = cursor;
@@ -330,6 +367,8 @@ function clearSelection() {
 }
 
 (function() {
+	
+	emoji();
 	
 	ignores_list();
 	
@@ -968,9 +1007,17 @@ function clearSelection() {
 		e.stopPropagation();
 	}
 	
+	let bubble2 = document.getElementById('bubble2');
+	
+	bubble2.onclick = function(e) {
+		e.stopPropagation();
+	}
+	
 	document.body.onclick = function(e) {   //when the document body is clicked
 		
 		bubble.style.display = 'none';
+		
+		bubble2.style.display = 'none';
 		
 		if (window.event) {
 			e = event.srcElement;           //assign the element clicked to e (IE 6-8)
@@ -1130,10 +1177,40 @@ function clearSelection() {
 		bubble.style.marginLeft = 24 * 2 - 18 + 'px';
 		bubble.style.display = 'inline-block';
 		Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
+		bubble2.style.display = 'none';
 		document.getElementById('addchan').style.setProperty('display', 'block');
 		
 		document.getElementById('newchan').focus();
 	}
+	
+	let btn_emoji = document.getElementById('emoji');
+	
+	btn_emoji.onclick = function(e) {
+		
+		e.stopPropagation();
+		
+		bubble2.style.display = 'inline-block';
+		
+		Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
+	}
+	
+	Array.from(document.getElementsByClassName('emoji')).forEach(function(item) {
+		
+		item.onclick = function() {
+			
+			let cursor = getCaretPosition(textarea, true)[0];
+			
+			let char = '&#' + parseInt(item.id.replace('-', ' '), 16);
+			
+			textarea.innerHTML = textarea.innerHTML.substring(0, cursor) + char + textarea.innerHTML.substring(cursor);
+			
+			bubble2.style.display = 'none';
+			
+			textarea.focus();
+			
+			setEndOfContenteditable(textarea);
+		}
+	});
 	
 	let btn_favorites_chans = document.getElementById('btn_favorites_chans');
 	
@@ -1144,6 +1221,7 @@ function clearSelection() {
 		bubble.style.marginLeft = 24 * 3 - 5 + 'px';
 		bubble.style.display = 'inline-block';
 		Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
+		bubble2.style.display = 'none';
 		document.getElementById('favchans').style.setProperty('display', 'block');
 		
 		let fav_default = document.getElementById('favlist_default');
