@@ -16,6 +16,8 @@ let topicByCommand = false;
 
 let autojoins_check = false;
 
+let url_summary = true;
+
 
 if (typeof nickname == null) {
 	let nickname = 'WircyUser_' + Math.floor((Math.random() * 1000) + 1).toString();
@@ -659,7 +661,8 @@ function process(rawData) {
 		onKick(rawsp);
 	}
 	
-	else { // RAWDATA FOR DEBUG
+	else { // RAWDATA
+		url_summary = false;
 		writeToScreen('<span class="nocolorcopy">' + urlify(style( raw.split(':').splice(2).join(':') ), '', false, false) + '</span>');
 	}
 	
@@ -1016,7 +1019,9 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		let mht = ht( rawsp.splice(3).join(' ').substring(1) );
 		
-		let message = urlify(style( mht[1] ), idmsg, true, false );
+		let message = urlify(style( mht[1] ), idmsg, url_summary, false );
+		
+		url_summary = true;
 		
 		elem.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">&lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + message + '</span>';
 		
