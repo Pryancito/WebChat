@@ -998,7 +998,7 @@ function memsg(mask, target, message) {
 	
 	if (w !== null) {
 	
-		w.innerHTML += '<p><strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; * <span style="color:blue;">' + nick.textContent + '</span></strong> ' + message + '</p>';
+		w.innerHTML += '<p><strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; * <span style="color:blue;">' + nick.textContent + '</span></strong> ' + message.replace('', '') + '</p>';
 	}
 	
 	scrollBottom(w);
@@ -1023,7 +1023,7 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		url_summary = true;
 		
-		elem.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">&lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + message + '</span>';
+		elem.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">&lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + message.replace('', '') + '</span>';
 		
 		let w = document.getElementsByClassName('wselected')[0];
 		if (typeof w != 'undefined') {
@@ -1658,7 +1658,7 @@ function msg(raw) {
 	line.id = 'idmsg_' + idmsg;
 	line.className = 'line';
 	
-	line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg;
+	line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg.replace('', '');
 	
 	if (w !== null) {
 		
