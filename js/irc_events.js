@@ -915,9 +915,14 @@ function clearSelection() {
 		
 		if (e.keyCode == 38) { // up arrow
 			
-			if (elem.innerHTML != null) {
+			if (elem.innerHTML !== '' && rememberLines.length < 31) {
 				
-				rememberLines.push( elem.innerHTML );
+				if (rememberLines.indexOf( elem.innerHTML ) === -1) {
+					
+					rememberLines.unshift( elem.innerHTML );
+					irl = 0;
+					elem.innerHTML = '';
+				}
 			}
 			
 			irl++;
