@@ -1819,10 +1819,10 @@ function userlist(chan, nicknames) {
 		
 		let nick = n.className.split(' ')[0].split('_').splice(1).join('_');
 		
-		let isOwner = uls[ chan ].indexOf('0' + me);
-		let isAdmin = uls[ chan ].indexOf('1' + me);
-		let isOp = uls[ chan ].indexOf('2' + me);
-		let isHop = uls[ chan ].indexOf('3' + me);
+		let isOwner = uls[ chanspNoHTML ].indexOf('0' + me);
+		let isAdmin = uls[ chanspNoHTML ].indexOf('1' + me);
+		let isOp = uls[ chanspNoHTML ].indexOf('2' + me);
+		let isHop = uls[ chanspNoHTML ].indexOf('3' + me);
 		
 		if (isOwner !== -1 || isAdmin !== -1 || isOp !== -1 || isHop !== -1) {
 			
