@@ -690,11 +690,9 @@ body #text .nocolorcopy {
 	clear:both;
 }
 .yt_ontop_wrapper {
-	position:absolute;
+	position:fixed;
 	top:0;
-	left:0;
 	z-index:100;
-	margin:0px -15px;
 }
 .play_in_chat {
 	color:blue;
