@@ -915,6 +915,11 @@ function clearSelection() {
 		
 		if (e.keyCode == 38) { // up arrow
 			
+			if (elem.innerHTML != null) {
+				
+				rememberLines.push( elem.innerHTML );
+			}
+			
 			irl++;
 			
 			if (irl == rememberLines.length) {
