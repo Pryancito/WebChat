@@ -887,9 +887,14 @@ function clearSelection() {
 		
 		if (e.keyCode == 40) { // down arrow
 			
-			if (elem.innerHTML !== '' && rememberLines.length < 31) {
+			if (elem.innerHTML !== '') {
 				
 				if (rememberLines.indexOf( elem.innerHTML ) === -1) {
+					
+					if (rememberLines.length > 500) {
+						
+						rememberLines.pop();
+					}
 					
 					rememberLines.unshift( elem.innerHTML );
 					irl = -1;
@@ -915,9 +920,14 @@ function clearSelection() {
 		
 		if (e.keyCode == 38) { // up arrow
 			
-			if (elem.innerHTML !== '' && rememberLines.length < 31) {
-				
+			if (elem.innerHTML !== '') {
+					
 				if (rememberLines.indexOf( elem.innerHTML ) === -1) {
+					
+					if (rememberLines.length > 500) {
+						
+						rememberLines.pop();
+					}
 					
 					rememberLines.unshift( elem.innerHTML );
 					irl = 0;
@@ -1100,9 +1110,11 @@ function clearSelection() {
 					let chan_topic = document.getElementById('chan_topic_' + ACStriped);
 					
 					if (chan_topic === null) {
+						
 						doSend('topic ' + chanspHTML);
 					}
 					else {
+						
 						let cts = document.getElementsByClassName('ct_selected');
 						
 						if (cts.length !== 0) {
