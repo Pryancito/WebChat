@@ -1253,6 +1253,8 @@ function onPart(mask, chan) {
 
 function onWhois(numraw, line) {
 	
+	console.log(line)
+	
 	if (numraw == '317') {
 		
 		line = line.split(' ');
@@ -1281,7 +1283,7 @@ function onWhois(numraw, line) {
 	line = line.split(':');
 	line = line[0] + line.splice(1).join(':');
 	
-	elem.innerHTML = '&lt;'+ currentTime() +'&gt; ' + line;
+	elem.innerHTML = '<span style="color:grey;">&lt;'+ currentTime() +'&gt; ' + line + '</span>';
 	
 	let w = document.getElementsByClassName('wselected')[0];
 	
@@ -1896,7 +1898,7 @@ function userlist(chan, nicknames) {
 					
 				document.getElementsByClassName('nlnick_whois')[0].onclick = function() {
 					
-					doSend('whois ' + nick);
+					doSend('whois ' + nick + ' ' + nick);
 					
 					n.style.backgroundColor = 'transparent';
 					
