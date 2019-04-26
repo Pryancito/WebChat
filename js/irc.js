@@ -1777,7 +1777,7 @@ function userlist(chan, nicknames) {
 				user.className += ' me';
 			}
 			
-			uls_no_mode[ chan ].push( item.substring(1) );
+			uls_no_mode[ chanspNoHTML ].push( item.substring(1) );
 		}
 		else {
 			user.className = 'nick_' + item.substring(1) + ' nlnick';
@@ -1786,10 +1786,10 @@ function userlist(chan, nicknames) {
 				user.className += ' me';
 			}
 			
-			uls_no_mode[ chan ].push( item.substring(1) );
+			uls_no_mode[ chanspNoHTML ].push( item.substring(1) );
 		}
 		
-		uls[ chan ].push( item );
+		uls[ chanspNoHTML ].push( item );
 		
 		if (item[0] == '0') {
 			item = '<i class="fa fa-circle owner" aria-hidden="true"></i> <span>' + item.substring(1) + '</span>';
