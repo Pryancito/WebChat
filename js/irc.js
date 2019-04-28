@@ -18,6 +18,10 @@ let autojoins_check = false;
 
 let url_summary = true;
 
+let logs = localStorage;
+
+//logs.removeItem( irc_server_address );
+
 
 if (typeof nickname == null) {
 	let nickname = 'WircyUser_' + Math.floor((Math.random() * 1000) + 1).toString();
@@ -1411,6 +1415,76 @@ function onNick(oldnick, newnick) {
 	}
 }
 
+function currentDate() {
+	
+	let date = new Date();
+	
+	let d = checkTime( date.getDate() );
+	let mo = checkTime( date.getMonth() + 1);
+	let y = checkTime( date.getFullYear() );
+	
+	return d + '/' + mo + '/' + y;
+	
+}
+
+function log(server, target, line) {
+	
+	let serv = JSON.parse(logs.getItem(server));
+	
+	if (serv === null) {
+		
+		let obj = new Object();
+		
+		obj[target] = [ line ];
+		
+		logs.setItem(server, JSON.stringify( obj ) );
+	}
+	else {
+		
+		if (typeof serv[target] !== 'undefined') {
+			
+			serv[target].push( line );
+			
+			logs.setItem( server, JSON.stringify( serv ) );
+		}
+		else {
+			
+			serv[target] = [ line ];
+			
+			logs.setItem( server, JSON.stringify( serv ) );
+		}
+	}
+}
+
+function readLog(server, target, last) {
+	
+	let r = JSON.parse( logs.getItem(server) );
+	
+	if (r !== null && typeof r[target] !== 'undefined') {
+	
+		let len = r[target].length - 1;
+		
+		let output = '';
+		
+		if (len < last) {
+			
+			last = len;
+		}
+		else {
+			len = last;
+		}
+		
+		for(var i = len; i >= 0; i--) {
+			
+			output += r[target][i];
+		}
+		
+		return output;
+	}
+	
+	return false;
+}
+
 function join(chan) {
 	
 	let chansp = chan.substring(1);
@@ -1423,6 +1497,15 @@ function join(chan) {
 	Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
 	channel_window.className = 'window chan wselected';
 	channel_window.setAttribute('id', 'chan_' + chanspNoHTML);
+	
+	let lo = readLog(irc_server_address, chanspNoHTML, 500);
+	
+	console.log(lo)
+	
+	if (lo !== false) {
+		channel_window.innerHTML = lo;
+	}
+	
 	document.getElementById('msgs').appendChild(channel_window);
 	
 	Array.from(document.getElementsByClassName('ul')).forEach(function(item) { item.className = 'ul ul_hidden' });
@@ -1655,12 +1738,18 @@ function msg(raw) {
 	}
 	
 	let w = document.getElementById('chan_' + chanlc);
-	let line = document.createElement('p');
 	
+	let line = document.createElement('p');
 	line.id = 'idmsg_' + idmsg;
 	line.className = 'line';
-	
 	line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg.replace('', '');
+	
+	let line_for_log = document.createElement('p');
+	line.id = 'idmsg_' + idmsg;
+	line.className = 'line';
+	line_for_log.innerHTML = '<strong class="'+ hlcolor +'">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg.replace('', '');
+	
+	log(irc_server_address, chanlc, line_for_log.outerHTML);
 	
 	if (w !== null) {
 		
