@@ -1498,7 +1498,7 @@ function join(chan) {
 	channel_window.className = 'window chan wselected';
 	channel_window.setAttribute('id', 'chan_' + chanspNoHTML);
 	
-	let lo = readLog(irc_server_address, chanspNoHTML, 500);
+	let lo = readLog(irc_server_address, chanspNoHTML, 50);
 	
 	console.log(lo)
 	
