@@ -1500,8 +1500,6 @@ function join(chan) {
 	
 	let lo = readLog(irc_server_address, chanspNoHTML, 50);
 	
-	console.log(lo)
-	
 	if (lo !== false) {
 		channel_window.innerHTML = lo;
 	}
