@@ -6,367 +6,11 @@ let numLines = 0, editbox = '';
 
 let favlist = getCookie('favlist');
 
-function emoji() {
-	
-	let elem = document.getElementById('bubble2');
-	
-    let rawFile = new XMLHttpRequest();
-    rawFile.open("GET", './emoji-v12.txt', false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                let text = rawFile.responseText;
-                
-                let lines = text.match(/((.*);(.*)#(...)(.*))/gim);
-                
-                //console.log(lines)
-                
-                for (let i = 0; i < 180; i++) {
-					
-					let code = lines[i].split(';')[0].trim().replace(' ', '-');
-					
-					let char = lines[i].split('#')[1].split(' ')[1];
-					
-					if (i % 10 === 0 && i !== 0) {
-						
-						elem.innerHTML += '<br />';
-					}
-					
-					elem.innerHTML += '<span id="' + code + '" class="emoji">' + char + '</span>';
-				}
-            }
-        }
-    }
-    rawFile.send(null);
-}
-
-function hashtag(text, cursor) {
-	
-	let c = cursor;
-	
-	for (var i=c; i >= 0; i--) {
-		
-		let char = text.substr(i, 1);
-		
-		if (char === ' ') {
-			return false;
-		}
-		if (char === '#') {
-			return text.substr(i+1, c) || '';
-		}
-	}
-	
-	return false;
-}
-
-function expandTextarea(obj) {
-	
-	obj.style.height = '23px';
-	let linesHeight = obj.scrollHeight - 10;
-	numLines = linesHeight / 23;
-	
-	let w = document.getElementsByClassName('wselected')[0];
-	
-	let weight;
-	
-	if (numLines <= 6) {
-		
-		obj.style.height = linesHeight + 'px';
-		obj.style.overflowY = 'hidden';
-		
-		weight = 55 + linesHeight;
-	}
-	else {
-		
-		obj.style.height = 6 * 23 + 'px';
-		obj.style.overflowY = 'auto';
-		
-		weight = 55 + 6 * 23;
-	}
-	
-	w.style.height = 'calc(100% - ' + weight + 'px)';
-	
-	w.scrollTop = w.scrollHeight;
-}
-
-function getCaretPosition(editableDiv, tab) {
-	
-	let caretPos = 0, sel, range;
-	
-	if (document.getSelection) {
-		
-		sel = document.getSelection();
-		
-		if (sel.rangeCount) {
-			
-			range = sel.getRangeAt(0);
-			
-			let len = editableDiv.innerHTML.replace(/<br\s*[\/]?>/gi, '').length;
-			
-			if (tab === true) {
-				caretPos = [ range.startOffset + (len - range.startOffset), range.endOffset + (len - range.startOffset), range.commonAncestorContainer.parentNode ];
-			}
-			else {
-				
-				caretPos = [ range.startOffset, range.endOffset, range.commonAncestorContainer.parentNode, range.commonAncestorContainer ];
-			}
-		}
-	}
-	return caretPos;
-}
-
-function setCaretPos(pos) {
-	
-	let content = document.getElementById('text');
-	let node = nodeSelect(content.childNodes, pos);
-	
-	if (document.selection) { // IE
-		let sel = document.selection.createRange();
-		sel.moveStart('character', node[1]);
-		sel.select();
-	}
-	else {
-		let sel = document.getSelection();
-		sel.collapse(node[0], node[1]);
-	}
-	
-	content.focus();
-}
-
-function nodeSelect(childNodes, pos) {
-	
-	let count = 0, oldCount = 0, result = false, BreakException = {};
-	
-	childNodes.forEach(function(item, index) {
-		
-		if (typeof item.outerHTML !== 'undefined') {
-			count += item.outerHTML.length;
-		}
-		else {
-			count += item.nodeValue.length;
-		}
-		
-		if (count >= pos) {
-			result = [ childNodes[index], pos - oldCount ];
-		}
-		else {
-			oldCount = count;
-		}
-	});
-	
-	return result;
-}
-
-function setEndOfContenteditable(contentEditableElement) {
-	
-    var range,selection;
-    if(document.createRange) {//Firefox, Chrome, Opera, Safari, IE 9+
-        range = document.createRange();//Create a range (a range is a like the selection but invisible)
-        range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
-        range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
-        selection = window.getSelection();//get the selection object (allows you to change selection)
-        selection.removeAllRanges();//remove any selections already made
-        selection.addRange(range);//make the range you have just created the visible selection
-    }
-    else if(document.selection) { //IE 8 and lower
-        range = document.body.createTextRange();//Create a range (a range is a like the selection but invisible)
-        range.moveToElementText(contentEditableElement);//Select the entire contents of the element with the range
-        range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
-        range.select();//Select the range (make it the visible selection
-    }
-}
-
-function index(element){
-    var sib = element.parentNode.childNodes;
-    var n = 0;
-    for (var i=0; i<sib.length; i++) {
-         if (sib[i]==element) return n;
-         if (sib[i].nodeType==1) n++;
-    }
-    return -1; 
-}
-
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-function getCaretCharacterOffsetWithin(element) {
-  var caretOffset = 0;
-  var doc = element.ownerDocument || element.document;
-  var win = doc.defaultView || doc.parentWindow;
-  var sel;
-  if (typeof win.getSelection != "undefined") {
-    sel = win.getSelection();
-    if (sel.rangeCount > 0) {
-      var range = win.getSelection().getRangeAt(0);
-      var preCaretRange = range.cloneRange();
-      preCaretRange.selectNodeContents(element);
-      
-      preCaretRange.setStart(range.startContainer, range.startOffset);
-      preCaretRange.setEnd(range.endContainer, range.endOffset);
-      
-      caretOffset = [ preCaretRange.startOffset, preCaretRange.endOffset, preCaretRange ];
-    }
-  } else if ((sel = doc.selection) && sel.type != "Control") {
-    var textRange = sel.createRange();
-    var preCaretTextRange = doc.body.createTextRange();
-    preCaretTextRange.moveToElementText(element);
-    preCaretTextRange.setEndPoint("EndToEnd", textRange);
-    caretOffset = preCaretTextRange.text.length;
-  }
-  return caretOffset;
-}
-
-function addFavEvents() {
-	
-	let favjoins = Array.from(document.getElementsByClassName('favjoin'));
-	
-	favjoins.forEach(function(item, index) {
-		
-		item.onclick = function() {
-			let chan = item.id.substring(4);
-			doSend('join #' + chan);
-			bubble.style.display = 'none';
-		}
-	});
-	
-	let favdel = Array.from(document.getElementsByClassName('favdel'));
-	
-	favdel.forEach(function(item, index) {
-		
-		item.onclick = function() {
-			
-			let chan = item.id.substring(4);
-			
-			item.parentNode.remove();
-			
-			favdelfct(chan);
-			
-			let elem = document.getElementById('fc_' + chan);
-			
-			elem.classList.toggle('favchecked');
-			
-			elem.classList.replace('fa-star', 'fa-star-o');
-		}
-	});
-}
-
-function favdelfct(chan) {
-	
-	let index = favlist.split(',').indexOf('#' + chan);
-	let fl = favlist.split(',');
-	fl.splice(index, 1);
-	favlist = fl.join(',');
-	setCookie('favlist', favlist, 10000000);
-	
-	if (favlist === '') {
-		let elem = document.getElementById('favlist_default');
-		
-		if (typeof elem !== 'undefined') {
-			elem.style.display = 'block';
-		}
-	}
-}
-
-function addFavInfoEvents() {
-	
-	let favinfo = document.getElementsByClassName('favinfo');
-	
-	Array.from(favinfo).forEach(function(item, index) {
-		
-		item.onclick = function(e) {
-			
-			e.stopPropagation();
-			
-			let chansp = item.id.substring(3).toLowerCase();
-			let chan = '#' + chansp.toLowerCase();
-			
-			let elem = document.getElementById(item.id);
-			
-			elem.classList.toggle('favchecked');
-			
-			if (elem.classList.value.indexOf('fa-star-o') === -1) { // Retrait du salon par le bouton du salon
-				
-				elem.classList.replace('fa-star', 'fa-star-o');
-				
-				favdelfct(chansp);
-				
-				document.getElementById('fav_' + chansp).parentNode.remove();
-			}
-			else { // Ajout du salon par le bouton du salon
-				
-				elem.classList.replace('fa-star-o', 'fa-star');
-				
-				if (favlist === '') {
-					
-					favlist = chan;
-					
-					setCookie('favlist', chan, 10000000);
-					
-					let p = document.createElement('p');
-					p.innerHTML = chan + '<i class="fa fa-times favdel" id="fav_' + chansp + '"></i><i class="fa fa-sign-in favjoin" id="fav_' + chansp + '" aria-hidden="true"></i>';
-					document.getElementById('favlist_content').appendChild(p);
-					
-					addFavEvents();
-				}
-				else {
-					
-					favlist += ',' + chan;
-					
-					setCookie('favlist', favlist, 10000000);
-					
-					let p = document.createElement('p');
-					p.innerHTML = chan + '<i class="fa fa-times favdel" id="fav_' + chansp + '"></i><i class="fa fa-sign-in favjoin" id="fav_' + chansp + '" aria-hidden="true"></i>';
-					document.getElementById('favlist_content').appendChild(p);
-					
-					addFavEvents();
-				}
-				
-				let fav_default = document.getElementById('favlist_default');
-				
-				if (fav_default !== null) {
-					fav_default.style.display = 'none';
-				}
-			}
-		}
-	});
-}
-
-function clearSelection() {
-	
-	if (window.getSelection) {
-		
-		window.getSelection().removeAllRanges();
-	}
-	else if (document.selection) {
-		
-		document.selection.empty();
-	}
-}
+let emojiCursor;
 
 (function() {
+	
+	let textarea = document.getElementById('text');
 	
 	emoji();
 	
@@ -506,8 +150,6 @@ function clearSelection() {
 	
 	notifyMe('');
 	
-	let textarea = document.getElementById('text');
-	
 	textarea.focus();
 	textarea.style.border = '4px solid #A6ACAF';
 	
@@ -551,94 +193,19 @@ function clearSelection() {
 		}
 	}
 	
-	/*
-	let bold = document.getElementById('btn_bold');
-	
-	bold.onmousedown = function() {
-		
-		let cursor = getCaretPosition(textarea);
-		
-		console.log(cursor);
-		
-		if (cursor !== 0) {
-			
-			let text = textarea.innerHTML;
-			
-			if (cursor[2].nodeName !== 'STRONG' && cursor[2].id == 'text') {
-			
-				if (cursor[0] === cursor[1]) {
-					textarea.innerHTML = text.substring(0, cursor[0]) + '<strong>' + text.substring(cursor[0]) + '</strong>';
-				}
-				else {
-					
-					let c0 = cursor[0];
-					let c1 = cursor[1];
-					
-					if (text.indexOf('<strong>') === -1 || text.indexOf('<strong>') < cursor[1]) {
-						c0 = cursor[0] + text.length - cursor[3].length;
-						c1 = cursor[1] + text.length - cursor[3].length;
-					}
-					
-					textarea.innerHTML = '<span>' + text.substring(0, c0) + '</span><strong>' + text.substring(c0, c1) + '</strong><span>' + text.substring(c1) + '</span>';
-				}
-			}
-			else if (cursor[2].id === 'editbox' || cursor[2].nodeName === 'STRONG') {
-				
-				if (cursor[2].nodeName === 'STRONG') {
-					
-				}
-				
-				textarea.innerHTML += '&zwnj;';
-			}
-		}
-	}
-	
-	bold.onclick = function() {
-		
-		setEndOfContenteditable( textarea );
-		
-		textarea.focus();
-	}
-	
-	let bold = document.getElementById('btn_bold');
-	
-	bold.onmousedown = function() {
-		
-		let text;
-		
-		if (editbox === '') {
-			text = textarea.innerText;
-		}
-		else {
-			text = editbox;
-		}
-		
-		let cursor = getCaretCharacterOffsetWithin( textarea );
-		
-		console.log(cursor);
-		
-		if (cursor[0] === cursor[1]) {
-			
-			editbox = text.substring(0, cursor[0]) + '' + text.substring(cursor[0]);
-			textarea.innerHTML = style( editbox );
-		}
-		else {
-			editbox = text.substring(0, cursor[0]) + '' + text.substring(cursor[0], cursor[1]) + '' + text.substring(cursor[1]);
-			textarea.innerHTML = style( editbox );
-		}
-	}
-	
-	bold.onclick = function() {
-		
-		setEndOfContenteditable( textarea );
-		
-		textarea.focus();
-	}
-	*/
-	
 	textarea.oninput = function() {
 		
 		expandTextarea(this);
+	}
+	
+	textarea.onkeyup = function() {
+		
+		emojiCursor = getCaretCharacterOffsetWithin(this);
+	}
+	
+	textarea.onmouseup = function() {
+		
+		emojiCursor = getCaretCharacterOffsetWithin(this);
 	}
 	
 	textarea.onkeydown = function(e) {
@@ -1220,11 +787,9 @@ function clearSelection() {
 		
 		item.onclick = function() {
 			
-			let cursor = getCaretPosition(textarea, true)[0];
-			
 			let char = '&#' + parseInt(item.id.replace('-', ' '), 16);
 			
-			textarea.innerHTML = textarea.innerHTML.substring(0, cursor) + char + textarea.innerHTML.substring(cursor);
+			textarea.innerText = textarea.innerText.substring(0, emojiCursor) + decodeEntities(char) + textarea.innerText.substring(emojiCursor);
 			
 			bubble2.style.display = 'none';
 			
@@ -1339,6 +904,384 @@ function clearSelection() {
 	connectWebSocket();
 	
 })();
+
+function emoji() {
+	
+	let elem = document.getElementById('bubble2');
+	
+    let rawFile = new XMLHttpRequest();
+    rawFile.open("GET", './emoji-v12.txt', false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                let text = rawFile.responseText;
+                
+                let lines = text.match(/((.*);(.*)#(...)(.*))/gim);
+                
+                //console.log(lines)
+                
+                for (let i = 0; i < 180; i++) {
+					
+					let code = lines[i].split(';')[0].trim().replace(' ', '-');
+					
+					let char = lines[i].split('#')[1].split(' ')[1];
+					
+					if (i % 10 === 0 && i !== 0) {
+						
+						elem.innerHTML += '<br />';
+					}
+					
+					elem.innerHTML += '<span id="' + code + '" class="emoji">' + char + '</span>';
+				}
+            }
+        }
+    }
+    
+    rawFile.send(null);
+}
+
+var decodeEntities = (function() {
+  // this prevents any overhead from creating the object each time
+  var element = document.createElement('div');
+
+  function decodeHTMLEntities (str) {
+    if(str && typeof str === 'string') {
+      // strip script/html tags
+      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+      str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+      element.innerHTML = str;
+      str = element.textContent;
+      element.textContent = '';
+    }
+
+    return str;
+  }
+
+  return decodeHTMLEntities;
+})();
+
+function hashtag(text, cursor) {
+	
+	let c = cursor;
+	
+	for (var i=c; i >= 0; i--) {
+		
+		let char = text.substr(i, 1);
+		
+		if (char === ' ') {
+			return false;
+		}
+		if (char === '#') {
+			return text.substr(i+1, c) || '';
+		}
+	}
+	
+	return false;
+}
+
+function expandTextarea(obj) {
+	
+	obj.style.height = '23px';
+	let linesHeight = obj.scrollHeight - 10;
+	numLines = linesHeight / 23;
+	
+	let w = document.getElementsByClassName('wselected')[0];
+	
+	let weight;
+	
+	if (numLines <= 6) {
+		
+		obj.style.height = linesHeight + 'px';
+		obj.style.overflowY = 'hidden';
+		
+		weight = 55 + linesHeight;
+	}
+	else {
+		
+		obj.style.height = 6 * 23 + 'px';
+		obj.style.overflowY = 'auto';
+		
+		weight = 55 + 6 * 23;
+	}
+	
+	w.style.height = 'calc(100% - ' + weight + 'px)';
+	
+	w.scrollTop = w.scrollHeight;
+}
+
+function getCaretPosition(editableDiv, tab) {
+	
+	let caretPos = 0, sel, range;
+	
+	if (document.getSelection) {
+		
+		sel = document.getSelection();
+		
+		if (sel.rangeCount) {
+			
+			range = sel.getRangeAt(0);
+			
+			let len = editableDiv.innerHTML.replace(/<br\s*[\/]?>/gi, '').length;
+			
+			if (tab === true) {
+				caretPos = [ range.startOffset + (len - range.startOffset), range.endOffset + (len - range.startOffset), range.commonAncestorContainer.parentNode ];
+			}
+			else {
+				
+				caretPos = [ range.startOffset, range.endOffset, range.commonAncestorContainer.parentNode, range.commonAncestorContainer ];
+			}
+		}
+	}
+	return caretPos;
+}
+
+function getCaretCharacterOffsetWithin(element) {
+  var caretOffset = 0;
+  var doc = element.ownerDocument || element.document;
+  var win = doc.defaultView || doc.parentWindow;
+  var sel;
+  if (typeof win.getSelection != "undefined") {
+    sel = win.getSelection();
+    if (sel.rangeCount > 0) {
+      var range = win.getSelection().getRangeAt(0);
+      var preCaretRange = range.cloneRange();
+      preCaretRange.selectNodeContents(element);
+      preCaretRange.setEnd(range.endContainer, range.endOffset);
+      caretOffset = preCaretRange.toString().length;
+    }
+  } else if ((sel = doc.selection) && sel.type != "Control") {
+    var textRange = sel.createRange();
+    var preCaretTextRange = doc.body.createTextRange();
+    preCaretTextRange.moveToElementText(element);
+    preCaretTextRange.setEndPoint("EndToEnd", textRange);
+    caretOffset = preCaretTextRange.text.length;
+  }
+  return caretOffset;
+}
+
+function setCaretPos(pos) {
+	
+	let content = document.getElementById('text');
+	let node = nodeSelect(content.childNodes, pos);
+	
+	if (document.selection) { // IE
+		let sel = document.selection.createRange();
+		sel.moveStart('character', node[1]);
+		sel.select();
+	}
+	else {
+		let sel = document.getSelection();
+		sel.collapse(node[0], node[1]);
+	}
+	
+	content.focus();
+}
+
+function nodeSelect(childNodes, pos) {
+	
+	let count = 0, oldCount = 0, result = false, BreakException = {};
+	
+	childNodes.forEach(function(item, index) {
+		
+		if (typeof item.outerHTML !== 'undefined') {
+			count += item.outerHTML.length;
+		}
+		else {
+			count += item.nodeValue.length;
+		}
+		
+		if (count >= pos) {
+			result = [ childNodes[index], pos - oldCount ];
+		}
+		else {
+			oldCount = count;
+		}
+	});
+	
+	return result;
+}
+
+function setEndOfContenteditable(contentEditableElement) {
+	
+    var range,selection;
+    if(document.createRange) {//Firefox, Chrome, Opera, Safari, IE 9+
+        range = document.createRange();//Create a range (a range is a like the selection but invisible)
+        range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
+        range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+        selection = window.getSelection();//get the selection object (allows you to change selection)
+        selection.removeAllRanges();//remove any selections already made
+        selection.addRange(range);//make the range you have just created the visible selection
+    }
+    else if(document.selection) { //IE 8 and lower
+        range = document.body.createTextRange();//Create a range (a range is a like the selection but invisible)
+        range.moveToElementText(contentEditableElement);//Select the entire contents of the element with the range
+        range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+        range.select();//Select the range (make it the visible selection
+    }
+}
+
+function index(element){
+    var sib = element.parentNode.childNodes;
+    var n = 0;
+    for (var i=0; i<sib.length; i++) {
+         if (sib[i]==element) return n;
+         if (sib[i].nodeType==1) n++;
+    }
+    return -1; 
+}
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function addFavEvents() {
+	
+	let favjoins = Array.from(document.getElementsByClassName('favjoin'));
+	
+	favjoins.forEach(function(item, index) {
+		
+		item.onclick = function() {
+			let chan = item.id.substring(4);
+			doSend('join #' + chan);
+			bubble.style.display = 'none';
+		}
+	});
+	
+	let favdel = Array.from(document.getElementsByClassName('favdel'));
+	
+	favdel.forEach(function(item, index) {
+		
+		item.onclick = function() {
+			
+			let chan = item.id.substring(4);
+			
+			item.parentNode.remove();
+			
+			favdelfct(chan);
+			
+			let elem = document.getElementById('fc_' + chan);
+			
+			elem.classList.toggle('favchecked');
+			
+			elem.classList.replace('fa-star', 'fa-star-o');
+		}
+	});
+}
+
+function favdelfct(chan) {
+	
+	let index = favlist.split(',').indexOf('#' + chan);
+	let fl = favlist.split(',');
+	fl.splice(index, 1);
+	favlist = fl.join(',');
+	setCookie('favlist', favlist, 10000000);
+	
+	if (favlist === '') {
+		let elem = document.getElementById('favlist_default');
+		
+		if (typeof elem !== 'undefined') {
+			elem.style.display = 'block';
+		}
+	}
+}
+
+function addFavInfoEvents() {
+	
+	let favinfo = document.getElementsByClassName('favinfo');
+	
+	Array.from(favinfo).forEach(function(item, index) {
+		
+		item.onclick = function(e) {
+			
+			e.stopPropagation();
+			
+			let chansp = item.id.substring(3).toLowerCase();
+			let chan = '#' + chansp.toLowerCase();
+			
+			let elem = document.getElementById(item.id);
+			
+			elem.classList.toggle('favchecked');
+			
+			if (elem.classList.value.indexOf('fa-star-o') === -1) { // Retrait du salon par le bouton du salon
+				
+				elem.classList.replace('fa-star', 'fa-star-o');
+				
+				favdelfct(chansp);
+				
+				document.getElementById('fav_' + chansp).parentNode.remove();
+			}
+			else { // Ajout du salon par le bouton du salon
+				
+				elem.classList.replace('fa-star-o', 'fa-star');
+				
+				if (favlist === '') {
+					
+					favlist = chan;
+					
+					setCookie('favlist', chan, 10000000);
+					
+					let p = document.createElement('p');
+					p.innerHTML = chan + '<i class="fa fa-times favdel" id="fav_' + chansp + '"></i><i class="fa fa-sign-in favjoin" id="fav_' + chansp + '" aria-hidden="true"></i>';
+					document.getElementById('favlist_content').appendChild(p);
+					
+					addFavEvents();
+				}
+				else {
+					
+					favlist += ',' + chan;
+					
+					setCookie('favlist', favlist, 10000000);
+					
+					let p = document.createElement('p');
+					p.innerHTML = chan + '<i class="fa fa-times favdel" id="fav_' + chansp + '"></i><i class="fa fa-sign-in favjoin" id="fav_' + chansp + '" aria-hidden="true"></i>';
+					document.getElementById('favlist_content').appendChild(p);
+					
+					addFavEvents();
+				}
+				
+				let fav_default = document.getElementById('favlist_default');
+				
+				if (fav_default !== null) {
+					fav_default.style.display = 'none';
+				}
+			}
+		}
+	});
+}
+
+function clearSelection() {
+	
+	if (window.getSelection) {
+		
+		window.getSelection().removeAllRanges();
+	}
+	else if (document.selection) {
+		
+		document.selection.empty();
+	}
+}
 
 function gchanlist_window() {
 	
