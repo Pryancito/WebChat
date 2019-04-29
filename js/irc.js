@@ -1469,6 +1469,11 @@ function readLog(server, target, last) {
 		
 		let output = '';
 		
+		if (len > last) {
+			
+			len = last;
+		}
+		
 		for(var i = len; i >= len - last; i--) {
 			
 			output += r[target][i];
