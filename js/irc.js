@@ -1476,7 +1476,9 @@ function readLog(server, target, last) {
 		
 		for(var i = len; i >= len - last; i--) {
 			
-			output += r[target][i];
+			if (typeof r[target][i] !== 'undefined') {
+				output += r[target][i];
+			}
 		}
 		
 		console.log(output);
