@@ -1650,7 +1650,7 @@ function query(nick, msg) {
 			
 			msg = urlify( style( escapeHtml( msg ) ) );
 			
-			line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;' + nick + '&gt;</strong> ' + msg;
+			line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg;
 			
 			w.appendChild(line);
 			
