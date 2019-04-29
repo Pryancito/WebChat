@@ -847,6 +847,9 @@ function setMode(rawsp) {
 		let nick = rawsp[0].split(':')[1].split('!')[0];
 		let chan = chan_or_nick.substring(1);
 		
+		let chanspNoHTML = chan_or_nick.replace(/\</g, '').substring(1).toLowerCase();
+		chanspNoHTML = chan_or_nick.replace(/\>/g, '').substring(1).toLowerCase();
+		
 		nick = document.createTextNode(nick);
 		chan = document.createTextNode(chan);
 		chan_nicks_mode = document.createTextNode(chan_nicks_mode);
@@ -859,7 +862,7 @@ function setMode(rawsp) {
 		elem.innerHTML += ' on #';
 		elem.appendChild(chan);
 		
-		let w = document.getElementById('chan_' + chan_or_nick.substring(1));
+		let w = document.getElementById('chan_' + chanspNoHTML);
 		if (w != null) {
 			w.appendChild(elem);
 		}
@@ -1466,18 +1469,12 @@ function readLog(server, target, last) {
 		
 		let output = '';
 		
-		if (len < last) {
-			
-			last = len;
-		}
-		else {
-			len = last;
-		}
-		
-		for(var i = len; i >= 0; i--) {
+		for(var i = len; i >= len - last; i--) {
 			
 			output += r[target][i];
 		}
+		
+		console.log(output);
 		
 		return output;
 	}
