@@ -906,7 +906,7 @@ function clearSelection() {
 					
 					irl--;
 					elem.innerHTML = rememberLines[ irl ];
-					//setTimeout(function(){ setEndOfContenteditable( elem ); }, 0);
+					setTimeout(function(){ setEndOfContenteditable( elem ); }, 0);
 				}
 				else {
 					
@@ -944,7 +944,7 @@ function clearSelection() {
 			if (typeof rememberLines[ irl ] !== 'undefined') {
 				
 				elem.innerHTML = rememberLines[ irl ];
-				//setTimeout(function(){ setEndOfContenteditable( elem ); }, 0);
+				setTimeout(function(){ setEndOfContenteditable( elem ); }, 0);
 			}
 			
 			expandTextarea(textarea);
