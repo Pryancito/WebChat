@@ -1467,21 +1467,23 @@ function readLog(server, target, last) {
 	
 		let len = r[target].length - 1;
 		
-		let output = '';
+		let start;
 		
-		if (len > last) {
-			
-			len = last;
+		if (last >= len) {
+			start = len - last;
+		}
+		else {
+			start = 0;
 		}
 		
-		for(var i = len; i >= len - last; i--) {
+		let output = '';
+		
+		for(var i = start; i <= len; i++) {
 			
 			if (typeof r[target][i] !== 'undefined') {
 				output += r[target][i];
 			}
 		}
-		
-		console.log(output);
 		
 		return output;
 	}
@@ -1502,7 +1504,7 @@ function join(chan) {
 	channel_window.className = 'window chan wselected';
 	channel_window.setAttribute('id', 'chan_' + chanspNoHTML);
 	
-	let lo = readLog(irc_server_address, chanspNoHTML, 50);
+	let lo = readLog(irc_server_address, '#' + chanspNoHTML, 50);
 	
 	if (lo !== false) {
 		channel_window.innerHTML = lo;
@@ -1658,6 +1660,11 @@ function query(nick, msg) {
 			
 			w.appendChild(line);
 			
+			let line_for_log = document.createElement('p');
+			line_for_log.innerHTML = '<strong class="'+ hlcolor +'">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg;
+			
+			log(irc_server_address, nick, line_for_log);
+			
 			if (hlCheck) {
 				hl(nick, msg);
 			}
@@ -1751,7 +1758,7 @@ function msg(raw) {
 	line.className = 'line';
 	line_for_log.innerHTML = '<strong class="'+ hlcolor +'">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg.replace('', '');
 	
-	log(irc_server_address, chanlc, line_for_log.outerHTML);
+	log(irc_server_address, '#' + chanlc, line_for_log.outerHTML);
 	
 	if (w !== null) {
 		
@@ -2535,7 +2542,19 @@ function send() {
 				
 				line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 				line.innerHTML += message;
+				
 				w.appendChild(line);
+				
+				let line_for_log = document.createElement('p');
+				
+				line_for_log.id = 'idmsg_' + idmsg;
+				
+				line_for_log.className = 'line';
+				
+				line_for_log.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
+				line_for_log.innerHTML += message;
+				
+				log(irc_server_address, recipient, line_for_log);
 				
 				let activeWindow = document.getElementsByClassName('wselected')[0];
 				
@@ -2559,7 +2578,19 @@ function send() {
 					
 					line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 					line.innerHTML += message;
+					
 					w.appendChild(line);
+					
+					let line_for_log = document.createElement('p');
+					
+					line_for_log.id = 'idmsg_' + idmsg;
+					
+					line_for_log.className = 'line';
+					
+					line_for_log.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
+					line_for_log.innerHTML += message;
+					
+					log(irc_server_address, recipient, line_for_log);
 					
 					let activeWindow = document.getElementsByClassName('wselected')[0];
 					
@@ -2588,6 +2619,17 @@ function send() {
 				
 				w.appendChild(line);
 				
+				let line_for_log = document.createElement('p');
+				
+				line_for_log.id = 'idmsg_' + idmsg;
+				
+				line_for_log.className = 'line';
+				
+				line_for_log.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
+				line_for_log.innerHTML += message;
+				
+				log(irc_server_address, recipient, line_for_log);
+				
 				let activeWindow = document.getElementsByClassName('wselected')[0];
 				
 				if (document.getElementById('border-right').style.backgroundColor !== 'red') {
@@ -2607,7 +2649,7 @@ function send() {
 function exec(cmd) {
 	
 	// Done : /raw, /join, /nick, /whois (/w), /part, /notice (/n), /me, /cycle, /mode, /topic, /list, /kick, /query (/q)
-	// To do : /quit, /who, /whowas, /links, /map, /op, /hop, /voice
+	// To do : /quit, /who, /whowas, /links, /map, /op, /hop, /voice, /lusers
 	
 	let raw = cmd;
 	cmd = cmd.split(' ');
