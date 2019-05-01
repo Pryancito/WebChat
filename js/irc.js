@@ -2554,7 +2554,7 @@ function send() {
 				line_for_log.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 				line_for_log.innerHTML += message;
 				
-				log(irc_server_address, recipient, line_for_log);
+				log(irc_server_address, recipient, line_for_log.outerHTML);
 				
 				let activeWindow = document.getElementsByClassName('wselected')[0];
 				
@@ -2590,7 +2590,7 @@ function send() {
 					line_for_log.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 					line_for_log.innerHTML += message;
 					
-					log(irc_server_address, recipient, line_for_log);
+					log(irc_server_address, recipient, line_for_log.outerHTML);
 					
 					let activeWindow = document.getElementsByClassName('wselected')[0];
 					
@@ -2628,7 +2628,7 @@ function send() {
 				line_for_log.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 				line_for_log.innerHTML += message;
 				
-				log(irc_server_address, recipient, line_for_log);
+				log(irc_server_address, recipient, line_for_log.outerHTML);
 				
 				let activeWindow = document.getElementsByClassName('wselected')[0];
 				
