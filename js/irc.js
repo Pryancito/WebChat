@@ -2540,7 +2540,7 @@ function send() {
 				
 				line.className = 'line';
 				
-				line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
+				line.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 				line.innerHTML += message;
 				
 				w.appendChild(line);
@@ -2587,7 +2587,7 @@ function send() {
 					
 					line_for_log.className = 'line';
 					
-					line_for_log.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
+					line_for_log.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 					line_for_log.innerHTML += message;
 					
 					log(irc_server_address, recipient, line_for_log.outerHTML);
@@ -2625,7 +2625,7 @@ function send() {
 				
 				line_for_log.className = 'line';
 				
-				line_for_log.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
+				line_for_log.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 				line_for_log.innerHTML += message;
 				
 				log(irc_server_address, recipient, line_for_log.outerHTML);
