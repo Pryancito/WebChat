@@ -2540,7 +2540,7 @@ function send() {
 				
 				line.className = 'line';
 				
-				line.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
+				line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 				line.innerHTML += message;
 				
 				w.appendChild(line);
