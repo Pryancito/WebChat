@@ -26,7 +26,7 @@ a, a:visited, a:active {
 }
 /* width */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
   margin-right:5px;
 }
 
@@ -166,7 +166,7 @@ a, a:visited, a:active {
 }
 #msgs .window {
 	position:absolute;
-	padding:0 15px;
+	padding:0 1px 0 15px;
 	overflow-y:scroll;
 	visibility:hidden;
 }
