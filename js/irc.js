@@ -20,7 +20,7 @@ let url_summary = true;
 
 let logs = localStorage;
 
-logs.removeItem( irc_server_address );
+//logs.removeItem( irc_server_address );
 
 
 if (typeof nickname == null) {
@@ -1445,6 +1445,11 @@ function log(server, target, line) {
 	else {
 		
 		if (typeof serv[target] !== 'undefined') {
+			
+			if (serv[target].length > 250) {
+				
+				serv[target].shift();
+			}
 			
 			serv[target].push( line );
 			
