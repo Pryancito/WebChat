@@ -81,16 +81,16 @@
 		
 		if ($metas !== false && $doc !== false) {
 			
+			$favicon = getFavicon($doc);
+			
 			if (isset($metas['og:title'])) {
-				
-				$favicon = getFavicon($doc);
 				
 				if ($metas['og:site_name'] == null) {
 					
 					$metas['og:site_name'] = str_ireplace('www.', '', parse_url($_GET['url'], PHP_URL_HOST));
 				}
 				
-				$json = json_encode(array('type' => 'summary', 'site_name' => $metas['og:site_name'], 'title' => $metas['og:title'], 'description' => $metas['og:description'], 'favicon' => $favicon, 'image' => $metas['og:image'], 'youtube_id' => $youtube_id));
+				$json = json_encode(array('type' => 'summary', 'site_name' => @$metas['og:site_name'], 'title' => @$metas['og:title'], 'description' => @$metas['og:description'], 'favicon' => @$favicon, 'image' => @$metas['og:image'], 'youtube_id' => @$youtube_id));
 				
 				cache_mysql($_GET['url'], $json);
 				
@@ -172,8 +172,6 @@
 				}
 			}
 			
-			//$favicon = getFavicon($doc);
-			
 			if (!isset($title)) {
 				$title = '';
 			}
@@ -184,7 +182,7 @@
 			
 			$domain = str_ireplace('www.', '', parse_url($_GET['url'], PHP_URL_HOST));
 			
-			$json = json_encode(array('type' => 'summary', 'site_name' => $domain, 'title' => $title, 'description' => $metas["description"], 'favicon' => $favicon, 'image' => $image, 'youtube_id' => $youtube_id));
+			$json = json_encode(array('type' => 'summary', 'site_name' => @$domain, 'title' => @$title, 'description' => @$metas["description"], 'favicon' => @$favicon, 'image' => @$image, 'youtube_id' => @$youtube_id));
 			
 			cache_mysql($_GET['url'], $json);
 			
