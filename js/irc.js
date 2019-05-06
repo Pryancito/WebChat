@@ -893,9 +893,13 @@ function onTopicMsg( rawp ) { // :irc.wevox.co 332 WircyUser_147 #WeVox :Canal I
 	let topic = urlify(style(topicRaw), '', false, false);
 	let cs = rawp[1].split(' ')[3].substring(1);
 	
+	let chanspNoHTML = cs.replace(/\</g, '').toLowerCase();
+	
+	chanspNoHTML = chanspNoHTML.replace(/\>/g, '');
+	
 	if (topicByCommand === true) {
 		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * Topic : ' + topic;
-		document.getElementById('chan_' + cs).appendChild(elem);
+		document.getElementById('chan_' + chanspNoHTML).appendChild(elem);
 	}
 	
 	let topicInput = document.getElementById('topic');
@@ -908,7 +912,7 @@ function onTopicMsg( rawp ) { // :irc.wevox.co 332 WircyUser_147 #WeVox :Canal I
 	
 	let chan_topic = document.createElement('p');
 	chan_topic.className = 'chan_topic ct_selected';
-	chan_topic.id = 'chan_topic_' + cs;
+	chan_topic.id = 'chan_topic_' + chanspNoHTML;
 	chan_topic.innerHTML = topic;
 	
 	topicInput.appendChild(chan_topic);
@@ -1031,6 +1035,14 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		url_summary = true;
 		
 		elem.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">&lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + message.replace('', '') + '</span>';
+		
+		let elem_for_log = document.createElement('p');
+		
+		elem_for_log.id = 'idmsg_' + idmsg;
+		
+		elem_for_log.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">' + currentDate() + ' - &lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + message.replace('', '') + '</span>';
+		
+		log(irc_server_address, active, elem_for_log.outerHTML);
 		
 		let w = document.getElementsByClassName('wselected')[0];
 		if (typeof w != 'undefined') {
@@ -1509,7 +1521,7 @@ function join(chan) {
 	channel_window.className = 'window chan wselected';
 	channel_window.setAttribute('id', 'chan_' + chanspNoHTML);
 	
-	let lo = readLog(irc_server_address, '#' + chanspNoHTML, 50);
+	let lo = readLog(irc_server_address, '#' + chanspNoHTML, 250);
 	
 	if (lo !== false) {
 		channel_window.innerHTML = lo;
@@ -1621,6 +1633,9 @@ function query(nick, msg) {
 		Array.from(document.getElementsByClassName('btn_selected')).forEach(function(item) { item.className = 'btn_window' });
 		query.setAttribute('class', 'btn_window btn_selected');
 		query.setAttribute('id', 'query_btn_' + nick);
+		
+		query.innerHTML = readLog(irc_server_address, nick.toLowerCase(), 250);
+		
 		querylist.appendChild(query);
 		
 		document.getElementById('text').focus();
@@ -1668,7 +1683,7 @@ function query(nick, msg) {
 			let line_for_log = document.createElement('p');
 			line_for_log.innerHTML = '<strong class="'+ hlcolor +'">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg;
 			
-			log(irc_server_address, nick, line_for_log);
+			log(irc_server_address, nick.toLowerCase(), line_for_log);
 			
 			if (hlCheck) {
 				hl(nick, msg);
@@ -2452,7 +2467,7 @@ function onJoin(user, chan) {
 		
 		ACStriped = chansp;
 		activeChannel = chan;
-		active = chan;
+		active = chan.toLowerCase();
 		activeType = 'channel';
 		
 		join(chan);
@@ -2556,7 +2571,7 @@ function send() {
 				
 				line_for_log.className = 'line';
 				
-				line_for_log.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
+				line_for_log.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 				line_for_log.innerHTML += message;
 				
 				log(irc_server_address, recipient, line_for_log.outerHTML);
