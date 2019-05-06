@@ -652,7 +652,7 @@ body #text .nocolorcopy {
 	display:none;
 	position:relative;
 	background-color:#eaeaea;
-	padding:15px;
+	padding:5px 15px;
 	font-family:Segoe UI !important;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
