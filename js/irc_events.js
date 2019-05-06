@@ -670,11 +670,15 @@ let emojiCursor;
 					
 					let chanspHTML = activeChannel.replace(/\/g, '<').toLowerCase();
 					
-					chanspHTML = chanspHTML.replace(/\/g, '>').toLowerCase();
+					chanspHTML = chanspHTML.replace(/\/g, '>');
 					
 					doSend('names ' + chanspHTML);
 					
-					let chan_topic = document.getElementById('chan_topic_' + ACStriped);
+					let chanspNoHTML = ACStriped.replace(/\/g, '<');
+					
+					chanspNoHTML = chanspNoHTML.replace(/\/g, '>');
+					
+					let chan_topic = document.getElementById('chan_topic_' + chanspNoHTML);
 					
 					if (chan_topic === null) {
 						
@@ -710,7 +714,7 @@ let emojiCursor;
 				}
 				else if (target[0] == 'query') {
 					
-					active = target[1];
+					active = target[1].toLowerCase();
 					activeType = 'query';
 					activeQuery = target[1];
 					
