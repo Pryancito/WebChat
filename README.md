@@ -11,11 +11,13 @@ IRC client with server-side websocket HTML5 support.
 ## Edit start of *js/irc.js* to give IRC server address and define URL summaries engine as following :
 
 ```
-"use strict";
+// -------------------------- START OF CONFIG -------------------------- \\
 
 let irc_server_address = 'wss://<IP address or hostname>:<port>/';
 
 let urlify_check = true; // Or false to disable.
+
+// --------------------------- END OF CONFIG --------------------------- \\
 ```
 
 ## Optional : for URL summaries (if urlify_check === true) edit *ajax/config.php* :
