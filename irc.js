@@ -1,8 +1,12 @@
 "use strict";
 
+// -------------------------- START OF CONFIG -------------------------- \\
+
 let irc_server_address = 'wss://roubaix.fr.epiknet.org:6680/';
 
 let urlify_check = true;
+
+// --------------------------- END OF CONFIG --------------------------- \\
 
 let nickname = getParameterByName('nickname');
 
