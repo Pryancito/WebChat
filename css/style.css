@@ -24,9 +24,10 @@ a, a:visited, a:active {
 .fa-circle.user {
 	color:white;
 }
+
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
   margin-right:5px;
 }
 
@@ -100,6 +101,9 @@ a, a:visited, a:active {
 	height:100%;
 	width:15%;
 }
+.emoji {
+	font-size:18px;
+}
 #cqlist {
 	float:left;
 	min-width:175px;
@@ -169,6 +173,8 @@ a, a:visited, a:active {
 	padding:0 1px 0 15px;
 	overflow-y:scroll;
 	visibility:hidden;
+	scrollbar-color: #888 transparent;
+	scrollbar-width: thin;
 }
 #msgs .window p {
 	word-wrap:break-word;
@@ -179,6 +185,8 @@ a, a:visited, a:active {
 #userlist {
 	float:right;
 	overflow-y:auto;
+	scrollbar-color: #888 transparent;
+	scrollbar-width: thin;
 }
 #editbox {
 	width:100%;
