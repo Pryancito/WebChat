@@ -1,8 +1,12 @@
 "use strict";
 
+// -------------------------- START OF CONFIG -------------------------- \\
+
 let irc_server_address = 'wss://roubaix.fr.epiknet.org:6680/';
 
-let urlify_check = true;
+let urlify_check = true; // Or false to disable.
+
+// --------------------------- END OF CONFIG --------------------------- \\
 
 let nickname = getParameterByName('nickname');
 
@@ -596,7 +600,10 @@ function process(rawData) {
 			onNotice( rawsp );
 		}
 	}
-	else if (rawsp[1] == '311' || rawsp[1] == '379' || rawsp[1] == '319' || rawsp[1] == '312' || rawsp[1] == '317' || rawsp[1] == '318') {
+	// <- :courbevoie2.fr.epiknet.org 330 KituPlus Courgette Courgette :is logged in as
+	// <- :courbevoie2.fr.epiknet.org 671 KituPlus Courgette :is using a Secure Connection
+	// whois :
+	else if (rawsp[1] == '311' || rawsp[1] == '379' || rawsp[1] == '319' || rawsp[1] == '312' || rawsp[1] == '317' || rawsp[1] == '318' || rawsp[1] == '307' || rawsp[1] == '671') {
 		onWhois( rawsp[1], rawsp.splice(3).join(' ') );
 	}
 	// rcvd :WircyUser_455!websocket@F59D8D69.81546244.7925F8A.IP TOPIC #websocket :pwet
@@ -1272,8 +1279,6 @@ function onPart(mask, chan) {
 
 function onWhois(numraw, line) {
 	
-	console.log(line)
-	
 	if (numraw == '317') {
 		
 		line = line.split(' ');
@@ -1634,7 +1639,7 @@ function query(nick, msg) {
 		query.setAttribute('class', 'btn_window btn_selected');
 		query.setAttribute('id', 'query_btn_' + nick);
 		
-		query.innerHTML = readLog(irc_server_address, nick.toLowerCase(), 250);
+		readLog(irc_server_address, nick.toLowerCase(), 250);
 		
 		querylist.appendChild(query);
 		
@@ -1774,8 +1779,8 @@ function msg(raw) {
 	line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg.replace('', '');
 	
 	let line_for_log = document.createElement('p');
-	line.id = 'idmsg_' + idmsg;
-	line.className = 'line';
+	line_for_log.id = 'idmsg_' + idmsg;
+	line_for_log.className = 'line';
 	line_for_log.innerHTML = '<strong class="'+ hlcolor +'">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg.replace('', '');
 	
 	log(irc_server_address, '#' + chanlc, line_for_log.outerHTML);
@@ -1874,14 +1879,14 @@ function userlist(chan, nicknames) {
 	
 	let chanspNoHTML = chan.replace(/\</g, '').toLowerCase();
 	
-	chanspNoHTML = chanspNoHTML.replace(/\>/g, '').toLowerCase();
+	chanspNoHTML = chanspNoHTML.replace(/\>/g, '');
 	
 	let user, userlist = document.getElementById('ul_' + chanspNoHTML);
 	
 	userlist.innerHTML = '';
 	
-	uls[ chan ] = [];
-	uls_no_mode[ chan ] = [];
+	uls[ chanspNoHTML ] = [];
+	uls_no_mode[ chanspNoHTML ] = [];
 	
 	nicksSorted.forEach(function(item, index) {
 		
@@ -2005,402 +2010,407 @@ function userlist(chan, nicknames) {
 				}
 				*/
 				
-				document.getElementsByClassName('nlnick_pm')[0].onclick = function() {
+				if (isOwner === -1 || isAdmin === -1 || isOp === -1 || isHop === -1) {
 					
-					query(nick, false);
-					
-					n.style.backgroundColor = 'transparent';
-					
-					nickoptions.remove();
-				}
-					
-				document.getElementsByClassName('nlnick_whois')[0].onclick = function() {
-					
-					doSend('whois ' + nick + ' ' + nick);
-					
-					n.style.backgroundColor = 'transparent';
-					
-					nickoptions.remove();
-				}
-					
-				document.getElementsByClassName('nlnick_op')[0].onclick = function() {
-					
-					doSend('mode ' + activeChannel + ' +o ' + nick);
-					
-					n.style.backgroundColor = 'transparent';
-					
-					nickoptions.remove();
-				}
-				
-				document.getElementsByClassName('nlnick_unop')[0].onclick = function() {
-					
-					doSend('mode ' + activeChannel + ' -o ' + nick);
-					
-					n.style.backgroundColor = 'transparent';
-					
-					nickoptions.remove();
-				}
-					
-				document.getElementsByClassName('nlnick_hop')[0].onclick = function() {
-					
-					doSend('mode ' + activeChannel + ' +h ' + nick);
-					
-					n.style.backgroundColor = 'transparent';
-					
-					nickoptions.remove();
-				}
-				
-				document.getElementsByClassName('nlnick_unhop')[0].onclick = function() {
-					
-					doSend('mode ' + activeChannel + ' -h ' + nick);
-					
-					n.style.backgroundColor = 'transparent';
-					
-					nickoptions.remove();
-				}
-					
-				document.getElementsByClassName('nlnick_voice')[0].onclick = function() {
-					
-					doSend('mode ' + activeChannel + ' +v ' + nick);
-					
-					n.style.backgroundColor = 'transparent';
-					
-					nickoptions.remove();
-				}
-				
-				document.getElementsByClassName('nlnick_unvoice')[0].onclick = function() {
-					
-					doSend('mode ' + activeChannel + ' -v ' + nick);
-					
-					n.style.backgroundColor = 'transparent';
-					
-					nickoptions.remove();
-				}
-					
-				document.getElementsByClassName('nlnick_kick')[0].onclick = function() {
-					
-					let kick_reason = document.createElement('div');
-					
-					kick_reason.id = 'kick_window';
-					
-					kick_reason.innerHTML = '<i id="close_ban_opts" class="fa fa-times" aria-hidden="true"></i><input id="reason" type="text" placeholder="Enter a reason" /><input id="kick" type="button" value="Kick" />';
-					
-					document.getElementById('chat').appendChild(kick_reason);
-					
-					document.getElementById('close_ban_opts').onclick = function() {
+					document.getElementsByClassName('nlnick_pm')[0].onclick = function() {
 						
-						document.getElementById('kick_window').remove();
+						query(nick, false);
+						
+						n.style.backgroundColor = 'transparent';
+						
+						nickoptions.remove();
 					}
-					
-					document.getElementById('kick').onclick = function() {
 						
-						let r = document.getElementById('reason').value;
+					document.getElementsByClassName('nlnick_whois')[0].onclick = function() {
 						
-						doSend('kick ' + activeChannel + ' ' + nick + ' ' + r);
+						doSend('whois ' + nick + ' ' + nick);
 						
-						document.getElementById('kick_window').remove();
-					}
-					
-					n.style.backgroundColor = 'transparent';
-					
-					nickoptions.remove();
-				}
-					
-				document.getElementsByClassName('nlnick_ban')[0].onclick = function() {
-					
-					let ban_opts = document.createElement('div');
-					
-					ban_opts.id = 'ban_opts';
-					
-					ban_opts.innerHTML = ' \
-						<i id="close_ban_opts" class="fa fa-times" aria-hidden="true"></i> \
-						<p> \
-							To ban <span id="ban_opts_nick">' + nick + '</span> \
-						</p> \
-						<p> \
-							<input id="ban_host" type="checkbox" name="bantype" value="h" checked /> \
-							<label for="ban_host">Host</label> \
-						</p> \
-						<p> \
-							<input id="ban_nick" type="checkbox" name="bantype" value="n" /> \
-							<label for="ban_nick">Nick</label> \
-						</p> \
-						<p> \
-							<input id="ban_username" type="checkbox" name="bantype" value="u" /> \
-							<label for="ban_username">Username</label> \
-						</p> \
-						<p> \
-							<input id="ban_realname" type="checkbox" name="bantype" value="r" /> \
-							<label for="ban_realname">Realname</label> \
-						</p> \
-						<p> \
-							<input id="submit_ban" type="button" value="Ban" /> \
-						</p> \
-					';
-					
-					document.getElementById('chat').appendChild(ban_opts);
-					
-					document.getElementById('close_ban_opts').onclick = function() {
+						n.style.backgroundColor = 'transparent';
 						
-						document.getElementById('ban_opts').remove();
-					}
-					
-					n.style.backgroundColor = 'transparent';
-					
-					nickoptions.remove();
-					
-					document.getElementById('submit_ban').onclick = function() {
-						
-						let bantype = '';
-						
-						if (document.getElementById('ban_host').checked === true) {
-							bantype += 'h';
-						}
-						
-						if (document.getElementById('ban_nick').checked === true) {
-							bantype += 'n';
-						}
-						
-						if (document.getElementById('ban_username').checked === true) {
-							bantype += 'u';
-						}
-						
-						if (document.getElementById('ban_realname').checked === true) {
-							bantype += 'r';
-						}
-						
-						let nick_opts = document.getElementById('ban_opts_nick').innerText;
-						
-						ban = [ activeChannel, nick_opts, bantype, 'ban' ];
-						
-						doSend('who ' + nick_opts);
-						
-						document.getElementById('ban_opts').remove();
+						nickoptions.remove();
 					}
 				}
-				
-				document.getElementsByClassName('nlnick_kb')[0].onclick = function() {
+				else {					
 					
-					let ban_opts = document.createElement('div');
-					
-					ban_opts.id = 'ban_opts';
-					
-					ban_opts.innerHTML = ' \
-						<i id="close_ban_opts" class="fa fa-times" aria-hidden="true"></i> \
-						<p> \
-							To kickban <span id="ban_opts_nick">' + nick + '</span> \
-						</p> \
-						<p> \
-							<input id="ban_host" type="checkbox" name="bantype" value="h" checked /> \
-							<label for="ban_host">Host</label> \
-						</p> \
-						<p> \
-							<input id="ban_nick" type="checkbox" name="bantype" value="n" /> \
-							<label for="ban_nick">Nick</label> \
-						</p> \
-						<p> \
-							<input id="ban_username" type="checkbox" name="bantype" value="u" /> \
-							<label for="ban_username">Username</label> \
-						</p> \
-						<p> \
-							<input id="ban_realname" type="checkbox" name="bantype" value="r" /> \
-							<label for="ban_realname">Realname</label> \
-						</p> \
-						<p> \
-							<input id="reason" type="text" placeholder="Enter a reason" /> \
-							<input id="submit_ban" type="button" value="Ban" /> \
-						</p> \
-					';
-					
-					document.getElementById('chat').appendChild(ban_opts);
-					
-					document.getElementById('close_ban_opts').onclick = function() {
+					document.getElementsByClassName('nlnick_op')[0].onclick = function() {
 						
-						document.getElementById('ban_opts').remove();
+						doSend('mode ' + activeChannel + ' +o ' + nick);
+						
+						n.style.backgroundColor = 'transparent';
+						
+						nickoptions.remove();
 					}
 					
-					n.style.backgroundColor = 'transparent';
-					
-					nickoptions.remove();
-					
-					document.getElementById('submit_ban').onclick = function() {
+					document.getElementsByClassName('nlnick_unop')[0].onclick = function() {
 						
-						let bantype = '';
+						doSend('mode ' + activeChannel + ' -o ' + nick);
 						
-						if (document.getElementById('ban_host').checked === true) {
-							bantype += 'h';
-						}
+						n.style.backgroundColor = 'transparent';
 						
-						if (document.getElementById('ban_nick').checked === true) {
-							bantype += 'n';
-						}
-						
-						if (document.getElementById('ban_username').checked === true) {
-							bantype += 'u';
-						}
-						
-						if (document.getElementById('ban_realname').checked === true) {
-							bantype += 'r';
-						}
-						
-						let nick_opts = document.getElementById('ban_opts_nick').innerText;
-						
-						let reason = document.getElementById('reason').value;
-						
-						ban = [ activeChannel, nick_opts, bantype, 'kickban', reason ];
-						
-						doSend('who ' + nick_opts);
-						
-						document.getElementById('ban_opts').remove();
+						nickoptions.remove();
 					}
-				}
-				
-				document.getElementsByClassName('nlnick_bk')[0].onclick = function() {
-					
-					let ban_opts = document.createElement('div');
-					
-					ban_opts.id = 'ban_opts';
-					
-					ban_opts.innerHTML = ' \
-						<i id="close_ban_opts" class="fa fa-times" aria-hidden="true"></i> \
-						<p> \
-							To ban <span id="ban_opts_nick">' + nick + '</span> \
-						</p> \
-						<p> \
-							<input id="ban_host" type="checkbox" name="bantype" value="h" checked /> \
-							<label for="ban_host">Host</label> \
-						</p> \
-						<p> \
-							<input id="ban_nick" type="checkbox" name="bantype" value="n" /> \
-							<label for="ban_nick">Nick</label> \
-						</p> \
-						<p> \
-							<input id="ban_username" type="checkbox" name="bantype" value="u" /> \
-							<label for="ban_username">Username</label> \
-						</p> \
-						<p> \
-							<input id="ban_realname" type="checkbox" name="bantype" value="r" /> \
-							<label for="ban_realname">Realname</label> \
-						</p> \
-						<p> \
-							<input id="reason" type="text" placeholder="Enter a reason" /> \
-							<input id="submit_ban" type="button" value="Ban" /> \
-						</p> \
-					';
-					
-					document.getElementById('chat').appendChild(ban_opts);
-					
-					document.getElementById('close_ban_opts').onclick = function() {
 						
-						document.getElementById('ban_opts').remove();
+					document.getElementsByClassName('nlnick_hop')[0].onclick = function() {
+						
+						doSend('mode ' + activeChannel + ' +h ' + nick);
+						
+						n.style.backgroundColor = 'transparent';
+						
+						nickoptions.remove();
 					}
 					
-					n.style.backgroundColor = 'transparent';
-					
-					nickoptions.remove();
-					
-					document.getElementById('submit_ban').onclick = function() {
+					document.getElementsByClassName('nlnick_unhop')[0].onclick = function() {
 						
-						let bantype = '';
+						doSend('mode ' + activeChannel + ' -h ' + nick);
 						
-						if (document.getElementById('ban_host').checked === true) {
-							bantype += 'h';
-						}
+						n.style.backgroundColor = 'transparent';
 						
-						if (document.getElementById('ban_nick').checked === true) {
-							bantype += 'n';
-						}
-						
-						if (document.getElementById('ban_username').checked === true) {
-							bantype += 'u';
-						}
-						
-						if (document.getElementById('ban_realname').checked === true) {
-							bantype += 'r';
-						}
-						
-						let nick_opts = document.getElementById('ban_opts_nick').innerText;
-						
-						let reason = document.getElementById('reason').value;
-						
-						ban = [ activeChannel, nick_opts, bantype, 'bankick', reason ];
-						
-						doSend('who ' + nick_opts);
-						
-						document.getElementById('ban_opts').remove();
+						nickoptions.remove();
 					}
-				}
-				
-				document.getElementsByClassName('nlnick_except')[0].onclick = function() {
-					
-					let ban_opts = document.createElement('div');
-					
-					ban_opts.id = 'ban_opts';
-					
-					ban_opts.innerHTML = ' \
-						<i id="close_ban_opts" class="fa fa-times" aria-hidden="true"></i> \
-						<p> \
-							To ban <span id="ban_opts_nick">' + nick + '</span> \
-						</p> \
-						<p> \
-							<input id="ban_host" type="checkbox" name="bantype" value="h" checked /> \
-							<label for="ban_host">Host</label> \
-						</p> \
-						<p> \
-							<input id="ban_nick" type="checkbox" name="bantype" value="n" /> \
-							<label for="ban_nick">Nick</label> \
-						</p> \
-						<p> \
-							<input id="ban_username" type="checkbox" name="bantype" value="u" /> \
-							<label for="ban_username">Username</label> \
-						</p> \
-						<p> \
-							<input id="ban_realname" type="checkbox" name="bantype" value="r" /> \
-							<label for="ban_realname">Realname</label> \
-						</p> \
-						<p> \
-							<input id="submit_ban" type="button" value="Except" /> \
-						</p> \
-					';
-					
-					document.getElementById('chat').appendChild(ban_opts);
-					
-					document.getElementById('close_ban_opts').onclick = function() {
 						
-						document.getElementById('ban_opts').remove();
+					document.getElementsByClassName('nlnick_voice')[0].onclick = function() {
+						
+						doSend('mode ' + activeChannel + ' +v ' + nick);
+						
+						n.style.backgroundColor = 'transparent';
+						
+						nickoptions.remove();
 					}
 					
-					n.style.backgroundColor = 'transparent';
+					document.getElementsByClassName('nlnick_unvoice')[0].onclick = function() {
+						
+						doSend('mode ' + activeChannel + ' -v ' + nick);
+						
+						n.style.backgroundColor = 'transparent';
+						
+						nickoptions.remove();
+					}
+						
+					document.getElementsByClassName('nlnick_kick')[0].onclick = function() {
+						
+						let kick_reason = document.createElement('div');
+						
+						kick_reason.id = 'kick_window';
+						
+						kick_reason.innerHTML = '<i id="close_ban_opts" class="fa fa-times" aria-hidden="true"></i><input id="reason" type="text" placeholder="Enter a reason" /><input id="kick" type="button" value="Kick" />';
+						
+						document.getElementById('chat').appendChild(kick_reason);
+						
+						document.getElementById('close_ban_opts').onclick = function() {
+							
+							document.getElementById('kick_window').remove();
+						}
+						
+						document.getElementById('kick').onclick = function() {
+							
+							let r = document.getElementById('reason').value;
+							
+							doSend('kick ' + activeChannel + ' ' + nick + ' ' + r);
+							
+							document.getElementById('kick_window').remove();
+						}
+						
+						n.style.backgroundColor = 'transparent';
+						
+						nickoptions.remove();
+					}
+						
+					document.getElementsByClassName('nlnick_ban')[0].onclick = function() {
+						
+						let ban_opts = document.createElement('div');
+						
+						ban_opts.id = 'ban_opts';
+						
+						ban_opts.innerHTML = ' \
+							<i id="close_ban_opts" class="fa fa-times" aria-hidden="true"></i> \
+							<p> \
+								To ban <span id="ban_opts_nick">' + nick + '</span> \
+							</p> \
+							<p> \
+								<input id="ban_host" type="checkbox" name="bantype" value="h" checked /> \
+								<label for="ban_host">Host</label> \
+							</p> \
+							<p> \
+								<input id="ban_nick" type="checkbox" name="bantype" value="n" /> \
+								<label for="ban_nick">Nick</label> \
+							</p> \
+							<p> \
+								<input id="ban_username" type="checkbox" name="bantype" value="u" /> \
+								<label for="ban_username">Username</label> \
+							</p> \
+							<p> \
+								<input id="ban_realname" type="checkbox" name="bantype" value="r" /> \
+								<label for="ban_realname">Realname</label> \
+							</p> \
+							<p> \
+								<input id="submit_ban" type="button" value="Ban" /> \
+							</p> \
+						';
+						
+						document.getElementById('chat').appendChild(ban_opts);
+						
+						document.getElementById('close_ban_opts').onclick = function() {
+							
+							document.getElementById('ban_opts').remove();
+						}
+						
+						n.style.backgroundColor = 'transparent';
+						
+						nickoptions.remove();
+						
+						document.getElementById('submit_ban').onclick = function() {
+							
+							let bantype = '';
+							
+							if (document.getElementById('ban_host').checked === true) {
+								bantype += 'h';
+							}
+							
+							if (document.getElementById('ban_nick').checked === true) {
+								bantype += 'n';
+							}
+							
+							if (document.getElementById('ban_username').checked === true) {
+								bantype += 'u';
+							}
+							
+							if (document.getElementById('ban_realname').checked === true) {
+								bantype += 'r';
+							}
+							
+							let nick_opts = document.getElementById('ban_opts_nick').innerText;
+							
+							ban = [ activeChannel, nick_opts, bantype, 'ban' ];
+							
+							doSend('who ' + nick_opts);
+							
+							document.getElementById('ban_opts').remove();
+						}
+					}
 					
-					nickoptions.remove();
+					document.getElementsByClassName('nlnick_kb')[0].onclick = function() {
+						
+						let ban_opts = document.createElement('div');
+						
+						ban_opts.id = 'ban_opts';
+						
+						ban_opts.innerHTML = ' \
+							<i id="close_ban_opts" class="fa fa-times" aria-hidden="true"></i> \
+							<p> \
+								To kickban <span id="ban_opts_nick">' + nick + '</span> \
+							</p> \
+							<p> \
+								<input id="ban_host" type="checkbox" name="bantype" value="h" checked /> \
+								<label for="ban_host">Host</label> \
+							</p> \
+							<p> \
+								<input id="ban_nick" type="checkbox" name="bantype" value="n" /> \
+								<label for="ban_nick">Nick</label> \
+							</p> \
+							<p> \
+								<input id="ban_username" type="checkbox" name="bantype" value="u" /> \
+								<label for="ban_username">Username</label> \
+							</p> \
+							<p> \
+								<input id="ban_realname" type="checkbox" name="bantype" value="r" /> \
+								<label for="ban_realname">Realname</label> \
+							</p> \
+							<p> \
+								<input id="reason" type="text" placeholder="Enter a reason" /> \
+								<input id="submit_ban" type="button" value="Ban" /> \
+							</p> \
+						';
+						
+						document.getElementById('chat').appendChild(ban_opts);
+						
+						document.getElementById('close_ban_opts').onclick = function() {
+							
+							document.getElementById('ban_opts').remove();
+						}
+						
+						n.style.backgroundColor = 'transparent';
+						
+						nickoptions.remove();
+						
+						document.getElementById('submit_ban').onclick = function() {
+							
+							let bantype = '';
+							
+							if (document.getElementById('ban_host').checked === true) {
+								bantype += 'h';
+							}
+							
+							if (document.getElementById('ban_nick').checked === true) {
+								bantype += 'n';
+							}
+							
+							if (document.getElementById('ban_username').checked === true) {
+								bantype += 'u';
+							}
+							
+							if (document.getElementById('ban_realname').checked === true) {
+								bantype += 'r';
+							}
+							
+							let nick_opts = document.getElementById('ban_opts_nick').innerText;
+							
+							let reason = document.getElementById('reason').value;
+							
+							ban = [ activeChannel, nick_opts, bantype, 'kickban', reason ];
+							
+							doSend('who ' + nick_opts);
+							
+							document.getElementById('ban_opts').remove();
+						}
+					}
 					
-					document.getElementById('submit_ban').onclick = function() {
+					document.getElementsByClassName('nlnick_bk')[0].onclick = function() {
 						
-						let bantype = '';
+						let ban_opts = document.createElement('div');
 						
-						if (document.getElementById('ban_host').checked === true) {
-							bantype += 'h';
+						ban_opts.id = 'ban_opts';
+						
+						ban_opts.innerHTML = ' \
+							<i id="close_ban_opts" class="fa fa-times" aria-hidden="true"></i> \
+							<p> \
+								To ban <span id="ban_opts_nick">' + nick + '</span> \
+							</p> \
+							<p> \
+								<input id="ban_host" type="checkbox" name="bantype" value="h" checked /> \
+								<label for="ban_host">Host</label> \
+							</p> \
+							<p> \
+								<input id="ban_nick" type="checkbox" name="bantype" value="n" /> \
+								<label for="ban_nick">Nick</label> \
+							</p> \
+							<p> \
+								<input id="ban_username" type="checkbox" name="bantype" value="u" /> \
+								<label for="ban_username">Username</label> \
+							</p> \
+							<p> \
+								<input id="ban_realname" type="checkbox" name="bantype" value="r" /> \
+								<label for="ban_realname">Realname</label> \
+							</p> \
+							<p> \
+								<input id="reason" type="text" placeholder="Enter a reason" /> \
+								<input id="submit_ban" type="button" value="Ban" /> \
+							</p> \
+						';
+						
+						document.getElementById('chat').appendChild(ban_opts);
+						
+						document.getElementById('close_ban_opts').onclick = function() {
+							
+							document.getElementById('ban_opts').remove();
 						}
 						
-						if (document.getElementById('ban_nick').checked === true) {
-							bantype += 'n';
+						n.style.backgroundColor = 'transparent';
+						
+						nickoptions.remove();
+						
+						document.getElementById('submit_ban').onclick = function() {
+							
+							let bantype = '';
+							
+							if (document.getElementById('ban_host').checked === true) {
+								bantype += 'h';
+							}
+							
+							if (document.getElementById('ban_nick').checked === true) {
+								bantype += 'n';
+							}
+							
+							if (document.getElementById('ban_username').checked === true) {
+								bantype += 'u';
+							}
+							
+							if (document.getElementById('ban_realname').checked === true) {
+								bantype += 'r';
+							}
+							
+							let nick_opts = document.getElementById('ban_opts_nick').innerText;
+							
+							let reason = document.getElementById('reason').value;
+							
+							ban = [ activeChannel, nick_opts, bantype, 'bankick', reason ];
+							
+							doSend('who ' + nick_opts);
+							
+							document.getElementById('ban_opts').remove();
+						}
+					}
+					
+					document.getElementsByClassName('nlnick_except')[0].onclick = function() {
+						
+						let ban_opts = document.createElement('div');
+						
+						ban_opts.id = 'ban_opts';
+						
+						ban_opts.innerHTML = ' \
+							<i id="close_ban_opts" class="fa fa-times" aria-hidden="true"></i> \
+							<p> \
+								To ban <span id="ban_opts_nick">' + nick + '</span> \
+							</p> \
+							<p> \
+								<input id="ban_host" type="checkbox" name="bantype" value="h" checked /> \
+								<label for="ban_host">Host</label> \
+							</p> \
+							<p> \
+								<input id="ban_nick" type="checkbox" name="bantype" value="n" /> \
+								<label for="ban_nick">Nick</label> \
+							</p> \
+							<p> \
+								<input id="ban_username" type="checkbox" name="bantype" value="u" /> \
+								<label for="ban_username">Username</label> \
+							</p> \
+							<p> \
+								<input id="ban_realname" type="checkbox" name="bantype" value="r" /> \
+								<label for="ban_realname">Realname</label> \
+							</p> \
+							<p> \
+								<input id="submit_ban" type="button" value="Except" /> \
+							</p> \
+						';
+						
+						document.getElementById('chat').appendChild(ban_opts);
+						
+						document.getElementById('close_ban_opts').onclick = function() {
+							
+							document.getElementById('ban_opts').remove();
 						}
 						
-						if (document.getElementById('ban_username').checked === true) {
-							bantype += 'u';
+						n.style.backgroundColor = 'transparent';
+						
+						nickoptions.remove();
+						
+						document.getElementById('submit_ban').onclick = function() {
+							
+							let bantype = '';
+							
+							if (document.getElementById('ban_host').checked === true) {
+								bantype += 'h';
+							}
+							
+							if (document.getElementById('ban_nick').checked === true) {
+								bantype += 'n';
+							}
+							
+							if (document.getElementById('ban_username').checked === true) {
+								bantype += 'u';
+							}
+							
+							if (document.getElementById('ban_realname').checked === true) {
+								bantype += 'r';
+							}
+							
+							let nick_opts = document.getElementById('ban_opts_nick').innerText;
+							
+							ban = [ activeChannel, nick_opts, bantype, 'except' ];
+							
+							doSend('who ' + nick_opts);
+							
+							document.getElementById('ban_opts').remove();
 						}
-						
-						if (document.getElementById('ban_realname').checked === true) {
-							bantype += 'r';
-						}
-						
-						let nick_opts = document.getElementById('ban_opts_nick').innerText;
-						
-						ban = [ activeChannel, nick_opts, bantype, 'except' ];
-						
-						doSend('who ' + nick_opts);
-						
-						document.getElementById('ban_opts').remove();
 					}
 				}
 			}
@@ -2687,7 +2697,7 @@ function exec(cmd) {
 		doSend('nick ' + cmd[1]);
 	}
 	else if (cmd[0] == 'whois' || cmd[0] == 'w') {
-		doSend('whois ' + cmd.splice(1));
+		doSend('whois ' + cmd.splice(1) + ' ' + cmd.splice(1));
 	}
 	else if (cmd[0] == 'part') {
 		if (typeof cmd[1] === 'undefined') {
