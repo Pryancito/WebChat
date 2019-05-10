@@ -1628,6 +1628,14 @@ function query(nick, msg) {
 		Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
 		query_window.className = 'window query wselected';
 		query_window.setAttribute('id', 'query_' + nick);
+		
+		let lo = readLog(irc_server_address, nick.toLowerCase(), 250);
+		
+		if (lo !== false) {
+			
+			query_window.innerHTML = lo;
+		}
+		
 		document.getElementById('msgs').appendChild(query_window);
 		
 		document.getElementById('userlist').className = 'displaynone';
@@ -1638,8 +1646,6 @@ function query(nick, msg) {
 		Array.from(document.getElementsByClassName('btn_selected')).forEach(function(item) { item.className = 'btn_window' });
 		query.setAttribute('class', 'btn_window btn_selected');
 		query.setAttribute('id', 'query_btn_' + nick);
-		
-		readLog(irc_server_address, nick.toLowerCase(), 250);
 		
 		querylist.appendChild(query);
 		
@@ -1688,7 +1694,7 @@ function query(nick, msg) {
 			let line_for_log = document.createElement('p');
 			line_for_log.innerHTML = '<strong class="'+ hlcolor +'">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg;
 			
-			log(irc_server_address, nick.toLowerCase(), line_for_log);
+			log(irc_server_address, nick.toLowerCase(), line_for_log.outerHTML);
 			
 			if (hlCheck) {
 				hl(nick, msg);
@@ -2467,7 +2473,7 @@ function onJoin(user, chan) {
 	
 	let chanspNoHTML = chansp.replace(/\</g, '').toLowerCase();
 	
-	chanspNoHTML = chanspNoHTML.replace(/\>/g, '').toLowerCase();
+	chanspNoHTML = chanspNoHTML.replace(/\>/g, '');
 	
 	let nick = getNickname(user);
 	let nickelem = document.createTextNode(nick);
