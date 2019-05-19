@@ -8,6 +8,8 @@ let urlify_check = true; // Or false to disable.
 
 // --------------------------- END OF CONFIG --------------------------- \\
 
+twemoji.parse(document.body);
+
 let nickname = getParameterByName('nickname');
 
 let nspasswd = JSON.parse(getCookie('nspasswd'));
@@ -1039,6 +1041,8 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		let message = urlify(style( mht[1] ), idmsg, url_summary, false );
 		
+		message = twemoji.parse(message);
+		
 		url_summary = true;
 		
 		elem.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">&lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + message.replace('', '') + '</span>';
@@ -1687,6 +1691,8 @@ function query(nick, msg) {
 			
 			msg = urlify( style( escapeHtml( msg ) ) );
 			
+			msg = twemoji.parse(msg);
+			
 			line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg;
 			
 			w.appendChild(line);
@@ -1767,6 +1773,7 @@ function msg(raw) {
 	
 	let nick = getNickname(raw);
 	let msg = urlify(style( mht[1] ), idmsg, true, false );
+	msg = twemoji.parse(msg);
 	let chan = raw.split(' ')[2].substring(1);
 	let hlCheck = false, hlcolor = '';
 	
@@ -1787,7 +1794,7 @@ function msg(raw) {
 	let line_for_log = document.createElement('p');
 	line_for_log.id = 'idmsg_' + idmsg;
 	line_for_log.className = 'line';
-	line_for_log.innerHTML = '<strong class="'+ hlcolor +'">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg.replace('', '');
+	line_for_log.innerHTML = '<strong class="'+ hlcolor +' nickname">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg.replace('', '');
 	
 	log(irc_server_address, '#' + chanlc, line_for_log.outerHTML);
 	
@@ -2538,6 +2545,19 @@ function writeToScreen(message) {
 	//msgs.scrollTop = msgs.scrollHeight;
 }
 
+function emojiToChar(input) {
+	
+	var imgs = input.getElementsByTagName('img');
+	
+	for (var i = imgs.length - 1; i >= 0; i--) {
+		var textNode = document.createElement('span');
+		textNode.innerHTML = imgs[0].alt;
+		imgs[0].parentNode.replaceChild(textNode, imgs[0]);
+	}
+	
+	return input;
+}
+
 function send() {
 	
 	let input = document.getElementById('text');
@@ -2599,12 +2619,21 @@ function send() {
 					activeWindow.scrollTop = activeWindow.scrollHeight;
 				}
 				
-				doSend('privmsg ' + recipient + ' :' + input.innerText);
+				let inputText = emojiToChar(input);
+				
+				doSend('privmsg ' + recipient + ' :' + inputText.innerText);
 			}
 			else {
+				
+				let first_line = document.createElement('div');
+				
+				first_line.innerHTML = input.childNodes[0].nodeValue;
+				
+				lines.unshift(first_line);
+				
 				lines.forEach(function(item, index) {
 					
-					let message = urlify(style( item.innerText ), idmsg, true, recipient );
+					let message = urlify(style( item.innerHTML ), idmsg, true, recipient );
 					
 					let line = document.createElement('p');
 					
@@ -2635,15 +2664,23 @@ function send() {
 						activeWindow.scrollTop = activeWindow.scrollHeight;
 					}
 					
-					doSend('privmsg ' + recipient + ' :' + input.innerText);
+					let inputText = emojiToChar(input);
+					
+					doSend('privmsg ' + recipient + ' :' + inputText.innerText);
 				});
 			}
 		}
 		else {
 			
+			let first_line = document.createElement('div');
+			
+			first_line.innerHTML = input.childNodes[0].nodeValue;
+			
+			lines.unshift(first_line);
+			
 			lines.forEach(function(item, index) {
 				
-				let message = urlify(style( item.innerText ), idmsg, true, recipient );
+				let message = urlify(style( item.innerHTML ), idmsg, true, recipient );
 				
 				let line = document.createElement('p');
 				line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
@@ -2673,7 +2710,9 @@ function send() {
 					activeWindow.scrollTop = activeWindow.scrollHeight;
 				}
 				
-				doSend('privmsg ' + recipient + ' :' + input.innerText);
+				let inputText = emojiToChar(input);
+				
+				doSend('privmsg ' + recipient + ' :' + inputText.innerText);
 			});
 		}
 		document.getElementById('text').style.height = '23px';
@@ -2893,9 +2932,11 @@ function urlify(text, idm, ajaxRequest, recipient) {
 	
 	let msg = text;
 	
-	let words = msg.split('&nbsp;');
+	msg = msg.replace('&nbsp;', ' ');
 	
-    let urlRegex = /((ftp|http|https):\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([\)\(-a-zA-Z0-9@:%_\+.~#?&//=,;]*)/gi;
+	let words = msg.split(' ');
+	
+    let urlRegex = /((ftp|http|https):\/\/)(?!twemoji\.maxcdn\.com)([-\w]*\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([\)\(-a-zA-Z0-9@:%_\+.~#?&\/=,;]*)/gi;
     
     let i = -1;
     
@@ -2903,7 +2944,7 @@ function urlify(text, idm, ajaxRequest, recipient) {
     
 		words[index] = item.replace(urlRegex, function(url) {
 			
-			let href = url.match(/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([\)\(-a-zA-Z0-9@:%_\+.~#?&//=,;]*)/gi)[0];
+			let href = url.match(/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([\)\(-a-zA-Z0-9@:%_\+.~#?&\/=,;]*)/gi)[0];
 			
 			let mailto = '';
 			

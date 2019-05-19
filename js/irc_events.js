@@ -731,6 +731,8 @@ let emojiCursor;
 			}
 			
 			windows.item(index + 1).scrollTop = windows.item(index + 1).scrollHeight;
+			
+			expandTextarea(textarea);
 		}
 		
 		if (e.className.indexOf('nlnick') === -1 && document.getElementsByClassName('nick_options').length !== 0) {
@@ -791,9 +793,13 @@ let emojiCursor;
 		
 		item.onclick = function() {
 			
-			let char = '&#' + parseInt(item.id.replace('-', ' '), 16);
+			let char = twemoji.parse(item.id);
 			
-			textarea.innerText = textarea.innerText.substring(0, emojiCursor) + decodeEntities(char) + textarea.innerText.substring(emojiCursor);
+			console.log(char.length)
+			
+			textarea.innerHTML = textarea.innerHTML.replace('&nbsp;', ' ');
+			
+			textarea.innerHTML = textarea.innerHTML.substring(0, emojiCursor + char.length) + char + textarea.innerHTML.substring(emojiCursor + char.length);
 			
 			bubble2.style.display = 'none';
 			
@@ -929,8 +935,6 @@ function emoji() {
                 
                 for (let i = 0; i < 180; i++) {
 					
-					let code = lines[i].split(';')[0].trim().replace(' ', '-');
-					
 					let char = lines[i].split('#')[1].split(' ')[1];
 					
 					if (i % 10 === 0 && i !== 0) {
@@ -938,7 +942,7 @@ function emoji() {
 						elem.innerHTML += '<br />';
 					}
 					
-					elem.innerHTML += '<span id="' + code + '" class="emoji">' + char + '</span>';
+					elem.innerHTML += '<span id="' + char + '" class="emoji">' + twemoji.parse(char) + '</span>';
 				}
             }
         }
