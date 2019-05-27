@@ -1039,7 +1039,9 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		let mht = ht( rawsp.splice(3).join(' ').substring(1) );
 		
-		let message = urlify(style( mht[1] ), idmsg, url_summary, false );
+		let message = urlify( style( mht[1] ), idmsg, url_summary, false );
+		
+		let msg_for_log = style( mht[1] );
 		
 		message = twemoji.parse(message);
 		
@@ -1051,7 +1053,9 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		elem_for_log.id = 'idmsg_' + idmsg;
 		
-		elem_for_log.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">' + currentDate() + ' - &lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + message.replace('', '') + '</span>';
+		elem_for_log.className = 'log';
+		
+		elem_for_log.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">' + currentDate() + ' - &lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + msg_for_log.replace('', '') + '</span>';
 		
 		log(irc_server_address, active, elem_for_log.outerHTML);
 		
@@ -1507,7 +1511,11 @@ function readLog(server, target, last) {
 		for(var i = start; i <= len; i++) {
 			
 			if (typeof r[target][i] !== 'undefined') {
-				output += r[target][i];
+				
+				let msg = urlify( r[target][i], '', false, false );
+				msg = twemoji.parse(msg);
+				
+				output += msg;
 			}
 		}
 		
@@ -1693,12 +1701,17 @@ function query(nick, msg) {
 			
 			msg = twemoji.parse(msg);
 			
+			let msg_for_log = style( escapeHtml( msg ) );
+			
 			line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg;
 			
 			w.appendChild(line);
 			
 			let line_for_log = document.createElement('p');
-			line_for_log.innerHTML = '<strong class="'+ hlcolor +'">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg;
+			
+			line_for_log.className = 'log';
+			
+			line_for_log.innerHTML = '<strong class="'+ hlcolor +'">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg_for_log;
 			
 			log(irc_server_address, nick.toLowerCase(), line_for_log.outerHTML);
 			
@@ -1774,6 +1787,9 @@ function msg(raw) {
 	let nick = getNickname(raw);
 	let msg = urlify(style( mht[1] ), idmsg, true, false );
 	msg = twemoji.parse(msg);
+	
+	let msg_for_log = style( mht[1] );
+	
 	let chan = raw.split(' ')[2].substring(1);
 	let hlCheck = false, hlcolor = '';
 	
@@ -1793,8 +1809,8 @@ function msg(raw) {
 	
 	let line_for_log = document.createElement('p');
 	line_for_log.id = 'idmsg_' + idmsg;
-	line_for_log.className = 'line';
-	line_for_log.innerHTML = '<strong class="'+ hlcolor +' nickname">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg.replace('', '');
+	line_for_log.className = 'line log';
+	line_for_log.innerHTML = '<strong class="'+ hlcolor +' nickname">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg_for_log.replace('', '');
 	
 	log(irc_server_address, '#' + chanlc, line_for_log.outerHTML);
 	
@@ -2590,6 +2606,8 @@ function send() {
 			
 				let message = urlify(style( text ), idmsg, true, recipient );
 				
+				let msg_for_log = style( text );
+				
 				let line = document.createElement('p');
 				
 				line.id = 'idmsg_' + idmsg;
@@ -2605,10 +2623,10 @@ function send() {
 				
 				line_for_log.id = 'idmsg_' + idmsg;
 				
-				line_for_log.className = 'line';
+				line_for_log.className = 'line log';
 				
 				line_for_log.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
-				line_for_log.innerHTML += message;
+				line_for_log.innerHTML += msg_for_log;
 				
 				log(irc_server_address, recipient, line_for_log.outerHTML);
 				
@@ -2635,6 +2653,8 @@ function send() {
 					
 					let message = urlify(style( item.innerHTML ), idmsg, true, recipient );
 					
+					let msg_for_log = style( text );
+					
 					let line = document.createElement('p');
 					
 					line.id = 'idmsg_' + idmsg;
@@ -2650,10 +2670,10 @@ function send() {
 					
 					line_for_log.id = 'idmsg_' + idmsg;
 					
-					line_for_log.className = 'line';
+					line_for_log.className = 'line log';
 					
 					line_for_log.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
-					line_for_log.innerHTML += message;
+					line_for_log.innerHTML += msg_for_log;
 					
 					log(irc_server_address, recipient, line_for_log.outerHTML);
 					
@@ -2682,6 +2702,8 @@ function send() {
 				
 				let message = urlify(style( item.innerHTML ), idmsg, true, recipient );
 				
+				let msg_for_log = style( text );
+				
 				let line = document.createElement('p');
 				line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 				line.innerHTML += message;
@@ -2696,10 +2718,10 @@ function send() {
 				
 				line_for_log.id = 'idmsg_' + idmsg;
 				
-				line_for_log.className = 'line';
+				line_for_log.className = 'line log';
 				
 				line_for_log.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
-				line_for_log.innerHTML += message;
+				line_for_log.innerHTML += msg_for_log;
 				
 				log(irc_server_address, recipient, line_for_log.outerHTML);
 				
@@ -2936,7 +2958,7 @@ function urlify(text, idm, ajaxRequest, recipient) {
 	
 	let words = msg.split(' ');
 	
-    let urlRegex = /((ftp|http|https):\/\/)(?!twemoji\.maxcdn\.com)([-\w]*\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([\)\(-a-zA-Z0-9@:%_\+.~#?&\/=,;]*)/gi;
+    let urlRegex = /((ftp|http|https):\/\/|www\.)(?!twemoji\.maxcdn\.com)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([\)\(-a-zA-Z0-9@:%_\+.~#?&\/=,;]*)/gi;
     
     let i = -1;
     
