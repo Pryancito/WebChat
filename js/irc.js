@@ -1051,8 +1051,6 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		let elem_for_log = document.createElement('p');
 		
-		elem_for_log.id = 'idmsg_' + idmsg;
-		
 		elem_for_log.className = 'log';
 		
 		elem_for_log.innerHTML = '<span style="color:#CE6F22;" class="nocolorcopy">' + currentDate() + ' - &lt;' + currentTime() + '&gt; -' + nicksend.textContent + '- ' + msg_for_log.replace('', '') + '</span>';
@@ -1808,7 +1806,6 @@ function msg(raw) {
 	line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg.replace('', '');
 	
 	let line_for_log = document.createElement('p');
-	line_for_log.id = 'idmsg_' + idmsg;
 	line_for_log.className = 'line log';
 	line_for_log.innerHTML = '<strong class="'+ hlcolor +' nickname">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg_for_log.replace('', '');
 	
@@ -2621,8 +2618,6 @@ function send() {
 				
 				let line_for_log = document.createElement('p');
 				
-				line_for_log.id = 'idmsg_' + idmsg;
-				
 				line_for_log.className = 'line log';
 				
 				line_for_log.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
@@ -2667,8 +2662,6 @@ function send() {
 					w.appendChild(line);
 					
 					let line_for_log = document.createElement('p');
-					
-					line_for_log.id = 'idmsg_' + idmsg;
 					
 					line_for_log.className = 'line log';
 					
@@ -2715,8 +2708,6 @@ function send() {
 				w.appendChild(line);
 				
 				let line_for_log = document.createElement('p');
-				
-				line_for_log.id = 'idmsg_' + idmsg;
 				
 				line_for_log.className = 'line log';
 				
