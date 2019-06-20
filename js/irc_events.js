@@ -12,7 +12,7 @@ let emojiCursor;
 	
 	let textarea = document.getElementById('text');
 	
-	emoji();
+	//emoji();
 	
 	ignores_list();
 	
@@ -198,6 +198,7 @@ let emojiCursor;
 		expandTextarea(this);
 	}
 	
+	/*
 	textarea.onkeyup = function() {
 		
 		emojiCursor = getCaretCharacterOffsetWithin(this);
@@ -207,6 +208,12 @@ let emojiCursor;
 		
 		emojiCursor = getCaretCharacterOffsetWithin(this);
 	}
+	
+	textarea.oninput = function() {
+		
+		emojiCursor = getCaretCharacterOffsetWithin(this);
+	}
+	*/
 	
 	textarea.onkeydown = function(e) {
 		
@@ -501,7 +508,7 @@ let emojiCursor;
 					elem.innerHTML = '';
 				}
 			}
-			
+		
 			irl++;
 			
 			if (irl == rememberLines.length) {
@@ -780,6 +787,7 @@ let emojiCursor;
 	
 	let btn_emoji = document.getElementById('emoji');
 	
+	/*
 	btn_emoji.onclick = function(e) {
 		
 		e.stopPropagation();
@@ -788,6 +796,7 @@ let emojiCursor;
 		
 		Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
 	}
+	*/
 	
 	Array.from(document.getElementsByClassName('emoji')).forEach(function(item) {
 		
@@ -795,11 +804,9 @@ let emojiCursor;
 			
 			let char = twemoji.parse(item.id);
 			
-			console.log(char.length)
-			
 			textarea.innerHTML = textarea.innerHTML.replace('&nbsp;', ' ');
 			
-			textarea.innerHTML = textarea.innerHTML.substring(0, emojiCursor + char.length) + char + textarea.innerHTML.substring(emojiCursor + char.length);
+			textarea.innerHTML = textarea.innerHTML.substring(0, emojiCursor) + char + textarea.innerHTML.substring(emojiCursor);
 			
 			bubble2.style.display = 'none';
 			

@@ -2612,7 +2612,10 @@ function send() {
 				line.className = 'line';
 				
 				line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
-				line.innerHTML += message;
+				
+				var mht = ht( message );
+				
+				line.innerHTML += mht[1];
 				
 				w.appendChild(line);
 				
@@ -2657,7 +2660,10 @@ function send() {
 					line.className = 'line';
 					
 					line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
-					line.innerHTML += message;
+					
+					var mht = ht( message );
+					
+					line.innerHTML += mht[1];
 					
 					w.appendChild(line);
 					
@@ -2699,7 +2705,10 @@ function send() {
 				
 				let line = document.createElement('p');
 				line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
-				line.innerHTML += message;
+				
+				var mht = ht( message );
+				
+				line.innerHTML += mht[1];
 				
 				line.id = 'idmsg_' + idmsg;
 				
@@ -2728,6 +2737,15 @@ function send() {
 				doSend('privmsg ' + recipient + ' :' + inputText.innerText);
 			});
 		}
+		
+		mht[0].forEach(function(item) {
+			
+			document.getElementById(item).ondblclick = function() {
+								
+				doSend( 'join #' + this.id.split('_')[1] );
+			}
+		});
+		
 		document.getElementById('text').style.height = '23px';
 	}
 	
