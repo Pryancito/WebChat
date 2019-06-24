@@ -103,6 +103,7 @@ a, a:visited, a:active {
 }
 .emoji {
 	font-size:18px;
+	width:25px;
 }
 #cqlist {
 	float:left;
