@@ -1540,6 +1540,7 @@ function join(chan) {
 	
 	if (lo !== false) {
 		channel_window.innerHTML = lo;
+		scrollBottom(w);
 	}
 	
 	document.getElementById('msgs').appendChild(channel_window);
@@ -1644,6 +1645,7 @@ function query(nick, msg) {
 		if (lo !== false) {
 			
 			query_window.innerHTML = lo;
+			scrollBottom(w);
 		}
 		
 		document.getElementById('msgs').appendChild(query_window);
