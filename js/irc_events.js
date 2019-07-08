@@ -727,6 +727,8 @@ let emojiCursor;
 					
 					document.getElementById('topic').innerHTML = '';
 					document.getElementById('userlist').className = 'displaynone';
+					
+					e.className = 'btn_window btn_selected';
 				}
 				
 				textarea.focus();

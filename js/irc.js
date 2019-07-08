@@ -1539,7 +1539,11 @@ function join(chan) {
 	let lo = readLog(irc_server_address, '#' + chanspNoHTML, 250);
 	
 	if (lo !== false) {
+		
 		channel_window.innerHTML = lo;
+		
+		let w = document.getElementById('chan_' + chanspNoHTML);
+		
 		scrollBottom(w);
 	}
 	
@@ -1633,7 +1637,11 @@ function query(nick, msg) {
 	
 	let querylist = document.getElementById('querylist');
 	
-	if (document.getElementById('query_' + nick) === null) {
+	let w = document.getElementById('query_' + nick);
+	
+	let hlCheck = false, hlcolor = '';
+	
+	if (w === null) {
 		
 		let query_window = document.createElement('div');
 		Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
@@ -1645,6 +1653,7 @@ function query(nick, msg) {
 		if (lo !== false) {
 			
 			query_window.innerHTML = lo;
+			
 			scrollBottom(w);
 		}
 		
@@ -1687,14 +1696,11 @@ function query(nick, msg) {
 				chanlist.appendChild(query);
 			}
 			
-			let hlCheck = false, hlcolor = '';
-			
-			if (msg.split(' ').indexOf(me) !== -1) { // HL
+			if (msg.toLowerCase().indexOf(me.toLowerCase()) !== -1) { // HL
 				hlCheck = true;
 				hlcolor = 'hlcolor';
 			}
 			
-			let w = document.getElementById('query_' + nick);
 			let line = document.createElement('p');
 			
 			msg = urlify( style( escapeHtml( msg ) ) );
@@ -1719,6 +1725,25 @@ function query(nick, msg) {
 				hl(nick, msg);
 			}
 		}
+		
+		let elem = document.getElementById('query_btn_' + nick);
+		
+		if (hlCheck === false) {
+			
+			if (elem.className.indexOf('red') === -1 && elem.className.indexOf('btn_selected') === -1) {
+				
+				elem.className += ' red';
+			}
+		}
+		else {
+			
+			if (elem.className.indexOf('green') === -1 && elem.className.indexOf('btn_selected') === -1) {
+				
+				elem.className += ' green';
+			}
+		}
+		
+		scrollBottom(w);
 	}
 	
 	document.getElementById('cn_' + nick).onclick = function() {
