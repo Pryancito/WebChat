@@ -674,6 +674,12 @@ function process(rawData) {
 		onKick(rawsp);
 	}
 	
+	// :roubaix.fr.epiknet.org 474 Kitu #politique :Cannot join channel (+b)
+	
+	else if (rawsp[1] == '474') {
+		writeToScreen('<span class="nocolorcopy">' + rawsp[3] + ' : ' + rawp[2] + '</span>');
+	}
+	
 	else { // RAWDATA
 		url_summary = false;
 		writeToScreen('<span class="nocolorcopy">' + urlify(style( raw.split(':').splice(2).join(':') ), '', false, false) + '</span>');
