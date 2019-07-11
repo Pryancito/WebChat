@@ -1553,7 +1553,9 @@ function join(chan) {
 		scrollBottom(w);
 	}
 	
-	document.getElementById('msgs').appendChild(channel_window);
+	let first_query = document.getElementsByClassName('query')[0];
+	
+	document.getElementById('msgs').insertBefore(channel_window, first_query);
 	
 	Array.from(document.getElementsByClassName('ul')).forEach(function(item) { item.className = 'ul ul_hidden' });
 	
@@ -1653,6 +1655,8 @@ function query(nick, msg) {
 		Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
 		query_window.className = 'window query wselected';
 		query_window.setAttribute('id', 'query_' + nick);
+		
+		w = query_window;
 		
 		let lo = readLog(irc_server_address, nick.toLowerCase(), 250);
 		
