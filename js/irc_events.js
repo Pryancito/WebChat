@@ -646,6 +646,7 @@ let emojiCursor;
 					item.className = 'btn_window';
 				}
 			});
+			
 			e.className += ' btn_selected';
 			
 			let windows = document.getElementsByClassName('window');
