@@ -11,7 +11,7 @@ let urlify_check = true; // Or false to disable.
 twemoji.parse(document.body);
 
 let nickname = getParameterByName('nickname');
-
+	
 let nspasswd = JSON.parse(getCookie('nspasswd'));
 
 let chans_from_url = getParameterByName('channels');
@@ -211,7 +211,7 @@ function autojoins() {
 		}
 	}
 }
-
+/*
 function ignores_list() {
 	
 	if (ignores !== '') {
@@ -246,6 +246,7 @@ function ignores_list() {
 		});
 	}
 }
+*/
 
 function ignores_check(mask, type) {
 	
@@ -683,16 +684,17 @@ function process(rawData) {
 	else { // RAWDATA
 		url_summary = false;
 		writeToScreen('<span class="nocolorcopy">' + urlify(style( raw.split(':').splice(2).join(':') ), '', false, false) + '</span>');
+		
+		console.log(raw);
 	}
-	
-	//console.log(raw);
 }
 
 function onKick(rawsp) {
 	
+	let chanstriped = rawsp[2].substring(1);
+	
 	if (rawsp[3] == me) {
 		
-		let chanstriped = rawsp[2].substring(1);
 		document.getElementById('chan_btn_' + chanstriped).remove();
 		document.getElementById('chan_' + chanstriped).remove();
 		document.getElementById('status').className += ' wselected';
@@ -705,7 +707,7 @@ function onKick(rawsp) {
 		let elem = document.createElement('p');
 		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + rawsp[3] + ' has been kicked on ' + rawsp[2] + ' (' + rawsp[4].substring(1) + ')';
 		
-		let w = document.getElementById('chan_' + rawsp[2].substring(1));
+		let w = document.getElementById('chan_' + chanstriped.toLowerCase());
 		
 		w.appendChild(elem);
 		

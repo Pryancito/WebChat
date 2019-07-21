@@ -12,9 +12,9 @@ let emojiCursor;
 	
 	let textarea = document.getElementById('text');
 	
-	//emoji();
+	emoji();
 	
-	ignores_list();
+	//ignores_list();
 	
 	let msgs = document.getElementById('msgs');
 	
@@ -197,23 +197,6 @@ let emojiCursor;
 		
 		expandTextarea(this);
 	}
-	
-	/*
-	textarea.onkeyup = function() {
-		
-		emojiCursor = getCaretCharacterOffsetWithin(this);
-	}
-	
-	textarea.onmouseup = function() {
-		
-		emojiCursor = getCaretCharacterOffsetWithin(this);
-	}
-	
-	textarea.oninput = function() {
-		
-		emojiCursor = getCaretCharacterOffsetWithin(this);
-	}
-	*/
 	
 	textarea.onkeydown = function(e) {
 		
@@ -646,7 +629,6 @@ let emojiCursor;
 					item.className = 'btn_window';
 				}
 			});
-			
 			e.className += ' btn_selected';
 			
 			let windows = document.getElementsByClassName('window');
@@ -728,8 +710,6 @@ let emojiCursor;
 					
 					document.getElementById('topic').innerHTML = '';
 					document.getElementById('userlist').className = 'displaynone';
-					
-					e.className = 'btn_window btn_selected';
 				}
 				
 				textarea.focus();
@@ -790,32 +770,57 @@ let emojiCursor;
 	
 	let btn_emoji = document.getElementById('emoji');
 	
-	/*
 	btn_emoji.onclick = function(e) {
 		
-		e.stopPropagation();
+		if (textarea.getElementsByTagName('img').length === 0) {
 		
-		bubble2.style.display = 'inline-block';
-		
-		Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
+			e.stopPropagation();
+			
+			bubble2.style.display = 'inline-block';
+			
+			Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
+		}
+		else {
+			alert('Seulement un emoji par message !');
+		}
 	}
-	*/
+	
+	textarea.oninput = function() {
+		
+		emojiCursor = getCaretCharacterOffsetWithin(this);
+	}
+	
+	textarea.onmouseup = function() {
+		
+		emojiCursor = getCaretCharacterOffsetWithin(this);
+	}
+	
+	textarea.onkeyup = function() {
+		
+		emojiCursor = getCaretCharacterOffsetWithin(this);
+	}
 	
 	Array.from(document.getElementsByClassName('emoji')).forEach(function(item) {
 		
-		item.onclick = function() {
+		if (item.parentNode.id !== 'emoji') {
 			
-			let char = twemoji.parse(item.id);
-			
-			textarea.innerHTML = textarea.innerHTML.replace('&nbsp;', ' ');
-			
-			textarea.innerHTML = textarea.innerHTML.substring(0, emojiCursor) + char + textarea.innerHTML.substring(emojiCursor);
-			
-			bubble2.style.display = 'none';
-			
-			textarea.focus();
-			
-			setEndOfContenteditable(textarea);
+			item.onclick = function() {
+				
+				if (textarea.getElementsByTagName('img').length === 0) {
+				
+					let char = twemoji.parse(item.id);
+					
+					textarea.innerHTML = textarea.innerHTML.replace('&nbsp;', ' ');
+					
+					textarea.innerHTML = textarea.innerHTML.substring(0, emojiCursor) + char + textarea.innerHTML.substring(emojiCursor);
+					
+					bubble2.style.display = 'none';
+					
+					setEndOfContenteditable(textarea);
+					
+					textarea.focus();
+				}
+			}
 		}
 	});
 	
@@ -1030,30 +1035,25 @@ function expandTextarea(obj) {
 	w.scrollTop = w.scrollHeight;
 }
 
-function getCaretPosition(editableDiv, tab) {
-	
-	let caretPos = 0, sel, range;
-	
-	if (document.getSelection) {
-		
-		sel = document.getSelection();
-		
-		if (sel.rangeCount) {
-			
-			range = sel.getRangeAt(0);
-			
-			let len = editableDiv.innerHTML.replace(/<br\s*[\/]?>/gi, '').length;
-			
-			if (tab === true) {
-				caretPos = [ range.startOffset + (len - range.startOffset), range.endOffset + (len - range.startOffset), range.commonAncestorContainer.parentNode ];
-			}
-			else {
-				
-				caretPos = [ range.startOffset, range.endOffset, range.commonAncestorContainer.parentNode, range.commonAncestorContainer ];
-			}
-		}
-	}
-	return caretPos;
+function getCaretPosition() {
+  if (window.getSelection && window.getSelection().getRangeAt) {
+    var range = window.getSelection().getRangeAt(0);
+    var selectedObj = window.getSelection();
+    var rangeCount = 0;
+    var childNodes = selectedObj.anchorNode.parentNode.childNodes;
+    for (var i = 0; i < childNodes.length; i++) {
+      if (childNodes[i] == selectedObj.anchorNode) {
+        break;
+      }
+      if (childNodes[i].outerHTML)
+        rangeCount += childNodes[i].outerHTML.length;
+      else if (childNodes[i].nodeType == 3) {
+        rangeCount += childNodes[i].textContent.length;
+      }
+    }
+    return range.startOffset + rangeCount;
+  }
+  return -1;
 }
 
 function getCaretCharacterOffsetWithin(element) {
@@ -1080,6 +1080,7 @@ function getCaretCharacterOffsetWithin(element) {
   return caretOffset;
 }
 
+/*
 function setCaretPos(pos) {
 	
 	let content = document.getElementById('text');
@@ -1096,6 +1097,19 @@ function setCaretPos(pos) {
 	}
 	
 	content.focus();
+}
+*/
+
+function setCaretPos(pos) {
+	
+	var el = document.getElementById("editable");
+	var range = document.createRange();
+	var sel = window.getSelection();
+	range.setStart(el.childNodes[0], 2);
+	range.collapse(true);
+	sel.removeAllRanges();
+	sel.addRange(range);
+	el.focus();
 }
 
 function nodeSelect(childNodes, pos) {
