@@ -606,6 +606,7 @@ function process(rawData) {
 	// <- :courbevoie2.fr.epiknet.org 330 KituPlus Courgette Courgette :is logged in as
 	// <- :courbevoie2.fr.epiknet.org 671 KituPlus Courgette :is using a Secure Connection
 	// whois :
+	
 	else if (rawsp[1] == '311' || rawsp[1] == '379' || rawsp[1] == '319' || rawsp[1] == '312' || rawsp[1] == '317' || rawsp[1] == '318' || rawsp[1] == '307' || rawsp[1] == '671') {
 		onWhois( rawsp[1], rawsp.splice(3).join(' ') );
 	}
@@ -1597,7 +1598,9 @@ function join(chan) {
 	chanlist.appendChild(channel);
 		
 	document.getElementById('cc_' + chanspNoHTML).onclick = function() {
-			
+		
+		Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
+		
 		doSend('part ' + chan);
 	
 	}
@@ -1654,8 +1657,8 @@ function query(nick, msg) {
 	if (w === null) {
 		
 		let query_window = document.createElement('div');
-		Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
-		query_window.className = 'window query wselected';
+		//Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
+		query_window.className = 'window query';
 		query_window.setAttribute('id', 'query_' + nick);
 		
 		w = query_window;

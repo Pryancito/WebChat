@@ -195,6 +195,8 @@ let emojiCursor;
 	
 	textarea.oninput = function() {
 		
+		emojiCursor = getCaretCharacterOffsetWithin(this);
+		
 		expandTextarea(this);
 	}
 	
@@ -594,13 +596,15 @@ let emojiCursor;
 		
 		bubble.style.display = 'none';
 		
-		bubble2.style.display = 'none';
-		
 		if (window.event) {
 			e = event.srcElement;           //assign the element clicked to e (IE 6-8)
 		}
 		else {
 			e = e.target;                   //assign the element clicked to e
+		}
+		
+		if (e.parentNode.parentNode.id !== 'bubble2') {
+			bubble2.style.display = 'none';
 		}
 
 		if (e.className && e.className.indexOf('btn_window') !== -1) {
@@ -708,6 +712,8 @@ let emojiCursor;
 					activeType = 'query';
 					activeQuery = target[1];
 					
+					document.getElementById(e.id).className = 'btn_window btn_selected';
+					
 					document.getElementById('topic').innerHTML = '';
 					document.getElementById('userlist').className = 'displaynone';
 				}
@@ -772,57 +778,50 @@ let emojiCursor;
 	
 	btn_emoji.onclick = function(e) {
 		
-		if (textarea.getElementsByTagName('img').length === 0) {
+		e.stopPropagation();
 		
-			e.stopPropagation();
-			
-			bubble2.style.display = 'inline-block';
-			
-			Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
-		}
-		else {
-			alert('Seulement un emoji par message !');
-		}
+		bubble2.style.display = 'inline-block';
+		
+		Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
 	}
 	
-	textarea.oninput = function() {
-		
-		emojiCursor = getCaretCharacterOffsetWithin(this);
+	var i = document.getElementById('bubble2');
+	var j = document.getElementById('text');
+
+	i.onmousedown = function (ev) { ev.preventDefault(); }
+	// ^ preventDefault() sur onmousedown appelé afin de ne pas perdre le focus lors du click
+	i.onclick = function (ev) {
+
+	if (Node.ELEMENT_NODE === ev.target.nodeType)
+	{
+	   if ('img' === ev.target.nodeName.toLowerCase())
+	   {
+		  var node = ev.target.cloneNode(false);
+		  //node.className = 'InlineBlock chatemoji';
+
+		  var s = window.getSelection();
+		  if ( 0 !== s.rangeCount )
+		  {
+			 var r0 = s.getRangeAt(0);
+			 if ( (r0.startContainer === j || 0 !== (j.compareDocumentPosition(r0.startContainer) & Node.DOCUMENT_POSITION_CONTAINED_BY)) &&
+				(r0.endContainer === j || 0 !== (j.compareDocumentPosition(r0.endContainer) & Node.DOCUMENT_POSITION_CONTAINED_BY)) )
+			 {
+				s.removeAllRanges();
+				//var node = twemoji.parse(
+				//   document.createTextNode(ev.target.alt), 
+				//      {className: 'InlineBlock topemoji'} );
+				r0.deleteContents();
+				r0.insertNode(node);
+				r0.collapse(false);
+				s.addRange(r0);
+				return;
+			 }
+		  }
+		  j.appendChild(node);
+
+	   }
 	}
-	
-	textarea.onmouseup = function() {
-		
-		emojiCursor = getCaretCharacterOffsetWithin(this);
-	}
-	
-	textarea.onkeyup = function() {
-		
-		emojiCursor = getCaretCharacterOffsetWithin(this);
-	}
-	
-	Array.from(document.getElementsByClassName('emoji')).forEach(function(item) {
-		
-		if (item.parentNode.id !== 'emoji') {
-			
-			item.onclick = function() {
-				
-				if (textarea.getElementsByTagName('img').length === 0) {
-				
-					let char = twemoji.parse(item.id);
-					
-					textarea.innerHTML = textarea.innerHTML.replace('&nbsp;', ' ');
-					
-					textarea.innerHTML = textarea.innerHTML.substring(0, emojiCursor) + char + textarea.innerHTML.substring(emojiCursor);
-					
-					bubble2.style.display = 'none';
-					
-					setEndOfContenteditable(textarea);
-					
-					textarea.focus();
-				}
-			}
-		}
-	});
+	};
 	
 	let btn_favorites_chans = document.getElementById('btn_favorites_chans');
 	
@@ -1102,7 +1101,7 @@ function setCaretPos(pos) {
 
 function setCaretPos(pos) {
 	
-	var el = document.getElementById("editable");
+	var el = document.getElementById("text");
 	var range = document.createRange();
 	var sel = window.getSelection();
 	range.setStart(el.childNodes[0], 2);
