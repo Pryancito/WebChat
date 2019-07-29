@@ -1657,7 +1657,6 @@ function query(nick, msg) {
 	if (w === null) {
 		
 		let query_window = document.createElement('div');
-		//Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
 		query_window.className = 'window query';
 		query_window.setAttribute('id', 'query_' + nick);
 		
@@ -1759,6 +1758,10 @@ function query(nick, msg) {
 		}
 		
 		scrollBottom(w);
+	}
+	else {
+		
+		Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
 	}
 	
 	document.getElementById('cn_' + nick).onclick = function() {

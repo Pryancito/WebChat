@@ -588,10 +588,6 @@ let emojiCursor;
 	
 	let bubble2 = document.getElementById('bubble2');
 	
-	bubble2.onclick = function(e) {
-		e.stopPropagation();
-	}
-	
 	document.body.onclick = function(e) {   //when the document body is clicked
 		
 		bubble.style.display = 'none';
@@ -785,42 +781,44 @@ let emojiCursor;
 		Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
 	}
 	
-	var i = document.getElementById('bubble2');
-	var j = document.getElementById('text');
-
-	i.onmousedown = function (ev) { ev.preventDefault(); }
-	// ^ preventDefault() sur onmousedown appelé afin de ne pas perdre le focus lors du click
-	i.onclick = function (ev) {
-
-	if (Node.ELEMENT_NODE === ev.target.nodeType)
-	{
-	   if ('img' === ev.target.nodeName.toLowerCase())
-	   {
-		  var node = ev.target.cloneNode(false);
-		  //node.className = 'InlineBlock chatemoji';
-
-		  var s = window.getSelection();
-		  if ( 0 !== s.rangeCount )
-		  {
-			 var r0 = s.getRangeAt(0);
-			 if ( (r0.startContainer === j || 0 !== (j.compareDocumentPosition(r0.startContainer) & Node.DOCUMENT_POSITION_CONTAINED_BY)) &&
-				(r0.endContainer === j || 0 !== (j.compareDocumentPosition(r0.endContainer) & Node.DOCUMENT_POSITION_CONTAINED_BY)) )
-			 {
-				s.removeAllRanges();
-				//var node = twemoji.parse(
-				//   document.createTextNode(ev.target.alt), 
-				//      {className: 'InlineBlock topemoji'} );
-				r0.deleteContents();
-				r0.insertNode(node);
-				r0.collapse(false);
-				s.addRange(r0);
-				return;
-			 }
-		  }
-		  j.appendChild(node);
-
-	   }
+	document.getElementById('send_options').onmousedown = function(e) {
+		
+		e.preventDefault();
 	}
+
+	bubble2.onmousedown = function (ev) { ev.preventDefault(); }
+	// ^ preventDefault() sur onmousedown appelé afin de ne pas perdre le focus lors du click
+	bubble2.onclick = function (ev) {
+
+		if (Node.ELEMENT_NODE === ev.target.nodeType)
+		{
+		   if ('img' === ev.target.nodeName.toLowerCase())
+		   {
+			  var node = ev.target.cloneNode(false);
+			  //node.className = 'InlineBlock chatemoji';
+
+			  var s = window.getSelection();
+			  if ( 0 !== s.rangeCount )
+			  {
+				 var r0 = s.getRangeAt(0);
+				 if ( (r0.startContainer === text || 0 !== (text.compareDocumentPosition(r0.startContainer) & Node.DOCUMENT_POSITION_CONTAINED_BY)) &&
+					(r0.endContainer === text || 0 !== (text.compareDocumentPosition(r0.endContainer) & Node.DOCUMENT_POSITION_CONTAINED_BY)) )
+				 {
+					s.removeAllRanges();
+					//var node = twemoji.parse(
+					//   document.createTextNode(ev.target.alt), 
+					//      {className: 'InlineBlock topemoji'} );
+					r0.deleteContents();
+					r0.insertNode(node);
+					r0.collapse(false);
+					s.addRange(r0);
+					return;
+				 }
+			  }
+			  
+			  text.appendChild(node);
+		   }
+		}
 	};
 	
 	let btn_favorites_chans = document.getElementById('btn_favorites_chans');
