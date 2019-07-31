@@ -706,7 +706,7 @@ function onKick(rawsp) {
 	else {
 		
 		let elem = document.createElement('p');
-		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + rawsp[3] + ' has been kicked on ' + rawsp[2] + ' (' + rawsp[4].substring(1) + ')';
+		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + rawsp[3] + ' has been kicked on ' + rawsp[2] + ' (' + rawsp.slice(4).substring(1) + ')';
 		
 		let w = document.getElementById('chan_' + chanstriped.toLowerCase());
 		
@@ -2081,7 +2081,7 @@ function userlist(chan, nicknames) {
 				}
 				*/
 				
-				if (isOwner === -1 || isAdmin === -1 || isOp === -1 || isHop === -1) {
+				if (isOwner === -1 && isAdmin === -1 && isOp === -1 && isHop === -1) {
 					
 					document.getElementsByClassName('nlnick_pm')[0].onclick = function() {
 						
@@ -2101,7 +2101,7 @@ function userlist(chan, nicknames) {
 						nickoptions.remove();
 					}
 				}
-				else {					
+				else {			
 					
 					document.getElementsByClassName('nlnick_op')[0].onclick = function() {
 						
