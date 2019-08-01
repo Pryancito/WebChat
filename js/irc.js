@@ -706,7 +706,7 @@ function onKick(rawsp) {
 	else {
 		
 		let elem = document.createElement('p');
-		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + rawsp[3] + ' has been kicked on ' + rawsp[2] + ' (' + rawsp[4].substring(1) + ')';
+		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + rawsp[3] + ' has been kicked on ' + rawsp[2] + ' (' + rawsp.slice(4).substring(1) + ')';
 		
 		let w = document.getElementById('chan_' + chanstriped.toLowerCase());
 		
@@ -1657,7 +1657,7 @@ function query(nick, msg) {
 	if (w === null) {
 		
 		let query_window = document.createElement('div');
-		query_window.className = 'window query';
+		query_window.className = 'window query wselected';
 		query_window.setAttribute('id', 'query_' + nick);
 		
 		w = query_window;
@@ -1686,12 +1686,14 @@ function query(nick, msg) {
 		
 		document.getElementById('text').focus();
 	}
+	
 	if (msg !== false) {
 		
 		if (msg[0] === '') {
 			ctcp(msg);
 		}
 		else {
+			
 			if (document.getElementById('query_' + nick) === null) {
 				
 				let query_window = document.createElement('div');
@@ -1761,7 +1763,12 @@ function query(nick, msg) {
 	}
 	else {
 		
-		Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
+		let w = document.getElementById('query_' + nick);
+		
+		if (w === null) {
+		
+			Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
+		}
 	}
 	
 	document.getElementById('cn_' + nick).onclick = function() {
@@ -2081,7 +2088,7 @@ function userlist(chan, nicknames) {
 				}
 				*/
 				
-				if (isOwner === -1 || isAdmin === -1 || isOp === -1 || isHop === -1) {
+				if (isOwner === -1 && isAdmin === -1 && isOp === -1 && isHop === -1) {
 					
 					document.getElementsByClassName('nlnick_pm')[0].onclick = function() {
 						
@@ -2101,7 +2108,7 @@ function userlist(chan, nicknames) {
 						nickoptions.remove();
 					}
 				}
-				else {					
+				else {			
 					
 					document.getElementsByClassName('nlnick_op')[0].onclick = function() {
 						
