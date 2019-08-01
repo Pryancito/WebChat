@@ -3027,6 +3027,8 @@ function urlify(text, idm, ajaxRequest, recipient) {
     
 		words[index] = item.replace(urlRegex, function(url) {
 			
+			let proto = url.split('://')[0];
+			
 			let href = url.match(/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([\)\(-a-zA-Z0-9@:%_\+.~#?&\/=,;]*)/gi)[0];
 			
 			let mailto = '';
@@ -3042,11 +3044,11 @@ function urlify(text, idm, ajaxRequest, recipient) {
 				
 				ajax('ajax/summary.php?url=' + url, idm, i, recipient, msg);
 				
-				return '<a href="' + mailto + '//' + href + '" target="_blank">' + url + '</a><i id="idm_' + idm + '_' + i + '" class="fa fa-arrow-circle-down summary_link" aria-hidden="true"></i>';
+				return '<a href="' + mailto + proto + '://' + href + '" target="_blank">' + url + '</a><i id="idm_' + idm + '_' + i + '" class="fa fa-arrow-circle-down summary_link" aria-hidden="true"></i>';
 			}
 			
 			
-			return '<a href="' + mailto + '//' + href + '" target="_blank">' + url + '</a>';
+			return '<a href="' + mailto + proto + '://' + href + '" target="_blank">' + url + '</a>';
 		});
 	});
 	
