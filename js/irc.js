@@ -1656,6 +1656,8 @@ function query(nick, msg) {
 	
 	if (w === null) {
 		
+		Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
+		
 		let query_window = document.createElement('div');
 		query_window.className = 'window query wselected';
 		query_window.setAttribute('id', 'query_' + nick);
@@ -1758,8 +1760,6 @@ function query(nick, msg) {
 				elem.className += ' green';
 			}
 		}
-		
-		scrollBottom(w);
 	}
 	else {
 		
@@ -1781,6 +1781,8 @@ function query(nick, msg) {
 	}
 	
 	document.getElementById('topic').innerHTML = '';
+	
+	scrollBottom(w);
 }
 
 function ctcp(msg) {
@@ -2087,28 +2089,26 @@ function userlist(chan, nicknames) {
 					doSend('userhost ' + nick);
 				}
 				*/
-				
-				if (isOwner === -1 && isAdmin === -1 && isOp === -1 && isHop === -1) {
 					
-					document.getElementsByClassName('nlnick_pm')[0].onclick = function() {
-						
-						query(nick, false);
-						
-						n.style.backgroundColor = 'transparent';
-						
-						nickoptions.remove();
-					}
-						
-					document.getElementsByClassName('nlnick_whois')[0].onclick = function() {
-						
-						doSend('whois ' + nick + ' ' + nick);
-						
-						n.style.backgroundColor = 'transparent';
-						
-						nickoptions.remove();
-					}
+				document.getElementsByClassName('nlnick_pm')[0].onclick = function() {
+					
+					query(nick, false);
+					
+					n.style.backgroundColor = 'transparent';
+					
+					nickoptions.remove();
 				}
-				else {			
+					
+				document.getElementsByClassName('nlnick_whois')[0].onclick = function() {
+					
+					doSend('whois ' + nick + ' ' + nick);
+					
+					n.style.backgroundColor = 'transparent';
+					
+					nickoptions.remove();
+				}
+				
+				if (isOwner !== -1 || isAdmin !== -1 || isOp !== -1 || isHop !== -1) {			
 					
 					document.getElementsByClassName('nlnick_op')[0].onclick = function() {
 						
