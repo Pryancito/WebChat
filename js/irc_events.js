@@ -553,7 +553,7 @@ let emojiCursor;
 		elemDragged = this.id;
 	}
 
-	document.addEventListener("dragover", function( e ) {
+	document.addEventListener("dragend", function( e ) {
 		
 		if (elemDragged === 'border-right') {
 			userlist.style.width = document.body.offsetWidth - e.clientX + 'px';
@@ -704,7 +704,7 @@ let emojiCursor;
 				}
 				else if (target[0] == 'query') {
 					
-					active = target[1].toLowerCase();
+					active = target[1];
 					activeType = 'query';
 					activeQuery = target[1];
 					

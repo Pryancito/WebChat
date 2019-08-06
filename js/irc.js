@@ -1927,6 +1927,12 @@ function ci(a, b) {
 	return a.toLowerCase().localeCompare(b.toLowerCase());
 }
 
+function strip(html) {
+   var tmp = document.createElement("DIV");
+   tmp.innerHTML = html;
+   return tmp.textContent || tmp.innerText || "";
+}
+
 function userlist(chan, nicknames) {
 	
 	nicknames = nicknames.trim().split(' ');
@@ -2627,7 +2633,7 @@ function send() {
 	
 	let input = document.getElementById('text');
 	let text = input.innerHTML.replace(/<br\s*[\/]?>/gi, "\n");
-	let recipient = activeChannel;
+	let recipient = active;
 	
 	if (text[0] == '/') {
 		exec( text.substring(1) );
@@ -2678,7 +2684,7 @@ function send() {
 				line_for_log.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 				line_for_log.innerHTML += msg_for_log;
 				
-				log(irc_server_address, recipient, line_for_log.outerHTML);
+				log(irc_server_address, recipient.toLowerCase(), line_for_log.outerHTML);
 				
 				let activeWindow = document.getElementsByClassName('wselected')[0];
 				
@@ -2726,7 +2732,7 @@ function send() {
 					line_for_log.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 					line_for_log.innerHTML += msg_for_log;
 					
-					log(irc_server_address, recipient, line_for_log.outerHTML);
+					log(irc_server_address, recipient.toLowerCase(), line_for_log.outerHTML);
 					
 					let activeWindow = document.getElementsByClassName('wselected')[0];
 					
@@ -2775,7 +2781,7 @@ function send() {
 				line_for_log.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
 				line_for_log.innerHTML += msg_for_log;
 				
-				log(irc_server_address, recipient, line_for_log.outerHTML);
+				log(irc_server_address, recipient.toLowerCase(), line_for_log.outerHTML);
 				
 				let activeWindow = document.getElementsByClassName('wselected')[0];
 				
@@ -3044,11 +3050,11 @@ function urlify(text, idm, ajaxRequest, recipient) {
 				
 				ajax('ajax/summary.php?url=' + url, idm, i, recipient, msg);
 				
-				return '<a href="' + mailto + proto + '://' + href + '" target="_blank">' + url + '</a><i id="idm_' + idm + '_' + i + '" class="fa fa-arrow-circle-down summary_link" aria-hidden="true"></i>';
+				return '<a href="' + strip(mailto) + strip(proto) + '://' + strip(href) + '" target="_blank">' + url + '</a><i id="idm_' + idm + '_' + i + '" class="fa fa-arrow-circle-down summary_link" aria-hidden="true"></i>';
 			}
 			
 			
-			return '<a href="' + mailto + proto + '://' + href + '" target="_blank">' + url + '</a>';
+			return '<a href="' + strip(mailto) + strip(proto) + '://' + strip(href) + '" target="_blank">' + url + '</a>';
 		});
 	});
 	
