@@ -1650,7 +1650,7 @@ function query(nick, msg) {
 	
 	let querylist = document.getElementById('querylist');
 	
-	let w = document.getElementById('query_' + nick);
+	let w = document.getElementById('query_' + nick.toLowerCase());
 	
 	let hlCheck = false, hlcolor = '';
 	
@@ -1660,7 +1660,7 @@ function query(nick, msg) {
 		
 		let query_window = document.createElement('div');
 		query_window.className = 'window query wselected';
-		query_window.setAttribute('id', 'query_' + nick);
+		query_window.setAttribute('id', 'query_' + nick.toLowerCase());
 		
 		w = query_window;
 		
@@ -1679,10 +1679,10 @@ function query(nick, msg) {
 		
 		let query = document.createElement('p');
 		query.innerHTML = '<i class="fa fa-user-circle" aria-hidden="true"></i>' + nick;
-		query.innerHTML += '<span class="chanlist_opt"><i id="cn_' + nick + '" class="fa fa-times close" aria-hidden="true"></i></span>';
+		query.innerHTML += '<span class="chanlist_opt"><i id="cn_' + nick.toLowerCase() + '" class="fa fa-times close" aria-hidden="true"></i></span>';
 		Array.from(document.getElementsByClassName('btn_selected')).forEach(function(item) { item.className = 'btn_window' });
 		query.setAttribute('class', 'btn_window btn_selected');
-		query.setAttribute('id', 'query_btn_' + nick);
+		query.setAttribute('id', 'query_btn_' + nick.toLowerCase());
 		
 		querylist.appendChild(query);
 		
@@ -1696,11 +1696,11 @@ function query(nick, msg) {
 		}
 		else {
 			
-			if (document.getElementById('query_' + nick) === null) {
+			if (document.getElementById('query_' + nick.toLowerCase()) === null) {
 				
 				let query_window = document.createElement('div');
 				query_window.className = 'window query';
-				query_window.setAttribute('id', 'query_' + nick);
+				query_window.setAttribute('id', 'query_' + nick.toLowerCase());
 				document.getElementById('msgs').appendChild(query_window);
 				
 				document.getElementById('userlist').className = 'displaynone';
@@ -1708,9 +1708,9 @@ function query(nick, msg) {
 				let query = document.createElement('p');
 				query.innerHTML = nick;
 				// Deleted : <i class="fa fa-caret-down nopt" aria-hidden="true">
-				query.innerHTML += '<span class="chanlist_opt"><i id="cn_' + nick + '" class="fa fa-times close" aria-hidden="true"></i></i></span>';
+				query.innerHTML += '<span class="chanlist_opt"><i id="cn_' + nick.toLowerCase() + '" class="fa fa-times close" aria-hidden="true"></i></i></span>';
 				query.setAttribute('class', 'btn_window');
-				query.setAttribute('id', 'query_btn_' + nick);
+				query.setAttribute('id', 'query_btn_' + nick.toLowerCase());
 				chanlist.appendChild(query);
 			}
 			
@@ -1744,7 +1744,7 @@ function query(nick, msg) {
 			}
 		}
 		
-		let elem = document.getElementById('query_btn_' + nick);
+		let elem = document.getElementById('query_btn_' + nick.toLowerCase());
 		
 		if (hlCheck === false) {
 			
@@ -1763,7 +1763,7 @@ function query(nick, msg) {
 	}
 	else {
 		
-		let w = document.getElementById('query_' + nick);
+		let w = document.getElementById('query_' + nick.toLowerCase());
 		
 		if (w === null) {
 		
@@ -1771,10 +1771,10 @@ function query(nick, msg) {
 		}
 	}
 	
-	document.getElementById('cn_' + nick).onclick = function() {
+	document.getElementById('cn_' + nick.toLowerCase()).onclick = function() {
 		
-		document.getElementById('query_' + nick).remove();
-		document.getElementById('query_btn_' + nick).remove();
+		document.getElementById('query_' + nick.toLowerCase()).remove();
+		document.getElementById('query_btn_' + nick.toLowerCase()).remove();
 		
 		document.getElementById('status').className += ' wselected';
 		document.getElementById('btn_status').className += ' btn_selected';
