@@ -704,7 +704,7 @@ let emojiCursor;
 				}
 				else if (target[0] == 'query') {
 					
-					active = target[1];
+					active = target[1].toLowerCase();
 					activeType = 'query';
 					activeQuery = target[1];
 					
