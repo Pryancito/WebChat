@@ -25,6 +25,28 @@ a, a:visited, a:active {
 	color:white;
 }
 
+* {
+	scrollbar-width:thin;
+	scrollbar-color:#888 transparent;
+}
+
+.style_bold {
+	font-weight:bold;
+}
+
+.style_underline {
+	text-decoration:underline;
+}
+
+.style_italic {
+	font-style:italic;
+}
+
+.style_syn {
+	color:white;
+	background-color:black;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 6px;
@@ -269,6 +291,7 @@ body #send_options .fa {
 	padding:10px;
 	line-height:25px;
 	font-size:20px;
+	min-width:258px;
 }
 #bubble2 span {
 	display:inline-block;
