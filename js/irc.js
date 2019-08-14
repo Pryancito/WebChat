@@ -692,7 +692,7 @@ function process(rawData) {
 	}
 }
 
-function onKick(rawsp) {
+function onKick(rawsp) { // <- :Kitu!~websocket@webmaster.epiknet.org KICK #wircy Kitu :Kitu
 	
 	let chanstriped = rawsp[2].substring(1);
 	
@@ -708,7 +708,7 @@ function onKick(rawsp) {
 	else {
 		
 		let elem = document.createElement('p');
-		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + rawsp[3] + ' has been kicked on ' + rawsp[2] + ' (' + rawsp.slice(4).substring(1) + ')';
+		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + rawsp[3] + ' has been kicked on ' + rawsp[2] + ' (' + rawsp.splice(4).join(' ').substring(1) + ')';
 		
 		let w = document.getElementById('chan_' + chanstriped.toLowerCase());
 		
@@ -998,7 +998,12 @@ function onSetTopic( raw ) {
 	topicInput.appendChild(chan_topic);
 	topicInput.style.display = 'inline';
 	
-	document.getElementById('chan_' + cs).appendChild(elem);
+	
+	let w = document.getElementById('chan_' + cs);
+	
+	w.appendChild(elem);
+	
+	scrollBottom(w);
 }
 
 function memsg(mask, target, message) {
@@ -1127,7 +1132,7 @@ function style(msg) {
 	
 	let stx = 0, etx = 0, syn = 0, gs = 0, us = 0;
 	
-	let res = msg.replace(/|[0-9,]{0,5}|||/g, function(match, offset, string) {
+	let res = msg.replace(/(()|([0-9,]{0,5})|()|()|())/g, function(match, string) {
 		
 		if (match === '') {
 			
@@ -1186,7 +1191,9 @@ function style(msg) {
 				return '</span>';
 			}
 		}
-		else if (match === '') {
+		else if (match === '') { // testtest
+			
+			console.log('italic');
 			
 			if (gs % 2 === 0) {
 				
@@ -1205,7 +1212,7 @@ function style(msg) {
 				
 				gs++;
 				
-				return '</span>';
+				return '<span style="font-style:initial;">';
 			}
 		}
 		else if (match === '') { //  #Quizz
@@ -2954,7 +2961,7 @@ function exec(cmd) {
 	else if (cmd[0] == 'kick') {
 		if (cmd[1][0] != '#') {
 			
-			doSend('kick ' + activeChannel + ' ' + cmd[1] + ' ' + cmd.splice(2));
+			doSend('kick ' + activeChannel + ' ' + cmd[1] + ' ' + cmd.splice(2).join(' '));
 		}
 		else {
 			doSend( raw );
