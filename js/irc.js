@@ -26,6 +26,8 @@ let url_summary = true;
 
 let logs = localStorage;
 
+let hl_style;
+
 //logs.removeItem( irc_server_address );
 
 
@@ -145,7 +147,7 @@ function connectWebSocket() {
 
 function onOpen(evt) {
 	
-	doSend('user websocket * * :WebSocket User');
+	doSend('user websocket * * :Wircy User');
 	doSend('nick ' + nickname);
 }
 
@@ -684,7 +686,7 @@ function process(rawData) {
 	
 	else { // RAWDATA
 		url_summary = false;
-		writeToScreen('<span class="nocolorcopy">' + urlify(style( raw.split(':').splice(2).join(':') ), '', false, false) + '</span>');
+		writeToScreen('<span class="nocolorcopy">' + style(urlify( raw.split(':').splice(2).join(':'), '', false, false, true)) + '</span>');
 		
 		console.log(raw);
 	}
@@ -753,7 +755,7 @@ function endList( rawsp ) {
 		let users = document.createTextNode( objectKey.split('#')[0] );
 		let chan = document.createTextNode( '#' + objectKey.split('#')[1] );
 		let topic = document.createElement( 'span' );
-		topic.innerHTML = urlify(style(list[objectKey][0]), '', false, false);
+		topic.innerHTML = style(urlify(list[objectKey][0], '', false, false));
 		
 		cell1.appendChild(chan);
 		cell2.appendChild(users);
@@ -908,7 +910,7 @@ function onTopicMsg( rawp ) { // :irc.wevox.co 332 WircyUser_147 #WeVox :Canal I
 	let topicRaw = rawp.slice(2).join(':');
 	
 	let elem = document.createElement('p');
-	let topic = urlify(style(topicRaw), '', false, false);
+	let topic = style(urlify(topicRaw, '', false, false));
 	let cs = rawp[1].split(' ')[3].substring(1);
 	
 	let chanspNoHTML = cs.replace(/\</g, '').toLowerCase();
@@ -917,7 +919,10 @@ function onTopicMsg( rawp ) { // :irc.wevox.co 332 WircyUser_147 #WeVox :Canal I
 	
 	if (topicByCommand === true) {
 		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * Topic : ' + topic;
-		document.getElementById('chan_' + chanspNoHTML).appendChild(elem);
+		let w = document.getElementById('chan_' + chanspNoHTML);
+		w.appendChild(elem);
+		
+		scrollBottom(w);
 	}
 	
 	let topicInput = document.getElementById('topic');
@@ -966,7 +971,7 @@ function onSetTopic( raw ) {
 	let nick = document.createTextNode(raw.split(':')[1].split('!')[0]);
 	let cs = raw.split(' ')[2].substring(1);
 	let chan_striped = document.createTextNode(cs);
-	let topic = urlify(style( raw.split(':').splice(2).join(':') ), '', false, false);
+	let topic = style(urlify( raw.split(':').splice(2).join(':'), '', false, false));
 	
 	let elem = document.createElement('p');
 	elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + nick.textContent + ' sets topic on #' + chan_striped.textContent + ' : ' + topic;
@@ -1009,7 +1014,7 @@ function memsg(mask, target, message) {
 		prefix = 'query_';
 	}
 	
-	message = urlify(style( escapeHtml( message.split('ACTION ')[1].split('')[0] ) ), '', false, false);
+	message = style(urlify(message.split('ACTION ')[1].split('')[0], '', false, false));
 	
 	let hlCheck = false, hlcolor = '';
 	
@@ -1048,7 +1053,7 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		let mht = ht( rawsp.splice(3).join(' ').substring(1) );
 		
-		let message = urlify( style( mht[1] ), idmsg, url_summary, false );
+		let message = style(urlify( mht[1], idmsg, url_summary, false ));
 		
 		let msg_for_log = style( mht[1] );
 		
@@ -1086,119 +1091,148 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 	}
 }
 
+// [#Audiovisuel] Bonjour, et BIENVENUE sur 4#Audiovisuel, lieu d'échange et de partage. Nous vous demandons de respecter la Charte d'#Audiovisuel 7https://urlz.fr/98W0 Un problème à signaler ? RDV sur #Athenes. L'équipe vous remercie de votre présence parmi nous !
+
+// 2,2||11Bienvenue sur #Quizz2||3,3////1412,12|||0,0|||4,4|||3,3////1,1|||8,8|||4,4|||3,3////4,4|||0+4|||3,3////4,4||4,0 & 4,4||3,3////8 Pas de Majuscules, Flood, Répétitions, ni de couleurs-gras-souligné Evitez le style SMS ! Merci. Un Bonjour en entrant n'a jamais tué personne la Courtoisie et Politesse non plus, Bravo Merci sont de rigueur. Google Wiki etc sont interdits. Bon jeu.3//12,0http://quizz.epiknet.
+
+function get_etx(match) {
+	
+	let colorcode = match.substring(1);
+	
+	colorcode = colorcode.split(',');
+	
+	let text = parseInt(colorcode[0], 10);
+	
+	let hl = parseInt(colorcode[1], 10);
+	
+	if (isNaN(text)) {
+		
+		text = 'inherit';
+	}
+	
+	if (isNaN(hl)) {
+		
+		hl = 'inherit';
+	}
+	
+	if (text === 'inherit' && hl === 'inherit') {
+		
+		return '</span>';
+	}
+	
+	return '<span style="color:'+color(text)+'; background-color:'+color(hl)+'">';
+}
+
 function style(msg) {
 	
-	let p = document.createElement('p');
+	let stx = 0, etx = 0, syn = 0, gs = 0, us = 0;
 	
-	p.innerText = msg;
-	
-	let newmsg = p.innerText.split('');
-	
-	let output = '';
-	
-	newmsg.forEach(function(item, index) { // 4,4|||0+4|||
-
-		if (index > 0) {
-			if (index % 2 == 0) {
-				output += item;
-			}
-			else {
-				output += '<strong>' + item;
-			}
-		}
-		else {
-			output += item;
-		}
-	});
-
-	let newmsg2 = output.split('');
-	let output2 = '';
-
-	newmsg2.forEach(function(item, index) {
-
-		if (index > 0) {
-			if (index % 2 == 0) {
-				output2 += '</u>' + item;
-			}
-			else {
-				output2 += '<u>' + item;
-			}
-		}
-		else {
-			output2 += item;
-		}
-	});
-
-	let newmsg3 = output2.split('');
-	let output3 = '';
-
-	newmsg3.forEach(function(item, index) {
-
-		if (index > 0) {
-			if (index % 2 == 0) {
-				output3 += '</em>' + item;
-			}
-			else {
-				output3 += '<em>' + item;
-			}
-		}
-		else {
-			output3 += item;
-		}
-	});
-
-	let newmsg4 = output3.split('');
-	let output4 = '';
-
-	newmsg4.forEach(function(item, index) {
-
-		if (index > 0) {
-			if (index % 2 == 0) {
-				output4 += '</span>' + item;
-			}
-			else {
-				output4 += '<span style="color:white; background-color:black;">' + item;
-			}
-		}
-		else {
-			output4 += item;
-		}
-	});
-
-	let newmsg5 = output4.split('');
-	let output5 = '';
-	
-	if (typeof newmsg5[1] !== 'undefined') {
-	
-		newmsg5.forEach(function(item, index) {
+	let res = msg.replace(/|[0-9,]{0,5}|||/g, function(match, offset, string) {
+		
+		if (match === '') {
 			
-			if (index > 0) {
+			if (stx % 2 === 0) {
 				
-				let colorcode = item.substr(0, 5);
-
-				colorcode = colorcode.split(',');
-
-				if (typeof colorcode[1] !== 'undefined') {
+				stx++;
+				
+				let closure = string.split('')[stx];
+				
+				if (typeof closure !== 'undefined') {
 					
-					var text = parseInt(colorcode[0], 10);
-					var highlight = parseInt(colorcode[1], 10);
-					
-					var len = parseInt(colorcode[0], 10).toString().length + parseInt(colorcode[1], 10).toString().length + 1;
-				}
-				else {
-					var text = parseInt(colorcode[0].substr(0, 2), 10);
-					var len = text.toString().length;
+					style(closure);
 				}
 				
-				output5 += '<span style="color:'+color(text)+'; background-color:'+color(highlight)+';">' + item.substring(len);
+				return '<span class="style_bold">';
 			}
-		});
-	}
-	else {
-		output5 = output4;
-	}
+			else {
+				
+				stx++;
+				
+				return '<span style="font-weight:normal;">';
+			}
+		}
+		else if (match[0] === '') {
+				
+			etx++;
+			
+			let closure = string.split('')[etx];
+			
+			if (typeof closure !== 'undefined') {
+				
+				style(closure);
+			}
+			
+			return get_etx(match);
+		}
+		else if (match === '') {
+			
+			if (syn % 2 === 0) {
+				
+				syn++;
+				
+				let closure = string.split('')[syn];
+				
+				if (typeof closure !== 'undefined') {
+					
+					style(closure);
+				}
+			
+				return '<span style="color:white; background-color:black;">';
+			}
+			else {
+				
+				syn++;
+				
+				return '</span>';
+			}
+		}
+		else if (match === '') {
+			
+			if (gs % 2 === 0) {
+				
+				gs++;
+				
+				let closure = string.split('')[gs];
+				
+				if (typeof closure !== 'undefined') {
+					
+					style(closure);
+				}
+			
+				return '<span class="style_italic">';
+			}
+			else {
+				
+				gs++;
+				
+				return '</span>';
+			}
+		}
+		else if (match === '') { //  #Quizz
+			
+			if (us % 2 === 0) {
+				
+				us++;
+				
+				let closure = string.split('')[us];
+				
+				if (typeof closure !== 'undefined') {				
+					
+					style(closure);
+				}
+			
+				return '<u>';
+			}
+			else {
+				
+				us++;
+				
+				return '</u>';
+			}
+		}
+	});
 	
-	return output5;
+	return res;
 }
 
 function color(n) {
@@ -1519,7 +1553,7 @@ function readLog(server, target, last) {
 			
 			if (typeof r[target][i] !== 'undefined') {
 				
-				let msg = urlify( r[target][i], '', false, false );
+				let msg = style(urlify( r[target][i], '', false, false ));
 				msg = twemoji.parse(msg);
 				
 				output += msg;
@@ -1648,9 +1682,11 @@ function join(chan) {
 
 function query(nick, msg) {
 	
+	let nick_lc = nick.toLowerCase();
+	
 	let querylist = document.getElementById('querylist');
 	
-	let w = document.getElementById('query_' + nick.toLowerCase());
+	let w = document.getElementById('query_' + nick_lc);
 	
 	let hlCheck = false, hlcolor = '';
 	
@@ -1660,11 +1696,11 @@ function query(nick, msg) {
 		
 		let query_window = document.createElement('div');
 		query_window.className = 'window query wselected';
-		query_window.setAttribute('id', 'query_' + nick.toLowerCase());
+		query_window.setAttribute('id', 'query_' + nick_lc);
 		
 		w = query_window;
 		
-		let lo = readLog(irc_server_address, nick.toLowerCase(), 250);
+		let lo = readLog(irc_server_address, nick_lc, 250);
 		
 		if (lo !== false) {
 			
@@ -1679,10 +1715,10 @@ function query(nick, msg) {
 		
 		let query = document.createElement('p');
 		query.innerHTML = '<i class="fa fa-user-circle" aria-hidden="true"></i>' + nick;
-		query.innerHTML += '<span class="chanlist_opt"><i id="cn_' + nick.toLowerCase() + '" class="fa fa-times close" aria-hidden="true"></i></span>';
+		query.innerHTML += '<span class="chanlist_opt"><i id="cn_' + nick_lc + '" class="fa fa-times close" aria-hidden="true"></i></span>';
 		Array.from(document.getElementsByClassName('btn_selected')).forEach(function(item) { item.className = 'btn_window' });
 		query.setAttribute('class', 'btn_window btn_selected');
-		query.setAttribute('id', 'query_btn_' + nick.toLowerCase());
+		query.setAttribute('id', 'query_btn_' + nick_lc);
 		
 		querylist.appendChild(query);
 		
@@ -1700,7 +1736,7 @@ function query(nick, msg) {
 				
 				let query_window = document.createElement('div');
 				query_window.className = 'window query';
-				query_window.setAttribute('id', 'query_' + nick.toLowerCase());
+				query_window.setAttribute('id', 'query_' + nick_lc);
 				document.getElementById('msgs').appendChild(query_window);
 				
 				document.getElementById('userlist').className = 'displaynone';
@@ -1708,9 +1744,9 @@ function query(nick, msg) {
 				let query = document.createElement('p');
 				query.innerHTML = nick;
 				// Deleted : <i class="fa fa-caret-down nopt" aria-hidden="true">
-				query.innerHTML += '<span class="chanlist_opt"><i id="cn_' + nick.toLowerCase() + '" class="fa fa-times close" aria-hidden="true"></i></i></span>';
+				query.innerHTML += '<span class="chanlist_opt"><i id="cn_' + nick_lc + '" class="fa fa-times close" aria-hidden="true"></i></i></span>';
 				query.setAttribute('class', 'btn_window');
-				query.setAttribute('id', 'query_btn_' + nick.toLowerCase());
+				query.setAttribute('id', 'query_btn_' + nick_lc);
 				chanlist.appendChild(query);
 			}
 			
@@ -1721,7 +1757,7 @@ function query(nick, msg) {
 			
 			let line = document.createElement('p');
 			
-			msg = urlify( style( escapeHtml( msg ) ) );
+			msg = style(urlify( escapeHtml( msg ) ) );
 			
 			msg = twemoji.parse(msg);
 			
@@ -1737,14 +1773,14 @@ function query(nick, msg) {
 			
 			line_for_log.innerHTML = '<strong class="'+ hlcolor +'">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg_for_log;
 			
-			log(irc_server_address, nick.toLowerCase(), line_for_log.outerHTML);
+			log(irc_server_address, nick_lc, line_for_log.outerHTML);
 			
 			if (hlCheck) {
 				hl(nick, msg);
 			}
 		}
 		
-		let elem = document.getElementById('query_btn_' + nick.toLowerCase());
+		let elem = document.getElementById('query_btn_' + nick_lc);
 		
 		if (hlCheck === false) {
 			
@@ -1763,7 +1799,7 @@ function query(nick, msg) {
 	}
 	else {
 		
-		let w = document.getElementById('query_' + nick.toLowerCase());
+		let w = document.getElementById('query_' + nick_lc);
 		
 		if (w === null) {
 		
@@ -1771,10 +1807,10 @@ function query(nick, msg) {
 		}
 	}
 	
-	document.getElementById('cn_' + nick.toLowerCase()).onclick = function() {
+	document.getElementById('cn_' + nick_lc).onclick = function() {
 		
-		document.getElementById('query_' + nick.toLowerCase()).remove();
-		document.getElementById('query_btn_' + nick.toLowerCase()).remove();
+		document.getElementById('query_' + nick_lc).remove();
+		document.getElementById('query_btn_' + nick_lc).remove();
 		
 		document.getElementById('status').className += ' wselected';
 		document.getElementById('btn_status').className += ' btn_selected';
@@ -1837,7 +1873,7 @@ function msg(raw) {
 	let mht = ht( escapeHtml( getMsg(raw) ) );
 	
 	let nick = getNickname(raw);
-	let msg = urlify(style( mht[1] ), idmsg, true, false );
+	let msg = style(urlify( mht[1], idmsg, true, false ));
 	msg = twemoji.parse(msg);
 	
 	let msg_for_log = style( mht[1] );
@@ -2659,7 +2695,7 @@ function send() {
 			
 			if (lines.length === 0) {
 			
-				let message = urlify(style( text ), idmsg, true, recipient );
+				let message = style(urlify( text, idmsg, true, recipient ));
 				
 				let msg_for_log = style( text );
 				
@@ -2707,7 +2743,7 @@ function send() {
 				
 				lines.forEach(function(item, index) {
 					
-					let message = urlify(style( item.innerHTML ), idmsg, true, recipient );
+					let message = style(urlify( item.innerHTML, idmsg, true, recipient ));
 					
 					let msg_for_log = style( text );
 					
@@ -2757,7 +2793,7 @@ function send() {
 			
 			lines.forEach(function(item, index) {
 				
-				let message = urlify(style( item.innerHTML ), idmsg, true, recipient );
+				let message = style(urlify( item.innerHTML, idmsg, true, recipient ));
 				
 				let msg_for_log = style( text );
 				
@@ -3017,7 +3053,7 @@ function html_decode(text) {
     return text.replace(/\&[\w\d\#]{2,5}\;/g, function(m) { return map[m]; });
 }
 
-function urlify(text, idm, ajaxRequest, recipient) {
+function urlify(text, idm, ajaxRequest, recipient, status) {
 	
 	let msg = text;
 	
@@ -3033,7 +3069,12 @@ function urlify(text, idm, ajaxRequest, recipient) {
     
 		words[index] = item.replace(urlRegex, function(url) {
 			
-			let proto = url.split('://')[0];
+			let proto = url.split('://')[0].toLowerCase();
+			
+			if (proto !== 'http' || proto !== 'https' || proto !== 'ftp') {
+				
+				proto = 'https';
+			}
 			
 			let href = url.match(/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([\)\(-a-zA-Z0-9@:%_\+.~#?&\/=,;]*)/gi)[0];
 			
