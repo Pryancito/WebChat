@@ -1032,25 +1032,30 @@ function expandTextarea(obj) {
 	w.scrollTop = w.scrollHeight;
 }
 
-function getCaretPosition() {
-  if (window.getSelection && window.getSelection().getRangeAt) {
-    var range = window.getSelection().getRangeAt(0);
-    var selectedObj = window.getSelection();
-    var rangeCount = 0;
-    var childNodes = selectedObj.anchorNode.parentNode.childNodes;
-    for (var i = 0; i < childNodes.length; i++) {
-      if (childNodes[i] == selectedObj.anchorNode) {
-        break;
-      }
-      if (childNodes[i].outerHTML)
-        rangeCount += childNodes[i].outerHTML.length;
-      else if (childNodes[i].nodeType == 3) {
-        rangeCount += childNodes[i].textContent.length;
-      }
-    }
-    return range.startOffset + rangeCount;
-  }
-  return -1;
+function getCaretPosition(editableDiv, tab) {
+
+	let caretPos = 0, sel, range;
+
+	if (document.getSelection) {
+
+		sel = document.getSelection();
+
+		if (sel.rangeCount) {
+
+			range = sel.getRangeAt(0);
+
+			let len = editableDiv.innerHTML.replace(/<br\s*[\/]?>/gi, '').length;
+
+			if (tab === true) {
+				caretPos = [ range.startOffset + (len - range.startOffset), range.endOffset + (len - range.startOffset), range.commonAncestorContainer.parentNode ];
+			}
+			else {
+
+				caretPos = [ range.startOffset, range.endOffset, range.commonAncestorContainer.parentNode, range.commonAncestorContainer ];
+			}
+		}
+	}
+	return caretPos;
 }
 
 function getCaretCharacterOffsetWithin(element) {
