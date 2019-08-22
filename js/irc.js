@@ -104,6 +104,11 @@ function ht(msg) {
 		
 		if (word[0] === '#') {
 			
+			if (word.substr(-1, 1) === '.') {
+				
+				word = word.substr(0, word.length - 1);
+			}
+			
 			let chansp = word.substring(1);
 			
 			chanht.push( 'ht_' + chansp );
@@ -2565,7 +2570,7 @@ function userlist(chan, nicknames) {
 	
 					
 	let border_right = document.getElementById('border-right');
-	border_right.style.height = document.getElementById('ul_' + chanspNoHTML).scrollHeight + 'px';
+	border_right.style.height = userlist.scrollHeight + 'px';
 }
 
 function getNickname(raw) {
@@ -3075,6 +3080,11 @@ function urlify(text, idm, ajaxRequest, recipient, status) {
     words.forEach(function(item, index) {
     
 		words[index] = item.replace(urlRegex, function(url) {
+			
+			if (url.substr(-1, 1) === '.') {
+				
+				url = url.substr(0, url.length - 1);
+			}
 			
 			let proto = url.split('://')[0].toLowerCase();
 			

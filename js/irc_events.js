@@ -687,7 +687,10 @@ let emojiCursor;
 					
 					Array.from(document.getElementsByClassName('ul')).forEach(function(item) {
 						
-						item.className += ' ul_hidden';
+						if (item.className.indexOf('ul_hidden') === -1) {
+							
+							item.className += ' ul_hidden';
+						}
 					});
 					
 					document.getElementById('ul_' + ACStriped).className = 'ul';
