@@ -2900,7 +2900,7 @@ function exec(cmd) {
 		doSend( raw );
 		
 		let elem = document.createElement('p');
-		elem.innerHTML = '<strong class="noboldcopy">&lt;'+ currentTime() +'&gt; Notice » '+ cmd[1]+' :</strong> '+ cmd[2];
+		elem.innerHTML = '<strong class="noboldcopy">&lt;'+ currentTime() +'&gt; Notice » '+ cmd[1]+' :</strong> '+ cmd.splice(2).join(' ');
 		document.getElementsByClassName('wselected')[0].appendChild(elem);
 	}
 	else if (cmd[0] == 'me') {
