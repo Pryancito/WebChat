@@ -1274,7 +1274,7 @@ function color(n) {
 			n = '#FC7F00';
 		break;
 		case 8:
-			n = '#FFFF00';
+			n = 'gold';
 		break;
 		case 9:
 			n = '#00FC00';
