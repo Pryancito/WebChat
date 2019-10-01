@@ -561,6 +561,8 @@ let emojiCursor;
 		else if (elemDragged === 'border-left') {
 			cqlist.style.width = e.clientX + 'px';
 		}
+		
+		scrollBottom(document.getElementsByClassName('wselected')[0]);
 	});
 	
 	/* (A GARDER) Event for video conference 
