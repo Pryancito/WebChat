@@ -12,7 +12,7 @@ let emojiCursor;
 	
 	let textarea = document.getElementById('text');
 	
-	emoji();
+	//emoji();
 	
 	//ignores_list();
 	
@@ -950,17 +950,23 @@ function emoji() {
                 
                 //console.log(lines)
                 
-                for (let i = 0; i < 180; i++) {
+                lines.forEach(function(item, index) {
 					
-					let char = lines[i].split('#')[1].split(' ')[1];
+					let code = item.split('#')[1].split(' ');
 					
-					if (i % 10 === 0 && i !== 0) {
+					let c = code[1].split(/[\u200D]/g)[0];
+										
+					let name = code.splice(2).join('');					
+					
+					if (index % 10 === 0 && index !== 0) {
 						
 						elem.innerHTML += '<br />';
 					}
 					
-					elem.innerHTML += '<span id="' + char + '" class="emoji">' + twemoji.parse(char) + '</span>';
-				}
+					elem.innerHTML += '<span id="' + c + '" class="emoji ' + name + '">' + c + '</span>';
+				});
+				
+				twemoji.parse(elem);
             }
         }
     }
