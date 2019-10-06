@@ -27,10 +27,7 @@
 #     element of the RGI set is missing one or more emoji presentation selectors.
 #   • The file is in CLDR order, not codepoint order. This is recommended (but not required!) for keyboard palettes.
 #   • The groups and subgroups are illustrative. See the Emoji Order chart for more information.
-
-
 # group: Smileys & Emotion
-
 # subgroup: face-smiling
 1F600                                      ; fully-qualified     # 😀 grinning face
 1F603                                      ; fully-qualified     # 😃 grinning face with big eyes
@@ -45,7 +42,6 @@
 1F609                                      ; fully-qualified     # 😉 winking face
 1F60A                                      ; fully-qualified     # 😊 smiling face with smiling eyes
 1F607                                      ; fully-qualified     # 😇 smiling face with halo
-
 # subgroup: face-affection
 1F60D                                      ; fully-qualified     # 😍 smiling face with heart-eyes
 1F929                                      ; fully-qualified     # 🤩 star-struck
@@ -53,7 +49,6 @@
 1F617                                      ; fully-qualified     # 😗 kissing face
 1F61A                                      ; fully-qualified     # 😚 kissing face with closed eyes
 1F619                                      ; fully-qualified     # 😙 kissing face with smiling eyes
-
 # subgroup: face-tongue
 1F60B                                      ; fully-qualified     # 😋 face savoring food
 1F61B                                      ; fully-qualified     # 😛 face with tongue
@@ -61,13 +56,11 @@
 1F92A                                      ; fully-qualified     # 🤪 zany face
 1F61D                                      ; fully-qualified     # 😝 squinting face with tongue
 1F911                                      ; fully-qualified     # 🤑 money-mouth face
-
 # subgroup: face-hand
 1F917                                      ; fully-qualified     # 🤗 hugging face
 1F92D                                      ; fully-qualified     # 🤭 face with hand over mouth
 1F92B                                      ; fully-qualified     # 🤫 shushing face
 1F914                                      ; fully-qualified     # 🤔 thinking face
-
 # subgroup: face-neutral-skeptical
 1F910                                      ; fully-qualified     # 🤐 zipper-mouth face
 1F928                                      ; fully-qualified     # 🤨 face with raised eyebrow
@@ -79,14 +72,12 @@
 1F644                                      ; fully-qualified     # 🙄 face with rolling eyes
 1F62C                                      ; fully-qualified     # 😬 grimacing face
 1F925                                      ; fully-qualified     # 🤥 lying face
-
 # subgroup: face-sleepy
 1F60C                                      ; fully-qualified     # 😌 relieved face
 1F614                                      ; fully-qualified     # 😔 pensive face
 1F62A                                      ; fully-qualified     # 😪 sleepy face
 1F924                                      ; fully-qualified     # 🤤 drooling face
 1F634                                      ; fully-qualified     # 😴 sleeping face
-
 # subgroup: face-unwell
 1F637                                      ; fully-qualified     # 😷 face with medical mask
 1F912                                      ; fully-qualified     # 🤒 face with thermometer
@@ -96,15 +87,12 @@
 1F927                                      ; fully-qualified     # 🤧 sneezing face
 1F635                                      ; fully-qualified     # 😵 dizzy face
 1F92F                                      ; fully-qualified     # 🤯 exploding head
-
 # subgroup: face-hat
 1F920                                      ; fully-qualified     # 🤠 cowboy hat face
-
 # subgroup: face-glasses
 1F60E                                      ; fully-qualified     # 😎 smiling face with sunglasses
 1F913                                      ; fully-qualified     # 🤓 nerd face
 1F9D0                                      ; fully-qualified     # 🧐 face with monocle
-
 # subgroup: face-concerned
 1F615                                      ; fully-qualified     # 😕 confused face
 1F61F                                      ; fully-qualified     # 😟 worried face
@@ -128,7 +116,6 @@
 1F613                                      ; fully-qualified     # 😓 downcast face with sweat
 1F629                                      ; fully-qualified     # 😩 weary face
 1F62B                                      ; fully-qualified     # 😫 tired face
-
 # subgroup: face-negative
 1F624                                      ; fully-qualified     # 😤 face with steam from nose
 1F621                                      ; fully-qualified     # 😡 pouting face
@@ -138,7 +125,6 @@
 1F47F                                      ; fully-qualified     # 👿 angry face with horns
 1F480                                      ; fully-qualified     # 💀 skull
 2620 FE0F                                  ; fully-qualified     # ☠️ skull and crossbones
-
 # subgroup: face-costume
 1F4A9                                      ; fully-qualified     # 💩 pile of poo
 1F921                                      ; fully-qualified     # 🤡 clown face
@@ -148,7 +134,6 @@
 1F47D                                      ; fully-qualified     # 👽 alien
 1F47E                                      ; fully-qualified     # 👾 alien monster
 1F916                                      ; fully-qualified     # 🤖 robot
-
 # subgroup: cat-face
 1F63A                                      ; fully-qualified     # 😺 grinning cat
 1F638                                      ; fully-qualified     # 😸 grinning cat with smiling eyes
@@ -159,12 +144,10 @@
 1F640                                      ; fully-qualified     # 🙀 weary cat
 1F63F                                      ; fully-qualified     # 😿 crying cat
 1F63E                                      ; fully-qualified     # 😾 pouting cat
-
 # subgroup: monkey-face
 1F648                                      ; fully-qualified     # 🙈 see-no-evil monkey
 1F649                                      ; fully-qualified     # 🙉 hear-no-evil monkey
 1F64A                                      ; fully-qualified     # 🙊 speak-no-evil monkey
-
 # subgroup: emotion
 1F48B                                      ; fully-qualified     # 💋 kiss mark
 1F48C                                      ; fully-qualified     # 💌 love letter
@@ -177,10 +160,8 @@
 1F495                                      ; fully-qualified     # 💕 two hearts
 1F49F                                      ; fully-qualified     # 💟 heart decoration
 2763 FE0F                                  ; fully-qualified     # ❣️ heart exclamation
-2763                                       ; unqualified         # ❣ heart exclamation
 1F494                                      ; fully-qualified     # 💔 broken heart
 2764 FE0F                                  ; fully-qualified     # ❤️ red heart
-2764                                       ; unqualified         # ❤ red heart
 1F9E1                                      ; fully-qualified     # 🧡 orange heart
 1F49B                                      ; fully-qualified     # 💛 yellow heart
 1F49A                                      ; fully-qualified     # 💚 green heart
@@ -194,57 +175,37 @@
 1F4A6                                      ; fully-qualified     # 💦 sweat droplets
 1F4A8                                      ; fully-qualified     # 💨 dashing away
 1F573 FE0F                                 ; fully-qualified     # 🕳️ hole
-1F573                                      ; unqualified         # 🕳 hole
 1F4A3                                      ; fully-qualified     # 💣 bomb
 1F4AC                                      ; fully-qualified     # 💬 speech balloon
 1F441 FE0F 200D 1F5E8 FE0F                 ; fully-qualified     # 👁️‍🗨️ eye in speech bubble
-1F441 200D 1F5E8 FE0F                      ; unqualified         # 👁‍🗨️ eye in speech bubble
-1F441 FE0F 200D 1F5E8                      ; unqualified         # 👁️‍🗨 eye in speech bubble
-1F441 200D 1F5E8                           ; unqualified         # 👁‍🗨 eye in speech bubble
 1F5E8 FE0F                                 ; fully-qualified     # 🗨️ left speech bubble
-1F5E8                                      ; unqualified         # 🗨 left speech bubble
 1F5EF FE0F                                 ; fully-qualified     # 🗯️ right anger bubble
-1F5EF                                      ; unqualified         # 🗯 right anger bubble
 1F4AD                                      ; fully-qualified     # 💭 thought balloon
 1F4A4                                      ; fully-qualified     # 💤 zzz
-
 # Smileys & Emotion subtotal:		160
 # Smileys & Emotion subtotal:		160	w/o modifiers
-
 # group: People & Body
-
 # subgroup: hand-fingers-open
 1F44B                                      ; fully-qualified     # 👋 waving hand
 1F91A                                      ; fully-qualified     # 🤚 raised back of hand
 1F590 FE0F                                 ; fully-qualified     # 🖐️ hand with fingers splayed
-1F590                                      ; unqualified         # 🖐 hand with fingers splayed
 270B                                       ; fully-qualified     # ✋ raised hand
 1F596                                      ; fully-qualified     # 🖖 vulcan salute
-
 # subgroup: hand-fingers-partial
 1F44C                                      ; fully-qualified     # 👌 OK hand
 1F90F                                      ; fully-qualified     # 🤏 pinching hand
 270C FE0F                                  ; fully-qualified     # ✌️ victory hand
-270C                                       ; unqualified         # ✌ victory hand
 1F91E                                      ; fully-qualified     # 🤞 crossed fingers
 1F91F                                      ; fully-qualified     # 🤟 love-you gesture
 1F918                                      ; fully-qualified     # 🤘 sign of the horns
 1F919                                      ; fully-qualified     # 🤙 call me hand
-
 # subgroup: hand-single-finger
 1F448                                      ; fully-qualified     # 👈 backhand index pointing left
 1F449                                      ; fully-qualified     # 👉 backhand index pointing right
 1F446                                      ; fully-qualified     # 👆 backhand index pointing up
 1F595                                      ; fully-qualified     # 🖕 middle finger
-
-
-
-
-
 1F447                                      ; fully-qualified     # 👇 backhand index pointing down
 261D FE0F                                  ; fully-qualified     # ☝️ index pointing up
-261D                                       ; unqualified         # ☝ index pointing up
-
 # subgroup: hand-fingers-closed
 1F44D                                      ; fully-qualified     # 👍 thumbs up
 1F44E                                      ; fully-qualified     # 👎 thumbs down
@@ -252,7 +213,6 @@
 1F44A                                      ; fully-qualified     # 👊 oncoming fist
 1F91B                                      ; fully-qualified     # 🤛 left-facing fist
 1F91C                                      ; fully-qualified     # 🤜 right-facing fist
-
 # subgroup: hands
 1F44F                                      ; fully-qualified     # 👏 clapping hands
 1F64C                                      ; fully-qualified     # 🙌 raising hands
@@ -260,13 +220,10 @@
 1F932                                      ; fully-qualified     # 🤲 palms up together
 1F91D                                      ; fully-qualified     # 🤝 handshake
 1F64F                                      ; fully-qualified     # 🙏 folded hands
-
 # subgroup: hand-prop
 270D FE0F                                  ; fully-qualified     # ✍️ writing hand
-270D                                       ; unqualified         # ✍ writing hand
 1F485                                      ; fully-qualified     # 💅 nail polish
 1F933                                      ; fully-qualified     # 🤳 selfie
-
 # subgroup: body-parts
 1F4AA                                      ; fully-qualified     # 💪 flexed biceps
 1F9BE                                      ; fully-qualified     # 🦾 mechanical arm
@@ -274,2042 +231,236 @@
 1F9B5                                      ; fully-qualified     # 🦵 leg
 1F9B6                                      ; fully-qualified     # 🦶 foot
 1F442                                      ; fully-qualified     # 👂 ear
-
-
-
-
-
 1F9BB                                      ; fully-qualified     # 🦻 ear with hearing aid
-
-
-
-
-
 1F443                                      ; fully-qualified     # 👃 nose
-
-
-
-
-
 1F9E0                                      ; fully-qualified     # 🧠 brain
 1F9B7                                      ; fully-qualified     # 🦷 tooth
 1F9B4                                      ; fully-qualified     # 🦴 bone
 1F440                                      ; fully-qualified     # 👀 eyes
 1F441 FE0F                                 ; fully-qualified     # 👁️ eye
-1F441                                      ; unqualified         # 👁 eye
 1F445                                      ; fully-qualified     # 👅 tongue
 1F444                                      ; fully-qualified     # 👄 mouth
-
 # subgroup: person
 1F476                                      ; fully-qualified     # 👶 baby
-
-
-
-
-
 1F9D2                                      ; fully-qualified     # 🧒 child
-
-
-
-
-
 1F466                                      ; fully-qualified     # 👦 boy
-
-
-
-
-
 1F467                                      ; fully-qualified     # 👧 girl
-
-
-
-
-
 1F9D1                                      ; fully-qualified     # 🧑 person
-
-
-
-
-
-
-
-
-
-
-
 1F468                                      ; fully-qualified     # 👨 man
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 1F469                                      ; fully-qualified     # 👩 woman
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 1F9D3                                      ; fully-qualified     # 🧓 older person
-
-
-
-
-
 1F474                                      ; fully-qualified     # 👴 old man
-
-
-
-
-
 1F475                                      ; fully-qualified     # 👵 old woman
-
-
-
-
-
-
 # subgroup: person-gesture
 1F64D                                      ; fully-qualified     # 🙍 person frowning
-
-
-
-
-
 1F64D 200D 2642 FE0F                       ; fully-qualified     # 🙍‍♂️ man frowning
-1F64D 200D 2642                            ; minimally-qualified # 🙍‍♂ man frowning
-
-
-
-
-
-
-
-
-
-
 1F64D 200D 2640 FE0F                       ; fully-qualified     # 🙍‍♀️ woman frowning
-1F64D 200D 2640                            ; minimally-qualified # 🙍‍♀ woman frowning
-
-
-
-
-
-
-
-
-
-
 1F64E                                      ; fully-qualified     # 🙎 person pouting
-
-
-
-
-
 1F64E 200D 2642 FE0F                       ; fully-qualified     # 🙎‍♂️ man pouting
-1F64E 200D 2642                            ; minimally-qualified # 🙎‍♂ man pouting
-
-
-
-
-
-
-
-
-
-
 1F64E 200D 2640 FE0F                       ; fully-qualified     # 🙎‍♀️ woman pouting
-1F64E 200D 2640                            ; minimally-qualified # 🙎‍♀ woman pouting
-
-
-
-
-
-
-
-
-
-
 1F645                                      ; fully-qualified     # 🙅 person gesturing NO
-
-
-
-
-
 1F645 200D 2642 FE0F                       ; fully-qualified     # 🙅‍♂️ man gesturing NO
-1F645 200D 2642                            ; minimally-qualified # 🙅‍♂ man gesturing NO
-
-
-
-
-
-
-
-
-
-
 1F645 200D 2640 FE0F                       ; fully-qualified     # 🙅‍♀️ woman gesturing NO
-1F645 200D 2640                            ; minimally-qualified # 🙅‍♀ woman gesturing NO
-
-
-
-
-
-
-
-
-
-
 1F646                                      ; fully-qualified     # 🙆 person gesturing OK
-
-
-
-
-
 1F646 200D 2642 FE0F                       ; fully-qualified     # 🙆‍♂️ man gesturing OK
-1F646 200D 2642                            ; minimally-qualified # 🙆‍♂ man gesturing OK
-
-
-
-
-
-
-
-
-
-
 1F646 200D 2640 FE0F                       ; fully-qualified     # 🙆‍♀️ woman gesturing OK
-1F646 200D 2640                            ; minimally-qualified # 🙆‍♀ woman gesturing OK
-
-
-
-
-
-
-
-
-
-
 1F481                                      ; fully-qualified     # 💁 person tipping hand
-
-
-
-
-
 1F481 200D 2642 FE0F                       ; fully-qualified     # 💁‍♂️ man tipping hand
-1F481 200D 2642                            ; minimally-qualified # 💁‍♂ man tipping hand
-
-
-
-
-
-
-
-
-
-
 1F481 200D 2640 FE0F                       ; fully-qualified     # 💁‍♀️ woman tipping hand
-1F481 200D 2640                            ; minimally-qualified # 💁‍♀ woman tipping hand
-
-
-
-
-
-
-
-
-
-
 1F64B                                      ; fully-qualified     # 🙋 person raising hand
-
-
-
-
-
 1F64B 200D 2642 FE0F                       ; fully-qualified     # 🙋‍♂️ man raising hand
-1F64B 200D 2642                            ; minimally-qualified # 🙋‍♂ man raising hand
-
-
-
-
-
-
-
-
-
-
 1F64B 200D 2640 FE0F                       ; fully-qualified     # 🙋‍♀️ woman raising hand
-1F64B 200D 2640                            ; minimally-qualified # 🙋‍♀ woman raising hand
-
-
-
-
-
-
-
-
-
-
 1F9CF                                      ; fully-qualified     # 🧏 deaf person
-
-
-
-
-
 1F9CF 200D 2642 FE0F                       ; fully-qualified     # 🧏‍♂️ deaf man
-1F9CF 200D 2642                            ; minimally-qualified # 🧏‍♂ deaf man
-
-
-
-
-
-
-
-
-
-
 1F9CF 200D 2640 FE0F                       ; fully-qualified     # 🧏‍♀️ deaf woman
-1F9CF 200D 2640                            ; minimally-qualified # 🧏‍♀ deaf woman
-
-
-
-
-
-
-
-
-
-
 1F647                                      ; fully-qualified     # 🙇 person bowing
-
-
-
-
-
 1F647 200D 2642 FE0F                       ; fully-qualified     # 🙇‍♂️ man bowing
-1F647 200D 2642                            ; minimally-qualified # 🙇‍♂ man bowing
-
-
-
-
-
-
-
-
-
-
 1F647 200D 2640 FE0F                       ; fully-qualified     # 🙇‍♀️ woman bowing
-1F647 200D 2640                            ; minimally-qualified # 🙇‍♀ woman bowing
-
-
-
-
-
-
-
-
-
-
 1F926                                      ; fully-qualified     # 🤦 person facepalming
-
-
-
-
-
 1F926 200D 2642 FE0F                       ; fully-qualified     # 🤦‍♂️ man facepalming
-1F926 200D 2642                            ; minimally-qualified # 🤦‍♂ man facepalming
-
-
-
-
-
-
-
-
-
-
 1F926 200D 2640 FE0F                       ; fully-qualified     # 🤦‍♀️ woman facepalming
-1F926 200D 2640                            ; minimally-qualified # 🤦‍♀ woman facepalming
-
-
-
-
-
-
-
-
-
-
 1F937                                      ; fully-qualified     # 🤷 person shrugging
-
-
-
-
-
 1F937 200D 2642 FE0F                       ; fully-qualified     # 🤷‍♂️ man shrugging
-1F937 200D 2642                            ; minimally-qualified # 🤷‍♂ man shrugging
-
-
-
-
-
-
-
-
-
-
 1F937 200D 2640 FE0F                       ; fully-qualified     # 🤷‍♀️ woman shrugging
-1F937 200D 2640                            ; minimally-qualified # 🤷‍♀ woman shrugging
-
-
-
-
-
-
-
-
-
-
-
 # subgroup: person-role
 1F468 200D 2695 FE0F                       ; fully-qualified     # 👨‍⚕️ man health worker
-1F468 200D 2695                            ; minimally-qualified # 👨‍⚕ man health worker
-
-
-
-
-
-
-
-
-
-
 1F469 200D 2695 FE0F                       ; fully-qualified     # 👩‍⚕️ woman health worker
-1F469 200D 2695                            ; minimally-qualified # 👩‍⚕ woman health worker
-
-
-
-
-
-
-
-
-
-
 1F468 200D 1F393                           ; fully-qualified     # 👨‍🎓 man student
-
-
-
-
-
 1F469 200D 1F393                           ; fully-qualified     # 👩‍🎓 woman student
-
-
-
-
-
 1F468 200D 1F3EB                           ; fully-qualified     # 👨‍🏫 man teacher
-
-
-
-
-
 1F469 200D 1F3EB                           ; fully-qualified     # 👩‍🏫 woman teacher
-
-
-
-
-
 1F468 200D 2696 FE0F                       ; fully-qualified     # 👨‍⚖️ man judge
-1F468 200D 2696                            ; minimally-qualified # 👨‍⚖ man judge
-
-
-
-
-
-
-
-
-
-
 1F469 200D 2696 FE0F                       ; fully-qualified     # 👩‍⚖️ woman judge
-1F469 200D 2696                            ; minimally-qualified # 👩‍⚖ woman judge
-
-
-
-
-
-
-
-
-
-
 1F468 200D 1F33E                           ; fully-qualified     # 👨‍🌾 man farmer
-
-
-
-
-
 1F469 200D 1F33E                           ; fully-qualified     # 👩‍🌾 woman farmer
-
-
-
-
-
 1F468 200D 1F373                           ; fully-qualified     # 👨‍🍳 man cook
-
-
-
-
-
 1F469 200D 1F373                           ; fully-qualified     # 👩‍🍳 woman cook
-
-
-
-
-
 1F468 200D 1F527                           ; fully-qualified     # 👨‍🔧 man mechanic
-
-
-
-
-
 1F469 200D 1F527                           ; fully-qualified     # 👩‍🔧 woman mechanic
-
-
-
-
-
 1F468 200D 1F3ED                           ; fully-qualified     # 👨‍🏭 man factory worker
-
-
-
-
-
 1F469 200D 1F3ED                           ; fully-qualified     # 👩‍🏭 woman factory worker
-
-
-
-
-
 1F468 200D 1F4BC                           ; fully-qualified     # 👨‍💼 man office worker
-
-
-
-
-
 1F469 200D 1F4BC                           ; fully-qualified     # 👩‍💼 woman office worker
-
-
-
-
-
 1F468 200D 1F52C                           ; fully-qualified     # 👨‍🔬 man scientist
-
-
-
-
-
 1F469 200D 1F52C                           ; fully-qualified     # 👩‍🔬 woman scientist
-
-
-
-
-
 1F468 200D 1F4BB                           ; fully-qualified     # 👨‍💻 man technologist
-
-
-
-
-
 1F469 200D 1F4BB                           ; fully-qualified     # 👩‍💻 woman technologist
-
-
-
-
-
 1F468 200D 1F3A4                           ; fully-qualified     # 👨‍🎤 man singer
-
-
-
-
-
 1F469 200D 1F3A4                           ; fully-qualified     # 👩‍🎤 woman singer
-
-
-
-
-
 1F468 200D 1F3A8                           ; fully-qualified     # 👨‍🎨 man artist
-
-
-
-
-
 1F469 200D 1F3A8                           ; fully-qualified     # 👩‍🎨 woman artist
-
-
-
-
-
 1F468 200D 2708 FE0F                       ; fully-qualified     # 👨‍✈️ man pilot
-1F468 200D 2708                            ; minimally-qualified # 👨‍✈ man pilot
-
-
-
-
-
-
-
-
-
-
 1F469 200D 2708 FE0F                       ; fully-qualified     # 👩‍✈️ woman pilot
-1F469 200D 2708                            ; minimally-qualified # 👩‍✈ woman pilot
-
-
-
-
-
-
-
-
-
-
 1F468 200D 1F680                           ; fully-qualified     # 👨‍🚀 man astronaut
-
-
-
-
-
 1F469 200D 1F680                           ; fully-qualified     # 👩‍🚀 woman astronaut
-
-
-
-
-
 1F468 200D 1F692                           ; fully-qualified     # 👨‍🚒 man firefighter
-
-
-
-
-
 1F469 200D 1F692                           ; fully-qualified     # 👩‍🚒 woman firefighter
-
-
-
-
-
 1F46E                                      ; fully-qualified     # 👮 police officer
-
-
-
-
-
 1F46E 200D 2642 FE0F                       ; fully-qualified     # 👮‍♂️ man police officer
-1F46E 200D 2642                            ; minimally-qualified # 👮‍♂ man police officer
-
-
-
-
-
-
-
-
-
-
 1F46E 200D 2640 FE0F                       ; fully-qualified     # 👮‍♀️ woman police officer
-1F46E 200D 2640                            ; minimally-qualified # 👮‍♀ woman police officer
-
-
-
-
-
-
-
-
-
-
 1F575 FE0F                                 ; fully-qualified     # 🕵️ detective
-1F575                                      ; unqualified         # 🕵 detective
-
-
-
-
-
 1F575 FE0F 200D 2642 FE0F                  ; fully-qualified     # 🕵️‍♂️ man detective
-1F575 200D 2642 FE0F                       ; unqualified         # 🕵‍♂️ man detective
-1F575 FE0F 200D 2642                       ; unqualified         # 🕵️‍♂ man detective
-1F575 200D 2642                            ; unqualified         # 🕵‍♂ man detective
-
-
-
-
-
-
-
-
-
-
 1F575 FE0F 200D 2640 FE0F                  ; fully-qualified     # 🕵️‍♀️ woman detective
-1F575 200D 2640 FE0F                       ; unqualified         # 🕵‍♀️ woman detective
-1F575 FE0F 200D 2640                       ; unqualified         # 🕵️‍♀ woman detective
-1F575 200D 2640                            ; unqualified         # 🕵‍♀ woman detective
-
-
-
-
-
-
-
-
-
-
 1F482                                      ; fully-qualified     # 💂 guard
-
-
-
-
-
 1F482 200D 2642 FE0F                       ; fully-qualified     # 💂‍♂️ man guard
-1F482 200D 2642                            ; minimally-qualified # 💂‍♂ man guard
-
-
-
-
-
-
-
-
-
-
 1F482 200D 2640 FE0F                       ; fully-qualified     # 💂‍♀️ woman guard
-1F482 200D 2640                            ; minimally-qualified # 💂‍♀ woman guard
-
-
-
-
-
-
-
-
-
-
 1F477                                      ; fully-qualified     # 👷 construction worker
-
-
-
-
-
 1F477 200D 2642 FE0F                       ; fully-qualified     # 👷‍♂️ man construction worker
-1F477 200D 2642                            ; minimally-qualified # 👷‍♂ man construction worker
-
-
-
-
-
-
-
-
-
-
 1F477 200D 2640 FE0F                       ; fully-qualified     # 👷‍♀️ woman construction worker
-1F477 200D 2640                            ; minimally-qualified # 👷‍♀ woman construction worker
-
-
-
-
-
-
-
-
-
-
 1F934                                      ; fully-qualified     # 🤴 prince
-
-
-
-
-
 1F478                                      ; fully-qualified     # 👸 princess
-
-
-
-
-
 1F473                                      ; fully-qualified     # 👳 person wearing turban
-
-
-
-
-
 1F473 200D 2642 FE0F                       ; fully-qualified     # 👳‍♂️ man wearing turban
-1F473 200D 2642                            ; minimally-qualified # 👳‍♂ man wearing turban
-
-
-
-
-
-
-
-
-
-
 1F473 200D 2640 FE0F                       ; fully-qualified     # 👳‍♀️ woman wearing turban
-1F473 200D 2640                            ; minimally-qualified # 👳‍♀ woman wearing turban
-
-
-
-
-
-
-
-
-
-
 1F472                                      ; fully-qualified     # 👲 man with Chinese cap
-
-
-
-
-
 1F9D5                                      ; fully-qualified     # 🧕 woman with headscarf
-
-
-
-
-
 1F935                                      ; fully-qualified     # 🤵 man in tuxedo
-
-
-
-
-
 1F470                                      ; fully-qualified     # 👰 bride with veil
-
-
-
-
-
 1F930                                      ; fully-qualified     # 🤰 pregnant woman
-
-
-
-
-
 1F931                                      ; fully-qualified     # 🤱 breast-feeding
-
-
-
-
-
-
 # subgroup: person-fantasy
 1F47C                                      ; fully-qualified     # 👼 baby angel
-
-
-
-
-
 1F385                                      ; fully-qualified     # 🎅 Santa Claus
-
-
-
-
-
 1F936                                      ; fully-qualified     # 🤶 Mrs. Claus
-
-
-
-
-
 1F9B8                                      ; fully-qualified     # 🦸 superhero
-
-
-
-
-
 1F9B8 200D 2642 FE0F                       ; fully-qualified     # 🦸‍♂️ man superhero
-1F9B8 200D 2642                            ; minimally-qualified # 🦸‍♂ man superhero
-
-
-
-
-
-
-
-
-
-
 1F9B8 200D 2640 FE0F                       ; fully-qualified     # 🦸‍♀️ woman superhero
-1F9B8 200D 2640                            ; minimally-qualified # 🦸‍♀ woman superhero
-
-
-
-
-
-
-
-
-
-
 1F9B9                                      ; fully-qualified     # 🦹 supervillain
-
-
-
-
-
 1F9B9 200D 2642 FE0F                       ; fully-qualified     # 🦹‍♂️ man supervillain
-1F9B9 200D 2642                            ; minimally-qualified # 🦹‍♂ man supervillain
-
-
-
-
-
-
-
-
-
-
 1F9B9 200D 2640 FE0F                       ; fully-qualified     # 🦹‍♀️ woman supervillain
-1F9B9 200D 2640                            ; minimally-qualified # 🦹‍♀ woman supervillain
-
-
-
-
-
-
-
-
-
-
 1F9D9                                      ; fully-qualified     # 🧙 mage
-
-
-
-
-
 1F9D9 200D 2642 FE0F                       ; fully-qualified     # 🧙‍♂️ man mage
-1F9D9 200D 2642                            ; minimally-qualified # 🧙‍♂ man mage
-
-
-
-
-
-
-
-
-
-
 1F9D9 200D 2640 FE0F                       ; fully-qualified     # 🧙‍♀️ woman mage
-1F9D9 200D 2640                            ; minimally-qualified # 🧙‍♀ woman mage
-
-
-
-
-
-
-
-
-
-
 1F9DA                                      ; fully-qualified     # 🧚 fairy
-
-
-
-
-
-1F9DA 200D 2642 FE0F                       ; fully-qualified     # 🧚‍♂️ man fairy
-1F9DA 200D 2642                            ; minimally-qualified # 🧚‍♂ man fairy
-
-
-
-
-
-
-
-
-
-
 1F9DA 200D 2640 FE0F                       ; fully-qualified     # 🧚‍♀️ woman fairy
-1F9DA 200D 2640                            ; minimally-qualified # 🧚‍♀ woman fairy
-
-
-
-
-
-
-
-
-
-
 1F9DB                                      ; fully-qualified     # 🧛 vampire
-
-
-
-
-
-1F9DB 200D 2642 FE0F                       ; fully-qualified     # 🧛‍♂️ man vampire
-1F9DB 200D 2642                            ; minimally-qualified # 🧛‍♂ man vampire
-
-
-
-
-
-
-
-
-
-
 1F9DB 200D 2640 FE0F                       ; fully-qualified     # 🧛‍♀️ woman vampire
-1F9DB 200D 2640                            ; minimally-qualified # 🧛‍♀ woman vampire
-
-
-
-
-
-
-
-
-
-
 1F9DC                                      ; fully-qualified     # 🧜 merperson
-
-
-
-
-
 1F9DC 200D 2642 FE0F                       ; fully-qualified     # 🧜‍♂️ merman
-1F9DC 200D 2642                            ; minimally-qualified # 🧜‍♂ merman
-
-
-
-
-
-
-
-
-
-
 1F9DC 200D 2640 FE0F                       ; fully-qualified     # 🧜‍♀️ mermaid
-1F9DC 200D 2640                            ; minimally-qualified # 🧜‍♀ mermaid
-
-
-
-
-
-
-
-
-
-
 1F9DD                                      ; fully-qualified     # 🧝 elf
-
-
-
-
-
-1F9DD 200D 2642 FE0F                       ; fully-qualified     # 🧝‍♂️ man elf
-1F9DD 200D 2642                            ; minimally-qualified # 🧝‍♂ man elf
-
-
-
-
-
-
-
-
-
-
 1F9DD 200D 2640 FE0F                       ; fully-qualified     # 🧝‍♀️ woman elf
-1F9DD 200D 2640                            ; minimally-qualified # 🧝‍♀ woman elf
-
-
-
-
-
-
-
-
-
-
 1F9DE                                      ; fully-qualified     # 🧞 genie
-1F9DE 200D 2642 FE0F                       ; fully-qualified     # 🧞‍♂️ man genie
-1F9DE 200D 2642                            ; minimally-qualified # 🧞‍♂ man genie
 1F9DE 200D 2640 FE0F                       ; fully-qualified     # 🧞‍♀️ woman genie
-1F9DE 200D 2640                            ; minimally-qualified # 🧞‍♀ woman genie
 1F9DF                                      ; fully-qualified     # 🧟 zombie
-1F9DF 200D 2642 FE0F                       ; fully-qualified     # 🧟‍♂️ man zombie
-1F9DF 200D 2642                            ; minimally-qualified # 🧟‍♂ man zombie
 1F9DF 200D 2640 FE0F                       ; fully-qualified     # 🧟‍♀️ woman zombie
-1F9DF 200D 2640                            ; minimally-qualified # 🧟‍♀ woman zombie
-
 # subgroup: person-activity
 1F486                                      ; fully-qualified     # 💆 person getting massage
-
-
-
-
-
-1F486 200D 2642 FE0F                       ; fully-qualified     # 💆‍♂️ man getting massage
-1F486 200D 2642                            ; minimally-qualified # 💆‍♂ man getting massage
-
-
-
-
-
-
-
-
-
-
 1F486 200D 2640 FE0F                       ; fully-qualified     # 💆‍♀️ woman getting massage
-1F486 200D 2640                            ; minimally-qualified # 💆‍♀ woman getting massage
-
-
-
-
-
-
-
-
-
-
 1F487                                      ; fully-qualified     # 💇 person getting haircut
-
-
-
-
-
-1F487 200D 2642 FE0F                       ; fully-qualified     # 💇‍♂️ man getting haircut
-1F487 200D 2642                            ; minimally-qualified # 💇‍♂ man getting haircut
-
-
-
-
-
-
-
-
-
-
 1F487 200D 2640 FE0F                       ; fully-qualified     # 💇‍♀️ woman getting haircut
-1F487 200D 2640                            ; minimally-qualified # 💇‍♀ woman getting haircut
-
-
-
-
-
-
-
-
-
-
 1F6B6                                      ; fully-qualified     # 🚶 person walking
-
-
-
-
-
-1F6B6 200D 2642 FE0F                       ; fully-qualified     # 🚶‍♂️ man walking
-1F6B6 200D 2642                            ; minimally-qualified # 🚶‍♂ man walking
-
-
-
-
-
-
-
-
-
-
 1F6B6 200D 2640 FE0F                       ; fully-qualified     # 🚶‍♀️ woman walking
-1F6B6 200D 2640                            ; minimally-qualified # 🚶‍♀ woman walking
-
-
-
-
-
-
-
-
-
-
 1F9CD                                      ; fully-qualified     # 🧍 person standing
-
-
-
-
-
-1F9CD 200D 2642 FE0F                       ; fully-qualified     # 🧍‍♂️ man standing
-1F9CD 200D 2642                            ; minimally-qualified # 🧍‍♂ man standing
-
-
-
-
-
-
-
-
-
-
 1F9CD 200D 2640 FE0F                       ; fully-qualified     # 🧍‍♀️ woman standing
-1F9CD 200D 2640                            ; minimally-qualified # 🧍‍♀ woman standing
-
-
-
-
-
-
-
-
-
-
 1F9CE                                      ; fully-qualified     # 🧎 person kneeling
-
-
-
-
-
-1F9CE 200D 2642 FE0F                       ; fully-qualified     # 🧎‍♂️ man kneeling
-1F9CE 200D 2642                            ; minimally-qualified # 🧎‍♂ man kneeling
-
-
-
-
-
-
-
-
-
-
 1F9CE 200D 2640 FE0F                       ; fully-qualified     # 🧎‍♀️ woman kneeling
-1F9CE 200D 2640                            ; minimally-qualified # 🧎‍♀ woman kneeling
-
-
-
-
-
-
-
-
-
-
 1F468 200D 1F9AF                           ; fully-qualified     # 👨‍🦯 man with probing cane
-
-
-
-
-
 1F469 200D 1F9AF                           ; fully-qualified     # 👩‍🦯 woman with probing cane
-
-
-
-
-
 1F468 200D 1F9BC                           ; fully-qualified     # 👨‍🦼 man in motorized wheelchair
-
-
-
-
-
 1F469 200D 1F9BC                           ; fully-qualified     # 👩‍🦼 woman in motorized wheelchair
-
-
-
-
-
 1F468 200D 1F9BD                           ; fully-qualified     # 👨‍🦽 man in manual wheelchair
-
-
-
-
-
 1F469 200D 1F9BD                           ; fully-qualified     # 👩‍🦽 woman in manual wheelchair
-
-
-
-
-
 1F3C3                                      ; fully-qualified     # 🏃 person running
-
-
-
-
-
-1F3C3 200D 2642 FE0F                       ; fully-qualified     # 🏃‍♂️ man running
-1F3C3 200D 2642                            ; minimally-qualified # 🏃‍♂ man running
-
-
-
-
-
-
-
-
-
-
 1F3C3 200D 2640 FE0F                       ; fully-qualified     # 🏃‍♀️ woman running
-1F3C3 200D 2640                            ; minimally-qualified # 🏃‍♀ woman running
-
-
-
-
-
-
-
-
-
-
 1F483                                      ; fully-qualified     # 💃 woman dancing
-
-
-
-
-
 1F57A                                      ; fully-qualified     # 🕺 man dancing
-
-
-
-
-
 1F574 FE0F                                 ; fully-qualified     # 🕴️ man in suit levitating
-1F574                                      ; unqualified         # 🕴 man in suit levitating
-
-
-
-
-
 1F46F                                      ; fully-qualified     # 👯 people with bunny ears
 1F46F 200D 2642 FE0F                       ; fully-qualified     # 👯‍♂️ men with bunny ears
-1F46F 200D 2642                            ; minimally-qualified # 👯‍♂ men with bunny ears
 1F46F 200D 2640 FE0F                       ; fully-qualified     # 👯‍♀️ women with bunny ears
-1F46F 200D 2640                            ; minimally-qualified # 👯‍♀ women with bunny ears
 1F9D6                                      ; fully-qualified     # 🧖 person in steamy room
-
-
-
-
-
 1F9D6 200D 2642 FE0F                       ; fully-qualified     # 🧖‍♂️ man in steamy room
-1F9D6 200D 2642                            ; minimally-qualified # 🧖‍♂ man in steamy room
-
-
-
-
-
-
-
-
-
-
 1F9D6 200D 2640 FE0F                       ; fully-qualified     # 🧖‍♀️ woman in steamy room
-1F9D6 200D 2640                            ; minimally-qualified # 🧖‍♀ woman in steamy room
-
-
-
-
-
-
-
-
-
-
 1F9D7                                      ; fully-qualified     # 🧗 person climbing
-
-
-
-
-
-1F9D7 200D 2642 FE0F                       ; fully-qualified     # 🧗‍♂️ man climbing
-1F9D7 200D 2642                            ; minimally-qualified # 🧗‍♂ man climbing
-
-
-
-
-
-
-
-
-
-
 1F9D7 200D 2640 FE0F                       ; fully-qualified     # 🧗‍♀️ woman climbing
-1F9D7 200D 2640                            ; minimally-qualified # 🧗‍♀ woman climbing
-
-
-
-
-
-
-
-
-
-
-
 # subgroup: person-sport
 1F93A                                      ; fully-qualified     # 🤺 person fencing
 1F3C7                                      ; fully-qualified     # 🏇 horse racing
-
-
-
-
-
 26F7 FE0F                                  ; fully-qualified     # ⛷️ skier
-26F7                                       ; unqualified         # ⛷ skier
 1F3C2                                      ; fully-qualified     # 🏂 snowboarder
-
-
-
-
-
 1F3CC FE0F                                 ; fully-qualified     # 🏌️ person golfing
-1F3CC                                      ; unqualified         # 🏌 person golfing
-
-
-
-
-
-1F3CC FE0F 200D 2642 FE0F                  ; fully-qualified     # 🏌️‍♂️ man golfing
-1F3CC 200D 2642 FE0F                       ; unqualified         # 🏌‍♂️ man golfing
-1F3CC FE0F 200D 2642                       ; unqualified         # 🏌️‍♂ man golfing
-1F3CC 200D 2642                            ; unqualified         # 🏌‍♂ man golfing
-
-
-
-
-
-
-
-
-
-
 1F3CC FE0F 200D 2640 FE0F                  ; fully-qualified     # 🏌️‍♀️ woman golfing
-1F3CC 200D 2640 FE0F                       ; unqualified         # 🏌‍♀️ woman golfing
-1F3CC FE0F 200D 2640                       ; unqualified         # 🏌️‍♀ woman golfing
-1F3CC 200D 2640                            ; unqualified         # 🏌‍♀ woman golfing
-
-
-
-
-
-
-
-
-
-
 1F3C4                                      ; fully-qualified     # 🏄 person surfing
-
-
-
-
-
-1F3C4 200D 2642 FE0F                       ; fully-qualified     # 🏄‍♂️ man surfing
-1F3C4 200D 2642                            ; minimally-qualified # 🏄‍♂ man surfing
-
-
-
-
-
-
-
-
-
-
 1F3C4 200D 2640 FE0F                       ; fully-qualified     # 🏄‍♀️ woman surfing
-1F3C4 200D 2640                            ; minimally-qualified # 🏄‍♀ woman surfing
-
-
-
-
-
-
-
-
-
-
 1F6A3                                      ; fully-qualified     # 🚣 person rowing boat
-
-
-
-
-
-1F6A3 200D 2642 FE0F                       ; fully-qualified     # 🚣‍♂️ man rowing boat
-1F6A3 200D 2642                            ; minimally-qualified # 🚣‍♂ man rowing boat
-
-
-
-
-
-
-
-
-
-
 1F6A3 200D 2640 FE0F                       ; fully-qualified     # 🚣‍♀️ woman rowing boat
-1F6A3 200D 2640                            ; minimally-qualified # 🚣‍♀ woman rowing boat
-
-
-
-
-
-
-
-
-
-
 1F3CA                                      ; fully-qualified     # 🏊 person swimming
-
-
-
-
-
-1F3CA 200D 2642 FE0F                       ; fully-qualified     # 🏊‍♂️ man swimming
-1F3CA 200D 2642                            ; minimally-qualified # 🏊‍♂ man swimming
-
-
-
-
-
-
-
-
-
-
 1F3CA 200D 2640 FE0F                       ; fully-qualified     # 🏊‍♀️ woman swimming
-1F3CA 200D 2640                            ; minimally-qualified # 🏊‍♀ woman swimming
-
-
-
-
-
-
-
-
-
-
 26F9 FE0F                                  ; fully-qualified     # ⛹️ person bouncing ball
-26F9                                       ; unqualified         # ⛹ person bouncing ball
-
-
-
-
-
-26F9 FE0F 200D 2642 FE0F                   ; fully-qualified     # ⛹️‍♂️ man bouncing ball
-26F9 200D 2642 FE0F                        ; unqualified         # ⛹‍♂️ man bouncing ball
-26F9 FE0F 200D 2642                        ; unqualified         # ⛹️‍♂ man bouncing ball
-26F9 200D 2642                             ; unqualified         # ⛹‍♂ man bouncing ball
-
-
-
-
-
-
-
-
-
-
 26F9 FE0F 200D 2640 FE0F                   ; fully-qualified     # ⛹️‍♀️ woman bouncing ball
-26F9 200D 2640 FE0F                        ; unqualified         # ⛹‍♀️ woman bouncing ball
-26F9 FE0F 200D 2640                        ; unqualified         # ⛹️‍♀ woman bouncing ball
-26F9 200D 2640                             ; unqualified         # ⛹‍♀ woman bouncing ball
-
-
-
-
-
-
-
-
-
-
 1F3CB FE0F                                 ; fully-qualified     # 🏋️ person lifting weights
-1F3CB                                      ; unqualified         # 🏋 person lifting weights
-
-
-
-
-
-1F3CB FE0F 200D 2642 FE0F                  ; fully-qualified     # 🏋️‍♂️ man lifting weights
-1F3CB 200D 2642 FE0F                       ; unqualified         # 🏋‍♂️ man lifting weights
-1F3CB FE0F 200D 2642                       ; unqualified         # 🏋️‍♂ man lifting weights
-1F3CB 200D 2642                            ; unqualified         # 🏋‍♂ man lifting weights
-
-
-
-
-
-
-
-
-
-
 1F3CB FE0F 200D 2640 FE0F                  ; fully-qualified     # 🏋️‍♀️ woman lifting weights
-1F3CB 200D 2640 FE0F                       ; unqualified         # 🏋‍♀️ woman lifting weights
-1F3CB FE0F 200D 2640                       ; unqualified         # 🏋️‍♀ woman lifting weights
-1F3CB 200D 2640                            ; unqualified         # 🏋‍♀ woman lifting weights
-
-
-
-
-
-
-
-
-
-
 1F6B4                                      ; fully-qualified     # 🚴 person biking
-
-
-
-
-
-1F6B4 200D 2642 FE0F                       ; fully-qualified     # 🚴‍♂️ man biking
-1F6B4 200D 2642                            ; minimally-qualified # 🚴‍♂ man biking
-
-
-
-
-
-
-
-
-
-
 1F6B4 200D 2640 FE0F                       ; fully-qualified     # 🚴‍♀️ woman biking
-1F6B4 200D 2640                            ; minimally-qualified # 🚴‍♀ woman biking
-
-
-
-
-
-
-
-
-
-
 1F6B5                                      ; fully-qualified     # 🚵 person mountain biking
-
-
-
-
-
-1F6B5 200D 2642 FE0F                       ; fully-qualified     # 🚵‍♂️ man mountain biking
-1F6B5 200D 2642                            ; minimally-qualified # 🚵‍♂ man mountain biking
-
-
-
-
-
-
-
-
-
-
 1F6B5 200D 2640 FE0F                       ; fully-qualified     # 🚵‍♀️ woman mountain biking
-1F6B5 200D 2640                            ; minimally-qualified # 🚵‍♀ woman mountain biking
-
-
-
-
-
-
-
-
-
-
 1F938                                      ; fully-qualified     # 🤸 person cartwheeling
-
-
-
-
-
-1F938 200D 2642 FE0F                       ; fully-qualified     # 🤸‍♂️ man cartwheeling
-1F938 200D 2642                            ; minimally-qualified # 🤸‍♂ man cartwheeling
-
-
-
-
-
-
-
-
-
-
 1F938 200D 2640 FE0F                       ; fully-qualified     # 🤸‍♀️ woman cartwheeling
-1F938 200D 2640                            ; minimally-qualified # 🤸‍♀ woman cartwheeling
-
-
-
-
-
-
-
-
-
-
 1F93C                                      ; fully-qualified     # 🤼 people wrestling
 1F93C 200D 2642 FE0F                       ; fully-qualified     # 🤼‍♂️ men wrestling
-1F93C 200D 2642                            ; minimally-qualified # 🤼‍♂ men wrestling
 1F93C 200D 2640 FE0F                       ; fully-qualified     # 🤼‍♀️ women wrestling
-1F93C 200D 2640                            ; minimally-qualified # 🤼‍♀ women wrestling
 1F93D                                      ; fully-qualified     # 🤽 person playing water polo
-
-
-
-
-
-1F93D 200D 2642 FE0F                       ; fully-qualified     # 🤽‍♂️ man playing water polo
-1F93D 200D 2642                            ; minimally-qualified # 🤽‍♂ man playing water polo
-
-
-
-
-
-
-
-
-
-
 1F93D 200D 2640 FE0F                       ; fully-qualified     # 🤽‍♀️ woman playing water polo
-1F93D 200D 2640                            ; minimally-qualified # 🤽‍♀ woman playing water polo
-
-
-
-
-
-
-
-
-
-
 1F93E                                      ; fully-qualified     # 🤾 person playing handball
-
-
-
-
-
-1F93E 200D 2642 FE0F                       ; fully-qualified     # 🤾‍♂️ man playing handball
-1F93E 200D 2642                            ; minimally-qualified # 🤾‍♂ man playing handball
-
-
-
-
-
-
-
-
-
-
 1F93E 200D 2640 FE0F                       ; fully-qualified     # 🤾‍♀️ woman playing handball
-1F93E 200D 2640                            ; minimally-qualified # 🤾‍♀ woman playing handball
-
-
-
-
-
-
-
-
-
-
 1F939                                      ; fully-qualified     # 🤹 person juggling
-
-
-
-
-
-1F939 200D 2642 FE0F                       ; fully-qualified     # 🤹‍♂️ man juggling
-1F939 200D 2642                            ; minimally-qualified # 🤹‍♂ man juggling
-
-
-
-
-
-
-
-
-
-
 1F939 200D 2640 FE0F                       ; fully-qualified     # 🤹‍♀️ woman juggling
-1F939 200D 2640                            ; minimally-qualified # 🤹‍♀ woman juggling
-
-
-
-
-
-
-
-
-
-
-
 # subgroup: person-resting
 1F9D8                                      ; fully-qualified     # 🧘 person in lotus position
-
-
-
-
-
-1F9D8 200D 2642 FE0F                       ; fully-qualified     # 🧘‍♂️ man in lotus position
-1F9D8 200D 2642                            ; minimally-qualified # 🧘‍♂ man in lotus position
-
-
-
-
-
-
-
-
-
-
 1F9D8 200D 2640 FE0F                       ; fully-qualified     # 🧘‍♀️ woman in lotus position
-1F9D8 200D 2640                            ; minimally-qualified # 🧘‍♀ woman in lotus position
-
-
-
-
-
-
-
-
-
-
 1F6C0                                      ; fully-qualified     # 🛀 person taking bath
-
-
-
-
-
 1F6CC                                      ; fully-qualified     # 🛌 person in bed
-
-
-
-
-
-
 # subgroup: family
 1F9D1 200D 1F91D 200D 1F9D1                ; fully-qualified     # 🧑‍🤝‍🧑 people holding hands
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 1F46D                                      ; fully-qualified     # 👭 women holding hands
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 1F46B                                      ; fully-qualified     # 👫 woman and man holding hands
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 1F46C                                      ; fully-qualified     # 👬 men holding hands
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 1F48F                                      ; fully-qualified     # 💏 kiss
-
-
-
-
-
-
 1F491                                      ; fully-qualified     # 💑 couple with heart
-
-
-
-
-
-
 1F46A                                      ; fully-qualified     # 👪 family
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # subgroup: person-symbol
 1F5E3 FE0F                                 ; fully-qualified     # 🗣️ speaking head
-1F5E3                                      ; unqualified         # 🗣 speaking head
 1F464                                      ; fully-qualified     # 👤 bust in silhouette
 1F465                                      ; fully-qualified     # 👥 busts in silhouette
 1F463                                      ; fully-qualified     # 👣 footprints
-
 # People & Body subtotal:		2212
 # People & Body subtotal:		447	w/o modifiers
-
 # group: Component
-
 # subgroup: skin-tone
 1F3FB                                      ; component           # 🏻 light skin tone
 1F3FC                                      ; component           # 🏼 medium-light skin tone
 1F3FD                                      ; component           # 🏽 medium skin tone
 1F3FE                                      ; component           # 🏾 medium-dark skin tone
 1F3FF                                      ; component           # 🏿 dark skin tone
-
 # subgroup: hair-style
 1F9B0                                      ; component           # 🦰 red hair
 1F9B1                                      ; component           # 🦱 curly hair
 1F9B3                                      ; component           # 🦳 white hair
 1F9B2                                      ; component           # 🦲 bald
-
 # Component subtotal:		9
 # Component subtotal:		4	w/o modifiers
-
 # group: Animals & Nature
-
 # subgroup: animal-mammal
 1F435                                      ; fully-qualified     # 🐵 monkey face
 1F412                                      ; fully-qualified     # 🐒 monkey
@@ -2359,7 +510,6 @@
 1F430                                      ; fully-qualified     # 🐰 rabbit face
 1F407                                      ; fully-qualified     # 🐇 rabbit
 1F43F FE0F                                 ; fully-qualified     # 🐿️ chipmunk
-1F43F                                      ; unqualified         # 🐿 chipmunk
 1F994                                      ; fully-qualified     # 🦔 hedgehog
 1F987                                      ; fully-qualified     # 🦇 bat
 1F43B                                      ; fully-qualified     # 🐻 bear
@@ -2371,7 +521,6 @@
 1F998                                      ; fully-qualified     # 🦘 kangaroo
 1F9A1                                      ; fully-qualified     # 🦡 badger
 1F43E                                      ; fully-qualified     # 🐾 paw prints
-
 # subgroup: animal-bird
 1F983                                      ; fully-qualified     # 🦃 turkey
 1F414                                      ; fully-qualified     # 🐔 chicken
@@ -2382,7 +531,6 @@
 1F426                                      ; fully-qualified     # 🐦 bird
 1F427                                      ; fully-qualified     # 🐧 penguin
 1F54A FE0F                                 ; fully-qualified     # 🕊️ dove
-1F54A                                      ; unqualified         # 🕊 dove
 1F985                                      ; fully-qualified     # 🦅 eagle
 1F986                                      ; fully-qualified     # 🦆 duck
 1F9A2                                      ; fully-qualified     # 🦢 swan
@@ -2390,10 +538,8 @@
 1F9A9                                      ; fully-qualified     # 🦩 flamingo
 1F99A                                      ; fully-qualified     # 🦚 peacock
 1F99C                                      ; fully-qualified     # 🦜 parrot
-
 # subgroup: animal-amphibian
 1F438                                      ; fully-qualified     # 🐸 frog
-
 # subgroup: animal-reptile
 1F40A                                      ; fully-qualified     # 🐊 crocodile
 1F422                                      ; fully-qualified     # 🐢 turtle
@@ -2403,7 +549,6 @@
 1F409                                      ; fully-qualified     # 🐉 dragon
 1F995                                      ; fully-qualified     # 🦕 sauropod
 1F996                                      ; fully-qualified     # 🦖 T-Rex
-
 # subgroup: animal-marine
 1F433                                      ; fully-qualified     # 🐳 spouting whale
 1F40B                                      ; fully-qualified     # 🐋 whale
@@ -2414,7 +559,6 @@
 1F988                                      ; fully-qualified     # 🦈 shark
 1F419                                      ; fully-qualified     # 🐙 octopus
 1F41A                                      ; fully-qualified     # 🐚 spiral shell
-
 # subgroup: animal-bug
 1F40C                                      ; fully-qualified     # 🐌 snail
 1F98B                                      ; fully-qualified     # 🦋 butterfly
@@ -2424,26 +568,21 @@
 1F41E                                      ; fully-qualified     # 🐞 lady beetle
 1F997                                      ; fully-qualified     # 🦗 cricket
 1F577 FE0F                                 ; fully-qualified     # 🕷️ spider
-1F577                                      ; unqualified         # 🕷 spider
 1F578 FE0F                                 ; fully-qualified     # 🕸️ spider web
-1F578                                      ; unqualified         # 🕸 spider web
 1F982                                      ; fully-qualified     # 🦂 scorpion
 1F99F                                      ; fully-qualified     # 🦟 mosquito
 1F9A0                                      ; fully-qualified     # 🦠 microbe
-
 # subgroup: plant-flower
 1F490                                      ; fully-qualified     # 💐 bouquet
 1F338                                      ; fully-qualified     # 🌸 cherry blossom
 1F4AE                                      ; fully-qualified     # 💮 white flower
 1F3F5 FE0F                                 ; fully-qualified     # 🏵️ rosette
-1F3F5                                      ; unqualified         # 🏵 rosette
 1F339                                      ; fully-qualified     # 🌹 rose
 1F940                                      ; fully-qualified     # 🥀 wilted flower
 1F33A                                      ; fully-qualified     # 🌺 hibiscus
 1F33B                                      ; fully-qualified     # 🌻 sunflower
 1F33C                                      ; fully-qualified     # 🌼 blossom
 1F337                                      ; fully-qualified     # 🌷 tulip
-
 # subgroup: plant-other
 1F331                                      ; fully-qualified     # 🌱 seedling
 1F332                                      ; fully-qualified     # 🌲 evergreen tree
@@ -2453,17 +592,13 @@
 1F33E                                      ; fully-qualified     # 🌾 sheaf of rice
 1F33F                                      ; fully-qualified     # 🌿 herb
 2618 FE0F                                  ; fully-qualified     # ☘️ shamrock
-2618                                       ; unqualified         # ☘ shamrock
 1F340                                      ; fully-qualified     # 🍀 four leaf clover
 1F341                                      ; fully-qualified     # 🍁 maple leaf
 1F342                                      ; fully-qualified     # 🍂 fallen leaf
 1F343                                      ; fully-qualified     # 🍃 leaf fluttering in wind
-
 # Animals & Nature subtotal:		133
 # Animals & Nature subtotal:		133	w/o modifiers
-
 # group: Food & Drink
-
 # subgroup: food-fruit
 1F347                                      ; fully-qualified     # 🍇 grapes
 1F348                                      ; fully-qualified     # 🍈 melon
@@ -2482,7 +617,6 @@
 1F95D                                      ; fully-qualified     # 🥝 kiwi fruit
 1F345                                      ; fully-qualified     # 🍅 tomato
 1F965                                      ; fully-qualified     # 🥥 coconut
-
 # subgroup: food-vegetable
 1F951                                      ; fully-qualified     # 🥑 avocado
 1F346                                      ; fully-qualified     # 🍆 eggplant
@@ -2490,7 +624,6 @@
 1F955                                      ; fully-qualified     # 🥕 carrot
 1F33D                                      ; fully-qualified     # 🌽 ear of corn
 1F336 FE0F                                 ; fully-qualified     # 🌶️ hot pepper
-1F336                                      ; unqualified         # 🌶 hot pepper
 1F952                                      ; fully-qualified     # 🥒 cucumber
 1F96C                                      ; fully-qualified     # 🥬 leafy green
 1F966                                      ; fully-qualified     # 🥦 broccoli
@@ -2499,7 +632,6 @@
 1F344                                      ; fully-qualified     # 🍄 mushroom
 1F95C                                      ; fully-qualified     # 🥜 peanuts
 1F330                                      ; fully-qualified     # 🌰 chestnut
-
 # subgroup: food-prepared
 1F35E                                      ; fully-qualified     # 🍞 bread
 1F950                                      ; fully-qualified     # 🥐 croissant
@@ -2532,7 +664,6 @@
 1F9C8                                      ; fully-qualified     # 🧈 butter
 1F9C2                                      ; fully-qualified     # 🧂 salt
 1F96B                                      ; fully-qualified     # 🥫 canned food
-
 # subgroup: food-asian
 1F371                                      ; fully-qualified     # 🍱 bento box
 1F358                                      ; fully-qualified     # 🍘 rice cracker
@@ -2551,14 +682,12 @@
 1F95F                                      ; fully-qualified     # 🥟 dumpling
 1F960                                      ; fully-qualified     # 🥠 fortune cookie
 1F961                                      ; fully-qualified     # 🥡 takeout box
-
 # subgroup: food-marine
 1F980                                      ; fully-qualified     # 🦀 crab
 1F99E                                      ; fully-qualified     # 🦞 lobster
 1F990                                      ; fully-qualified     # 🦐 shrimp
 1F991                                      ; fully-qualified     # 🦑 squid
 1F9AA                                      ; fully-qualified     # 🦪 oyster
-
 # subgroup: food-sweet
 1F366                                      ; fully-qualified     # 🍦 soft ice cream
 1F367                                      ; fully-qualified     # 🍧 shaved ice
@@ -2574,7 +703,6 @@
 1F36D                                      ; fully-qualified     # 🍭 lollipop
 1F36E                                      ; fully-qualified     # 🍮 custard
 1F36F                                      ; fully-qualified     # 🍯 honey pot
-
 # subgroup: drink
 1F37C                                      ; fully-qualified     # 🍼 baby bottle
 1F95B                                      ; fully-qualified     # 🥛 glass of milk
@@ -2593,61 +721,41 @@
 1F9C3                                      ; fully-qualified     # 🧃 beverage box
 1F9C9                                      ; fully-qualified     # 🧉 mate
 1F9CA                                      ; fully-qualified     # 🧊 ice cube
-
 # subgroup: dishware
 1F962                                      ; fully-qualified     # 🥢 chopsticks
 1F37D FE0F                                 ; fully-qualified     # 🍽️ fork and knife with plate
-1F37D                                      ; unqualified         # 🍽 fork and knife with plate
 1F374                                      ; fully-qualified     # 🍴 fork and knife
 1F944                                      ; fully-qualified     # 🥄 spoon
 1F52A                                      ; fully-qualified     # 🔪 kitchen knife
 1F3FA                                      ; fully-qualified     # 🏺 amphora
-
 # Food & Drink subtotal:		123
 # Food & Drink subtotal:		123	w/o modifiers
-
 # group: Travel & Places
-
 # subgroup: place-map
 1F30D                                      ; fully-qualified     # 🌍 globe showing Europe-Africa
 1F30E                                      ; fully-qualified     # 🌎 globe showing Americas
 1F30F                                      ; fully-qualified     # 🌏 globe showing Asia-Australia
 1F310                                      ; fully-qualified     # 🌐 globe with meridians
 1F5FA FE0F                                 ; fully-qualified     # 🗺️ world map
-1F5FA                                      ; unqualified         # 🗺 world map
 1F5FE                                      ; fully-qualified     # 🗾 map of Japan
 1F9ED                                      ; fully-qualified     # 🧭 compass
-
 # subgroup: place-geographic
 1F3D4 FE0F                                 ; fully-qualified     # 🏔️ snow-capped mountain
-1F3D4                                      ; unqualified         # 🏔 snow-capped mountain
 26F0 FE0F                                  ; fully-qualified     # ⛰️ mountain
-26F0                                       ; unqualified         # ⛰ mountain
 1F30B                                      ; fully-qualified     # 🌋 volcano
 1F5FB                                      ; fully-qualified     # 🗻 mount fuji
 1F3D5 FE0F                                 ; fully-qualified     # 🏕️ camping
-1F3D5                                      ; unqualified         # 🏕 camping
 1F3D6 FE0F                                 ; fully-qualified     # 🏖️ beach with umbrella
-1F3D6                                      ; unqualified         # 🏖 beach with umbrella
 1F3DC FE0F                                 ; fully-qualified     # 🏜️ desert
-1F3DC                                      ; unqualified         # 🏜 desert
 1F3DD FE0F                                 ; fully-qualified     # 🏝️ desert island
-1F3DD                                      ; unqualified         # 🏝 desert island
 1F3DE FE0F                                 ; fully-qualified     # 🏞️ national park
-1F3DE                                      ; unqualified         # 🏞 national park
-
 # subgroup: place-building
 1F3DF FE0F                                 ; fully-qualified     # 🏟️ stadium
-1F3DF                                      ; unqualified         # 🏟 stadium
 1F3DB FE0F                                 ; fully-qualified     # 🏛️ classical building
-1F3DB                                      ; unqualified         # 🏛 classical building
 1F3D7 FE0F                                 ; fully-qualified     # 🏗️ building construction
-1F3D7                                      ; unqualified         # 🏗 building construction
 1F9F1                                      ; fully-qualified     # 🧱 brick
 1F3D8 FE0F                                 ; fully-qualified     # 🏘️ houses
-1F3D8                                      ; unqualified         # 🏘 houses
 1F3DA FE0F                                 ; fully-qualified     # 🏚️ derelict house
-1F3DA                                      ; unqualified         # 🏚 derelict house
 1F3E0                                      ; fully-qualified     # 🏠 house
 1F3E1                                      ; fully-qualified     # 🏡 house with garden
 1F3E2                                      ; fully-qualified     # 🏢 office building
@@ -2666,36 +774,30 @@
 1F492                                      ; fully-qualified     # 💒 wedding
 1F5FC                                      ; fully-qualified     # 🗼 Tokyo tower
 1F5FD                                      ; fully-qualified     # 🗽 Statue of Liberty
-
 # subgroup: place-religious
 26EA                                       ; fully-qualified     # ⛪ church
 1F54C                                      ; fully-qualified     # 🕌 mosque
 1F6D5                                      ; fully-qualified     # 🛕 hindu temple
 1F54D                                      ; fully-qualified     # 🕍 synagogue
 26E9 FE0F                                  ; fully-qualified     # ⛩️ shinto shrine
-26E9                                       ; unqualified         # ⛩ shinto shrine
 1F54B                                      ; fully-qualified     # 🕋 kaaba
-
 # subgroup: place-other
 26F2                                       ; fully-qualified     # ⛲ fountain
 26FA                                       ; fully-qualified     # ⛺ tent
 1F301                                      ; fully-qualified     # 🌁 foggy
 1F303                                      ; fully-qualified     # 🌃 night with stars
 1F3D9 FE0F                                 ; fully-qualified     # 🏙️ cityscape
-1F3D9                                      ; unqualified         # 🏙 cityscape
 1F304                                      ; fully-qualified     # 🌄 sunrise over mountains
 1F305                                      ; fully-qualified     # 🌅 sunrise
 1F306                                      ; fully-qualified     # 🌆 cityscape at dusk
 1F307                                      ; fully-qualified     # 🌇 sunset
 1F309                                      ; fully-qualified     # 🌉 bridge at night
 2668 FE0F                                  ; fully-qualified     # ♨️ hot springs
-2668                                       ; unqualified         # ♨ hot springs
 1F3A0                                      ; fully-qualified     # 🎠 carousel horse
 1F3A1                                      ; fully-qualified     # 🎡 ferris wheel
 1F3A2                                      ; fully-qualified     # 🎢 roller coaster
 1F488                                      ; fully-qualified     # 💈 barber pole
 1F3AA                                      ; fully-qualified     # 🎪 circus tent
-
 # subgroup: transport-ground
 1F682                                      ; fully-qualified     # 🚂 locomotive
 1F683                                      ; fully-qualified     # 🚃 railway car
@@ -2726,9 +828,7 @@
 1F69B                                      ; fully-qualified     # 🚛 articulated lorry
 1F69C                                      ; fully-qualified     # 🚜 tractor
 1F3CE FE0F                                 ; fully-qualified     # 🏎️ racing car
-1F3CE                                      ; unqualified         # 🏎 racing car
 1F3CD FE0F                                 ; fully-qualified     # 🏍️ motorcycle
-1F3CD                                      ; unqualified         # 🏍 motorcycle
 1F6F5                                      ; fully-qualified     # 🛵 motor scooter
 1F9BD                                      ; fully-qualified     # 🦽 manual wheelchair
 1F9BC                                      ; fully-qualified     # 🦼 motorized wheelchair
@@ -2738,36 +838,26 @@
 1F6F9                                      ; fully-qualified     # 🛹 skateboard
 1F68F                                      ; fully-qualified     # 🚏 bus stop
 1F6E3 FE0F                                 ; fully-qualified     # 🛣️ motorway
-1F6E3                                      ; unqualified         # 🛣 motorway
 1F6E4 FE0F                                 ; fully-qualified     # 🛤️ railway track
-1F6E4                                      ; unqualified         # 🛤 railway track
 1F6E2 FE0F                                 ; fully-qualified     # 🛢️ oil drum
-1F6E2                                      ; unqualified         # 🛢 oil drum
 26FD                                       ; fully-qualified     # ⛽ fuel pump
 1F6A8                                      ; fully-qualified     # 🚨 police car light
 1F6A5                                      ; fully-qualified     # 🚥 horizontal traffic light
 1F6A6                                      ; fully-qualified     # 🚦 vertical traffic light
 1F6D1                                      ; fully-qualified     # 🛑 stop sign
 1F6A7                                      ; fully-qualified     # 🚧 construction
-
 # subgroup: transport-water
 2693                                       ; fully-qualified     # ⚓ anchor
 26F5                                       ; fully-qualified     # ⛵ sailboat
 1F6F6                                      ; fully-qualified     # 🛶 canoe
 1F6A4                                      ; fully-qualified     # 🚤 speedboat
 1F6F3 FE0F                                 ; fully-qualified     # 🛳️ passenger ship
-1F6F3                                      ; unqualified         # 🛳 passenger ship
 26F4 FE0F                                  ; fully-qualified     # ⛴️ ferry
-26F4                                       ; unqualified         # ⛴ ferry
 1F6E5 FE0F                                 ; fully-qualified     # 🛥️ motor boat
-1F6E5                                      ; unqualified         # 🛥 motor boat
 1F6A2                                      ; fully-qualified     # 🚢 ship
-
 # subgroup: transport-air
 2708 FE0F                                  ; fully-qualified     # ✈️ airplane
-2708                                       ; unqualified         # ✈ airplane
 1F6E9 FE0F                                 ; fully-qualified     # 🛩️ small airplane
-1F6E9                                      ; unqualified         # 🛩 small airplane
 1F6EB                                      ; fully-qualified     # 🛫 airplane departure
 1F6EC                                      ; fully-qualified     # 🛬 airplane arrival
 1FA82                                      ; fully-qualified     # 🪂 parachute
@@ -2777,26 +867,19 @@
 1F6A0                                      ; fully-qualified     # 🚠 mountain cableway
 1F6A1                                      ; fully-qualified     # 🚡 aerial tramway
 1F6F0 FE0F                                 ; fully-qualified     # 🛰️ satellite
-1F6F0                                      ; unqualified         # 🛰 satellite
 1F680                                      ; fully-qualified     # 🚀 rocket
 1F6F8                                      ; fully-qualified     # 🛸 flying saucer
-
 # subgroup: hotel
 1F6CE FE0F                                 ; fully-qualified     # 🛎️ bellhop bell
-1F6CE                                      ; unqualified         # 🛎 bellhop bell
 1F9F3                                      ; fully-qualified     # 🧳 luggage
-
 # subgroup: time
 231B                                       ; fully-qualified     # ⌛ hourglass done
 23F3                                       ; fully-qualified     # ⏳ hourglass not done
 231A                                       ; fully-qualified     # ⌚ watch
 23F0                                       ; fully-qualified     # ⏰ alarm clock
 23F1 FE0F                                  ; fully-qualified     # ⏱️ stopwatch
-23F1                                       ; unqualified         # ⏱ stopwatch
 23F2 FE0F                                  ; fully-qualified     # ⏲️ timer clock
-23F2                                       ; unqualified         # ⏲ timer clock
 1F570 FE0F                                 ; fully-qualified     # 🕰️ mantelpiece clock
-1F570                                      ; unqualified         # 🕰 mantelpiece clock
 1F55B                                      ; fully-qualified     # 🕛 twelve o’clock
 1F567                                      ; fully-qualified     # 🕧 twelve-thirty
 1F550                                      ; fully-qualified     # 🕐 one o’clock
@@ -2821,7 +904,6 @@
 1F565                                      ; fully-qualified     # 🕥 ten-thirty
 1F55A                                      ; fully-qualified     # 🕚 eleven o’clock
 1F566                                      ; fully-qualified     # 🕦 eleven-thirty
-
 # subgroup: sky & weather
 1F311                                      ; fully-qualified     # 🌑 new moon
 1F312                                      ; fully-qualified     # 🌒 waxing crescent moon
@@ -2836,9 +918,7 @@
 1F31B                                      ; fully-qualified     # 🌛 first quarter moon face
 1F31C                                      ; fully-qualified     # 🌜 last quarter moon face
 1F321 FE0F                                 ; fully-qualified     # 🌡️ thermometer
-1F321                                      ; unqualified         # 🌡 thermometer
 2600 FE0F                                  ; fully-qualified     # ☀️ sun
-2600                                       ; unqualified         # ☀ sun
 1F31D                                      ; fully-qualified     # 🌝 full moon face
 1F31E                                      ; fully-qualified     # 🌞 sun with face
 1FA90                                      ; fully-qualified     # 🪐 ringed planet
@@ -2847,53 +927,34 @@
 1F320                                      ; fully-qualified     # 🌠 shooting star
 1F30C                                      ; fully-qualified     # 🌌 milky way
 2601 FE0F                                  ; fully-qualified     # ☁️ cloud
-2601                                       ; unqualified         # ☁ cloud
 26C5                                       ; fully-qualified     # ⛅ sun behind cloud
 26C8 FE0F                                  ; fully-qualified     # ⛈️ cloud with lightning and rain
-26C8                                       ; unqualified         # ⛈ cloud with lightning and rain
 1F324 FE0F                                 ; fully-qualified     # 🌤️ sun behind small cloud
-1F324                                      ; unqualified         # 🌤 sun behind small cloud
 1F325 FE0F                                 ; fully-qualified     # 🌥️ sun behind large cloud
-1F325                                      ; unqualified         # 🌥 sun behind large cloud
 1F326 FE0F                                 ; fully-qualified     # 🌦️ sun behind rain cloud
-1F326                                      ; unqualified         # 🌦 sun behind rain cloud
 1F327 FE0F                                 ; fully-qualified     # 🌧️ cloud with rain
-1F327                                      ; unqualified         # 🌧 cloud with rain
 1F328 FE0F                                 ; fully-qualified     # 🌨️ cloud with snow
-1F328                                      ; unqualified         # 🌨 cloud with snow
 1F329 FE0F                                 ; fully-qualified     # 🌩️ cloud with lightning
-1F329                                      ; unqualified         # 🌩 cloud with lightning
 1F32A FE0F                                 ; fully-qualified     # 🌪️ tornado
-1F32A                                      ; unqualified         # 🌪 tornado
 1F32B FE0F                                 ; fully-qualified     # 🌫️ fog
-1F32B                                      ; unqualified         # 🌫 fog
 1F32C FE0F                                 ; fully-qualified     # 🌬️ wind face
-1F32C                                      ; unqualified         # 🌬 wind face
 1F300                                      ; fully-qualified     # 🌀 cyclone
 1F308                                      ; fully-qualified     # 🌈 rainbow
 1F302                                      ; fully-qualified     # 🌂 closed umbrella
 2602 FE0F                                  ; fully-qualified     # ☂️ umbrella
-2602                                       ; unqualified         # ☂ umbrella
 2614                                       ; fully-qualified     # ☔ umbrella with rain drops
 26F1 FE0F                                  ; fully-qualified     # ⛱️ umbrella on ground
-26F1                                       ; unqualified         # ⛱ umbrella on ground
 26A1                                       ; fully-qualified     # ⚡ high voltage
 2744 FE0F                                  ; fully-qualified     # ❄️ snowflake
-2744                                       ; unqualified         # ❄ snowflake
 2603 FE0F                                  ; fully-qualified     # ☃️ snowman
-2603                                       ; unqualified         # ☃ snowman
 26C4                                       ; fully-qualified     # ⛄ snowman without snow
 2604 FE0F                                  ; fully-qualified     # ☄️ comet
-2604                                       ; unqualified         # ☄ comet
 1F525                                      ; fully-qualified     # 🔥 fire
 1F4A7                                      ; fully-qualified     # 💧 droplet
 1F30A                                      ; fully-qualified     # 🌊 water wave
-
 # Travel & Places subtotal:		259
 # Travel & Places subtotal:		259	w/o modifiers
-
 # group: Activities
-
 # subgroup: event
 1F383                                      ; fully-qualified     # 🎃 jack-o-lantern
 1F384                                      ; fully-qualified     # 🎄 Christmas tree
@@ -2914,20 +975,15 @@
 1F380                                      ; fully-qualified     # 🎀 ribbon
 1F381                                      ; fully-qualified     # 🎁 wrapped gift
 1F397 FE0F                                 ; fully-qualified     # 🎗️ reminder ribbon
-1F397                                      ; unqualified         # 🎗 reminder ribbon
 1F39F FE0F                                 ; fully-qualified     # 🎟️ admission tickets
-1F39F                                      ; unqualified         # 🎟 admission tickets
 1F3AB                                      ; fully-qualified     # 🎫 ticket
-
 # subgroup: award-medal
 1F396 FE0F                                 ; fully-qualified     # 🎖️ military medal
-1F396                                      ; unqualified         # 🎖 military medal
 1F3C6                                      ; fully-qualified     # 🏆 trophy
 1F3C5                                      ; fully-qualified     # 🏅 sports medal
 1F947                                      ; fully-qualified     # 🥇 1st place medal
 1F948                                      ; fully-qualified     # 🥈 2nd place medal
 1F949                                      ; fully-qualified     # 🥉 3rd place medal
-
 # subgroup: sport
 26BD                                       ; fully-qualified     # ⚽ soccer ball
 26BE                                       ; fully-qualified     # ⚾ baseball
@@ -2950,14 +1006,12 @@
 1F945                                      ; fully-qualified     # 🥅 goal net
 26F3                                       ; fully-qualified     # ⛳ flag in hole
 26F8 FE0F                                  ; fully-qualified     # ⛸️ ice skate
-26F8                                       ; unqualified         # ⛸ ice skate
 1F3A3                                      ; fully-qualified     # 🎣 fishing pole
 1F93F                                      ; fully-qualified     # 🤿 diving mask
 1F3BD                                      ; fully-qualified     # 🎽 running shirt
 1F3BF                                      ; fully-qualified     # 🎿 skis
 1F6F7                                      ; fully-qualified     # 🛷 sled
 1F94C                                      ; fully-qualified     # 🥌 curling stone
-
 # subgroup: game
 1F3AF                                      ; fully-qualified     # 🎯 direct hit
 1FA80                                      ; fully-qualified     # 🪀 yo-yo
@@ -2967,42 +1021,30 @@
 1F9FF                                      ; fully-qualified     # 🧿 nazar amulet
 1F3AE                                      ; fully-qualified     # 🎮 video game
 1F579 FE0F                                 ; fully-qualified     # 🕹️ joystick
-1F579                                      ; unqualified         # 🕹 joystick
 1F3B0                                      ; fully-qualified     # 🎰 slot machine
 1F3B2                                      ; fully-qualified     # 🎲 game die
 1F9E9                                      ; fully-qualified     # 🧩 puzzle piece
 1F9F8                                      ; fully-qualified     # 🧸 teddy bear
 2660 FE0F                                  ; fully-qualified     # ♠️ spade suit
-2660                                       ; unqualified         # ♠ spade suit
 2665 FE0F                                  ; fully-qualified     # ♥️ heart suit
-2665                                       ; unqualified         # ♥ heart suit
 2666 FE0F                                  ; fully-qualified     # ♦️ diamond suit
-2666                                       ; unqualified         # ♦ diamond suit
 2663 FE0F                                  ; fully-qualified     # ♣️ club suit
-2663                                       ; unqualified         # ♣ club suit
 265F FE0F                                  ; fully-qualified     # ♟️ chess pawn
-265F                                       ; unqualified         # ♟ chess pawn
 1F0CF                                      ; fully-qualified     # 🃏 joker
 1F004                                      ; fully-qualified     # 🀄 mahjong red dragon
 1F3B4                                      ; fully-qualified     # 🎴 flower playing cards
-
 # subgroup: arts & crafts
 1F3AD                                      ; fully-qualified     # 🎭 performing arts
 1F5BC FE0F                                 ; fully-qualified     # 🖼️ framed picture
-1F5BC                                      ; unqualified         # 🖼 framed picture
 1F3A8                                      ; fully-qualified     # 🎨 artist palette
 1F9F5                                      ; fully-qualified     # 🧵 thread
 1F9F6                                      ; fully-qualified     # 🧶 yarn
-
 # Activities subtotal:		90
 # Activities subtotal:		90	w/o modifiers
-
 # group: Objects
-
 # subgroup: clothing
 1F453                                      ; fully-qualified     # 👓 glasses
 1F576 FE0F                                 ; fully-qualified     # 🕶️ sunglasses
-1F576                                      ; unqualified         # 🕶 sunglasses
 1F97D                                      ; fully-qualified     # 🥽 goggles
 1F97C                                      ; fully-qualified     # 🥼 lab coat
 1F9BA                                      ; fully-qualified     # 🦺 safety vest
@@ -3025,7 +1067,6 @@
 1F45C                                      ; fully-qualified     # 👜 handbag
 1F45D                                      ; fully-qualified     # 👝 clutch bag
 1F6CD FE0F                                 ; fully-qualified     # 🛍️ shopping bags
-1F6CD                                      ; unqualified         # 🛍 shopping bags
 1F392                                      ; fully-qualified     # 🎒 backpack
 1F45E                                      ; fully-qualified     # 👞 man’s shoe
 1F45F                                      ; fully-qualified     # 👟 running shoe
@@ -3041,12 +1082,10 @@
 1F393                                      ; fully-qualified     # 🎓 graduation cap
 1F9E2                                      ; fully-qualified     # 🧢 billed cap
 26D1 FE0F                                  ; fully-qualified     # ⛑️ rescue worker’s helmet
-26D1                                       ; unqualified         # ⛑ rescue worker’s helmet
 1F4FF                                      ; fully-qualified     # 📿 prayer beads
 1F484                                      ; fully-qualified     # 💄 lipstick
 1F48D                                      ; fully-qualified     # 💍 ring
 1F48E                                      ; fully-qualified     # 💎 gem stone
-
 # subgroup: sound
 1F507                                      ; fully-qualified     # 🔇 muted speaker
 1F508                                      ; fully-qualified     # 🔈 speaker low volume
@@ -3057,21 +1096,16 @@
 1F4EF                                      ; fully-qualified     # 📯 postal horn
 1F514                                      ; fully-qualified     # 🔔 bell
 1F515                                      ; fully-qualified     # 🔕 bell with slash
-
 # subgroup: music
 1F3BC                                      ; fully-qualified     # 🎼 musical score
 1F3B5                                      ; fully-qualified     # 🎵 musical note
 1F3B6                                      ; fully-qualified     # 🎶 musical notes
 1F399 FE0F                                 ; fully-qualified     # 🎙️ studio microphone
-1F399                                      ; unqualified         # 🎙 studio microphone
 1F39A FE0F                                 ; fully-qualified     # 🎚️ level slider
-1F39A                                      ; unqualified         # 🎚 level slider
 1F39B FE0F                                 ; fully-qualified     # 🎛️ control knobs
-1F39B                                      ; unqualified         # 🎛 control knobs
 1F3A4                                      ; fully-qualified     # 🎤 microphone
 1F3A7                                      ; fully-qualified     # 🎧 headphone
 1F4FB                                      ; fully-qualified     # 📻 radio
-
 # subgroup: musical-instrument
 1F3B7                                      ; fully-qualified     # 🎷 saxophone
 1F3B8                                      ; fully-qualified     # 🎸 guitar
@@ -3080,42 +1114,31 @@
 1F3BB                                      ; fully-qualified     # 🎻 violin
 1FA95                                      ; fully-qualified     # 🪕 banjo
 1F941                                      ; fully-qualified     # 🥁 drum
-
 # subgroup: phone
 1F4F1                                      ; fully-qualified     # 📱 mobile phone
 1F4F2                                      ; fully-qualified     # 📲 mobile phone with arrow
 260E FE0F                                  ; fully-qualified     # ☎️ telephone
-260E                                       ; unqualified         # ☎ telephone
 1F4DE                                      ; fully-qualified     # 📞 telephone receiver
 1F4DF                                      ; fully-qualified     # 📟 pager
 1F4E0                                      ; fully-qualified     # 📠 fax machine
-
 # subgroup: computer
 1F50B                                      ; fully-qualified     # 🔋 battery
 1F50C                                      ; fully-qualified     # 🔌 electric plug
 1F4BB                                      ; fully-qualified     # 💻 laptop computer
 1F5A5 FE0F                                 ; fully-qualified     # 🖥️ desktop computer
-1F5A5                                      ; unqualified         # 🖥 desktop computer
 1F5A8 FE0F                                 ; fully-qualified     # 🖨️ printer
-1F5A8                                      ; unqualified         # 🖨 printer
 2328 FE0F                                  ; fully-qualified     # ⌨️ keyboard
-2328                                       ; unqualified         # ⌨ keyboard
 1F5B1 FE0F                                 ; fully-qualified     # 🖱️ computer mouse
-1F5B1                                      ; unqualified         # 🖱 computer mouse
 1F5B2 FE0F                                 ; fully-qualified     # 🖲️ trackball
-1F5B2                                      ; unqualified         # 🖲 trackball
 1F4BD                                      ; fully-qualified     # 💽 computer disk
 1F4BE                                      ; fully-qualified     # 💾 floppy disk
 1F4BF                                      ; fully-qualified     # 💿 optical disk
 1F4C0                                      ; fully-qualified     # 📀 dvd
 1F9EE                                      ; fully-qualified     # 🧮 abacus
-
 # subgroup: light & video
 1F3A5                                      ; fully-qualified     # 🎥 movie camera
 1F39E FE0F                                 ; fully-qualified     # 🎞️ film frames
-1F39E                                      ; unqualified         # 🎞 film frames
 1F4FD FE0F                                 ; fully-qualified     # 📽️ film projector
-1F4FD                                      ; unqualified         # 📽 film projector
 1F3AC                                      ; fully-qualified     # 🎬 clapper board
 1F4FA                                      ; fully-qualified     # 📺 television
 1F4F7                                      ; fully-qualified     # 📷 camera
@@ -3125,12 +1148,10 @@
 1F50D                                      ; fully-qualified     # 🔍 magnifying glass tilted left
 1F50E                                      ; fully-qualified     # 🔎 magnifying glass tilted right
 1F56F FE0F                                 ; fully-qualified     # 🕯️ candle
-1F56F                                      ; unqualified         # 🕯 candle
 1F4A1                                      ; fully-qualified     # 💡 light bulb
 1F526                                      ; fully-qualified     # 🔦 flashlight
 1F3EE                                      ; fully-qualified     # 🏮 red paper lantern
 1FA94                                      ; fully-qualified     # 🪔 diya lamp
-
 # subgroup: book-paper
 1F4D4                                      ; fully-qualified     # 📔 notebook with decorative cover
 1F4D5                                      ; fully-qualified     # 📕 closed book
@@ -3146,12 +1167,9 @@
 1F4C4                                      ; fully-qualified     # 📄 page facing up
 1F4F0                                      ; fully-qualified     # 📰 newspaper
 1F5DE FE0F                                 ; fully-qualified     # 🗞️ rolled-up newspaper
-1F5DE                                      ; unqualified         # 🗞 rolled-up newspaper
 1F4D1                                      ; fully-qualified     # 📑 bookmark tabs
 1F516                                      ; fully-qualified     # 🔖 bookmark
 1F3F7 FE0F                                 ; fully-qualified     # 🏷️ label
-1F3F7                                      ; unqualified         # 🏷 label
-
 # subgroup: money
 1F4B0                                      ; fully-qualified     # 💰 money bag
 1F4B4                                      ; fully-qualified     # 💴 yen banknote
@@ -3164,10 +1182,8 @@
 1F4B9                                      ; fully-qualified     # 💹 chart increasing with yen
 1F4B1                                      ; fully-qualified     # 💱 currency exchange
 1F4B2                                      ; fully-qualified     # 💲 heavy dollar sign
-
 # subgroup: mail
 2709 FE0F                                  ; fully-qualified     # ✉️ envelope
-2709                                       ; unqualified         # ✉ envelope
 1F4E7                                      ; fully-qualified     # 📧 e-mail
 1F4E8                                      ; fully-qualified     # 📨 incoming envelope
 1F4E9                                      ; fully-qualified     # 📩 envelope with arrow
@@ -3180,35 +1196,23 @@
 1F4ED                                      ; fully-qualified     # 📭 open mailbox with lowered flag
 1F4EE                                      ; fully-qualified     # 📮 postbox
 1F5F3 FE0F                                 ; fully-qualified     # 🗳️ ballot box with ballot
-1F5F3                                      ; unqualified         # 🗳 ballot box with ballot
-
 # subgroup: writing
 270F FE0F                                  ; fully-qualified     # ✏️ pencil
-270F                                       ; unqualified         # ✏ pencil
 2712 FE0F                                  ; fully-qualified     # ✒️ black nib
-2712                                       ; unqualified         # ✒ black nib
 1F58B FE0F                                 ; fully-qualified     # 🖋️ fountain pen
-1F58B                                      ; unqualified         # 🖋 fountain pen
 1F58A FE0F                                 ; fully-qualified     # 🖊️ pen
-1F58A                                      ; unqualified         # 🖊 pen
 1F58C FE0F                                 ; fully-qualified     # 🖌️ paintbrush
-1F58C                                      ; unqualified         # 🖌 paintbrush
 1F58D FE0F                                 ; fully-qualified     # 🖍️ crayon
-1F58D                                      ; unqualified         # 🖍 crayon
 1F4DD                                      ; fully-qualified     # 📝 memo
-
 # subgroup: office
 1F4BC                                      ; fully-qualified     # 💼 briefcase
 1F4C1                                      ; fully-qualified     # 📁 file folder
 1F4C2                                      ; fully-qualified     # 📂 open file folder
 1F5C2 FE0F                                 ; fully-qualified     # 🗂️ card index dividers
-1F5C2                                      ; unqualified         # 🗂 card index dividers
 1F4C5                                      ; fully-qualified     # 📅 calendar
 1F4C6                                      ; fully-qualified     # 📆 tear-off calendar
 1F5D2 FE0F                                 ; fully-qualified     # 🗒️ spiral notepad
-1F5D2                                      ; unqualified         # 🗒 spiral notepad
 1F5D3 FE0F                                 ; fully-qualified     # 🗓️ spiral calendar
-1F5D3                                      ; unqualified         # 🗓 spiral calendar
 1F4C7                                      ; fully-qualified     # 📇 card index
 1F4C8                                      ; fully-qualified     # 📈 chart increasing
 1F4C9                                      ; fully-qualified     # 📉 chart decreasing
@@ -3218,18 +1222,12 @@
 1F4CD                                      ; fully-qualified     # 📍 round pushpin
 1F4CE                                      ; fully-qualified     # 📎 paperclip
 1F587 FE0F                                 ; fully-qualified     # 🖇️ linked paperclips
-1F587                                      ; unqualified         # 🖇 linked paperclips
 1F4CF                                      ; fully-qualified     # 📏 straight ruler
 1F4D0                                      ; fully-qualified     # 📐 triangular ruler
 2702 FE0F                                  ; fully-qualified     # ✂️ scissors
-2702                                       ; unqualified         # ✂ scissors
 1F5C3 FE0F                                 ; fully-qualified     # 🗃️ card file box
-1F5C3                                      ; unqualified         # 🗃 card file box
 1F5C4 FE0F                                 ; fully-qualified     # 🗄️ file cabinet
-1F5C4                                      ; unqualified         # 🗄 file cabinet
 1F5D1 FE0F                                 ; fully-qualified     # 🗑️ wastebasket
-1F5D1                                      ; unqualified         # 🗑 wastebasket
-
 # subgroup: lock
 1F512                                      ; fully-qualified     # 🔒 locked
 1F513                                      ; fully-qualified     # 🔓 unlocked
@@ -3237,63 +1235,45 @@
 1F510                                      ; fully-qualified     # 🔐 locked with key
 1F511                                      ; fully-qualified     # 🔑 key
 1F5DD FE0F                                 ; fully-qualified     # 🗝️ old key
-1F5DD                                      ; unqualified         # 🗝 old key
-
 # subgroup: tool
 1F528                                      ; fully-qualified     # 🔨 hammer
 1FA93                                      ; fully-qualified     # 🪓 axe
 26CF FE0F                                  ; fully-qualified     # ⛏️ pick
-26CF                                       ; unqualified         # ⛏ pick
 2692 FE0F                                  ; fully-qualified     # ⚒️ hammer and pick
-2692                                       ; unqualified         # ⚒ hammer and pick
 1F6E0 FE0F                                 ; fully-qualified     # 🛠️ hammer and wrench
-1F6E0                                      ; unqualified         # 🛠 hammer and wrench
 1F5E1 FE0F                                 ; fully-qualified     # 🗡️ dagger
-1F5E1                                      ; unqualified         # 🗡 dagger
 2694 FE0F                                  ; fully-qualified     # ⚔️ crossed swords
-2694                                       ; unqualified         # ⚔ crossed swords
 1F52B                                      ; fully-qualified     # 🔫 pistol
 1F3F9                                      ; fully-qualified     # 🏹 bow and arrow
 1F6E1 FE0F                                 ; fully-qualified     # 🛡️ shield
-1F6E1                                      ; unqualified         # 🛡 shield
 1F527                                      ; fully-qualified     # 🔧 wrench
 1F529                                      ; fully-qualified     # 🔩 nut and bolt
 2699 FE0F                                  ; fully-qualified     # ⚙️ gear
-2699                                       ; unqualified         # ⚙ gear
 1F5DC FE0F                                 ; fully-qualified     # 🗜️ clamp
-1F5DC                                      ; unqualified         # 🗜 clamp
 2696 FE0F                                  ; fully-qualified     # ⚖️ balance scale
-2696                                       ; unqualified         # ⚖ balance scale
 1F9AF                                      ; fully-qualified     # 🦯 probing cane
 1F517                                      ; fully-qualified     # 🔗 link
 26D3 FE0F                                  ; fully-qualified     # ⛓️ chains
-26D3                                       ; unqualified         # ⛓ chains
 1F9F0                                      ; fully-qualified     # 🧰 toolbox
 1F9F2                                      ; fully-qualified     # 🧲 magnet
-
 # subgroup: science
 2697 FE0F                                  ; fully-qualified     # ⚗️ alembic
-2697                                       ; unqualified         # ⚗ alembic
 1F9EA                                      ; fully-qualified     # 🧪 test tube
 1F9EB                                      ; fully-qualified     # 🧫 petri dish
 1F9EC                                      ; fully-qualified     # 🧬 dna
 1F52C                                      ; fully-qualified     # 🔬 microscope
 1F52D                                      ; fully-qualified     # 🔭 telescope
 1F4E1                                      ; fully-qualified     # 📡 satellite antenna
-
 # subgroup: medical
 1F489                                      ; fully-qualified     # 💉 syringe
 1FA78                                      ; fully-qualified     # 🩸 drop of blood
 1F48A                                      ; fully-qualified     # 💊 pill
 1FA79                                      ; fully-qualified     # 🩹 adhesive bandage
 1FA7A                                      ; fully-qualified     # 🩺 stethoscope
-
 # subgroup: household
 1F6AA                                      ; fully-qualified     # 🚪 door
 1F6CF FE0F                                 ; fully-qualified     # 🛏️ bed
-1F6CF                                      ; unqualified         # 🛏 bed
 1F6CB FE0F                                 ; fully-qualified     # 🛋️ couch and lamp
-1F6CB                                      ; unqualified         # 🛋 couch and lamp
 1FA91                                      ; fully-qualified     # 🪑 chair
 1F6BD                                      ; fully-qualified     # 🚽 toilet
 1F6BF                                      ; fully-qualified     # 🚿 shower
@@ -3308,20 +1288,14 @@
 1F9FD                                      ; fully-qualified     # 🧽 sponge
 1F9EF                                      ; fully-qualified     # 🧯 fire extinguisher
 1F6D2                                      ; fully-qualified     # 🛒 shopping cart
-
 # subgroup: other-object
 1F6AC                                      ; fully-qualified     # 🚬 cigarette
 26B0 FE0F                                  ; fully-qualified     # ⚰️ coffin
-26B0                                       ; unqualified         # ⚰ coffin
 26B1 FE0F                                  ; fully-qualified     # ⚱️ funeral urn
-26B1                                       ; unqualified         # ⚱ funeral urn
 1F5FF                                      ; fully-qualified     # 🗿 moai
-
 # Objects subtotal:		282
 # Objects subtotal:		282	w/o modifiers
-
 # group: Symbols
-
 # subgroup: transport-sign
 1F3E7                                      ; fully-qualified     # 🏧 ATM sign
 1F6AE                                      ; fully-qualified     # 🚮 litter in bin sign
@@ -3336,10 +1310,8 @@
 1F6C3                                      ; fully-qualified     # 🛃 customs
 1F6C4                                      ; fully-qualified     # 🛄 baggage claim
 1F6C5                                      ; fully-qualified     # 🛅 left luggage
-
 # subgroup: warning
 26A0 FE0F                                  ; fully-qualified     # ⚠️ warning
-26A0                                       ; unqualified         # ⚠ warning
 1F6B8                                      ; fully-qualified     # 🚸 children crossing
 26D4                                       ; fully-qualified     # ⛔ no entry
 1F6AB                                      ; fully-qualified     # 🚫 prohibited
@@ -3351,39 +1323,22 @@
 1F4F5                                      ; fully-qualified     # 📵 no mobile phones
 1F51E                                      ; fully-qualified     # 🔞 no one under eighteen
 2622 FE0F                                  ; fully-qualified     # ☢️ radioactive
-2622                                       ; unqualified         # ☢ radioactive
 2623 FE0F                                  ; fully-qualified     # ☣️ biohazard
-2623                                       ; unqualified         # ☣ biohazard
-
 # subgroup: arrow
 2B06 FE0F                                  ; fully-qualified     # ⬆️ up arrow
-2B06                                       ; unqualified         # ⬆ up arrow
 2197 FE0F                                  ; fully-qualified     # ↗️ up-right arrow
-2197                                       ; unqualified         # ↗ up-right arrow
 27A1 FE0F                                  ; fully-qualified     # ➡️ right arrow
-27A1                                       ; unqualified         # ➡ right arrow
 2198 FE0F                                  ; fully-qualified     # ↘️ down-right arrow
-2198                                       ; unqualified         # ↘ down-right arrow
 2B07 FE0F                                  ; fully-qualified     # ⬇️ down arrow
-2B07                                       ; unqualified         # ⬇ down arrow
 2199 FE0F                                  ; fully-qualified     # ↙️ down-left arrow
-2199                                       ; unqualified         # ↙ down-left arrow
 2B05 FE0F                                  ; fully-qualified     # ⬅️ left arrow
-2B05                                       ; unqualified         # ⬅ left arrow
 2196 FE0F                                  ; fully-qualified     # ↖️ up-left arrow
-2196                                       ; unqualified         # ↖ up-left arrow
 2195 FE0F                                  ; fully-qualified     # ↕️ up-down arrow
-2195                                       ; unqualified         # ↕ up-down arrow
 2194 FE0F                                  ; fully-qualified     # ↔️ left-right arrow
-2194                                       ; unqualified         # ↔ left-right arrow
 21A9 FE0F                                  ; fully-qualified     # ↩️ right arrow curving left
-21A9                                       ; unqualified         # ↩ right arrow curving left
 21AA FE0F                                  ; fully-qualified     # ↪️ left arrow curving right
-21AA                                       ; unqualified         # ↪ left arrow curving right
 2934 FE0F                                  ; fully-qualified     # ⤴️ right arrow curving up
-2934                                       ; unqualified         # ⤴ right arrow curving up
 2935 FE0F                                  ; fully-qualified     # ⤵️ right arrow curving down
-2935                                       ; unqualified         # ⤵ right arrow curving down
 1F503                                      ; fully-qualified     # 🔃 clockwise vertical arrows
 1F504                                      ; fully-qualified     # 🔄 counterclockwise arrows button
 1F519                                      ; fully-qualified     # 🔙 BACK arrow
@@ -3391,30 +1346,19 @@
 1F51B                                      ; fully-qualified     # 🔛 ON! arrow
 1F51C                                      ; fully-qualified     # 🔜 SOON arrow
 1F51D                                      ; fully-qualified     # 🔝 TOP arrow
-
 # subgroup: religion
 1F6D0                                      ; fully-qualified     # 🛐 place of worship
 269B FE0F                                  ; fully-qualified     # ⚛️ atom symbol
-269B                                       ; unqualified         # ⚛ atom symbol
 1F549 FE0F                                 ; fully-qualified     # 🕉️ om
-1F549                                      ; unqualified         # 🕉 om
 2721 FE0F                                  ; fully-qualified     # ✡️ star of David
-2721                                       ; unqualified         # ✡ star of David
 2638 FE0F                                  ; fully-qualified     # ☸️ wheel of dharma
-2638                                       ; unqualified         # ☸ wheel of dharma
 262F FE0F                                  ; fully-qualified     # ☯️ yin yang
-262F                                       ; unqualified         # ☯ yin yang
 271D FE0F                                  ; fully-qualified     # ✝️ latin cross
-271D                                       ; unqualified         # ✝ latin cross
 2626 FE0F                                  ; fully-qualified     # ☦️ orthodox cross
-2626                                       ; unqualified         # ☦ orthodox cross
 262A FE0F                                  ; fully-qualified     # ☪️ star and crescent
-262A                                       ; unqualified         # ☪ star and crescent
 262E FE0F                                  ; fully-qualified     # ☮️ peace symbol
-262E                                       ; unqualified         # ☮ peace symbol
 1F54E                                      ; fully-qualified     # 🕎 menorah
 1F52F                                      ; fully-qualified     # 🔯 dotted six-pointed star
-
 # subgroup: zodiac
 2648                                       ; fully-qualified     # ♈ Aries
 2649                                       ; fully-qualified     # ♉ Taurus
@@ -3429,68 +1373,47 @@
 2652                                       ; fully-qualified     # ♒ Aquarius
 2653                                       ; fully-qualified     # ♓ Pisces
 26CE                                       ; fully-qualified     # ⛎ Ophiuchus
-
 # subgroup: av-symbol
 1F500                                      ; fully-qualified     # 🔀 shuffle tracks button
 1F501                                      ; fully-qualified     # 🔁 repeat button
 1F502                                      ; fully-qualified     # 🔂 repeat single button
 25B6 FE0F                                  ; fully-qualified     # ▶️ play button
-25B6                                       ; unqualified         # ▶ play button
 23E9                                       ; fully-qualified     # ⏩ fast-forward button
 23ED FE0F                                  ; fully-qualified     # ⏭️ next track button
-23ED                                       ; unqualified         # ⏭ next track button
 23EF FE0F                                  ; fully-qualified     # ⏯️ play or pause button
-23EF                                       ; unqualified         # ⏯ play or pause button
 25C0 FE0F                                  ; fully-qualified     # ◀️ reverse button
-25C0                                       ; unqualified         # ◀ reverse button
 23EA                                       ; fully-qualified     # ⏪ fast reverse button
 23EE FE0F                                  ; fully-qualified     # ⏮️ last track button
-23EE                                       ; unqualified         # ⏮ last track button
 1F53C                                      ; fully-qualified     # 🔼 upwards button
 23EB                                       ; fully-qualified     # ⏫ fast up button
 1F53D                                      ; fully-qualified     # 🔽 downwards button
 23EC                                       ; fully-qualified     # ⏬ fast down button
 23F8 FE0F                                  ; fully-qualified     # ⏸️ pause button
-23F8                                       ; unqualified         # ⏸ pause button
 23F9 FE0F                                  ; fully-qualified     # ⏹️ stop button
-23F9                                       ; unqualified         # ⏹ stop button
 23FA FE0F                                  ; fully-qualified     # ⏺️ record button
-23FA                                       ; unqualified         # ⏺ record button
 23CF FE0F                                  ; fully-qualified     # ⏏️ eject button
-23CF                                       ; unqualified         # ⏏ eject button
 1F3A6                                      ; fully-qualified     # 🎦 cinema
 1F505                                      ; fully-qualified     # 🔅 dim button
 1F506                                      ; fully-qualified     # 🔆 bright button
 1F4F6                                      ; fully-qualified     # 📶 antenna bars
 1F4F3                                      ; fully-qualified     # 📳 vibration mode
 1F4F4                                      ; fully-qualified     # 📴 mobile phone off
-
 # subgroup: gender
 2640 FE0F                                  ; fully-qualified     # ♀️ female sign
-2640                                       ; unqualified         # ♀ female sign
 2642 FE0F                                  ; fully-qualified     # ♂️ male sign
-2642                                       ; unqualified         # ♂ male sign
-
 # subgroup: other-symbol
 2695 FE0F                                  ; fully-qualified     # ⚕️ medical symbol
-2695                                       ; unqualified         # ⚕ medical symbol
 267E FE0F                                  ; fully-qualified     # ♾️ infinity
-267E                                       ; unqualified         # ♾ infinity
 267B FE0F                                  ; fully-qualified     # ♻️ recycling symbol
-267B                                       ; unqualified         # ♻ recycling symbol
 269C FE0F                                  ; fully-qualified     # ⚜️ fleur-de-lis
-269C                                       ; unqualified         # ⚜ fleur-de-lis
 1F531                                      ; fully-qualified     # 🔱 trident emblem
 1F4DB                                      ; fully-qualified     # 📛 name badge
 1F530                                      ; fully-qualified     # 🔰 Japanese symbol for beginner
 2B55                                       ; fully-qualified     # ⭕ hollow red circle
 2705                                       ; fully-qualified     # ✅ check mark button
 2611 FE0F                                  ; fully-qualified     # ☑️ check box with check
-2611                                       ; unqualified         # ☑ check box with check
 2714 FE0F                                  ; fully-qualified     # ✔️ check mark
-2714                                       ; unqualified         # ✔ check mark
 2716 FE0F                                  ; fully-qualified     # ✖️ multiplication sign
-2716                                       ; unqualified         # ✖ multiplication sign
 274C                                       ; fully-qualified     # ❌ cross mark
 274E                                       ; fully-qualified     # ❎ cross mark button
 2795                                       ; fully-qualified     # ➕ plus sign
@@ -3499,57 +1422,20 @@
 27B0                                       ; fully-qualified     # ➰ curly loop
 27BF                                       ; fully-qualified     # ➿ double curly loop
 303D FE0F                                  ; fully-qualified     # 〽️ part alternation mark
-303D                                       ; unqualified         # 〽 part alternation mark
 2733 FE0F                                  ; fully-qualified     # ✳️ eight-spoked asterisk
-2733                                       ; unqualified         # ✳ eight-spoked asterisk
 2734 FE0F                                  ; fully-qualified     # ✴️ eight-pointed star
-2734                                       ; unqualified         # ✴ eight-pointed star
 2747 FE0F                                  ; fully-qualified     # ❇️ sparkle
-2747                                       ; unqualified         # ❇ sparkle
 203C FE0F                                  ; fully-qualified     # ‼️ double exclamation mark
-203C                                       ; unqualified         # ‼ double exclamation mark
 2049 FE0F                                  ; fully-qualified     # ⁉️ exclamation question mark
-2049                                       ; unqualified         # ⁉ exclamation question mark
 2753                                       ; fully-qualified     # ❓ question mark
 2754                                       ; fully-qualified     # ❔ white question mark
 2755                                       ; fully-qualified     # ❕ white exclamation mark
 2757                                       ; fully-qualified     # ❗ exclamation mark
 3030 FE0F                                  ; fully-qualified     # 〰️ wavy dash
-3030                                       ; unqualified         # 〰 wavy dash
 00A9 FE0F                                  ; fully-qualified     # ©️ copyright
-00A9                                       ; unqualified         # © copyright
 00AE FE0F                                  ; fully-qualified     # ®️ registered
-00AE                                       ; unqualified         # ® registered
 2122 FE0F                                  ; fully-qualified     # ™️ trade mark
-2122                                       ; unqualified         # ™ trade mark
-
 # subgroup: keycap
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # subgroup: alphanum
 1F520                                      ; fully-qualified     # 🔠 input latin uppercase
 1F521                                      ; fully-qualified     # 🔡 input latin lowercase
@@ -3557,33 +1443,25 @@
 1F523                                      ; fully-qualified     # 🔣 input symbols
 1F524                                      ; fully-qualified     # 🔤 input latin letters
 1F170 FE0F                                 ; fully-qualified     # 🅰️ A button (blood type)
-1F170                                      ; unqualified         # 🅰 A button (blood type)
 1F18E                                      ; fully-qualified     # 🆎 AB button (blood type)
 1F171 FE0F                                 ; fully-qualified     # 🅱️ B button (blood type)
-1F171                                      ; unqualified         # 🅱 B button (blood type)
 1F191                                      ; fully-qualified     # 🆑 CL button
 1F192                                      ; fully-qualified     # 🆒 COOL button
 1F193                                      ; fully-qualified     # 🆓 FREE button
 2139 FE0F                                  ; fully-qualified     # ℹ️ information
-2139                                       ; unqualified         # ℹ information
 1F194                                      ; fully-qualified     # 🆔 ID button
 24C2 FE0F                                  ; fully-qualified     # Ⓜ️ circled M
-24C2                                       ; unqualified         # Ⓜ circled M
 1F195                                      ; fully-qualified     # 🆕 NEW button
 1F196                                      ; fully-qualified     # 🆖 NG button
 1F17E FE0F                                 ; fully-qualified     # 🅾️ O button (blood type)
-1F17E                                      ; unqualified         # 🅾 O button (blood type)
 1F197                                      ; fully-qualified     # 🆗 OK button
 1F17F FE0F                                 ; fully-qualified     # 🅿️ P button
-1F17F                                      ; unqualified         # 🅿 P button
 1F198                                      ; fully-qualified     # 🆘 SOS button
 1F199                                      ; fully-qualified     # 🆙 UP! button
 1F19A                                      ; fully-qualified     # 🆚 VS button
 1F201                                      ; fully-qualified     # 🈁 Japanese “here” button
 1F202 FE0F                                 ; fully-qualified     # 🈂️ Japanese “service charge” button
-1F202                                      ; unqualified         # 🈂 Japanese “service charge” button
 1F237 FE0F                                 ; fully-qualified     # 🈷️ Japanese “monthly amount” button
-1F237                                      ; unqualified         # 🈷 Japanese “monthly amount” button
 1F236                                      ; fully-qualified     # 🈶 Japanese “not free of charge” button
 1F22F                                      ; fully-qualified     # 🈯 Japanese “reserved” button
 1F250                                      ; fully-qualified     # 🉐 Japanese “bargain” button
@@ -3595,12 +1473,9 @@
 1F234                                      ; fully-qualified     # 🈴 Japanese “passing grade” button
 1F233                                      ; fully-qualified     # 🈳 Japanese “vacancy” button
 3297 FE0F                                  ; fully-qualified     # ㊗️ Japanese “congratulations” button
-3297                                       ; unqualified         # ㊗ Japanese “congratulations” button
 3299 FE0F                                  ; fully-qualified     # ㊙️ Japanese “secret” button
-3299                                       ; unqualified         # ㊙ Japanese “secret” button
 1F23A                                      ; fully-qualified     # 🈺 Japanese “open for business” button
 1F235                                      ; fully-qualified     # 🈵 Japanese “no vacancy” button
-
 # subgroup: geometric
 1F534                                      ; fully-qualified     # 🔴 red circle
 1F7E0                                      ; fully-qualified     # 🟠 orange circle
@@ -3621,15 +1496,11 @@
 2B1B                                       ; fully-qualified     # ⬛ black large square
 2B1C                                       ; fully-qualified     # ⬜ white large square
 25FC FE0F                                  ; fully-qualified     # ◼️ black medium square
-25FC                                       ; unqualified         # ◼ black medium square
 25FB FE0F                                  ; fully-qualified     # ◻️ white medium square
-25FB                                       ; unqualified         # ◻ white medium square
 25FE                                       ; fully-qualified     # ◾ black medium-small square
 25FD                                       ; fully-qualified     # ◽ white medium-small square
 25AA FE0F                                  ; fully-qualified     # ▪️ black small square
-25AA                                       ; unqualified         # ▪ black small square
 25AB FE0F                                  ; fully-qualified     # ▫️ white small square
-25AB                                       ; unqualified         # ▫ white small square
 1F536                                      ; fully-qualified     # 🔶 large orange diamond
 1F537                                      ; fully-qualified     # 🔷 large blue diamond
 1F538                                      ; fully-qualified     # 🔸 small orange diamond
@@ -3640,24 +1511,17 @@
 1F518                                      ; fully-qualified     # 🔘 radio button
 1F533                                      ; fully-qualified     # 🔳 white square button
 1F532                                      ; fully-qualified     # 🔲 black square button
-
 # Symbols subtotal:		297
 # Symbols subtotal:		297	w/o modifiers
-
 # group: Flags
-
 # subgroup: flag
 1F3C1                                      ; fully-qualified     # 🏁 chequered flag
 1F6A9                                      ; fully-qualified     # 🚩 triangular flag
 1F38C                                      ; fully-qualified     # 🎌 crossed flags
 1F3F4                                      ; fully-qualified     # 🏴 black flag
 1F3F3 FE0F                                 ; fully-qualified     # 🏳️ white flag
-1F3F3                                      ; unqualified         # 🏳 white flag
 1F3F3 FE0F 200D 1F308                      ; fully-qualified     # 🏳️‍🌈 rainbow flag
-1F3F3 200D 1F308                           ; unqualified         # 🏳‍🌈 rainbow flag
 1F3F4 200D 2620 FE0F                       ; fully-qualified     # 🏴‍☠️ pirate flag
-1F3F4 200D 2620                            ; minimally-qualified # 🏴‍☠ pirate flag
-
 # subgroup: country-flag
 1F1E6 1F1E8                                ; fully-qualified     # 🇦🇨 flag: Ascension Island
 1F1E6 1F1E9                                ; fully-qualified     # 🇦🇩 flag: Andorra
@@ -3917,274 +1781,12 @@
 1F1FF 1F1E6                                ; fully-qualified     # 🇿🇦 flag: South Africa
 1F1FF 1F1F2                                ; fully-qualified     # 🇿🇲 flag: Zambia
 1F1FF 1F1FC                                ; fully-qualified     # 🇿🇼 flag: Zimbabwe
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # subgroup: subdivision-flag
-
-
-
-
 # Flags subtotal:		271
 # Flags subtotal:		271	w/o modifiers
-
 # Status Counts
 # fully-qualified : 3010
 # minimally-qualified : 571
 # unqualified : 246
 # component : 9
-
 #EOF
