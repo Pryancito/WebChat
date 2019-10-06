@@ -956,7 +956,7 @@ function emoji() {
 					
 					let c = code[1].split(/[\u200D]/g)[0];
 										
-					let name = code.splice(2).join('');					
+					let name = code.splice(2).join('');
 					
 					if (index % 10 === 0 && index !== 0) {
 						
