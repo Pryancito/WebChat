@@ -30,7 +30,6 @@ let hl_style;
 
 //logs.removeItem( irc_server_address );
 
-
 if (typeof nickname == null) {
 	let nickname = 'WircyUser_' + Math.floor((Math.random() * 1000) + 1).toString();
 }
@@ -88,6 +87,7 @@ function escapeHtml(text) {
 */
 // Use the browser's built-in functionality to quickly and safely escape
 // the string
+
 function escapeHtml(str) {
     let div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
@@ -183,6 +183,8 @@ function handleBinaryInput(event) {
 
 function autojoins() {
 	
+	let chans = [];
+	
 	if (autojoins_check === false) {
 	
 		if (!chans_from_url) {
@@ -202,7 +204,9 @@ function autojoins() {
 			
 			list.forEach(function(item, index) {
 				
-				doSend('topic ' + item);
+				doSend('join ' + item);
+				
+				chans.push(item);
 			});
 		}
 		else {
@@ -213,9 +217,18 @@ function autojoins() {
 			
 			chans_from_url.forEach(function(item, index) {
 				
-				doSend('topic ' + item);
+				doSend('join ' + item);
+				
+				chans.push(item);
 			});
 		}
+	}
+	else {
+		
+		chans.forEach(function(item, index) {
+			
+			doSend('topic ' + item);
+		});
 	}
 }
 /*
@@ -946,10 +959,12 @@ function onTopicMsg( rawp ) { // :irc.wevox.co 332 WircyUser_147 #WeVox :Canal I
 	topicInput.appendChild(chan_topic);
 	topicInput.style.display = 'inline';
 	
+	/*
 	if (autojoins_check === false) {
 		
 		doSend('join ' + rawp[1].split(' ')[3]);
 	}
+	*/
 }
 
 function onTopicMetas( rawsp ) {
@@ -1065,7 +1080,7 @@ function onNotice(rawsp) { // :NickServ!services@services.wevox.co NOTICE WircyU
 		
 		let message = style(urlify( mht[1], idmsg, url_summary, false ));
 		
-		let msg_for_log = style( mht[1] );
+		let msg_for_log = mht[1];
 		
 		message = twemoji.parse(message);
 		
@@ -1704,10 +1719,20 @@ function query(nick, msg) {
 	
 	if (w === null) {
 		
-		Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
+		let focus_window = '';
+		let focus_btn = '';
+		
+		if (msg === false) {
+			
+			focus_window = 'wselected';
+			focus_btn = 'btn_selected';
+			
+			Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
+			Array.from(document.getElementsByClassName('btn_selected')).forEach(function(item) { item.className = 'btn_window' });
+		}
 		
 		let query_window = document.createElement('div');
-		query_window.className = 'window query wselected';
+		query_window.className = 'window query ' + focus_window;
 		query_window.setAttribute('id', 'query_' + nick_lc);
 		
 		w = query_window;
@@ -1728,8 +1753,8 @@ function query(nick, msg) {
 		let query = document.createElement('p');
 		query.innerHTML = '<i class="fa fa-user-circle" aria-hidden="true"></i>' + nick;
 		query.innerHTML += '<span class="chanlist_opt"><i id="cn_' + nick_lc + '" class="fa fa-times close" aria-hidden="true"></i></span>';
-		Array.from(document.getElementsByClassName('btn_selected')).forEach(function(item) { item.className = 'btn_window' });
-		query.setAttribute('class', 'btn_window btn_selected');
+		
+		query.setAttribute('class', 'btn_window ' + focus_btn);
 		query.setAttribute('id', 'query_btn_' + nick_lc);
 		
 		querylist.appendChild(query);
@@ -1809,6 +1834,7 @@ function query(nick, msg) {
 			}
 		}
 	}
+	/*
 	else {
 		
 		let w = document.getElementById('query_' + nick_lc);
@@ -1818,6 +1844,7 @@ function query(nick, msg) {
 			Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
 		}
 	}
+	*/
 	
 	document.getElementById('cn_' + nick_lc).onclick = function() {
 		
@@ -1888,7 +1915,7 @@ function msg(raw) {
 	let msg = style(urlify( mht[1], idmsg, true, false ));
 	msg = twemoji.parse(msg);
 	
-	let msg_for_log = style( mht[1] );
+	let msg_for_log = mht[1];
 	
 	let chan = raw.split(' ')[2].substring(1);
 	let hlCheck = false, hlcolor = '';
@@ -2625,6 +2652,8 @@ function onJoin(user, chan) {
 			
 			autojoins_check = true;
 			aj = false;
+			
+			autojoins();
 		}
 	}
 	
