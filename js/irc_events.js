@@ -954,7 +954,7 @@ function emoji() {
 					
 					let code = item.split('#')[1].split(' ');
 					
-					let c = code[1].split(/[\u200D]/g)[0];
+					let c = twemoji.parse(code[1]);
 										
 					let name = code.splice(2).join('');
 					
@@ -963,10 +963,10 @@ function emoji() {
 						elem.innerHTML += '<br />';
 					}
 					
-					elem.innerHTML += '<span id="' + c + '" class="emoji ' + name + '">' + c + '</span>';
+					elem.innerHTML += '<span id="' + code[1] + '" class="emoji ' + name + '" title=":' + name + ':">' + c + '</span>';
 				});
 				
-				twemoji.parse(elem);
+				//twemoji.parse(elem);
             }
         }
     }
