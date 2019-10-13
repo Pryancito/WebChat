@@ -799,7 +799,10 @@ let emojiCursor;
 		{
 		   if ('img' === ev.target.nodeName.toLowerCase())
 		   {
+			  var parent = document.createElement('span');
 			  var node = ev.target.cloneNode(false);
+			  parent.appendChild(node);
+			  parent.innerHTML += '&nbsp;';
 			  //node.className = 'InlineBlock chatemoji';
 
 			  var s = window.getSelection();
@@ -814,7 +817,7 @@ let emojiCursor;
 					//   document.createTextNode(ev.target.alt), 
 					//      {className: 'InlineBlock topemoji'} );
 					r0.deleteContents();
-					r0.insertNode(node);
+					r0.insertNode(parent);
 					r0.collapse(false);
 					s.addRange(r0);
 					return;
