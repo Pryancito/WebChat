@@ -641,7 +641,7 @@ let emojiCursor;
 			
 			if (windows.item(index + 1).id !== 'status') {
 				
-				let target = windows.item(index + 1).id.split('_', 1);
+				let target = windows.item(index + 1).id.split('_', 2);
 				
 				if (target[0] == 'chan') {
 					
