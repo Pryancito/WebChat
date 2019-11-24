@@ -11,8 +11,23 @@ let urlify_check = true; // Or false to disable.
 twemoji.parse(document.body);
 
 let nickname = getParameterByName('nickname');
+
+if (nickname === null) {
 	
-let nspasswd = JSON.parse(getCookie('nspasswd'));
+	nickname = getCookie('nick_connect');
+}
+
+if (nickname === '') {
+	
+	nickname = 'WU_' + Date.now();
+}
+	
+let nspasswd = getCookie('nspasswd');
+
+if (nspasswd !== '') {
+	
+	nspasswd = JSON.parse(nspasswd);
+}
 
 let chans_from_url = getParameterByName('channels');
 
@@ -70,7 +85,7 @@ function getCookie(cname) {
             return c.substring(name.length, c.length);
         }
     }
-    return "";
+    return '';
 }
 
 /*
@@ -581,7 +596,7 @@ function process(rawData) {
 		myhost = rawsp[3];
 	}
 	else if (rawsp[1] == 'JOIN') { // on join
-		onJoin( rawsp[0], rawp[2] );
+		onJoin( rawsp[0], rawsp[2].substring(1) );
 	}
 	else if (rawsp[1] == 'PRIVMSG') {
 		
