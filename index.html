@@ -13,6 +13,27 @@
 
 <script src="js/langs.js"></script>
 
+<script>
+function getChan() {
+        if((window.location.href).indexOf('?') != -1) {
+    var queryString = (window.location.href).substr((window.location.href).indexOf('?') + 1);
+
+    // "queryString" will now contain kerdesPost=fdasdas%20ad%20asd%20ad%20asdas
+
+    var value = (queryString.split('='))[1];
+
+    // "value" will now contain fdasdas%20ad%20asd%20ad%20asdas
+
+    value = decodeURIComponent(value);
+
+    return value;
+        }
+	else {
+		return "#Zeus";
+	}
+}
+</script>
+
 <title>Wircy</title>
 
 </head>
@@ -24,7 +45,7 @@
 				<script> document.write('<input type="text" id="wircy_nickname" name="wircy_nickname" value="Zeus-' + Math.floor(Math.random() * 10000) + '" />'); </script>
 				<script> document.write('<input type="button" id="submit" value="' + lang_submit + '" />'); </script>
 				<p>
-					<script> document.write('<input id="wircy_channels" name="wircy_channels" type="text" value="#Zeus" />'); </script>
+					<script> document.write('<input id="wircy_channels" name="wircy_channels" type="text" value="' + getChan() + '" />'); </script>
 				</p>
 				<select id="lang">
 					<script> document.write('<option>'+ lang_lang +'</option>'); </script>
@@ -48,7 +69,7 @@
 	</div>
 	
 	<script src="js/welcome.js"></script>
-	
+
 </body>
 
 </html>
