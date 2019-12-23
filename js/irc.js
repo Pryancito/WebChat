@@ -173,7 +173,20 @@ function onOpen(evt) {
 
 function onClose(evt) {
 	writeToScreen('DISCONNECTED');
-	msg("DISCONNECTED");
+	for (var chan in uls_no_mode) {
+                
+                if (uls_no_mode[chan].indexOf(nick) !== -1) {
+
+                        let w = document.getElementById('chan_' + chan);
+                        let line = document.createElement('p');
+                        line.innerHTML = '['+ currentTime() +'] * <span style="color:red; font-weight:bold;">DISCONNECTED</span>';
+
+                        w.appendChild(line);
+                        
+                        scrollBottom(w);
+                }
+        }
+
 }
 
 function onMessage(evt) {
