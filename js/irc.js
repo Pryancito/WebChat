@@ -642,7 +642,7 @@ function process(rawData) {
 	// <- :courbevoie2.fr.epiknet.org 671 KituPlus Courgette :is using a Secure Connection
 	// whois :
 	
-	else if (rawsp[1] == '311' || rawsp[1] == '379' || rawsp[1] == '319' || rawsp[1] == '312' || rawsp[1] == '317' || rawsp[1] == '318' || rawsp[1] == '307' || rawsp[1] == '671') {
+	else if (rawsp[1] == '311' || rawsp[1] == '379' || rawsp[1] == '319' || rawsp[1] == '312' || rawsp[1] == '317' || rawsp[1] == '318' || rawsp[1] == '307' || rawsp[1] == '671' || rawsp[1] == '320') {
 		onWhois( rawsp[1], rawsp.splice(3).join(' ') );
 	}
 	// rcvd :WircyUser_455!websocket@F59D8D69.81546244.7925F8A.IP TOPIC #websocket :pwet
