@@ -8,9 +8,8 @@
 	submit.onclick = function() {
 		let nickname = document.getElementById('wircy_nickname').value;
 		setCookie('nick_connect', nickname, 10000000);
-		setCookie('nspasswd', JSON.stringify([ nickname, document.getElementById('wircy_nickserv').value ]), 10000000);
 		
-		let channels = getParameterByName('channels');
+		let channels = document.getElementById('wircy_channels').value;
 		
 		if (channels !== null) {
 			document.location.href = 'irc.html?nickname=' + nickname + '&channels=' + channels;
@@ -32,12 +31,6 @@
 		if (nick_connect !== '') {
 			document.getElementById('wircy_nickname').value = nick_connect;
 		}
-	}
-	
-	let nspasswd = JSON.parse(getCookie('nspasswd'));
-	
-	if (nspasswd !== '') {
-		document.getElementById('wircy_nickserv').value = nspasswd[1];
 	}
 	
 	document.getElementById('lang').onchange = function() {

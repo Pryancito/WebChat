@@ -1,6 +1,6 @@
 <?php
-  $dbname = "..."; // Name of database.
-  $dbhost = "..."; // Host of database.
-  $dbuser = "..."; // User of database.
-  $dbpasswd = "..."; // Password of database.
-  $dbprefix = "..."; // Prefix of MySQL tables name.
+  $dbname = "webchat"; // Name of database.
+  $dbhost = "localhost"; // Host of database.
+  $dbuser = "root"; // User of database.
+  $dbpasswd = "mypassword"; // Password of database.
+  $dbprefix = "web_"; // Prefix of MySQL tables name.

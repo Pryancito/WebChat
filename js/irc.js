@@ -2,7 +2,7 @@
 
 // -------------------------- START OF CONFIG -------------------------- \\
 
-let irc_server_address = 'wss://roubaix.fr.epiknet.org:6680/';
+let irc_server_address = 'wss://irc.zeusircd.net:9000/';
 
 let urlify_check = true; // Or false to disable.
 
@@ -167,8 +167,8 @@ function connectWebSocket() {
 
 function onOpen(evt) {
 	
-	doSend('user websocket * * :Wircy User');
 	doSend('nick ' + nickname);
+	doSend('user WebChat * * :Wircy User');
 }
 
 function onClose(evt) {
@@ -445,7 +445,7 @@ var is_utf8 = function(bytes)
 function process(rawData) {
 	
 	let raw;
-	
+
 	if (is_utf8(new Uint8Array(rawData)) === false) {
 		raw = (new TextDecoder('iso-8859-15')).decode(rawData);
 	}
@@ -464,7 +464,7 @@ function process(rawData) {
 	}
 	else if (rawsp[1] === '001') {
 		
-		//doSend("join " + activeChannel); // join a room upon connection.
+		//doSend("join #Zeus"); // join a room upon connection.
 		//doSend("mode " + activeChannel);
 		
 		if (nspasswd[0] === nickname && nspasswd[1] !== '') { // Perform for nickserv pass

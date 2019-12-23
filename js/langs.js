@@ -39,7 +39,7 @@ if (lang == '' || lang === 'en') {
 	var lang_ab_all = "All";
 	var lang_ab_over = "Over ignores";
 	var lang_nsemail = "Enter a valid email address to register";
-	var default_chan = "#EpiKnet";
+	var default_chan = getChannel();
 	var lang_topic = 'Topic';
 	var lang_topic_view = 'Double-clic to see topic';
 	var lang_topic_view2 = 'Double-clic to reduct topic';
@@ -83,11 +83,28 @@ else if (lang === 'fr') {
 	var lang_ab_all = "Tout";
 	var lang_ab_over = "Surcharger ignores";
 	var lang_nsemail = "Entrez une adresse email valide pour vous enregistrer";
-	var default_chan = "#EpiKnet";
+	var default_chan = getChannel();
 	var lang_topic = 'Sujet';
 	var lang_topic_view = 'Double-clic pour voir le sujet';
 	var lang_topic_view2 = 'Double-clic pour réduire le sujet';
 	var lang_leave_warning = 'Êtes-vous sûr de vouloir quitter cette page ?';
+}
+
+function getChannel() {
+	if((window.location.href).indexOf('&') != -1) {
+    var queryString = (window.location.href).substr((window.location.href).indexOf('&') + 1); 
+
+    // "queryString" will now contain kerdesPost=fdasdas%20ad%20asd%20ad%20asdas
+
+    var value = (queryString.split('='))[1];
+
+    // "value" will now contain fdasdas%20ad%20asd%20ad%20asdas
+
+    value = decodeURIComponent(value);
+
+    // "value" will now contain fdasdas ad asd ad asdas (unescaped value)
+    return value;
+	}
 }
 
 function getCookie(cname) {
