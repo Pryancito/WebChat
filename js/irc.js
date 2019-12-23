@@ -173,7 +173,7 @@ function onOpen(evt) {
 
 function onClose(evt) {
 	writeToScreen('DISCONNECTED');
-	window.navigate('index.html');
+	msg("DISCONNECTED");
 }
 
 function onMessage(evt) {
