@@ -174,7 +174,7 @@ function onOpen(evt) {
 function onClose(evt) {
 	writeToScreen('DISCONNECTED');
 	alert("DISCONNECTED");
-	window.close();
+	window.location.href = 'index.html';
 }
 
 function onMessage(evt) {
