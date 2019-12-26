@@ -41,7 +41,9 @@
 		if (this.value === 'Français') {
 			setCookie('lang', 'fr', 10000000);
 		}
-		
+		if (this.value === 'Español') {
+                        setCookie('lang', 'es', 10000000);
+                }
 		window.location.href = './';
 	}
 	

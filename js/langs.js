@@ -90,6 +90,51 @@ else if (lang === 'fr') {
 	var lang_leave_warning = 'Êtes-vous sûr de vouloir quitter cette page ?';
 }
 
+if (lang === 'es') {
+
+        var lang_connect_button = "Conectar !";
+        var lang_add_chan = "Crear canal o entrar en un canal";
+        var lang_favorites_chans = "Controlar canales favoritos";
+        var lang_address_book = "Controlar libreta de direcciones";
+        var lang_summary_off = "No mostrar resumen";
+        var lang_summary_on = "Mostrar resumen";
+        var lang_visio_button_dwait = "No esperar para video conferencia";
+        var lang_visio_button_wait = "Esperar para video conferencia";
+        var lang_send_picture = "Enviar una imagen";
+        var lang_send_video = "Enviar un video";
+        var lang_color = "Color del texto";
+        var lang_bold = "Negrita";
+        var lang_italic = "Italica";
+        var lang_underline = "Subrayado";
+        var lang_nltosp = "Reemplazar nuevas lineas por espacios";
+        var lang_addchan_options = "Entrar a canal";
+        var lang_addfav_current_chan = "A&ntilde;adir canal actual a favoritos";
+        var lang_nofav = "Sin canales favoritos por el momento";
+        var lang_list = "Mostrar lista de canales";
+        var lang_status = "Status";
+        var lang_nick = "Nickname";
+        var lang_submit = "Chatear !";
+        var lang_lang = "Elige idioma";
+        var lang_nspasswd = "NickServ Password (optional)";
+        var lang_ignore = "Ignores";
+        var lang_hl = "Highlights";
+        var lang_friend = "Amigos";
+        var lang_mask = "Mascara";
+        var lang_add_mask = "A&ntilde;adir";
+        var lang_ab_private = "Privado";
+        var lang_ab_channel = "Canal";
+        var lang_ab_notice = "Notice";
+        var lang_ab_invite = "Invite";
+        var lang_ab_all = "Todos";
+        var lang_ab_over = "Sobre los ignores";
+        var lang_nsemail = "Enter a valid email address to register";
+        var default_chan = getChannel();
+        var lang_topic = 'Topic';
+        var lang_topic_view = 'Doble-clic para ver topic';
+        var lang_topic_view2 = 'Doble-clic para reducir topic';
+        var lang_leave_warning = 'Quieres abandonar esta pagina ?';
+}
+
 function getChannel() {
 	if((window.location.href).indexOf('&') != -1) {
     var queryString = (window.location.href).substr((window.location.href).indexOf('&') + 1); 
