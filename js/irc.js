@@ -2789,7 +2789,7 @@ function send() {
 				
 				let inputText = emojiToChar(input);
 				
-				doSend('privmsg ' + recipient + ' :' + inputText.innerText);
+				doSend('PRIVMSG ' + recipient + ' :' + inputText.innerText);
 			}
 			else {
 				
@@ -2837,7 +2837,7 @@ function send() {
 					
 					let inputText = emojiToChar(input);
 					
-					doSend('privmsg ' + recipient + ' :' + inputText.innerText);
+					doSend('PRIVMSG ' + recipient + ' :' + inputText.innerText);
 				});
 			}
 		}
@@ -2886,7 +2886,7 @@ function send() {
 				
 				let inputText = emojiToChar(input);
 				
-				doSend('privmsg ' + recipient + ' :' + inputText.innerText);
+				doSend('PRIVMSG ' + recipient + ' :' + inputText.innerText);
 			});
 		}
 		
@@ -2965,7 +2965,7 @@ function exec(cmd) {
 		}
 		
 		let realmemsg = cmd.splice(1).join(' ');
-		doSend('privmsg ' + active + ' :ACTION ' + realmemsg + '');
+		doSend('PRIVMSG ' + active + ' :ACTION ' + realmemsg + '');
 		
 		let elem = document.createElement('p');
 		elem.innerHTML = '&lt;'+ currentTime() +'&gt; * ' + me + ' ' + realmemsg;
