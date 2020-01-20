@@ -702,7 +702,7 @@ let emojiCursor;
 					border_right.style.height = userlist.scrollHeight + 'px';
 					
 					//scrollBottom(windows.item(index + 1));
-					document.getElementById('userlist').className = 'displayblock';
+					userlist.className = 'displayblock';
 				}
 				else if (target[0] == 'query') {
 					
