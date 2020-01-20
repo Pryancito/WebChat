@@ -696,15 +696,13 @@ let emojiCursor;
 					
 					document.getElementById('ul_' + ACStriped).className = 'ul';
 					
-					document.getElementById('userlist').className = 'displayblock';
-					
 					document.getElementById('chan_btn_' + ACStriped).className = 'btn_window btn_selected';
 					
 					let border_right = document.getElementById('border-right');
 					border_right.style.height = userlist.scrollHeight + 'px';
 					
 					//scrollBottom(windows.item(index + 1));
-					
+					document.getElementById('userlist').className = 'displayblock';
 				}
 				else if (target[0] == 'query') {
 					
