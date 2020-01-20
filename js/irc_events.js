@@ -654,7 +654,7 @@ let emojiCursor;
 						document.getElementById('border-right').style.backgroundColor = 'gainsboro';
 						document.getElementById('border-left').style.backgroundColor = 'gainsboro';
 					}
-					document.getElementById('userlist').className = 'display';
+					document.getElementById('userlist').className = 'displayblock';
 					activeChannel = '#' + target[1];
 					ACStriped = target[1].toLowerCase();
 					active = activeChannel.toLowerCase();
