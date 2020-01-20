@@ -700,16 +700,13 @@ let emojiCursor;
 					Array.from(document.getElementsByClassName('ul')).forEach(function(item) {
 						
 						if (item.className.indexOf('ul_hidden') == -1) {
-					
-							item.className = 'ul ul_hidden';
+							item.className += ' ul_hidden';
 						}
 					});
 
 					
-					document.getElementById('ul_' + ACStriped).className = 'ul';
+					document.getElementById('ul_' + chanspNoHTML).className = 'ul';
 					
-					document.getElementById('userlist').className = 'displayblock';
-
 					document.getElementById('chan_btn_' + ACStriped).className = 'btn_window btn_selected';
 					
 					let border_right = document.getElementById('border-right');
