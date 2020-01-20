@@ -654,7 +654,6 @@ let emojiCursor;
 						document.getElementById('border-right').style.backgroundColor = 'gainsboro';
 						document.getElementById('border-left').style.backgroundColor = 'gainsboro';
 					}
-					document.getElementById('userlist').className = 'displayblock';
 					activeChannel = '#' + target[1];
 					ACStriped = target[1].toLowerCase();
 					active = activeChannel.toLowerCase();
@@ -697,7 +696,7 @@ let emojiCursor;
 					
 					document.getElementById('ul_' + ACStriped).className = 'ul';
 					
-					document.getElementById('userlist').className = '';
+					document.getElementById('userlist').className = 'displayblock';
 					
 					document.getElementById('chan_btn_' + ACStriped).className = 'btn_window btn_selected';
 					
