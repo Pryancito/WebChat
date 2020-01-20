@@ -699,9 +699,9 @@ let emojiCursor;
 					
 					Array.from(document.getElementsByClassName('ul')).forEach(function(item) {
 						
-						if (item.className.indexOf('ul_hidden') === -1) {
+						if (item.className.indexOf('ul_hidden') == -1) {
 					
-							item.className += ' ul_hidden';
+							item.className = 'ul ul_hidden';
 						}
 					});
 
