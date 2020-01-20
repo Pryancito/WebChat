@@ -2,9 +2,9 @@
 
 // -------------------------- START OF CONFIG -------------------------- \\
 
-let irc_server_address = 'wss://irc.zeusircd.net:9000/';
+let irc_server_address = 'wss://127.0.0.1:9000/';
 
-let urlify_check = true; // Or false to disable.
+let urlify_check = false; // Or false to disable.
 
 // --------------------------- END OF CONFIG --------------------------- \\
 
