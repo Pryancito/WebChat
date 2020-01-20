@@ -703,6 +703,7 @@ let emojiCursor;
 					
 					//scrollBottom(windows.item(index + 1));
 					document.getElementById('userlist').style.setProperty('display', 'block');
+					document.getElementById('userlist').className = 'displayblock';
 				}
 				else if (target[0] == 'query') {
 					
