@@ -697,23 +697,25 @@ let emojiCursor;
 						chan_topic.className = 'chan_topic ct_selected';
 					}
 					
-					//Array.from(document.getElementsByClassName('ul')).forEach(function(item) {
+					Array.from(document.getElementsByClassName('ul')).forEach(function(item) {
 						
-					//	if (item.className.indexOf('ul_hidden') === -1) {
-							
-					//		item.className += ' ul_hidden';
-					//	}
-					//});
+						if (item.className.indexOf('ul_hidden') === -1) {
+					
+							item.className += ' ul_hidden';
+						}
+					});
+
 					
 					document.getElementById('ul_' + ACStriped).className = 'ul';
 					
+					document.getElementById('userlist').className = 'displayblock';
+
 					document.getElementById('chan_btn_' + ACStriped).className = 'btn_window btn_selected';
 					
 					let border_right = document.getElementById('border-right');
 					border_right.style.height = userlist.scrollHeight + 'px';
 					
 					//scrollBottom(windows.item(index + 1));
-					document.getElementById('userlist').className = '';
 				}
 				textarea.focus();
 			}
