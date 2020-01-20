@@ -704,7 +704,6 @@ let emojiCursor;
 						}
 					});
 
-					alert(ACStriped);
 					document.getElementById('ul_' + ACStriped).className = 'ul';
 					
 					document.getElementById('chan_btn_' + ACStriped).className = 'btn_window btn_selected';
