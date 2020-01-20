@@ -639,11 +639,22 @@ let emojiCursor;
 			
 			windows.item(index + 1).className += ' wselected';
 			
-			if (windows.item(index + 1).id !== 'status') {
+			if (windows.item(index + 1).id != 'status') {
 				
 				let target = windows.item(index + 1).id.split('_').splice(1).join('_');
 				
-				if (target[0] == 'chan') {
+				if (target[0] == 'query') {
+
+                                        active = target[1].toLowerCase();
+                                        activeType = 'query';
+                                        activeQuery = target[1];
+
+                                        document.getElementById(e.id).className = 'btn_window btn_selected';
+
+                                        document.getElementById('topic').innerHTML = '';
+                                        document.getElementById('userlist').className = 'displaynone';
+                                }
+				else {
 					
 					if (windows.item(index + 1).scrollHeight !== windows.item(index + 1).offsetHeight + windows.item(index + 1).scrollTop) {
 						
@@ -670,7 +681,8 @@ let emojiCursor;
 					chanspNoHTML = chanspNoHTML.replace(/\/g, '>');
 					
 					let chan_topic = document.getElementById('chan_topic_' + chanspNoHTML);
-					
+					document.getElementById('userlist').className = '';
+
 					if (chan_topic === null) {
 						
 						doSend('topic ' + chanspHTML);
@@ -678,7 +690,6 @@ let emojiCursor;
 					else {
 						
 						let cts = document.getElementsByClassName('ct_selected');
-						
 						if (cts.length !== 0) {
 							cts[0].className = 'chan_topic';
 						}
@@ -686,13 +697,13 @@ let emojiCursor;
 						chan_topic.className = 'chan_topic ct_selected';
 					}
 					
-					Array.from(document.getElementsByClassName('ul')).forEach(function(item) {
+					//Array.from(document.getElementsByClassName('ul')).forEach(function(item) {
 						
-						if (item.className.indexOf('ul_hidden') === -1) {
+					//	if (item.className.indexOf('ul_hidden') === -1) {
 							
-							item.className += ' ul_hidden';
-						}
-					});
+					//		item.className += ' ul_hidden';
+					//	}
+					//});
 					
 					document.getElementById('ul_' + ACStriped).className = 'ul';
 					
@@ -702,21 +713,8 @@ let emojiCursor;
 					border_right.style.height = userlist.scrollHeight + 'px';
 					
 					//scrollBottom(windows.item(index + 1));
-					document.getElementById('userlist').style.setProperty('display', 'block');
-					document.getElementById('userlist').className = 'displayblock';
+					document.getElementById('userlist').className = '';
 				}
-				else if (target[0] == 'query') {
-					
-					active = target[1].toLowerCase();
-					activeType = 'query';
-					activeQuery = target[1];
-					
-					document.getElementById(e.id).className = 'btn_window btn_selected';
-					
-					document.getElementById('topic').innerHTML = '';
-					document.getElementById('userlist').className = 'displaynone';
-				}
-				
 				textarea.focus();
 			}
 			else {

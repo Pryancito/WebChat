@@ -2,7 +2,7 @@
 
 // -------------------------- START OF CONFIG -------------------------- \\
 
-let irc_server_address = 'wss://127.0.0.1:9000/';
+let irc_server_address = 'wss://irc.chateros.org:9000/';
 
 let urlify_check = false; // Or false to disable.
 
