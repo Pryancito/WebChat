@@ -458,13 +458,13 @@ function process(rawData) {
 	let rawp = raw.split(':');
 	let rawsp = raw.split(' ');
 	
-	if (rawsp[0] === 'PING') {
+	if (rawsp[0] == 'PING') {
 		
 		let pongResponse = raw.replace("PING","PONG");
 		//writeToScreen('<span style="color: brown;">SENDING: ' + escapeHtml(pongResponse)+'<\/span>');
 		websocket.send(pongResponse);
 	}
-	else if (rawsp[1] === '001') {
+	else if (rawsp[1] == '001') {
 		
 		//doSend("join #Zeus"); // join a room upon connection.
 		//doSend("mode " + activeChannel);
