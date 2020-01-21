@@ -768,7 +768,7 @@ function onList( rawsp ) {
 		list[ rawsp[4] + rawsp[3] ] = [];
 	}
 	
-	list[ rawsp[4] + rawsp[3] ].push( rawsp.splice(6).join(' ') );
+	list[ rawsp[4] + rawsp[3] ].push( rawsp.splice(5).join(' ') );
 }
 
 function sortNumber(a, b) {
