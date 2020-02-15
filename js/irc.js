@@ -2,7 +2,7 @@
 
 // -------------------------- START OF CONFIG -------------------------- \\
 
-let irc_server_address = 'wss://roubaix.fr.epiknet.org:6680/';
+let irc_server_address = 'wss://irc.unrealircd.org:443/';
 
 let urlify_check = true; // Or false to disable.
 
@@ -167,7 +167,7 @@ function connectWebSocket() {
 
 function onOpen(evt) {
 	
-	doSend('user websocket * * :Wircy User');
+	doSend('user Joker * * :Joker');
 	doSend('nick ' + nickname);
 }
 
@@ -447,10 +447,19 @@ function process(rawData) {
 	let raw;
 	
 	if (is_utf8(new Uint8Array(rawData)) === false) {
+		
 		raw = (new TextDecoder('iso-8859-15')).decode(rawData);
 	}
 	else {
-		raw = (new TextDecoder()).decode(rawData);
+		
+		try {
+			
+			raw = (new TextDecoder()).decode(rawData);
+		}
+		catch (error) {
+			
+			raw = rawData;
+		}
 	}
 	
 	let rawp = raw.split(':');
