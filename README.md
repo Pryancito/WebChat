@@ -60,4 +60,4 @@ Make sure your browser is up to date.
 - Manage all IRC protocol. /raw sends a raw request to IRC server, raws callbacks is in javascript console of your browser.
 
 # To test the client
-https://www.epiknet.org/wircy/
+https://susoft.fr/wircy/
