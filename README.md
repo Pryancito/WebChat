@@ -42,7 +42,7 @@ It works !
 
 # Compatibilty
 
-Works with UnrealIRCd 4.x server : https://www.unrealircd.org/docs/WebSocket_support
+Works with UnrealIRCd 4.x and later server : https://www.unrealircd.org/docs/WebSocket_support
 
 ## Browser compatibility
 - Google chrome
