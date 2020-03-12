@@ -167,7 +167,7 @@ function connectWebSocket() {
 
 function onOpen(evt) {
 	
-	doSend('user Joker * * :Joker');
+	doSend('user Wircy * * :Wircy user - https://github.com/Kitu83/wircy');
 	doSend('nick ' + nickname);
 }
 
@@ -634,9 +634,11 @@ function process(rawData) {
 		onQuit( getNickname(raw), getMask(raw), rawp[3] );
 	}
 	else if (rawsp[1] == 'PART') {
+		
 		onPart(rawp[1], rawsp[2]);
 	}
 	else if (rawsp[1] == 'NICK') {
+		
 		onNick( getNickname(raw), rawp[2] );
 	}
 	//<- :Kitu!~mg@971300C1.EFA6EE0.D7878BA0.IP NOTICE Kitu :pwet
@@ -1510,6 +1512,7 @@ function onNick(oldnick, newnick) {
 	}
 	
 	if (oldnick == me) {
+		
 		me = newnick;
 	}
 	
@@ -2626,9 +2629,15 @@ function userlist(chan, nicknames) {
 
 function getNickname(raw) {
 	
+	// :Kitu!~Wircy@Clk-79538109.subs.proxad.net
+	
+	// :Kitu NICK :lll
+	
 	raw = raw.split(':')[1];
 	
 	let mask = raw.split('!');
+	
+	mask = mask[0].split(' ');
 	
 	return mask[0];
 }
@@ -2741,6 +2750,10 @@ function send() {
 	}
 	else if (text) {
 		
+		let inputText = emojiToChar(input);
+		
+		doSend('privmsg ' + recipient + ' :' + inputText.innerText);
+		
 		idmsg++;
 		
 		let lines = Array.from(input.getElementsByTagName('div'));
@@ -2754,6 +2767,7 @@ function send() {
 			recipient = query.id.substring(6);
 			w = query;
 		}
+		
 		if (lines.length === 0) {
 			
 			lines = Array.from(input.getElementsByTagName('p'));
@@ -2793,10 +2807,6 @@ function send() {
 					
 					activeWindow.scrollTop = activeWindow.scrollHeight;
 				}
-				
-				let inputText = emojiToChar(input);
-				
-				doSend('privmsg ' + recipient + ' :' + inputText.innerText);
 			}
 			else {
 				
@@ -2841,10 +2851,6 @@ function send() {
 						
 						activeWindow.scrollTop = activeWindow.scrollHeight;
 					}
-					
-					let inputText = emojiToChar(input);
-					
-					doSend('privmsg ' + recipient + ' :' + inputText.innerText);
 				});
 			}
 		}
@@ -2890,10 +2896,6 @@ function send() {
 					
 					activeWindow.scrollTop = activeWindow.scrollHeight;
 				}
-				
-				let inputText = emojiToChar(input);
-				
-				doSend('privmsg ' + recipient + ' :' + inputText.innerText);
 			});
 		}
 		
@@ -2929,6 +2931,7 @@ function exec(cmd) {
 		doSend('join ' + html_decode(cmd[1]));
 	}
 	else if (cmd[0] == 'nick') {
+		
 		doSend('nick ' + cmd[1]);
 	}
 	else if (cmd[0] == 'whois' || cmd[0] == 'w') {
