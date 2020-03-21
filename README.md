@@ -54,10 +54,11 @@ Works with UnrealIRCd 4.x and later server : https://www.unrealircd.org/docs/Web
 Make sure your browser is up to date.
 
 ## Some lights bugs/imperfections to resolve
-- Instability of copy to clipboard on text selection.
 - URL summaries to improve.
 - To do responsive design.
-- Manage all IRC protocol. /raw sends a raw request to IRC server, raws callbacks is in javascript console of your browser.
+- Manage all IRC protocol. /raw sends a raw request to IRC server.
+
+Note : Raws not supported are in javascript console of your browser.
 
 # To test the client
 https://susoft.fr/wircy/
