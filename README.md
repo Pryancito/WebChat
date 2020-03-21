@@ -42,7 +42,9 @@ It works !
 
 # Compatibilty
 
-Works with UnrealIRCd 4.x and later server : https://www.unrealircd.org/docs/WebSocket_support
+## IRC Daemons
+- Works with UnrealIRCd 4.x and later versions : https://www.unrealircd.org/docs/WebSocket_support
+- Works with InspirIRCd 3.x and later versions : https://docs.inspircd.org/3/modules/websocket/
 
 ## Browser compatibility
 - Google chrome
