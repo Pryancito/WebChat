@@ -2020,9 +2020,9 @@ function scrollBottom(w) {
 	}
 }
 
-function getMsg(raw) {
+function getMsg(raw) { // :Kitu2!Wircy@F537BEB1:B76530E1:A9B980DA:IP PRIVMSG #Welcome :test
 	
-	return raw.split(':').splice(2).join(':');
+	return raw.split('PRIVMSG')[1].split(':').splice(1).join(':');
 }
 
 function ci(a, b) {
