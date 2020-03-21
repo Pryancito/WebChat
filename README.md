@@ -20,7 +20,7 @@ let urlify_check = true; // Or false to disable.
 // --------------------------- END OF CONFIG --------------------------- \\
 ```
 
-## Optional : for URL summaries (if urlify_check === true) edit *ajax/config.php* :
+## __Optional__ : for URL summaries (if urlify_check === true) edit *ajax/config.php* :
 
 Create MySQL database on localhost or elsewhere, the MySQL table is created automatically from PHP script *ajax/summary.php*, and then edit (or create) *ajax/config.php* as following :
 
