@@ -665,8 +665,8 @@ let emojiCursor;
 						document.getElementById('border-right').style.backgroundColor = 'gainsboro';
 						document.getElementById('border-left').style.backgroundColor = 'gainsboro';
 					}
-					activeChannel = '#' + target;
-					ACStriped = target.toLowerCase();
+					activeChannel = '#' + target[1];
+					ACStriped = target[1].toLowerCase();
 					active = activeChannel.toLowerCase();
 					activeType = 'channel';
 					
