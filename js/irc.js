@@ -449,11 +449,21 @@ function process(rawData) {
 	let raw;
 
 	if (is_utf8(new Uint8Array(rawData)) === false) {
+
 		raw = (new TextDecoder('iso-8859-15')).decode(rawData);
 	}
 	else {
-		raw = (new TextDecoder()).decode(rawData);
+
+		try {
+
+			raw = (new TextDecoder()).decode(rawData);
+		}
+		catch (error) {
+
+			raw = rawData;
+		}
 	}
+
 	
 	let rawp = raw.split(':');
 	let rawsp = raw.split(' ');
@@ -598,7 +608,7 @@ function process(rawData) {
 		myhost = rawsp[3];
 	}
 	else if (rawsp[1] == 'JOIN') { // on join
-		onJoin( rawsp[0], rawsp[2].substring(1) );
+		onJoin( rawsp[0], rawsp[2] );
 	}
 	else if (rawsp[1] == 'PRIVMSG') {
 		
@@ -1614,9 +1624,9 @@ function join(chan) {
 	
 	let chansp = chan.substring(1);
 	
-	let chanspNoHTML = chansp.replace(/\</g, '').toLowerCase();
+	let chanspNoHTML = chansp.replace(/\</g, '').toLowerCase();
 	
-	chanspNoHTML = chanspNoHTML.replace(/\>/g, '').toLowerCase();
+	chanspNoHTML = chanspNoHTML.replace(/\>/g, '').toLowerCase();
 	
 	let channel_window = document.createElement('div');
 	Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
@@ -2641,9 +2651,9 @@ function onJoin(user, chan) {
 	
 	let chansp = chan.substring(1);
 	
-	let chanspNoHTML = chansp.replace(/\</g, '').toLowerCase();
+	let chanspNoHTML = chansp.replace(/\</g, '').toLowerCase();
 	
-	chanspNoHTML = chanspNoHTML.replace(/\>/g, '');
+	chanspNoHTML = chanspNoHTML.replace(/\>/g, '');
 	
 	let nick = getNickname(user);
 	let nickelem = document.createTextNode(nick);

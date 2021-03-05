@@ -641,7 +641,7 @@ let emojiCursor;
 			
 			if (windows.item(index + 1).id != 'status') {
 				
-				let target = windows.item(index + 1).id.split('_').splice(1).join('_');
+				let target = windows.item(index + 1).id.split('_');
 				
 				if (target[0] == 'query') {
 
