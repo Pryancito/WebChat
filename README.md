@@ -39,6 +39,7 @@ It works !
 # Languages
 - English
 - French
+- Spanish
 
 # Compatibilty
 
