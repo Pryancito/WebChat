@@ -61,6 +61,3 @@ Make sure your browser is up to date.
 - Manage all IRC protocol. /raw sends a raw request to IRC server.
 
 Note : Raws not supported are in javascript console of your browser.
-
-# To test the client
-https://susoft.fr/wircy/
