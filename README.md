@@ -60,4 +60,4 @@ Make sure your browser is up to date.
 - To do responsive design.
 - Manage all IRC protocol. /raw sends a raw request to IRC server.
 
-Note : Raws not supported are in javascript console of your browser.
+Note : IRC raws not supported are in Javascript console of your web browser.
