@@ -13,12 +13,21 @@
 
 <script src="js/langs.js"></script>
 
-<title>Wircy</title>
+<title>SuSoft - Wircy - Un bon vieux t'chat IRC - WebIRC</title>
 
 </head>
 
 <body>
 	<div id="wrapper">
+		<header>
+			<div id="subheader">
+				<a href="/"><img id="banner" src="/img/susoft2.png" alt="Banner" /></a>
+				<div id="header_menu">
+					<a href="mailto:susoft.webmaster@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+					<a href="https://www.facebook.com/SuSoft.Webmaster/" target="_blank"><img class="facebook_btn" src="/img/facebook_btn.png" alt="Facebook" /></a>
+				</div>
+			</div>
+		</header>
 		<div id="window">
 			<form id="user" method="POST" action="" enctype="multipart/form-data">
 				<script> document.write('<input type="text" id="wircy_nickname" name="wircy_nickname" placeholder="' + lang_nick + '" />'); </script>
@@ -28,8 +37,8 @@
 				</p>
 				<select id="lang">
 					<script> document.write('<option>'+ lang_lang +'</option>'); </script>
-					<option>English</option>
-					<option>Français</option>
+					<option id="en">English</option>
+					<option id="fr">Français</option>
 				</select>
 				<!--
 				<div id="options">
