@@ -6,6 +6,8 @@ let irc_server_address = 'wss://irc.unrealircd.org:443/';
 
 let urlify_check = true; // Or false to disable.
 
+let irc_config = { 'notice': false, 'join': false, 'modes': false, 'list': false };
+
 // --------------------------- END OF CONFIG --------------------------- \\
 
 twemoji.parse(document.body);
@@ -40,6 +42,8 @@ let autojoins_check = false;
 let url_summary = true;
 
 let logs = localStorage;
+
+//logs.clear();
 
 let hl_style;
 
@@ -76,7 +80,7 @@ function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
+    for(var i = 0; i < ca.length; i++) {
         var c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
@@ -1015,7 +1019,7 @@ function onTopicMetas( rawsp ) {
 function onSetTopic( raw ) {
 	
 	let nick = document.createTextNode(raw.split(':')[1].split('!')[0]);
-	let cs = raw.split(' ')[2].substring(1);
+	let cs = raw.split(' ')[2].substring(1).toLowerCase();
 	let chan_striped = document.createTextNode(cs);
 	let topic = style(urlify( raw.split(':').splice(2).join(':'), '', false, false));
 	
@@ -1608,7 +1612,6 @@ function readLog(server, target, last) {
 			if (typeof r[target][i] !== 'undefined') {
 				
 				let msg = style(urlify( r[target][i], '', false, false ));
-				msg = twemoji.parse(msg);
 				
 				output += msg;
 			}
@@ -1721,13 +1724,11 @@ function join(chan) {
 			
 				if (this.scrollHeight !== this.offsetHeight + this.scrollTop) {
 					
-					document.getElementById('border-right').style.backgroundColor = 'red';
-					document.getElementById('border-left').style.backgroundColor = 'red';
+					document.getElementsByClassName('wselected')[0].classList.add('black');
 				}
 				else {
 					
-					document.getElementById('border-right').style.backgroundColor = 'gainsboro';
-					document.getElementById('border-left').style.backgroundColor = 'gainsboro';
+					document.getElementsByClassName('wselected')[0].classList.remove('black');
 				}
 			}
 		}
@@ -1956,20 +1957,61 @@ function msg(raw) {
 	
 	let w = document.getElementById('chan_' + chanlc);
 	
-	let line = document.createElement('p');
-	line.id = 'idmsg_' + idmsg;
-	line.className = 'line';
-	line.innerHTML = '<strong class="'+ hlcolor +'">&lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg.replace('', '');
+	let nicks = document.getElementsByClassName('nickname');
 	
-	let line_for_log = document.createElement('p');
-	line_for_log.className = 'line log';
-	line_for_log.innerHTML = '<strong class="'+ hlcolor +' nickname">' + currentDate() + ' - &lt;' + currentTime() + '&gt; &lt;<span style="color:blue;">' + nick + '</span>&gt;</strong> ' + msg_for_log.replace('', '');
-	
-	log(irc_server_address, '#' + chanlc, line_for_log.outerHTML);
+	if (nicks.length === 0 || nicks.length > 0 && nicks[nicks.length - 1].innerText !== nick) {
+		
+		console.log(nick);
+		
+		var line = document.createElement('div');
+		line.id = 'idmsg_' + idmsg;
+		line.className = 'line';
+		line.innerHTML = '';
+		
+		let n = document.createElement('strong');
+		n.className = hlcolor + ' nickname';
+		n.innerText = nick;
+		line.appendChild(n);
+		line.innerHTML += ' - ' + lang_today + ' ' + currentTime();
+		
+		let line_for_log = document.createElement('div');
+		line_for_log.className = 'line log';
+		line_for_log.innerHTML = '';
+		
+		n = document.createElement('strong');
+		n.className = hlcolor + ' nickname_old';
+		n.innerText = nick;
+		line_for_log.appendChild(n);
+		line_for_log.innerHTML += ' - ' + currentDate() + ' ' + lang_at_time + ' ' + currentTime();
+		
+		let newline_log = document.createElement('p');
+		newline_log.innerHTML += msg_for_log.replace('', '');
+		line_for_log.appendChild(newline_log);
+		
+		log(irc_server_address, '#' + chanlc, line_for_log.outerHTML);
+	}
 	
 	if (w !== null) {
 		
-		w.appendChild(line);
+		console.log(line)
+		
+		if (typeof(line) !== 'undefined') {
+			
+			w.appendChild(line);
+			
+			let last_msg = document.getElementById('idmsg_' + idmsg);
+			let newline = document.createElement('p');
+			newline.innerHTML = msg.replace('', '');
+			last_msg.appendChild(newline);
+		}
+		else {
+			
+			let last_msg = document.getElementsByClassName('line');
+			last_msg = last_msg[last_msg.length - 1];
+			let newline = document.createElement('p');
+			newline.innerHTML = msg.replace('', '');
+			last_msg.appendChild(newline);
+		}
 		
 		mht[0].forEach(function(item) {
 			
@@ -2739,6 +2781,50 @@ function emojiToChar(input) {
 	return input;
 }
 
+function newsend(w, text, idmsg, recipient) {
+	
+	let nicks = document.getElementsByClassName('nickname');
+	
+	let line = document.createElement('div');
+	
+	let message = style(urlify( text, idmsg, true, recipient ));
+	
+	let msg_for_log = style(urlify( text, idmsg, false, recipient ));
+
+	line.id = 'idmsg_' + idmsg;
+
+	line.className = 'line';
+
+	line.innerHTML = '';
+	if (nicks.length === 0) {
+		line.innerHTML = '<strong class="nickname">' + me + '</strong> - ' + lang_today + ' ' + currentTime();
+	}
+	else if (nicks[nicks.length - 1].innerText !== me) {
+		line.innerHTML = '<strong class="nickname">' + me + '</strong> - ' + lang_today + ' ' + currentTime();
+	}
+
+	let mht = ht( message );
+
+	line.innerHTML += '<p>' + mht[1] + '</p>';
+
+	w.appendChild(line);
+
+	let line_for_log = document.createElement('div');
+
+	line_for_log.className = 'line log';
+	
+	line_for_log.innerHTML = '';
+	if (nicks.length === 0) {
+		line_for_log.innerHTML = '<strong class="nickname_old">' + me + '</strong> - ' + currentDate() + ' ' + lang_at_time + ' ' + currentTime();
+	}
+	else if (nicks[nicks.length - 1].innerText !== me) {
+		line_for_log.innerHTML = '<strong class="nickname_old">' + me + '</strong> - ' + currentDate() + ' ' + lang_at_time + ' ' + currentTime();
+	}
+	line_for_log.innerHTML += '<p>' + msg_for_log + '</p>';
+
+	log(irc_server_address, recipient.toLowerCase(), line_for_log.outerHTML);
+}
+
 function send() {
 	
 	let input = document.getElementById('text');
@@ -2773,33 +2859,8 @@ function send() {
 			lines = Array.from(input.getElementsByTagName('p'));
 			
 			if (lines.length === 0) {
-			
-				let message = style(urlify( text, idmsg, true, recipient ));
 				
-				let msg_for_log = style( text );
-				
-				let line = document.createElement('p');
-				
-				line.id = 'idmsg_' + idmsg;
-				
-				line.className = 'line';
-				
-				line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
-				
-				var mht = ht( message );
-				
-				line.innerHTML += mht[1];
-				
-				w.appendChild(line);
-				
-				let line_for_log = document.createElement('p');
-				
-				line_for_log.className = 'line log';
-				
-				line_for_log.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
-				line_for_log.innerHTML += msg_for_log;
-				
-				log(irc_server_address, recipient.toLowerCase(), line_for_log.outerHTML);
+				newsend(w, text, idmsg, recipient);
 				
 				let activeWindow = document.getElementsByClassName('wselected')[0];
 				
@@ -2818,32 +2879,7 @@ function send() {
 				
 				lines.forEach(function(item, index) {
 					
-					let message = style(urlify( item.innerHTML, idmsg, true, recipient ));
-					
-					let msg_for_log = style( text );
-					
-					let line = document.createElement('p');
-					
-					line.id = 'idmsg_' + idmsg;
-					
-					line.className = 'line';
-					
-					line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
-					
-					var mht = ht( message );
-					
-					line.innerHTML += mht[1];
-					
-					w.appendChild(line);
-					
-					let line_for_log = document.createElement('p');
-					
-					line_for_log.className = 'line log';
-					
-					line_for_log.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
-					line_for_log.innerHTML += msg_for_log;
-					
-					log(irc_server_address, recipient.toLowerCase(), line_for_log.outerHTML);
+					newsend(w, text, idmsg, recipient);
 					
 					let activeWindow = document.getElementsByClassName('wselected')[0];
 					
@@ -2864,31 +2900,7 @@ function send() {
 			
 			lines.forEach(function(item, index) {
 				
-				let message = style(urlify( item.innerHTML, idmsg, true, recipient ));
-				
-				let msg_for_log = style( text );
-				
-				let line = document.createElement('p');
-				line.innerHTML = '<strong class="nickname">&lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
-				
-				var mht = ht( message );
-				
-				line.innerHTML += mht[1];
-				
-				line.id = 'idmsg_' + idmsg;
-				
-				line.className = 'line';
-				
-				w.appendChild(line);
-				
-				let line_for_log = document.createElement('p');
-				
-				line_for_log.className = 'line log';
-				
-				line_for_log.innerHTML = '<strong class="nickname">' + currentDate() + ' - &lt;'+ currentTime() +'&gt; &lt;' + me + '&gt; </strong>';
-				line_for_log.innerHTML += msg_for_log;
-				
-				log(irc_server_address, recipient.toLowerCase(), line_for_log.outerHTML);
+				newsend(w, text, idmsg, recipient);
 				
 				let activeWindow = document.getElementsByClassName('wselected')[0];
 				
@@ -2898,6 +2910,10 @@ function send() {
 				}
 			});
 		}
+		
+		let message = style(urlify( text, idmsg, true, recipient ));
+		
+		let mht = ht( message );
 		
 		mht[0].forEach(function(item) {
 			

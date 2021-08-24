@@ -10,6 +10,26 @@ let emojiCursor;
 
 (function() {
 	
+	setTimeout(function(){
+		
+		loadEmojis();
+		
+	}, 10000);
+	
+	/*
+	if (irc_config.list === false) {
+		
+		document.getElementById('btn_chanlist').style.display = 'none';
+	}
+	*/
+	
+	/*
+	document.getElementById('profile').onclick = function() {
+		
+		document.getElementById('meet').style.display = 'block';
+	}
+	*/
+	
 	let textarea = document.getElementById('text');
 	
 	//emoji();
@@ -28,6 +48,11 @@ let emojiCursor;
 		document.getElementById('chan_params').style.display = 'none';
 	}
 	*/
+	
+	document.getElementById('close_meet').onclick = function() {
+		
+		document.getElementById('meet').style.display = 'none';
+	}
 	
 	document.getElementById('topic').ondblclick = function() {
 		
@@ -151,7 +176,6 @@ let emojiCursor;
 	notifyMe('');
 	
 	textarea.focus();
-	textarea.style.border = '4px solid #A6ACAF';
 	
 	let nltosp = document.getElementById('btn_nltosp');
 	
@@ -510,14 +534,6 @@ let emojiCursor;
 		}
 	}
 	
-	textarea.onfocus = function() {
-		this.style.border = '4px solid #A6ACAF';
-	}
-	
-	textarea.onblur = function() {
-		this.style.border = '4px solid gainsboro';
-	}
-	
 	let border_left = document.getElementById('border-left');
 	let chanlist = document.getElementById('chanlist');
 	
@@ -647,12 +663,10 @@ let emojiCursor;
 					
 					if (windows.item(index + 1).scrollHeight !== windows.item(index + 1).offsetHeight + windows.item(index + 1).scrollTop) {
 						
-						document.getElementById('border-right').style.backgroundColor = 'red';
-						document.getElementById('border-left').style.backgroundColor = 'red';
+						document.getElementsByClassName('wselected')[0].classList.add('black');
 					}
 					else {
-						document.getElementById('border-right').style.backgroundColor = 'gainsboro';
-						document.getElementById('border-left').style.backgroundColor = 'gainsboro';
+						document.getElementsByClassName('wselected')[0].classList.remove('black');
 					}
 					
 					activeChannel = '#' + target[1];
@@ -935,6 +949,39 @@ let emojiCursor;
 	
 })();
 
+async function loadEmojis() {
+	
+	let response = await fetch('emoji.html');
+		
+	if(response.status != 200) {
+		throw new Error("Server Error");
+	}
+		
+	// read response stream as text
+	let text_data = await response.text();
+	
+	let elem = document.getElementById('bubble2');
+	elem.innerHTML = '<input id="search_emoji" type="text" placeholder="' + lang_search_emoji + '" />';
+	elem.innerHTML += text_data;
+	
+	document.getElementById('search_emoji').onclick = function(e) {
+		
+		e.stopPropagation();
+		
+		this.focus();
+	}
+	
+	document.getElementById('text').onclick = function(e) {
+		
+		e.stopPropagation();
+	}
+	
+	document.getElementById('search_emoji').onkeyup = function() {
+		
+		search_emoji(this.value);
+	}
+};
+
 function emoji() {
 	
 	let elem = document.getElementById('bubble2');
@@ -949,32 +996,43 @@ function emoji() {
             {
                 let text = rawFile.responseText;
                 
-                let lines = text.match(/((.*);(.*)#(...)(.*))/gim);
-                
-                //console.log(lines)
+                let lines = text.match(/(.*)\n/gim);
                 
                 lines.forEach(function(item, index) {
 					
-					let code = item.split('#')[1].split(' ');
+					if (item !== undefined) {
 					
-					let c = twemoji.parse(code[1]);
-										
-					let name = code.splice(2).join('');
-					
-					if (index % 10 === 0 && index !== 0) {
-						
-						elem.innerHTML += '<br />';
+						if (item.indexOf('# subgroup:') === -1) {
+							
+							let code = item.split('#');
+							
+							if (code[1] !== undefined) {
+								
+								code = code[1].split(' ');
+							}
+							
+							let c = twemoji.parse(code[1]);
+												
+							let name = code.splice(2).join('');
+							
+							if (index % 10 === 0 && index !== 0) {
+								
+								elem.innerHTML += '<br />';
+							}
+							
+							elem.innerHTML += '<span id="' + code[1] + '" class="emoji ' + name + '" title=":' + name + ':">' + c + '</span>';
+						}
+						else {
+							
+							elem.innerHTML += '<hr />';
+						}
 					}
-					
-					elem.innerHTML += '<span id="' + code[1] + '" class="emoji ' + name + '" title=":' + name + ':">' + c + '</span>';
 				});
-				
-				//twemoji.parse(elem);
             }
         }
     }
-    
-    rawFile.send(null);
+	
+	rawFile.send(null);
 }
 
 var decodeEntities = (function() {
@@ -1031,7 +1089,7 @@ function expandTextarea(obj) {
 		obj.style.height = linesHeight + 'px';
 		obj.style.overflowY = 'hidden';
 		
-		weight = 55 + linesHeight;
+		weight = 44 + linesHeight;
 	}
 	else {
 		
@@ -1347,4 +1405,26 @@ function gchanlist_window() {
 	}
 	
 	document.getElementById('gchanlist').className += ' wselected';
+}
+
+function search_emoji(s) {
+	
+	if (s.substr(0, 1) !== ':') {
+		
+		s = ':' + s;
+	}
+	
+	let emojis = document.querySelectorAll('#bubble2 span.emoji');
+	
+	Array.from(emojis).forEach(function(item) {
+		
+		if (item.getAttribute('title').substr(0, s.length) !== s) {
+			
+			item.style.display = 'none';
+		}
+		else {
+			
+			item.style.display = 'inline-block';
+		}
+	});
 }
