@@ -98,3 +98,33 @@ input[type=text], input[type=password] {
     top: 50%;
     left: 50%;
 }
+header {
+	background-color:rgba(255, 255, 255, 0.5);
+}
+#subheader {
+	margin:0 auto;
+	height:80px;
+	line-height:70px;
+	margin-left:20px;
+}
+#header_menu {
+	text-align:right;
+	float:right;
+    height:80px;
+    line-height: 70px;
+    margin-right:20px;
+}
+#subheader .fa {
+	color:black;
+	font-size:40px !important;
+	vertical-align:middle;
+	margin:0 20px;
+}
+.facebook_btn {
+	width:40px;
+	vertical-align:middle;
+}
+#banner {
+    width:200px;
+    vertical-align:middle;
+}
