@@ -43,8 +43,8 @@ It works !
 # Compatibilty
 
 ## IRC Daemons
-- Works with UnrealIRCd 4.x and later versions : [link](https://www.unrealircd.org/docs/WebSocket_support){:target="_blank"}
-- Works with InspIRCd 3.x and later versions : [link](https://docs.inspircd.org/3/modules/websocket/){:target="_blank"}
+- Works with UnrealIRCd 4.x and later versions : https://www.unrealircd.org/docs/WebSocket_support
+- Works with InspIRCd 3.x and later versions : https://docs.inspircd.org/3/modules/websocket/
 
 ## Browser compatibility
 - Google chrome
@@ -63,4 +63,4 @@ Make sure your browser is up to date.
 Note : IRC raws not supported are in Javascript console of your web browser.
 
 ## To test Wircy with UnrealIRCd server
-[link](https://susoft.fr/wircy/){:target="_blank"}
+https://susoft.fr/wircy/
