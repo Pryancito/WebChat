@@ -2,6 +2,11 @@
 
 (function() {
 	
+	if (lang === '') {
+		
+		lang = 'fr';
+	}
+	
 	document.documentElement.setAttribute('lang', lang);
 	
 	let submit = document.getElementById('submit');
