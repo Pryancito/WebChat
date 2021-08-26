@@ -9,13 +9,6 @@
 	
 	document.documentElement.setAttribute('lang', lang);
 	
-	if (lang === '') {
-		
-		lang = 'fr';
-	}
-	
-	document.getElementById(lang).setAttribute('selected', 'selected');
-	
 	let submit = document.getElementById('submit');
 	submit.onclick = function() {
 		let nickname = document.getElementById('wircy_nickname').value;
