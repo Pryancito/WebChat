@@ -61,3 +61,6 @@ Make sure your browser is up to date.
 - Manage all IRC protocol. /raw sends a raw request to IRC server.
 
 Note : IRC raws not supported are in Javascript console of your web browser.
+
+## To test Wircy with UnrealIRCd server
+https://susoft.fr/wircy/
