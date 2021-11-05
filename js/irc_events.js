@@ -295,7 +295,9 @@ let emojiCursor;
 			
 			e.preventDefault();
 			
-			uls_no_mode[ ACStriped ].sort();
+			let AC = ACStriped.toLowerCase();
+			
+			uls_no_mode[ AC ].sort();
 			
 			let cursor = getCaretPosition(elem, true)[0];
 			
@@ -453,7 +455,7 @@ let emojiCursor;
 					
 					newsearch = newsearch[ count_spaces ];
 					
-					if (search.toLowerCase() != newsearch.substr(0, search.length).toLowerCase() && newsearch.indexOf(uls_no_mode[ ACStriped ]) === -1) {
+					if (search.toLowerCase() != newsearch.substr(0, search.length).toLowerCase() && newsearch.indexOf(uls_no_mode[ AC ]) === -1) {
 						
 						tabindexstr = false;
 						tabindex = -1;
@@ -481,7 +483,7 @@ let emojiCursor;
 					
 					tabindexstr = [];
 					
-					uls_no_mode[ ACStriped ].forEach(function(item, index) {
+					uls_no_mode[ AC ].forEach(function(item, index) {
 						
 						if (item.substring(0, search.length).toLowerCase() == search.toLowerCase() || item.substring(0, search.length) == '') {
 							tabindexstr.push(index);
@@ -493,15 +495,15 @@ let emojiCursor;
 					tabindex = 0;
 				}
 				
-				if (typeof uls_no_mode[ ACStriped ][ tabindexstr[ tabindex ] ] !== 'undefined') {
+				if (typeof uls_no_mode[ AC ][ tabindexstr[ tabindex ] ] !== 'undefined') {
 					
 					let val = textval.split(' ');
 					
-					val[ count_spaces ] = uls_no_mode[ ACStriped ][ tabindexstr[ tabindex ] ];
+					val[ count_spaces ] = uls_no_mode[ AC ][ tabindexstr[ tabindex ] ];
 					
 					elem.innerHTML = val.join(' ');
 					
-					let pos = cursor + uls_no_mode[ ACStriped ][ tabindexstr[ tabindex ] ].length - search.length;
+					let pos = cursor + uls_no_mode[ AC ][ tabindexstr[ tabindex ] ].length - search.length;
 					
 					setCaretPos(pos);
 				}
@@ -729,6 +731,8 @@ let emojiCursor;
 					let chanspNoHTML = ACStriped.replace(/\/g, '<');
 					
 					chanspNoHTML = chanspNoHTML.replace(/\/g, '>');
+					
+					ACStriped = chanspNoHTML;
 					
 					let chan_topic = document.getElementById('chan_topic_' + chanspNoHTML);
 					
