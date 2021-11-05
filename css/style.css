@@ -311,7 +311,9 @@ body #send_options .fa {
 	padding:10px;
 	line-height:25px;
 	font-size:20px;
-	width:258px;
+	width:258px;
+	
+	background-color: #f0f0f0;
 }
 #bubble2 span {
 	display:inline-block;
