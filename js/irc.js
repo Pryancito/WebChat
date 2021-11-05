@@ -212,6 +212,8 @@ function autojoins() {
 			
 			list = list.split(',');
 			
+			console.log(list)
+			
 			if (list.length == 1 && list[0] == '') {
 				
 				doSend('join ' + default_chan);
@@ -483,9 +485,8 @@ function process(rawData) {
 		if (nspasswd[0] === nickname && nspasswd[1] !== '') { // Perform for nickserv pass
 			doSend('ns identify ' + nspasswd[1]);
 		}
-		else {
-			autojoins();
-		}
+		
+		autojoins();
 		
 		Array.from(document.getElementsByClassName('window')).forEach( closeAllWindows );
 		
@@ -2789,7 +2790,7 @@ function newsend(w, text, idmsg, recipient) {
 	
 	let message = style(urlify( text, idmsg, true, recipient ));
 	
-	let msg_for_log = style(urlify( text, idmsg, false, recipient ));
+	let msg_for_log = style(text);
 
 	line.id = 'idmsg_' + idmsg;
 
@@ -2814,12 +2815,9 @@ function newsend(w, text, idmsg, recipient) {
 	line_for_log.className = 'line log';
 	
 	line_for_log.innerHTML = '';
-	if (nicks.length === 0) {
-		line_for_log.innerHTML = '<strong class="nickname_old">' + me + '</strong> - ' + currentDate() + ' ' + lang_at_time + ' ' + currentTime();
-	}
-	else if (nicks[nicks.length - 1].innerText !== me) {
-		line_for_log.innerHTML = '<strong class="nickname_old">' + me + '</strong> - ' + currentDate() + ' ' + lang_at_time + ' ' + currentTime();
-	}
+	
+	line_for_log.innerHTML = '<strong class="nickname_old">' + me + '</strong> - ' + currentDate() + ' ' + lang_at_time + ' ' + currentTime();
+	
 	line_for_log.innerHTML += '<p>' + msg_for_log + '</p>';
 
 	log(irc_server_address, recipient.toLowerCase(), line_for_log.outerHTML);
@@ -3321,10 +3319,10 @@ function youtube_link(id) {
 	let recipient;
 	
 	if (active[0] == '#') {
-		recipient = 'chan_' + ACStriped;
+		recipient = 'chan_' + ACStriped.toLowerCase();
 	}
 	else {
-		recipient = 'query_' + active;
+		recipient = 'query_' + active.toLowerCase();
 	}
 	
 	document.getElementById(recipient).innerHTML += html;

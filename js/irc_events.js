@@ -2,7 +2,7 @@
 
 let rememberLines = [], irl = -1, tabindexstr = false, tabindex = -1, search = false, count_spaces = false, textval = false;
 let chanc = 0, ccindex, cclen, cccursor, newcursor, hindex = false, hindex_iter, htag;
-let numLines = 0, editbox = '';
+let numLines = 0, editbox = '', emojiSearch = '';
 
 let favlist = getCookie('favlist');
 
@@ -222,6 +222,43 @@ let emojiCursor;
 		emojiCursor = getCaretCharacterOffsetWithin(this);
 		
 		expandTextarea(this);
+	}
+	
+	let checkKeyCode = false, s = '';
+	
+	textarea.onkeyup = function(e) {
+		
+		console.log(e.keyCode)
+		
+		if (checkKeyCode === 191) {
+			
+			checkKeyCode = true;
+			
+			emojiSearch = '';
+		}
+		
+		if (e.keyCode == 191) {
+			
+			checkKeyCode = 191;
+		}
+		else if (checkKeyCode !== true || e.keyCode == 32) {
+			
+			checkKeyCode = false;
+		}
+		else if (checkKeyCode === true && e.keyCode !== 8) {
+			
+			bubble2.style.display = 'inline-block';
+			
+			Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
+			
+			let se = document.getElementById('search_emoji');
+			
+			emojiSearch += String.fromCharCode(e.keyCode).toLowerCase();
+			
+			se.value = emojiSearch;
+			
+			search_emoji(emojiSearch);
+		}
 	}
 	
 	textarea.onkeydown = function(e) {
@@ -837,8 +874,10 @@ let emojiCursor;
 					return;
 				 }
 			  }
-			  
+				
 			  text.appendChild(node);
+			  
+			  expandTextarea(textarea);
 		   }
 		}
 	};
@@ -1409,16 +1448,11 @@ function gchanlist_window() {
 
 function search_emoji(s) {
 	
-	if (s.substr(0, 1) !== ':') {
-		
-		s = ':' + s;
-	}
-	
 	let emojis = document.querySelectorAll('#bubble2 span.emoji');
 	
 	Array.from(emojis).forEach(function(item) {
 		
-		if (item.getAttribute('title').substr(0, s.length) !== s) {
+		if (item.getAttribute('title').toLowerCase().indexOf( s.toLowerCase() ) === -1) {
 			
 			item.style.display = 'none';
 		}

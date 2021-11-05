@@ -5,9 +5,15 @@
 	if (lang === '') {
 		
 		lang = 'fr';
+		
+		setCookie('lang', 'fr', 10000000);
 	}
 	
+	console.log(lang)
+	
 	document.documentElement.setAttribute('lang', lang);
+	
+	document.getElementById(lang).setAttribute('selected', 'selected');
 	
 	let submit = document.getElementById('submit');
 	submit.onclick = function() {
@@ -39,9 +45,12 @@
 		}
 	}
 	
-	let nspasswd = JSON.parse(getCookie('nspasswd'));
+	let nspasswd = getCookie('nspasswd');
 	
 	if (nspasswd !== '') {
+		
+		nspasswd = JSON.parse(nspasswd);
+		
 		document.getElementById('wircy_nickserv').value = nspasswd[1];
 	}
 	
