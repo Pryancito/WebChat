@@ -1,228 +1,228 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-<meta charset="utf-8" />
-
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-
-<link href="css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-
-<script src="js/langs.js"></script>
-
-<script src="https://twemoji.maxcdn.com/2/twemoji.min.js?12.0.0"></script>
-
-<title>Wircy</title>
-
-</head>
-
-<body>
-	
-	<div id="meet">
-		<div id="submeet">
-			
-			<i id="close_meet" class="fa fa-times" aria-hidden="true"></i>
-			
-			<ul id="meet_menu">
-				<li>Mon profil</li>
-				<li>Recherchez un profil</li>
-			</ul>
-			
-			<div id="myprofile">
-				
-			</div>
-			
-			<div id="search_profile">
-				<input id="search_meet" type="text" placeholder="Recherchez un profil" />
-				<input id="ray" type="number" placeholder="Rayon de recherche en kms" name="search_ray" min="1" />
-				<select id="genre" name="genre">
-					<option>Homme</option>
-					<option>Femme</option>
-				</select>
-				<input type="number" id="age_min" name="age_min" min="18" max="100" step="1" placeholder="Âge minimum" />
-				<input type="number" id="age_max" name="age_max" min="18" max="100" step="1" placeholder="Âge maximum" />
-			</div>
-		</div>
-	</div>
-	
-	<header>
-		<div id="icons">
-			<div id="tools">
-				<!--<script> document.write('<i id="btn_connect" class="fa fa-bolt" aria-hidden="true" title="' + lang_connect_button + '"></i>'); </script>-->
-				<!--<script> document.write('<i class="fa fa-bars" aria-hidden="true" title="' + lang_settings +'"></i>'); </script>-->
-				<script> document.write('<i id="btn_chanlist" class="fa fa-th-list" aria-hidden="true" title="'+ lang_list +'"></i>'); </script>
-				<script> document.write('<i id="btn_add_chan" class="fa fa-plus" aria-hidden="true" title="'+ lang_add_chan +'"></i>'); </script>
-				<script> document.write('<i id="btn_favorites_chans" class="fa fa-star" aria-hidden="true" title="' + lang_favorites_chans + '"></i>'); </script>
-				<!--<script> document.write('<i id="btn_address_book" class="fa fa-address-book" aria-hidden="true" title="' + lang_address_book + '"></i>'); </script>-->
-				<!--<script> document.write('<i id="btn_summary" class="fa fa-code" aria-hidden="true" title="'+ lang_summary_off +'" style="background-color:white;"></i>'); </script>-->
-				<!--<script> document.write('<i id="btn_visio" class="fa fa-eye" aria-hidden="true" title="' + lang_visio_button_dwait + '"></i>'); </script>-->
-			</div>
-			<!--<script> document.write('<div id="topic"><span>' + lang_topic + ' : </span></div>'); </script>-->
-			<script> document.write('<div id="topic" title="' + lang_topic_view + '"></div>'); </script>
-			<!--
-			<div id="meet_tools">
-				<script> document.write('<i id="profile" class="fa fa-address-card" aria-hidden="true" title="' + lang_cards + '"></i>'); </script>
-				<script> document.write('<i id="visio" class="fa fa-video-camera" aria-hidden="true" title="' + lang_visio + '"></i>'); </script>
-			</div>
-			-->
-		</div>
-		<div id="bubble">
-			<div id="connect" class="options">
-				<ul>
-					<li>Disconnect</li>
-				</ul>
-				<!--
-				<h4>Historical</h4>
-				<div>
-					
-				</div>
-				<h4>Favorites servers</h4>
-				<div>
-					
-				</div>
-				<h4>Servers Preselection</h4>
-				<div>
-					
-				</div>
-				-->
-			</div>
-			<div id="addchan" class="options">
-				<p>
-					<script> document.write('<input id="newchan" type="text" placeholder="'+ lang_addchan_options +'" />'); </script>
-					<input id="create_newchan" type="button" value="Ok" />
-				</p>
-			</div>
-			<div id="favchans" class="options">
-				<p id="current_in_fav">
-					<i id="addFavChan" class="fa fa-star-o" aria-hidden="true"></i>
-					<span><script> document.write(lang_addfav_current_chan); </script></span>
-				</p>
-				<div id="favlist">
-					<p id="favlist_default" style="text-align:center;"> <script> document.write(lang_nofav); </script> </p>
-					<p id="favlist_content"></p>
-				</div>
-			</div>
-			<div id="addressbook" class="options">
-				<div>
-					<span id="tab_ab_ignore" class="ab_tab ab_selected"><script> document.write(lang_ignore); </script></span>
-					<span id="tab_ab_highlight" class="ab_tab"><script> document.write(lang_hl); </script></span>
-					<span id="tab_ab_friend" class="ab_tab"><script> document.write(lang_friend); </script></span>
-				</div>
-				<div id="ab_ignore" class="ab_content">
-					
-					<div>
-						<script> document.write('<input type="text" placeholder="' + lang_mask + '" />'); </script>
-						<script> document.write('<input type="button" value="' + lang_add_mask + '" />'); </script>
-					</div>
-					
-					<div id="abi_options" class="ab_options">
-						<input id="abi_all" type="checkbox" value="a" checked="checked" />
-						<script> document.write('<label for="abi_all">' + lang_ab_all + '</label>'); </script>
-						<input id="abi_private" type="checkbox" value="p" class="abi_notall" />
-						<script> document.write('<label for="abi_private">' + lang_ab_private + '</label>'); </script>
-						<input id="abi_channel" type="checkbox" value="c" class="abi_notall" />
-						<script> document.write('<label for="abi_channel">' + lang_ab_channel + '</label>'); </script>
-						<input id="abi_notice" type="checkbox" value="n" class="abi_notall" />
-						<script> document.write('<label for="abi_notice">' + lang_ab_notice + '</label>'); </script>
-						<input id="abi_invite" type="checkbox" value="i" class="abi_notall" />
-						<script> document.write('<label for="abi_invite">' + lang_ab_invite + '</label>'); </script>
-					</div>
-					
-					<div id="ab_ignore_masks" class="ab_list">
-						
-					</div>
-				</div>
-				<div id="ab_highlight" class="ab_content">
-					
-					<script> document.write('<input type="text" placeholder="' + lang_mask + '" />'); </script>
-					<script> document.write('<input type="button" value="' + lang_add_mask + '" />'); </script>
-					
-					<div id="ab_highlight_masks" class="ab_list">
-						
-					</div>
-				</div>
-				<div id="ab_friend" class="ab_content">
-					
-					<div>
-						<script> document.write('<input type="text" placeholder="' + lang_mask + '" />'); </script>
-						<script> document.write('<input type="button" value="' + lang_add_mask + '" />'); </script>
-					</div>
-					
-					<div id="abf_options" class="ab_options">
-						<input id="abf_over" type="checkbox" value="o" checked="checked" />
-						<script> document.write('<label for="abf_over">' + lang_ab_over + '</label>'); </script>
-					</div>
-					
-					<div id="ab_friend_masks" class="ab_list">
-						
-					</div>
-				</div>
-			</div>
-		</div>
-		<img id="banner" src="./img/susoft_wircy.png" alt="Banner" />
-	</header>
-	
-	<div id="content">
-		<div id="cqlist">
-			
-			<div id="border-left" draggable="true"></div>
-			
-			<div id="chanlist"></div>
-			<div id="querylist"></div>
-		</div>
-		<div id="userlist">
-			<div id="border-right" draggable="true"></div>
-		</div>
-		<div id="chat">
-			<div id="msgs">
-				<div id="gchanlist" class="window"></div>
-				<div id="status" class="window"></div>
-				<img id="loader" src="img/loader.gif" alt="loader.gif" />
-			</div>
-			<div id="editbox">
-				
-				<div id="text" style="height:23px;" contenteditable="true"></div>
-				
-				<div id="send_options">
-					<!--<script> document.write('<i id="btn_send_picture" class="fa fa-camera" aria-hidden="true" title="' + lang_send_picture + '"></i>'); </script>-->
-					<!--<script> document.write('<i id="btn_send_video" class="fa fa-video-camera" aria-hidden="true" title="' + lang_send_video + '"></i>'); </script>-->
-					<!--
-					<script> document.write('<i id="btn_color" class="fa fa-paint-brush" aria-hidden="true" title="' + lang_color + '"></i>'); </script>
-					<script> document.write('<i id="btn_bold" class="fa fa-bold" aria-hidden="true" title="' + lang_bold + '"></i>'); </script>
-					<script> document.write('<i id="btn_italic" class="fa fa-italic" aria-hidden="true" title="' + lang_italic + '"></i>'); </script>
-					<script> document.write('<i id="btn_underline" class="fa fa-underline" aria-hidden="true" title="' + lang_underline +'"></i>'); </script>
-					-->
-					<script> document.write('<i id="btn_nltosp" class="fa fa-paragraph" aria-hidden="true" title="' + lang_nltosp + '"></i>'); </script>
-					<script> document.write('<span id="emoji" title="Emoji">😄</span>'); </script>
-					<div id="bubble2"><img src="img/loader.gif" alt="Loader" id="emojis_loader" /></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--
-	<div id="chan_params">
-		<i id="cross_chan_params" class="fa fa-times" aria-hidden="true"></i>
-		<span class="cp_tab cp_tab_selected">Bans</span>
-		<span class="cp_tab">Excepts</span>
-		<span class="cp_tab">Invites</span>
-		<span class="cp_tab">Quiets</span>
-		<div id="cp_list"></div>
-		<div id="cp_buttons">
-			<input type="button" value="OK" />
-			<input type="button" value="Cancel" />
-		</div>
-	</div>
-	-->
-	
-	<script src="js/encoding-indexes.js"></script>
-	<script src="js/encoding.js"></script>
-	<script src="js/irc.js"></script>
-	<script src="js/irc_events.js"></script>
-	
-</body>
-
-</html>
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8" />
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+<link href="css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+
+<script src="js/langs.js"></script>
+
+<script src="https://twemoji.maxcdn.com/2/twemoji.min.js?12.0.0"></script>
+
+<title>Wircy</title>
+
+</head>
+
+<body>
+	
+	<div id="meet">
+		<div id="submeet">
+			
+			<i id="close_meet" class="fa fa-times" aria-hidden="true"></i>
+			
+			<ul id="meet_menu">
+				<li>Mon profil</li>
+				<li>Recherchez un profil</li>
+			</ul>
+			
+			<div id="myprofile">
+				
+			</div>
+			
+			<div id="search_profile">
+				<input id="search_meet" type="text" placeholder="Recherchez un profil" />
+				<input id="ray" type="number" placeholder="Rayon de recherche en kms" name="search_ray" min="1" />
+				<select id="genre" name="genre">
+					<option>Homme</option>
+					<option>Femme</option>
+				</select>
+				<input type="number" id="age_min" name="age_min" min="18" max="100" step="1" placeholder="Âge minimum" />
+				<input type="number" id="age_max" name="age_max" min="18" max="100" step="1" placeholder="Âge maximum" />
+			</div>
+		</div>
+	</div>
+	
+	<header>
+		<div id="icons">
+			<div id="tools">
+				<!--<script> document.write('<i id="btn_connect" class="fa fa-bolt" aria-hidden="true" title="' + lang_connect_button + '"></i>'); </script>-->
+				<!--<script> document.write('<i class="fa fa-bars" aria-hidden="true" title="' + lang_settings +'"></i>'); </script>-->
+				<script> document.write('<i id="btn_chanlist" class="fa fa-th-list" aria-hidden="true" title="'+ lang_list +'"></i>'); </script>
+				<script> document.write('<i id="btn_add_chan" class="fa fa-plus" aria-hidden="true" title="'+ lang_add_chan +'"></i>'); </script>
+				<script> document.write('<i id="btn_favorites_chans" class="fa fa-star" aria-hidden="true" title="' + lang_favorites_chans + '"></i>'); </script>
+				<!--<script> document.write('<i id="btn_address_book" class="fa fa-address-book" aria-hidden="true" title="' + lang_address_book + '"></i>'); </script>-->
+				<!--<script> document.write('<i id="btn_summary" class="fa fa-code" aria-hidden="true" title="'+ lang_summary_off +'" style="background-color:white;"></i>'); </script>-->
+				<!--<script> document.write('<i id="btn_visio" class="fa fa-eye" aria-hidden="true" title="' + lang_visio_button_dwait + '"></i>'); </script>-->
+			</div>
+			<!--<script> document.write('<div id="topic"><span>' + lang_topic + ' : </span></div>'); </script>-->
+			<script> document.write('<div id="topic" title="' + lang_topic_view + '"></div>'); </script>
+			<!--
+			<div id="meet_tools">
+				<script> document.write('<i id="profile" class="fa fa-address-card" aria-hidden="true" title="' + lang_cards + '"></i>'); </script>
+				<script> document.write('<i id="visio" class="fa fa-video-camera" aria-hidden="true" title="' + lang_visio + '"></i>'); </script>
+			</div>
+			-->
+		</div>
+		<div id="bubble">
+			<div id="connect" class="options">
+				<ul>
+					<li>Disconnect</li>
+				</ul>
+				<!--
+				<h4>Historical</h4>
+				<div>
+					
+				</div>
+				<h4>Favorites servers</h4>
+				<div>
+					
+				</div>
+				<h4>Servers Preselection</h4>
+				<div>
+					
+				</div>
+				-->
+			</div>
+			<div id="addchan" class="options">
+				<p>
+					<script> document.write('<input id="newchan" type="text" placeholder="'+ lang_addchan_options +'" />'); </script>
+					<input id="create_newchan" type="button" value="Ok" />
+				</p>
+			</div>
+			<div id="favchans" class="options">
+				<p id="current_in_fav">
+					<i id="addFavChan" class="fa fa-star-o" aria-hidden="true"></i>
+					<span><script> document.write(lang_addfav_current_chan); </script></span>
+				</p>
+				<div id="favlist">
+					<p id="favlist_default" style="text-align:center;"> <script> document.write(lang_nofav); </script> </p>
+					<p id="favlist_content"></p>
+				</div>
+			</div>
+			<div id="addressbook" class="options">
+				<div>
+					<span id="tab_ab_ignore" class="ab_tab ab_selected"><script> document.write(lang_ignore); </script></span>
+					<span id="tab_ab_highlight" class="ab_tab"><script> document.write(lang_hl); </script></span>
+					<span id="tab_ab_friend" class="ab_tab"><script> document.write(lang_friend); </script></span>
+				</div>
+				<div id="ab_ignore" class="ab_content">
+					
+					<div>
+						<script> document.write('<input type="text" placeholder="' + lang_mask + '" />'); </script>
+						<script> document.write('<input type="button" value="' + lang_add_mask + '" />'); </script>
+					</div>
+					
+					<div id="abi_options" class="ab_options">
+						<input id="abi_all" type="checkbox" value="a" checked="checked" />
+						<script> document.write('<label for="abi_all">' + lang_ab_all + '</label>'); </script>
+						<input id="abi_private" type="checkbox" value="p" class="abi_notall" />
+						<script> document.write('<label for="abi_private">' + lang_ab_private + '</label>'); </script>
+						<input id="abi_channel" type="checkbox" value="c" class="abi_notall" />
+						<script> document.write('<label for="abi_channel">' + lang_ab_channel + '</label>'); </script>
+						<input id="abi_notice" type="checkbox" value="n" class="abi_notall" />
+						<script> document.write('<label for="abi_notice">' + lang_ab_notice + '</label>'); </script>
+						<input id="abi_invite" type="checkbox" value="i" class="abi_notall" />
+						<script> document.write('<label for="abi_invite">' + lang_ab_invite + '</label>'); </script>
+					</div>
+					
+					<div id="ab_ignore_masks" class="ab_list">
+						
+					</div>
+				</div>
+				<div id="ab_highlight" class="ab_content">
+					
+					<script> document.write('<input type="text" placeholder="' + lang_mask + '" />'); </script>
+					<script> document.write('<input type="button" value="' + lang_add_mask + '" />'); </script>
+					
+					<div id="ab_highlight_masks" class="ab_list">
+						
+					</div>
+				</div>
+				<div id="ab_friend" class="ab_content">
+					
+					<div>
+						<script> document.write('<input type="text" placeholder="' + lang_mask + '" />'); </script>
+						<script> document.write('<input type="button" value="' + lang_add_mask + '" />'); </script>
+					</div>
+					
+					<div id="abf_options" class="ab_options">
+						<input id="abf_over" type="checkbox" value="o" checked="checked" />
+						<script> document.write('<label for="abf_over">' + lang_ab_over + '</label>'); </script>
+					</div>
+					
+					<div id="ab_friend_masks" class="ab_list">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<img id="banner" src="./img/susoft_wircy.png" alt="Banner" />
+	</header>
+	
+	<div id="content">
+		<div id="cqlist">
+			
+			<div id="border-left" draggable="true"></div>
+			
+			<div id="chanlist"></div>
+			<div id="querylist"></div>
+		</div>
+		<div id="userlist">
+			<div id="border-right" draggable="true"></div>
+		</div>
+		<div id="chat">
+			<div id="msgs">
+				<div id="gchanlist" class="window"></div>
+				<div id="status" class="window"></div>
+				<img id="loader" src="img/loader.gif" alt="loader.gif" />
+			</div>
+			<div id="editbox">
+				
+				<div id="text" style="height:23px;" contenteditable="true"></div>
+				
+				<div id="send_options">
+					<!--<script> document.write('<i id="btn_send_picture" class="fa fa-camera" aria-hidden="true" title="' + lang_send_picture + '"></i>'); </script>-->
+					<!--<script> document.write('<i id="btn_send_video" class="fa fa-video-camera" aria-hidden="true" title="' + lang_send_video + '"></i>'); </script>-->
+					<!--
+					<script> document.write('<i id="btn_color" class="fa fa-paint-brush" aria-hidden="true" title="' + lang_color + '"></i>'); </script>
+					<script> document.write('<i id="btn_bold" class="fa fa-bold" aria-hidden="true" title="' + lang_bold + '"></i>'); </script>
+					<script> document.write('<i id="btn_italic" class="fa fa-italic" aria-hidden="true" title="' + lang_italic + '"></i>'); </script>
+					<script> document.write('<i id="btn_underline" class="fa fa-underline" aria-hidden="true" title="' + lang_underline +'"></i>'); </script>
+					-->
+					<script> document.write('<i id="btn_nltosp" class="fa fa-paragraph" aria-hidden="true" title="' + lang_nltosp + '"></i>'); </script>
+					<script> document.write('<span id="emoji" title="Emoji">😄</span>'); </script>
+					<div id="bubble2"><img src="img/loader.gif" alt="Loader" id="emojis_loader" /></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--
+	<div id="chan_params">
+		<i id="cross_chan_params" class="fa fa-times" aria-hidden="true"></i>
+		<span class="cp_tab cp_tab_selected">Bans</span>
+		<span class="cp_tab">Excepts</span>
+		<span class="cp_tab">Invites</span>
+		<span class="cp_tab">Quiets</span>
+		<div id="cp_list"></div>
+		<div id="cp_buttons">
+			<input type="button" value="OK" />
+			<input type="button" value="Cancel" />
+		</div>
+	</div>
+	-->
+	
+	<script src="js/encoding-indexes.js"></script>
+	<script src="js/encoding.js"></script>
+	<script src="js/irc.js"></script>
+	<script src="js/irc_events.js"></script>
+	
+</body>
+
+</html>
