@@ -228,8 +228,6 @@ let emojiCursor;
 	
 	textarea.onkeyup = function(e) {
 		
-		console.log(e.keyCode)
-		
 		if (checkKeyCode === 191) {
 			
 			checkKeyCode = true;
@@ -245,6 +243,7 @@ let emojiCursor;
 			
 			checkKeyCode = false;
 		}
+		/*
 		else if (checkKeyCode === true && e.keyCode !== 8) {
 			
 			bubble2.style.display = 'inline-block';
@@ -259,6 +258,7 @@ let emojiCursor;
 			
 			search_emoji(emojiSearch);
 		}
+		*/
 	}
 	
 	textarea.onkeydown = function(e) {
@@ -279,6 +279,15 @@ let emojiCursor;
 			send();
 			
 			expandTextarea(this);
+		}
+		
+		if (e.code === 'F4') {
+			
+			bubble2.style.display = 'inline-block';
+			
+			Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
+			
+			document.getElementById('search_emoji').focus();
 		}
 		
 		// nick and chan completion :
@@ -835,6 +844,8 @@ let emojiCursor;
 		bubble2.style.display = 'inline-block';
 		
 		Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
+		
+		document.getElementById('search_emoji').focus();
 	}
 	
 	document.getElementById('send_options').onmousedown = function(e) {
@@ -876,10 +887,10 @@ let emojiCursor;
 			  }
 				
 			  text.appendChild(node);
-			  
-			  expandTextarea(textarea);
 		   }
 		}
+		
+		expandTextarea(textarea);
 	};
 	
 	let btn_favorites_chans = document.getElementById('btn_favorites_chans');
