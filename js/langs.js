@@ -126,7 +126,7 @@ if (lang === 'es') {
         var lang_nick = "Nickname";
         var lang_submit = "Chatear !";
         var lang_lang = "Elige idioma";
-        var lang_nspasswd = "NickServ Password (optional)";
+        var lang_nspasswd = "Contrase&ntilde;a NickServ (opcional)";
         var lang_ignore = "Ignores";
         var lang_hl = "Highlights";
         var lang_friend = "Amigos";

@@ -2,11 +2,7 @@
 
 // -------------------------- START OF CONFIG -------------------------- \\
 
-<<<<<<< HEAD
 let irc_server_address = 'wss://irc.chateros.org:9000/';
-=======
-let irc_server_address = 'wss://irc.unrealircd.org:443/';
->>>>>>> 9ddd141fc3caa00ec6aa48071f65266c58911fd2
 
 let urlify_check = false; // Or false to disable.
 
@@ -28,13 +24,6 @@ if (nickname === '') {
 	nickname = 'WU_' + Date.now();
 }
 	
-let nspasswd = getCookie('nspasswd');
-
-if (nspasswd !== '') {
-	
-	nspasswd = JSON.parse(nspasswd);
-}
-
 let chans_from_url = getParameterByName('channels');
 
 let nicks_join = new Object();
@@ -175,10 +164,6 @@ function connectWebSocket() {
 
 function onOpen(evt) {
 	
-<<<<<<< HEAD
-=======
-	doSend('user Wircy * * :Wircy user - https://github.com/Kitu83/wircy');
->>>>>>> 9ddd141fc3caa00ec6aa48071f65266c58911fd2
 	doSend('nick ' + nickname);
 	doSend('user WebChat * * :Wircy User');
 }
@@ -463,20 +448,6 @@ function process(rawData) {
 	let raw;
 
 	if (is_utf8(new Uint8Array(rawData)) === false) {
-<<<<<<< HEAD
-
-		raw = (new TextDecoder('iso-8859-15')).decode(rawData);
-	}
-	else {
-
-		try {
-
-			raw = (new TextDecoder()).decode(rawData);
-		}
-		catch (error) {
-
-=======
-		
 		raw = (new TextDecoder('iso-8859-15')).decode(rawData);
 	}
 	else {
@@ -487,7 +458,6 @@ function process(rawData) {
 		}
 		catch (error) {
 			
->>>>>>> 9ddd141fc3caa00ec6aa48071f65266c58911fd2
 			raw = rawData;
 		}
 	}
@@ -506,10 +476,6 @@ function process(rawData) {
 		
 		//doSend("join #Zeus"); // join a room upon connection.
 		//doSend("mode " + activeChannel);
-		
-		if (nspasswd[0] === nickname && nspasswd[1] !== '') { // Perform for nickserv pass
-			doSend('ns identify ' + nspasswd[1]);
-		}
 		
 		autojoins();
 		
@@ -2090,11 +2056,7 @@ function scrollBottom(w) {
 
 function getMsg(raw) { // :Kitu2!Wircy@F537BEB1:B76530E1:A9B980DA:IP PRIVMSG #Welcome :test
 	
-<<<<<<< HEAD
-	raw.split('PRIVMSG')[1].split(':').splice(1).join(':');
-=======
 	return raw.split('PRIVMSG')[1].split(':').splice(1).join(':');
->>>>>>> 9ddd141fc3caa00ec6aa48071f65266c58911fd2
 }
 
 function ci(a, b) {
@@ -2895,13 +2857,6 @@ function send() {
 					
 					activeWindow.scrollTop = activeWindow.scrollHeight;
 				}
-<<<<<<< HEAD
-				
-				let inputText = emojiToChar(input);
-				
-				doSend('PRIVMSG ' + recipient + ' :' + inputText.innerText);
-=======
->>>>>>> 9ddd141fc3caa00ec6aa48071f65266c58911fd2
 			}
 			else {
 				
@@ -2921,13 +2876,6 @@ function send() {
 						
 						activeWindow.scrollTop = activeWindow.scrollHeight;
 					}
-<<<<<<< HEAD
-					
-					let inputText = emojiToChar(input);
-					
-					doSend('PRIVMSG ' + recipient + ' :' + inputText.innerText);
-=======
->>>>>>> 9ddd141fc3caa00ec6aa48071f65266c58911fd2
 				});
 			}
 		}
@@ -2949,13 +2897,6 @@ function send() {
 					
 					activeWindow.scrollTop = activeWindow.scrollHeight;
 				}
-<<<<<<< HEAD
-				
-				let inputText = emojiToChar(input);
-				
-				doSend('PRIVMSG ' + recipient + ' :' + inputText.innerText);
-=======
->>>>>>> 9ddd141fc3caa00ec6aa48071f65266c58911fd2
 			});
 		}
 		

@@ -9,8 +9,6 @@
 		setCookie('lang', 'es', 10000000);
 	}
 	
-	console.log(lang)
-	
 	document.documentElement.setAttribute('lang', lang);
 	
 	document.getElementById(lang).setAttribute('selected', 'selected');
@@ -19,15 +17,17 @@
 	submit.onclick = function() {
 		let nickname = document.getElementById('wircy_nickname').value;
 		setCookie('nick_connect', nickname, 10000000);
-		setCookie('nspasswd', JSON.stringify([ nickname, document.getElementById('wircy_nickserv').value ]), 10000000);
 		
 		let channels = getParameterByName('channels');
 		
+		if (channels == null) {
+			channels = document.getElementById('wircy_channels').value;
+		}
 		if (channels !== null) {
 			document.location.href = 'irc.html?nickname=' + nickname + '&channels=' + channels;
 		}
 		else {
-			document.location.href = 'irc.html?nickname=' + nickname;
+			document.location.href = 'irc.html?nickname=' + nickname + '&channels=#Chateros';
 		}
 	}
 	
@@ -45,15 +45,6 @@
 		}
 	}
 	
-	let nspasswd = getCookie('nspasswd');
-	
-	if (nspasswd !== '') {
-		
-		nspasswd = JSON.parse(nspasswd);
-		
-		document.getElementById('wircy_nickserv').value = nspasswd[1];
-	}
-	
 	document.getElementById('lang').onchange = function() {
 		
 		if (this.value === 'English') {
@@ -62,7 +53,9 @@
 		if (this.value === 'Français') {
 			setCookie('lang', 'fr', 10000000);
 		}
-		
+		if (this.value === 'Espa&ntilde;ol') {
+                        setCookie('lang', 'es', 10000000);
+                }
 		window.location.href = './';
 	}
 	
