@@ -2022,7 +2022,7 @@ function scrollBottom(w) {
 
 function getMsg(raw) {
 	
-	return raw.split(':').splice(2).join(':');
+	raw.split('PRIVMSG')[1].split(':').splice(1).join(':');
 }
 
 function ci(a, b) {
