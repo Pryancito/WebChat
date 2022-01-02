@@ -20,7 +20,7 @@ let urlify_check = true; // Or false to disable.
 // --------------------------- END OF CONFIG --------------------------- \\
 ```
 
-## Optional : for URL summaries (if urlify_check === true) edit *ajax/config.php* :
+## ```Optional``` : for URL summaries (if urlify_check === true) edit *ajax/config.php* :
 
 Create MySQL database on localhost or elsewhere, the MySQL table is created automatically from PHP script *ajax/summary.php*, and then edit (or create) *ajax/config.php* as following :
 
@@ -43,7 +43,9 @@ It works !
 
 # Compatibilty
 
-Works with UnrealIRCd 4.x server : https://www.unrealircd.org/docs/WebSocket_support
+## IRC Daemons
+- Works with UnrealIRCd 4.x and later versions : https://www.unrealircd.org/docs/WebSocket_support
+- Works with InspIRCd 3.x and later versions : https://docs.inspircd.org/3/modules/websocket/
 
 ## Browser compatibility
 - Google chrome
@@ -55,10 +57,11 @@ Works with UnrealIRCd 4.x server : https://www.unrealircd.org/docs/WebSocket_sup
 Make sure your browser is up to date.
 
 ## Some lights bugs/imperfections to resolve
-- Instability of copy to clipboard on text selection.
 - URL summaries to improve.
 - To do responsive design.
-- Manage all IRC protocol. /raw sends a raw request to IRC server, raws callbacks is in javascript console of your browser.
+- Manage all IRC protocol. /raw sends a raw request to IRC server.
 
-# To test the client
-https://www.epiknet.org/wircy/
+Note : IRC raws not supported are in Javascript console of your web browser.
+
+## To test Wircy with UnrealIRCd server
+https://susoft.fr/wircy/

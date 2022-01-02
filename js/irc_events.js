@@ -2,13 +2,33 @@
 
 let rememberLines = [], irl = -1, tabindexstr = false, tabindex = -1, search = false, count_spaces = false, textval = false;
 let chanc = 0, ccindex, cclen, cccursor, newcursor, hindex = false, hindex_iter, htag;
-let numLines = 0, editbox = '';
+let numLines = 0, editbox = '', emojiSearch = '';
 
 let favlist = getCookie('favlist');
 
 let emojiCursor;
 
 (function() {
+	
+	setTimeout(function(){
+		
+		loadEmojis();
+		
+	}, 10000);
+	
+	/*
+	if (irc_config.list === false) {
+		
+		document.getElementById('btn_chanlist').style.display = 'none';
+	}
+	*/
+	
+	/*
+	document.getElementById('profile').onclick = function() {
+		
+		document.getElementById('meet').style.display = 'block';
+	}
+	*/
 	
 	let textarea = document.getElementById('text');
 	
@@ -28,6 +48,11 @@ let emojiCursor;
 		document.getElementById('chan_params').style.display = 'none';
 	}
 	*/
+	
+	document.getElementById('close_meet').onclick = function() {
+		
+		document.getElementById('meet').style.display = 'none';
+	}
 	
 	document.getElementById('topic').ondblclick = function() {
 		
@@ -151,7 +176,6 @@ let emojiCursor;
 	notifyMe('');
 	
 	textarea.focus();
-	textarea.style.border = '4px solid #A6ACAF';
 	
 	let nltosp = document.getElementById('btn_nltosp');
 	
@@ -200,6 +224,43 @@ let emojiCursor;
 		expandTextarea(this);
 	}
 	
+	let checkKeyCode = false, s = '';
+	
+	textarea.onkeyup = function(e) {
+		
+		if (checkKeyCode === 191) {
+			
+			checkKeyCode = true;
+			
+			emojiSearch = '';
+		}
+		
+		if (e.keyCode == 191) {
+			
+			checkKeyCode = 191;
+		}
+		else if (checkKeyCode !== true || e.keyCode == 32) {
+			
+			checkKeyCode = false;
+		}
+		/*
+		else if (checkKeyCode === true && e.keyCode !== 8) {
+			
+			bubble2.style.display = 'inline-block';
+			
+			Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
+			
+			let se = document.getElementById('search_emoji');
+			
+			emojiSearch += String.fromCharCode(e.keyCode).toLowerCase();
+			
+			se.value = emojiSearch;
+			
+			search_emoji(emojiSearch);
+		}
+		*/
+	}
+	
 	textarea.onkeydown = function(e) {
 		
 		let elem = e.currentTarget;
@@ -220,12 +281,23 @@ let emojiCursor;
 			expandTextarea(this);
 		}
 		
+		if (e.code === 'F4') {
+			
+			bubble2.style.display = 'inline-block';
+			
+			Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
+			
+			document.getElementById('search_emoji').focus();
+		}
+		
 		// nick and chan completion :
 		if (e.keyCode == 9) { // tabulation
 			
 			e.preventDefault();
 			
-			uls_no_mode[ ACStriped ].sort();
+			let AC = ACStriped.toLowerCase();
+			
+			uls_no_mode[ AC ].sort();
 			
 			let cursor = getCaretPosition(elem, true)[0];
 			
@@ -383,7 +455,7 @@ let emojiCursor;
 					
 					newsearch = newsearch[ count_spaces ];
 					
-					if (search.toLowerCase() != newsearch.substr(0, search.length).toLowerCase() && newsearch.indexOf(uls_no_mode[ ACStriped ]) === -1) {
+					if (search.toLowerCase() != newsearch.substr(0, search.length).toLowerCase() && newsearch.indexOf(uls_no_mode[ AC ]) === -1) {
 						
 						tabindexstr = false;
 						tabindex = -1;
@@ -411,7 +483,7 @@ let emojiCursor;
 					
 					tabindexstr = [];
 					
-					uls_no_mode[ ACStriped ].forEach(function(item, index) {
+					uls_no_mode[ AC ].forEach(function(item, index) {
 						
 						if (item.substring(0, search.length).toLowerCase() == search.toLowerCase() || item.substring(0, search.length) == '') {
 							tabindexstr.push(index);
@@ -423,15 +495,15 @@ let emojiCursor;
 					tabindex = 0;
 				}
 				
-				if (typeof uls_no_mode[ ACStriped ][ tabindexstr[ tabindex ] ] !== 'undefined') {
+				if (typeof uls_no_mode[ AC ][ tabindexstr[ tabindex ] ] !== 'undefined') {
 					
 					let val = textval.split(' ');
 					
-					val[ count_spaces ] = uls_no_mode[ ACStriped ][ tabindexstr[ tabindex ] ];
+					val[ count_spaces ] = uls_no_mode[ AC ][ tabindexstr[ tabindex ] ];
 					
 					elem.innerHTML = val.join(' ');
 					
-					let pos = cursor + uls_no_mode[ ACStriped ][ tabindexstr[ tabindex ] ].length - search.length;
+					let pos = cursor + uls_no_mode[ AC ][ tabindexstr[ tabindex ] ].length - search.length;
 					
 					setCaretPos(pos);
 				}
@@ -508,14 +580,6 @@ let emojiCursor;
 			
 			expandTextarea(textarea);
 		}
-	}
-	
-	textarea.onfocus = function() {
-		this.style.border = '4px solid #A6ACAF';
-	}
-	
-	textarea.onblur = function() {
-		this.style.border = '4px solid gainsboro';
 	}
 	
 	let border_left = document.getElementById('border-left');
@@ -658,12 +722,10 @@ let emojiCursor;
 					
 					if (windows.item(index + 1).scrollHeight !== windows.item(index + 1).offsetHeight + windows.item(index + 1).scrollTop) {
 						
-						document.getElementById('border-right').style.backgroundColor = 'red';
-						document.getElementById('border-left').style.backgroundColor = 'red';
+						document.getElementsByClassName('wselected')[0].classList.add('black');
 					}
 					else {
-						document.getElementById('border-right').style.backgroundColor = 'gainsboro';
-						document.getElementById('border-left').style.backgroundColor = 'gainsboro';
+						document.getElementsByClassName('wselected')[0].classList.remove('black');
 					}
 					activeChannel = '#' + target[1];
 					ACStriped = target[1].toLowerCase();
@@ -679,6 +741,8 @@ let emojiCursor;
 					let chanspNoHTML = ACStriped.replace(/\/g, '<');
 					
 					chanspNoHTML = chanspNoHTML.replace(/\/g, '>');
+					
+					ACStriped = chanspNoHTML;
 					
 					let chan_topic = document.getElementById('chan_topic_' + chanspNoHTML);
 					document.getElementById('userlist').className = '';
@@ -778,6 +842,8 @@ let emojiCursor;
 		bubble2.style.display = 'inline-block';
 		
 		Array.from(document.getElementsByClassName('options')).forEach(closeContentBubble);
+		
+		document.getElementById('search_emoji').focus();
 	}
 	
 	document.getElementById('send_options').onmousedown = function(e) {
@@ -817,10 +883,12 @@ let emojiCursor;
 					return;
 				 }
 			  }
-			  
+				
 			  text.appendChild(node);
 		   }
 		}
+		
+		expandTextarea(textarea);
 	};
 	
 	let btn_favorites_chans = document.getElementById('btn_favorites_chans');
@@ -929,6 +997,39 @@ let emojiCursor;
 	
 })();
 
+async function loadEmojis() {
+	
+	let response = await fetch('emoji.html');
+		
+	if(response.status != 200) {
+		throw new Error("Server Error");
+	}
+		
+	// read response stream as text
+	let text_data = await response.text();
+	
+	let elem = document.getElementById('bubble2');
+	elem.innerHTML = '<input id="search_emoji" type="text" placeholder="' + lang_search_emoji + '" />';
+	elem.innerHTML += text_data;
+	
+	document.getElementById('search_emoji').onclick = function(e) {
+		
+		e.stopPropagation();
+		
+		this.focus();
+	}
+	
+	document.getElementById('text').onclick = function(e) {
+		
+		e.stopPropagation();
+	}
+	
+	document.getElementById('search_emoji').onkeyup = function() {
+		
+		search_emoji(this.value);
+	}
+};
+
 function emoji() {
 	
 	let elem = document.getElementById('bubble2');
@@ -943,32 +1044,43 @@ function emoji() {
             {
                 let text = rawFile.responseText;
                 
-                let lines = text.match(/((.*);(.*)#(...)(.*))/gim);
-                
-                //console.log(lines)
+                let lines = text.match(/(.*)\n/gim);
                 
                 lines.forEach(function(item, index) {
 					
-					let code = item.split('#')[1].split(' ');
+					if (item !== undefined) {
 					
-					let c = twemoji.parse(code[1]);
-										
-					let name = code.splice(2).join('');
-					
-					if (index % 10 === 0 && index !== 0) {
-						
-						elem.innerHTML += '<br />';
+						if (item.indexOf('# subgroup:') === -1) {
+							
+							let code = item.split('#');
+							
+							if (code[1] !== undefined) {
+								
+								code = code[1].split(' ');
+							}
+							
+							let c = twemoji.parse(code[1]);
+												
+							let name = code.splice(2).join('');
+							
+							if (index % 10 === 0 && index !== 0) {
+								
+								elem.innerHTML += '<br />';
+							}
+							
+							elem.innerHTML += '<span id="' + code[1] + '" class="emoji ' + name + '" title=":' + name + ':">' + c + '</span>';
+						}
+						else {
+							
+							elem.innerHTML += '<hr />';
+						}
 					}
-					
-					elem.innerHTML += '<span id="' + code[1] + '" class="emoji ' + name + '" title=":' + name + ':">' + c + '</span>';
 				});
-				
-				//twemoji.parse(elem);
             }
         }
     }
-    
-    rawFile.send(null);
+	
+	rawFile.send(null);
 }
 
 var decodeEntities = (function() {
@@ -1025,7 +1137,7 @@ function expandTextarea(obj) {
 		obj.style.height = linesHeight + 'px';
 		obj.style.overflowY = 'hidden';
 		
-		weight = 55 + linesHeight;
+		weight = 44 + linesHeight;
 	}
 	else {
 		
@@ -1341,4 +1453,21 @@ function gchanlist_window() {
 	}
 	
 	document.getElementById('gchanlist').className += ' wselected';
+}
+
+function search_emoji(s) {
+	
+	let emojis = document.querySelectorAll('#bubble2 span.emoji');
+	
+	Array.from(emojis).forEach(function(item) {
+		
+		if (item.getAttribute('title').toLowerCase().indexOf( s.toLowerCase() ) === -1) {
+			
+			item.style.display = 'none';
+		}
+		else {
+			
+			item.style.display = 'inline-block';
+		}
+	});
 }
