@@ -4,9 +4,9 @@
 	
 	if (lang === '') {
 		
-		lang = 'fr';
+		lang = 'es';
 		
-		setCookie('lang', 'fr', 10000000);
+		setCookie('lang', 'es', 10000000);
 	}
 	
 	console.log(lang)
