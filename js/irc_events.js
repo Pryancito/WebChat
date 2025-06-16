@@ -1471,3 +1471,33 @@ function search_emoji(s) {
 		}
 	});
 }
+
+function connectWebSocket() {
+    // Asegúrate de que la URL sea correcta
+    const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const wsUrl = `${wsProtocol}//${window.location.host}/ws`;
+    
+    const ws = new WebSocket(wsUrl, ['irc']);
+    
+    ws.onopen = function() {
+        console.log('Conexión WebSocket establecida');
+        // Enviar comandos de autenticación IRC
+        ws.send('NICK WebUser');
+        ws.send('USER WebUser 8 * :Web User');
+    };
+    
+    ws.onerror = function(error) {
+        console.error('Error en WebSocket:', error);
+    };
+    
+    ws.onclose = function(event) {
+        console.log('Conexión WebSocket cerrada:', event.code, event.reason);
+    };
+    
+    ws.onmessage = function(event) {
+        console.log('Mensaje recibido:', event.data);
+        // Procesar mensajes IRC aquí
+    };
+    
+    return ws;
+}
