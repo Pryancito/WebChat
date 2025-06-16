@@ -65,6 +65,8 @@ let activeChannel,
 	ignores = getCookie('ignores'),
 	aj = false;
 
+
+
 function init() {
 	output = document.getElementById('status');
 }
@@ -3341,4 +3343,7 @@ function insertAfter(newNode, referenceNode) {
 	}
 }
 
-window.addEventListener("load", init, false);
+window.onload = function() {
+    output = document.getElementById('status');
+    init();
+};
